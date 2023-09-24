@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+ <!-- interface employé -->
+		<record id="view_hr_dossier_form" model="ir.ui.view">
+            <field name="name">hr.dossier.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <notebook position="inside">
+                        <page string="Dossier" name="employee_dossier">
+                            <group>
+                                <group>
+                                    <field name="model_dossier_id" />
+                                    <field name="date_depot_dossier"/>
+                                </group>
+                                <group>
+                                    <button name="button_get_piece_liste" string="Liste des pieces du dossier" type="object" class="oe_highlight"/>
+                                </group>
+                                
+                            </group>
+                            <field name="piece_ids">
+                                <tree create="0" delete="0" editable="Bottom" colors="gray:state in ('NonDemand',);green:state in ('Remis',);red:state in ('NonRemis',)">
+                                    <field name="name" readonly="1"/>
+                                    <field name="nbr_copie" readonly="1"/>
+                                    <field name="validite" readonly="1"/>
+                                    <field name="date"/>
+                                    <field name="date_expiration"/>
+                                    <field name="state"/>
+                                    <button name="action_recue" string="Piece recue" type="object" icon="fa-check text-success" states="NonRemis"/>
+                                    <button name="action_nondemande" string="Piece non demandée" type="object" icon="fa-close text-danger" states="NonRemis"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </data>
+			</field>
+        </record>
+
+    </data>
+</openerp>

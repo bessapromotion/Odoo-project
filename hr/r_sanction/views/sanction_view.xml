@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Sanction -->
+  		<record model="ir.ui.view" id="sanction_tree_view">
+            <field name="name">sanction.tree</field>
+            <field name="model">hr.sanction</field>
+            <field name="arch" type="xml">
+				<tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                	<field name="name"/>
+                    <field name="employe_id"/>
+				  	<field name="s_date"/>
+                    <field name="date_effet"/>
+					<field name="reference"/>
+                    <field name="type_id"/>
+                    <field name="motif_id"/>
+                    <field name="degre"/>
+                    <field name="user_id"/>
+                    <field name="company_id"/>
+                    <field name="state" decoration-success="state == 'done'"
+                           decoration-muted="state == 'cancel'"
+                           decoration-warning="state == 'valid'"
+                           decoration-info="state == 'draft'" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+		<record id="sanction_filter" model="ir.ui.view">
+            <field name="name">hr.sanction.filter</field>
+            <field name="model">hr.sanction</field>
+            <field name="arch" type="xml">
+                <search string="Sanction">
+                    <field name="employe_id" />
+                    <field name="type_id" />
+                    <field name="motif_id" />
+                    <field name="name" />
+
+                    <filter name="draft" string="Nouveaux" domain="[('state','=','draft')]"/>
+                    <filter name="done" string="Terminés" domain="[('state', '=', 'done')]"/>
+                    <filter name="cancel" string="Annulés" domain="[('state', '=', 'cancel')]"/>
+
+                    <group expand="0" string="Grouper par...">
+                        <filter name="employee" string="Employé" domain="[]" context="{'group_by':'employe_id'}" help="Employé"/>
+                        <filter string="Type" name="type" domain="[]" context="{'group_by':'type_id'}" help="Type de sanction"/>
+                        <filter string="Motif" name="motif" domain="[]" context="{'group_by':'motif_id'}" help="Motif de sanction"/>
+                        <filter string="Société" name="company" domain="[]" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+		<record model="ir.ui.view" id="sanction_form_view">
+            <field name="name">hr.sanction.form</field>
+            <field name="model">hr.sanction</field>
+            <field name="arch" type="xml">
+				<form string="Décision disciplinaire">
+                    <header>
+                        <button name="action_validate" string="Valider" states="draft" class="oe_highlight" type="object"
+                        confirm="Voulez-vous valider cette sanction ?"/>
+                        <button name="action_prise_effet" string="Entrer en application" states="valid" class="oe_highlight" type="object"
+                        confirm="Voulez-vous faire rentrer en vigueur cette sanction ?"/>
+                        <button name="action_print" states="valid,done" string="Imprimer" class="oe_highlight" type="object"/>
+
+                        <button name="action_cancel" string="Annuler" states="draft,valid" type="object"
+                        confirm="Voulez-vous annuler cette sanction ?"/>
+
+                        <field name="state"  widget="statusbar" statusbar_visible="draft,valid,done" />
+				    </header>
+					<sheet>
+                        <h1>
+                            <label for="name" string="Décision disciplinaire # "/>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                        <field name="image" widget='image' class="oe_avatar" />
+                        <div class="oe_title">
+                            <label for="employe_id" class="oe_edit_only"/>
+                            <h1>
+                                <field name="employe_id" placeholder="Employé  " options='{"no_open": True, "no_create": True}'/>
+                            </h1>
+                        </div>
+
+						<group>
+                            <group>
+								<field name="user_id"  options='{"no_open": True, "no_create": True}'/>
+								<field name="company_id"  options='{"no_open": True, "no_create": True}'/>
+								<field name="s_date"/>
+                                <field name="date_effet"/>
+						    </group>
+							<group>
+                                <field name="contract_id"  domain="[('employee_id','=', employe_id), ('state','not in', ('draft','cancel'))]" options='{"no_open": True, "no_create": True}'/>
+                                <field name="matricule"/>
+								<field name="job_id"/>
+							</group>
+                            <group>
+								<!--field name="questionnaire_id" domain="[('employe_id', '=', employe_id)]"/-->
+								<field name="questionnaire_id" />
+								<field name="date_quest"/>
+							</group>
+                            <group>
+                                <field name="motif_id" options='{"no_open": True, "no_create": True}'/>
+								<field name="degre"/>
+								<field name="date_faute"/>
+								<field name="type_id" options='{"no_open": True, "no_create": True}' domain="[('degre','=', degre)]"/>
+                            </group>
+
+						</group>
+					</sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+				</form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_sanction_tree_view">
+            <field name="name">Décisions disciplinaires</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.sanction</field>
+			<field name="search_view_id" ref="sanction_filter"/>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="sanction_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer une nouvelle décision disciplinaire.
+                </p><p>
+
+                </p><p>
+
+                </p>
+            </field>
+		</record>
+
+ <!-- Top menu item -->
+
+        
+        <menuitem name="Décisions disciplinaires" action="action_sanction_tree_view" id="menu_sanction"
+            parent="hr_base.menu_carriere" sequence="30"/>
+
+    </data>
+</openerp>

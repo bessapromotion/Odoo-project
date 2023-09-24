@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_crm_reservation,crm.reservation user,crm_operation.model_crm_reservation,gestion_profil.group_charg_recouvrement,1,0,0,0
+access_creer_echeancier_wizard_commercial,creer.echeancier.wizard user,crm_echeancier.model_creer_echeancier_wizard,gestion_profil.group_commercial,1,1,1,1
+access_creer_echeancier_wizard_res_commercial,creer.echeancier.wizard user,crm_echeancier.model_creer_echeancier_wizard,gestion_profil.group_res_commercial,1,1,1,1
+access_creer_echeancier_wizard_adv,creer.echeancier.wizard user,crm_echeancier.model_creer_echeancier_wizard,gestion_profil.group_adv,1,1,1,1
+access_creer_echeancier_wizard_res_adv,creer.echeancier.wizard user,crm_echeancier.model_creer_echeancier_wizard,gestion_profil.group_res_adv,1,1,1,1
+
+access_creer_echeancier_tva_wizard_commercial,creer.echeancier.tva.wizard user,crm_echeancier.model_creer_echeancier_tva_wizard,gestion_profil.group_commercial,1,1,1,1
+access_creer_echeancier_tva_wizard_res_commercial,creer.echeancier.tva.wizard user,crm_echeancier.model_creer_echeancier_tva_wizard,gestion_profil.group_res_commercial,1,1,1,1
+access_creer_echeancier_tva_wizard_adv,creer.echeancier.tva.wizard user,crm_echeancier.model_creer_echeancier_tva_wizard,gestion_profil.group_adv,1,1,1,1
+access_creer_echeancier_tva_wizard_res_adv,creer.echeancier.tva.wizard user,crm_echeancier.model_creer_echeancier_tva_wizard,gestion_profil.group_res_adv,1,1,1,1
+
+access_crm_lead_user,crm.lead user,crm.model_crm_lead,base.group_user,1,1,1,1
+access_project_project_user,project.project user,project.model_project_project,base.group_user,1,1,1,1
+access_project_project_user_res_adv,project.project user,project.model_project_project,gestion_profil.group_res_adv,1,1,1,1
+access_project_project_user_adv,project.project user,project.model_project_project,gestion_profil.group_adv,1,1,1,1
+

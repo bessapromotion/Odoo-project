@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<template id="ordre_paiement.report_ordre_paiement">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">  <t t-call="web.basic_layout">
+<!--            <t t-call="web.external_layout">-->
+<!--            <t t-set="o"/>-->
+                <style>
+                  .page-style{
+                    padding-top:10px; padding-bottom:10px; padding-left:60px; padding-right:30px; border: 2px solid #FFFFFF; background: #FFFFFF;
+                  }
+                  .titre-style{
+                    text-align: center; font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif; font-size: 16px; font-style: normal; font-variant: normal;
+                    padding: 0px;
+                  }
+
+                  table {
+                      border-collapse: collapse;
+                    }
+
+                    table, th, td {
+                      border: 1px solid black;
+                    }
+                    th, td {
+                      padding: 15px;
+                      text-align: left;
+                    }
+                </style>
+                <div class="page-style">
+                    <p style="font-size: 22px; font-weight: bold; text-align: left; margin-left: 30px;">N° : <span t-field="o.name"/></p>
+
+                    <p style="font-weight: bold; text-align: right; margin-right: 30px;">Alger le : <span t-field="o.date"/></p>
+
+                    <p style="font-size: 26px; font-weight: bold; text-align: center; ">ORDRE DE PAIEMENT</p>
+                    <div style="width: 250px; padding-top:10px; padding-bottom:10px; margin: auto; border: 4px double #000000; background: #FFFFFF; text-align: left;">
+                        <div class="titre-style">Montant (Chiffres) : <span t-field="o.amount"/></div>
+                    </div>
+                    <p style="margin-left: 10px; font-weight: bold;">Veuillez payer à l'ordre de : <span t-field="o.partner_id"/> </p>
+                    <p style="margin-left: 10px; font-weight: bold;">La somme de (en lettres) : <span t-field="o.amount_lettre"/> </p>
+                    <p style="margin-left: 10px; font-weight: bold;">Objet du règlement : <span t-field="o.objet"/> </p>
+                    <table style=" width: 100%; padding-top:100px;">
+                          <tr>
+                              <td colspan="2">
+                                  <p style="font-size: 18px; font-weight: bold; text-align: center; ">BON POUR ORDONNANCEMENT LE : <span t-field="o.date_ordonnancement"/></p>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <p style="padding-bottom:60px; font-size: 16px; text-align: center; text-decoration: underline;">Structure d'Administration </p>
+                              </td>
+                              <td>
+                                  <!--<p style="padding-bottom:60px; font-size: 16px; text-align: center; text-decoration: underline;">Directeur de l'Organisation et de l'administration Générale </p>-->
+                              </td>
+                          </tr>
+
+                        <tr >
+                            <td colspan="2">
+                                <p style="font-size: 18px; font-weight: bold; text-align: center; ">Direction des Finances et de la Comptabilité (DFC)</p>
+                                <p style="font-size: 18px; font-weight: bold; text-align: center; ">BON POUR PAIEMENT LE : <span t-field="o.date_paiement"/></p>
+                            </td>
+                        </tr>
+                        <tr>
+                              <td>
+                                  <p style="padding-bottom:40px; font-size: 16px; text-align: left; text-decoration: underline;">Structure de la comptabilité</p>
+                              </td>
+                              <td>
+                                  <p style="padding-bottom:40px; font-size: 16px; text-align: right; text-decoration: underline;">Directeur des Finances et de la Comptabilité</p>
+                              </td>
+                        </tr>
+
+                        <tr>
+                              <td rowspan="4">
+                                  <p style="padding-bottom:60px; font-size: 16px; text-align: left; text-decoration: underline;">Structure des Finances</p>
+                              </td>
+                              <td>
+                                  <p style="font-size: 16px;">Chèque ................................. N°.................................... du ...................................</p>
+                              </td>
+                        </tr>
+                        <tr>
+                            <td><p style="font-size: 16px;">Chèque/banque ............................. N°.................................... du ...................................</p></td>
+                        </tr>
+                        <tr>
+                            <td><p style="font-size: 16px;">Ordre de Virement N°............................................................... du ...................................</p></td>
+                        </tr>
+                        <tr>
+                            <td><p style="font-size: 16px;">Caisse Régie le .......................................................................................................</p></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p style="padding-bottom:80px; font-size: 16px; text-align: left; text-decoration: underline;">Accusé de réception :</p>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </t>
+        </t>
+    </t>
+    <!--</t>-->
+</template>
+</odoo>

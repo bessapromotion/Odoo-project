@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                string="Fiche de poste"
+                id="act_report_poste"
+                model="hr.job"
+                report_type="qweb-pdf"
+                menu="True"
+                name="r_recrutement.report_poste"
+                file="r_recrutement.report_poste"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'Fiche de poste_'+ object.name"
+        />
+        <report
+                string="Promesse d'embauche"
+                id="act_report_promesse_embauche"
+                model="hr.applicant"
+                report_type="qweb-pdf"
+                menu="True"
+                name="r_recrutement.report_promesse_embauche"
+                file="r_recrutement.report_promesse_embauche"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'Promesse_embauche_'+ object.partner_name"
+        />
+
+    </data>
+</odoo>

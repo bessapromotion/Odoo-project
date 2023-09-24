@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+       <record id="action_promotion_button" model="ir.actions.act_window">
+            <field name="name">Promotions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.promotion</field>
+            <field name="context">{'search_default_employe_id': [active_id], 'default_employe_id': active_id}</field>
+            <!--<field name="domain"></field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="promotion_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquez pour créer une promotion.
+              </p><p>
+              </p>
+            </field>
+        </record>
+
+ <!-- interface Clients -->
+		<record id="view_hr_cont_promotion_tree" model="ir.ui.view">
+            <field name="name">lun.hr.promotion2.cont.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//div[@name='button_box']" position="inside">
+                        <button class="oe_stat_button" type="action" name="%(action_promotion_button)d" attrs="{'invisible':[('nbr_promotion','=', 0)]}" icon="fa-trophy">
+                                <field string="Promotions" name="nbr_promotion" widget="statinfo" />
+                        </button>
+                    </xpath>
+                </data>
+			</field>
+        </record>
+    </data>
+</openerp>

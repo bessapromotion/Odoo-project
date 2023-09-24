@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="decision_affectation_credit">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+
+                        <p align="left">R&#233;f:
+                            <span t-field="o.name"/>
+                        </p>
+                        <p style="margin-top : -45px;" align="right">Alger le :
+                            <span t-field="o.date"/>
+                        </p>
+                        <h2 class="text-center" style="margin-bottom : 20px;">
+                            <u>
+                                <strong>
+                                    D&#233;cision d&#39;affectation
+                                </strong>
+                            </u>
+
+                        </h2>
+                        <p>
+                            Le G&#233;rant,
+                        </p>
+                        <p>
+                            - Vu les statuts de la
+                            <b><span t-field="o.company_id.name"/></b>
+                            <br/>
+                            <br/>
+                            - Vu le d&#233;cret l&#233;gislatif 11/04 du 17/02/2011 relatif à l&#39;activit&#233; de la
+                            promotion
+                            immobili&#232;re.
+                        </p>
+                        <h3 class="text-center" style="margin-bottom : 20px;">
+                            <u>
+                                <strong>
+                                    DECIDE
+                                </strong>
+                            </u>
+
+                        </h3>
+                        <h5>
+                            <strong>
+                                <u>ARTICLE 01 :</u>
+                            </strong>
+
+                        </h5>
+                        <p align="justify">Monsieur (Mme)
+                            <t t-if="o.signataire">
+                                <strong>
+                                    <span t-field="o.new_partner_id.name"/>
+                                </strong>
+                                n&#233;(e) le
+                                <strong>
+                                    <span t-field="o.new_partner_id.birthday"/>
+                                </strong>&#224;
+                                <strong>
+                                    <span t-field="o.new_partner_id.place_of_birth"/>
+                                </strong>
+                            </t>
+                            <t t-else="">
+                                <strong>
+                                    <span t-field="o.partner_id.name.name"/>
+                                </strong>
+                                n&#233;(e) le
+                                <strong>
+                                    <span t-field="o.partner_id.name.birthday"/>
+                                </strong>&#224;
+                                <strong>
+                                    <span t-field="o.partner_id.name.place_of_birth"/>
+                                </strong>
+                            </t>
+                            est attributaire d&#39;un logement promotionel sise au :
+                        </p>
+                        <p style="margin-left :30px;" align="center">
+                            <p style="margin-left :30px;">
+                                <strong>Projet :</strong>
+                                Logements promotionnels &#224;
+                                <span t-field="o.project_id.name"/>
+                            </p>
+                            <p style="margin-left :30px;">
+                                <strong>Batiment :</strong>
+                                <span t-field="o.bloc"/>
+                            </p>
+                            <p style="margin-left :30px;">
+                                <strong>Type :</strong>
+                                <span t-field="o.format_id.name"/>
+                            </p>
+                            <p style="margin-left :30px;">
+                                <strong>Niveau :</strong>
+                                <span t-field="o.etage.name"/>
+                            </p>
+                            <p style="margin-left :30px;" align="left">
+                                <strong>Superficie :</strong>
+                                <span t-field="o.superficie"/>
+                                m&#178;
+                            </p>
+                            <p style="margin-left :30px;" align="left">
+                                <strong>Lot :</strong>
+                                <span t-field="o.num_lot"/>
+                            </p>
+                            <p style="margin-left :30px;" align="left">
+                                <strong>Co&#251;t de cession appartement Hors Taxe :</strong>
+                                <span t-field="o.amount_untaxed"/>
+                            </p>
+                        </p>
+
+                        <!--
+                        <table style="margin-left: auto;margin-right: auto; width: 700px;font-size:20px">
+                            <tr>
+                                <td>
+                                    <span>
+                                        <strong>Co&#251;t de cession appartement Hors Taxe :</strong>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span t-field="o.amount_untaxed"/>
+                                </td>
+                            </tr>
+
+                        </table> -->
+                        <h5>
+                            <strong>
+                                <u>ARTICLE 02 :</u>
+                            </strong>
+
+                        </h5>
+                        <p align="justify">Cette décision est établie exclusivement pour permettre à la CNEP
+                                        la mise en place d’un crédit immobilier et ne peut valoir pour une
+                                        quelconque autre utilité.
+                        </p>
+                        <h5>
+                            <strong>
+                                <u>ARTICLE 03 :</u>
+                            </strong>
+
+                        </h5>
+                        <p align="justify">Le règlement des frais de transfert de propriété est à la charge de l’acquéreur.
+                        </p>
+                        <h5>
+                            <strong>
+                                <u>ARTICLE 04 :</u>
+                            </strong>
+
+                        </h5>
+                        <p align="justify">Cette décision est valable 01 mois à dater de sa signature.
+                        </p>
+                        <h5>
+                            <strong>
+                                <u>ARTICLE 05 :</u>
+                            </strong>
+
+                        </h5>
+                        <p align="justify">En cas de désistement par l’acquéreur, aucun remboursement ne lui sera fait qu’à la vente du bien immobilier qui lui a été réservé initialement.
+                        </p>
+
+                        <div style=" width:100%;">
+                                <div style="float: left;width:50%;">
+                                </div>
+                                <div style="float: right;width:50%;text-align:right;padding-right:20px">
+                                    <b>Le Directeur Général
+                                         </b>
+                                </div>
+
+                            </div>
+
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

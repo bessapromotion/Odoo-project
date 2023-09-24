@@ -1,0 +1,18 @@
+<openerp>
+    <data>
+        <!-- chargement de la table type Annulation-->
+
+         <record model="crm.annulation.type" id="type_desist">
+             <field name="name">Désistement</field>
+         </record>
+
+        <record model="crm.annulation.type" id="type_resil">
+             <field name="name">Résiliation</field>
+         </record>
+
+        <record model="crm.annulation.type" id="type_annul">
+             <field name="name">Annulation</field>
+         </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--<record id="view_crm_tdb_reservation_filter" model="ir.ui.view">-->
+ <record model="ir.ui.view" id="crm_tdb_sale_tree_view">
+        <field name="name">crm.tdb.sale</field>
+        <field name="model">crm.reservation.product</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree create="false" string="Ventes"  decoration-success="state == 'valid'" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                <field name="project_id"/>
+                <field name="bloc"/>
+                <field name="type_id"/>
+                <field name="etage"/>
+                <field name="name"/>
+                 <field name="num_lot"/>
+                <field name="format_id"/>
+                <field name="orientation"/>
+                <field name="superficie"/>
+                <field name="prix_m2"/>
+                <field name="price_2"/>
+                <field name="reservation_id"/>
+                <field name="partner_id"/>
+                <field name="commercial_id"/>
+                <field name="charge_recouv_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_sale_view">
+            <field name="name">Etat des Ventes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.reservation.product</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="crm_tdb_sale_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+
+                </p><p>
+
+                </p><p>
+
+                </p>
+             </field>
+     </record>
+    </data>
+</openerp>

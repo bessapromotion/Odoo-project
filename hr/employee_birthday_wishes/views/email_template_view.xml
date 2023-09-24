@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_hr_employee_form_inherit_age">
+        <field name="name">hr.employee.form.inherit.age</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath position="after" expr="//field[@name='birthday']">
+                <label for="employee_age" string="Age"/>
+                <div name="employee_age">
+                    <div class="o_row">
+                        <field name="employee_age" force_save="1" readonly="1" nolabel="0" class="oe_inline"/>
+                        <span>Ans</span>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="email_template_birthday" model="mail.template">
+        <field name="name">Birthday Wishes</field>
+        <field name="email_from">erp@texala.net</field>
+        <field name="subject">Birthday Wishes</field>
+        <field name="email_to">${object.work_email}</field>
+        <field name="model_id" ref="hr.model_hr_employee"/>
+        <field name="auto_delete" eval="False"/>
+        <field name="lang">${object.company_id.partner_id.lang}</field>
+        <field name="body_html"><![CDATA[
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+
+                    <p>Hello ${object.name},</p>
+                    <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
+                       &nbsp;&nbsp;<strong> Happy Birthday !!!</strong><br />
+                    </p>  
+                    <br/><p style="border-left: 1px solid #8e0000; margin-left: 30px;">
+                 I hope your birthday is the beginning of Another Great Year full of happiness.
+                Have a wonderful day!</p>
+                    <br/>
+                    <br/>
+                </div>
+            ]]>
+        </field>
+
+    </record>
+
+</odoo>

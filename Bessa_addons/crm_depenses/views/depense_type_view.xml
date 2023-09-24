@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_type_form" model="ir.ui.view">
+        <field name="name">depense.type.form</field>
+        <field name="model">depense.type</field>
+        <field name="arch" type="xml">
+            <form string="Type">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <notebook>
+                        <page string="Projet">
+                            <field name="sous_projects_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_type_tree" model="ir.ui.view">
+        <field name="name">depense.type.tree</field>
+        <field name="model">depense.type</field>
+        <field name="arch" type="xml">
+            <tree string="Type" create="1" delete="1" >
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_depense_type" model="ir.actions.act_window">
+        <field name="name">Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">depense.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

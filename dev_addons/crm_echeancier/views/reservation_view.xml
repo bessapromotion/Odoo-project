@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_reservation_echeancier_form" model="ir.ui.view">
+            <field name="name">crm.reservation.echeancier.form</field>
+            <field name="model">crm.reservation</field>
+            <field name="inherit_id" ref="crm_operation.crm_reservation_form_view_2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_ids']" position="after">
+
+                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                        <field name="amount_total" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="amount_tva" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="total_paiement" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                            <label for="total_paiement"/>
+                        </div>
+                        <field name="total_paiement" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary'
+                               options="{'currency_field': 'currency_id'}"/>
+                    </group>
+
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_reservation_echeancier_tree" model="ir.ui.view">
+            <field name="name">crm.reservation.echeancier.tree</field>
+            <field name="model">crm.reservation</field>
+            <field name="inherit_id" ref="crm_operation.crm_reservation_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='charge_recouv_id']" position="after">
+                    <field name="invoice_id"/>
+                    <field name="amount_total" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_tva" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="total_paiement" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

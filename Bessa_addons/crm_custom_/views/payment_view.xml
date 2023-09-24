@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_payment_tree_v3" model="ir.ui.view">
+            <field name="name">account.payment.mode.tree</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="crm_echeancier.view_payment_treeçmode"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='dl_date']" position="before">
+                    <field name="order_id"/>
+                    <field name="num_dossier"/>
+                    <field name="type_bien"/>
+                    <field name="commercial_id"/>
+                </xpath>
+                <xpath expr="//field[@name='project_id']" position="after">
+                    <field name="echeance_id"/>
+                </xpath>
+                <xpath expr="//field[@name='mode_paiement_id']" position="after">
+                    <field name="cheque_type" optional="hide"/>
+                    <field name="cheque_objet" optional="hide"/>
+                </xpath>
+                <xpath expr="//field[@name='payment_method_line_id']" position="replace">
+                    <field name="payment_method_line_id" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='journal_id']" position="after">
+                    <!--                    <field name="project_id_charge"/>-->
+                    <!--                    <field name="mode_paiement_id"/>-->
+                    <field name="type" widget="badge" decoration-info="type == 'charge'"
+                           decoration-success="type == 'tag'" decoration-warning="type == 'versement'" decoration-danger ="type == 'transfert'"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_payment_3_form" model="ir.ui.view">
+            <field name="name">account.payment.3.form</field>
+            <field name="model">account.payment</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="crm_echeancier.view_payment_2_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_bank_id']" position="after">
+                    <field name="type"/>
+                </xpath>
+                <xpath expr="//field[@name='project_id']" position="replace">
+                    <field name="project_id" attrs="{'invisible': [('type', '!=', 'versement')]}"/>
+
+                </xpath>
+                <xpath expr="//field[@name='echeance_id']" position="before">
+                    <field name="charge_ok" invisible="1"/>
+                    <field name="order_id" attrs="{'invisible': [('type','not in',('versement','transfert'))]}"/>
+                    <field name="num_dossier" attrs="{'invisible': [('type','not in',('versement','transfert'))]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_payment_serach_view" model="ir.ui.view">
+            <field name="name">view.account.payment.search1</field>
+            <field name="inherit_id" ref="account.view_account_payment_search"/>
+            <field name="model">account.payment</field>
+            <field name="arch" type="xml">
+                <search>
+                    <group expand="0" string="Group By">
+                        <filter string="Projet" name="project" domain="[]" context="{'group_by': 'project_id'}"
+                                groups="base.group_multi_company"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_account_payment_tree_view">
+            <field name="name">Paiements</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <!--            <field name="domain">[('type','in',('versement','transfert'))]</field>-->
+            <field name="view_id" ref="view_payment_tree_v3"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer une nouvelle demande d'autorisation des location .
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+        <record id="account.action_account_payments" model="ir.actions.act_window">
+            <field name="domain">[('type','in',('versement','transfert'))]</field>
+        </record>
+
+
+    </data>
+</openerp>

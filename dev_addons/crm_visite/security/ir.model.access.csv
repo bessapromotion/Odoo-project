@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_visite_tags_user,visite.tags user,model_visite_tags,sales_team.group_sale_salesman,1,0,0,0
+access_visite_tags_manager,visite.tags manager,model_visite_tags,sales_team.group_sale_manager,1,1,1,1
+access_visite_obs_user,visite.obs user,model_visite_obs,sales_team.group_sale_salesman,1,0,0,0
+access_visite_obs_manager,visite.obs manager,model_visite_obs,sales_team.group_sale_manager,1,1,1,1
+access_crm_visite_user,crm.visite user,model_crm_visite,sales_team.group_sale_salesman,1,0,0,0
+access_crm_visite_manager,crm.visite manager,model_crm_visite,sales_team.group_sale_manager,1,1,1,1
+access_crm_vocale_user,crm.vocale user,model_crm_vocale,sales_team.group_sale_salesman,1,0,0,0
+access_crm_vocale_manager,crm.vocale manager,model_crm_vocale,sales_team.group_sale_manager,1,1,1,1
+
+
+

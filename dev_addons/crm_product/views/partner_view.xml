@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+     <!-- interface Clients -->
+		<record id="view_partner_status_form" model="ir.ui.view">
+            <field name="name">res.partner.status.info.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                     <xpath expr="//h1[1]" position="before">
+                         <separator/>
+                         <field name="customer" invisible="1"/>
+                         <h2 attrs="{'invisible':['|', ('code_client','=',0), ('customer', '=', False)]}">
+                             N° de Compte: <field name="code_client" string="N° de compte" readonly="1" />
+                         </h2>
+                	 </xpath>
+                	<xpath expr="//field[@name='vat']" position="after">
+                        <separator/><separator/>
+                        <field name="etat" attrs="{'invisible':[('customer','=',False)], 'required': [('customer', '=', True)]}"/>
+                        <field name="mode_achat" attrs="{'invisible':[('customer','=',False)]}"/>
+                        <separator/><separator/>
+
+                        <field name="type_pi" attrs="{'invisible':['|', ('customer','=',False), ('is_company', '=', True)]}"/>
+                        <field name="num_pi" attrs="{'invisible':['|', ('customer','=',False), ('is_company', '=', True)]}"/>
+                        <field name="date_pi" attrs="{'invisible':['|', ('customer','=',False), ('is_company', '=', True)]}"/>
+                	</xpath>
+                    <xpath expr="//field[@name='mobile']" position="after">
+                        <field name="birthday" attrs="{'invisible':['|', ('customer','=',False), ('is_company', '=', True)]}"/>
+                        <field name="place_of_birth" attrs="{'invisible':['|', ('customer','=',False), ('is_company', '=', True)]}"/>
+                	</xpath>
+                    <xpath expr="//field[@name='email']" position="after">
+                        <separator/><separator/>
+                        <field name="hs_contact_id" attrs="{'invisible':[('customer','=',False)]}"/>
+                	</xpath>
+
+                </data>
+			</field>
+        </record>
+         <record id="crm_product_view_res_partner_filter_inherit" model="ir.ui.view">
+            <field name="name">res.partner.select.inerit</field>
+            <field name="model">res.partner</field>
+
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+
+            <xpath expr="//filter[@name='customer']" position="after">
+
+                <separator/>
+
+                <filter string="Acquéreur" name="Acquéreur" domain="[('customer','=',True), ('parent_id', '=', False), ('etat','=' ,'Acquéreur')]"/>
+                <filter string="Réservataire" name="Réservataire" domain="[('customer','=',True), ('parent_id', '=', False), ('etat','=' ,'Réservataire')]"/>
+                <filter string="Locataire" name="Locataire" domain="[('customer','=',True), ('parent_id', '=', False), ('etat','=' ,'Locataire')]"/>
+                <filter string="Potentiel" name="Potentiel" domain="[('customer','=',True), ('parent_id', '=', False), ('etat','=' ,'Potentiel')]"/>
+                <filter string="Prospect" name="Prospect" domain="[('customer','=',True), ('parent_id', '=', False), ('etat','=' ,'Prospect')]"/>
+                <separator/>
+
+                <group expand="0" name="group_by" string="Group By">
+                       <filter name="etat" string="Etat" domain="[]" context="{'group_by' : 'etat'}" />
+
+                   </group>
+            </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_inherit_search" model="ir.ui.view">
+              <field name="name">res.ppartner.expand2.filter</field>
+              <field name="model">res.partner</field>
+              <field name="inherit_id" ref="base.view_res_partner_filter"/>
+              <field name="arch" type="xml">
+                    <xpath expr="//search" position="inside">
+                        <field name="code_client" />
+                        <field name="num_pi" />
+                        <field name="hs_contact_id" />
+                        <field name="birthday" />
+
+
+                    </xpath>
+              </field>
+        </record>
+
+        <!--<record model="ir.ui.view" id="partner_view_buttons_replace">-->
+            <!--<field name="name">partner.view.buttons</field>-->
+            <!--<field name="model">res.partner</field>-->
+            <!--<field name="inherit_id" ref="account_reports.partner_view_buttons" />-->
+            <!--<field name="priority" eval="13"/>-->
+            <!--<field name="arch" type="xml">-->
+                <!--<button name="open_partner_ledger" position="replace"/>-->
+            <!--</field>-->
+        <!--</record>-->
+
+         <record id="view_partner_dl_tree" model="ir.ui.view">
+            <field name="name">res.partner.dl.tree.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='phone']" position="before">
+                        <field name="code_client" invisible="1"/>
+                        <field name="hs_contact_id"/>
+                        <field name="birthday"/>
+
+                    </xpath>
+                </data>
+			</field>
+        </record>
+
+        <!--<record model="ir.ui.view" id="partner_view_button_contracts_count_replace">-->
+            <!--<field name="name">partner.view.button.contracts_count.replace</field>-->
+            <!--<field name="model">res.partner</field>-->
+            <!--<field name="inherit_id" ref="account.partner_view_button_contracts_count" />-->
+            <!--<field name="priority" eval="14"/>-->
+            <!--<field name="arch" type="xml">-->
+                <!--<button name="%(account.action_open_partner_analytic_accounts)d" position="replace"/>-->
+
+            <!--</field>-->
+        <!--</record>-->
+
+        <!--<record model="ir.ui.view" id="partner_view_buttons">-->
+            <!--<field name="name">partner.view.buttons</field>-->
+            <!--<field name="model">res.partner</field>-->
+            <!--<field name="inherit_id" ref="base.view_partner_form" />-->
+            <!--<field name="priority" eval="13"/>-->
+            <!--<field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]"/>-->
+            <!--<field name="arch" type="xml">-->
+                <!--<button name="toggle_active" position="before">-->
+                    <!--<button type="object"-->
+                        <!--class="oe_stat_button"-->
+                        <!--id="partner_ledger_button"-->
+                        <!--icon="fa-pencil-square-o"-->
+                        <!--name="open_partner_ledger"-->
+                        <!--context="{'default_partner_id': active_id}">-->
+                        <!--<field name="partner_ledger_label"/>-->
+                    <!--</button>-->
+                <!--</button>-->
+            <!--</field>-->
+        <!--</record>-->
+
+    </data>
+</openerp>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<template id="report_autorisation">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="r_mission_fleet.custom_autorisation">
+        <!--
+            -->
+                <style>
+                    * { font-family: 'Arial'; font-size: 16px;}
+
+                    .table th, .table td { padding: .25rem .5rem; }
+
+                    .main-content { border: 1px solid #999999; padding-top: 1rem; }
+
+                    .signature-block { page-break-inside: avoid; text-align: center; margin-top: 50px; padding-bottom: 150px; }
+                    .signature-block td { width: 50%; }
+
+                    .footnote { text-align: center; font-size: 14px; }
+                </style>
+
+                <div class="page">
+                    <!-- HEADER -->
+                    <style>
+                    .report-header-table { font-size: 12px; }
+                    .report-header-table tr,
+                    .report-header-table td { border: 1px solid #999999; }
+                    .report-header-table td { padding: .5rem; vertical-align: middle; }
+
+                    .report-header-table .nowrap { white-space: nowrap; }
+                    .report-header-table .title { text-align: center; text-transform: uppercase; font-size: 18px; font-weight: bold; letter-spacing: .2px; }
+                    </style>
+                    <br/>
+                    <table class="table report-header-table">
+                        <tbody>
+                            <tr>
+                                <td ><img class="img" src="/r_mission_fleet/static/src/img/logo.png" height="62"/></td>
+                                <td class="title">Autorisation D'utilisation des Véhicules</td>
+<!--                                <td class="nowrap">Code :FO-RH-039/02</td>-->
+                            </tr>
+<!--                            <tr>-->
+<!--                                <td class="nowrap">Date : 15/08/2018</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td class="nowrap">Type: Formulaire</td>-->
+<!--                                <td class="nowrap">Page 1 sur 1</td>-->
+<!--                            </tr>-->
+                        </tbody>
+                    </table>
+                    <br/>
+
+                    <!-- BODY -->
+                    <div class="main-content">
+                        <table class="table table-borderless w-auto">
+                            <tr>
+                                <th>Référence : </th>
+                                <td><span t-field="o.name"/></td>
+                            </tr>
+                            <tr>
+                                <th>Date : </th>
+                                <td><span t-field="o.date"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="table table-borderless w-auto">
+<!--                            <tr>-->
+<!--                                <th>Structure : </th>-->
+<!--                                <td><span t-field="o.department_id"/></td>-->
+<!--                            </tr>-->
+                            <tr>
+                                <th>Nom et Prénom : </th>
+                                <td><span t-field="o.autorise_pour"/></td>
+                            </tr>
+                            <tr>
+                                <th style="white-space: nowrap;">Motif du déplacement : </th>
+                                <td><span t-field="o.motif"/></td>
+                            </tr>
+                        </table>
+
+                        <table class="table table-borderless">
+                            <tr>
+                                <th style="width: 25%;">Date et heure<br/>de sortie : </th>
+                                <td style="width: 25%;">
+                                    <t t-if="o.date_depart_prevue"><span t-field="o.date_depart_prevue"/></t>
+                                    <t t-else=""> - </t>
+                                </td>
+                                <th style="width: 25%;">Date et heure<br/>de retour : </th>
+                                <td style="width: 25%;">
+                                    <t t-if="o.date_retour_prevue"><span t-field="o.date_retour_prevue"/></t>
+                                    <!-- <t t-else=""> - </t> -->
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="table table-borderless w-auto" style="margin-bottom: 0;">
+                            <t t-if="o.avec_chauffeur">
+                                <tr>
+                                    <th>Nom du chauffeur : </th>
+                                    <td><span t-field="o.chauffeur_id"/></td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <th>Véhicule : </th>
+                                <td>
+                                    <span t-field="o.vehicule_id"/>
+                                    <t t-if="not o.avec_chauffeur">
+                                        <span class="text-muted"> (Sans chauffeur)</span>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-borderless">
+                            <tr>
+                                <th colspan="2">Kilométrage :</th>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%;">
+                                    <b>Sortie : </b>
+                                    <t t-if="o.km_depart != 0"><span t-field="o.km_depart"/> km</t>
+                                    <!-- <t t-else=""> - </t> -->
+                                </td>
+                                <td style="width: 50%;">
+                                    <b>Retour : </b>
+                                    <t t-if="o.km_arrivee != 0"><span t-field="o.km_arrivee"/> km</t>
+                                    <!-- <t t-else=""> - </t> -->
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Signature -->
+                        <div class="signature-block">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td>
+                                        Directeur de la structure<br/>du demandeur
+                                    </td>
+                                    <td>Responsable M.G /DARH</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <div class="pt-3">
+                        <p class="footnote text-muted">Cette autorisation n’est valable qu’avec apposition de la griffe du Responsable des Moyens Généraux ou du Directeur de l’Administration et des Ressources Humaines.</p>
+                    </div>
+
+                </div>
+
+            </t>
+        </t>
+    </t>
+</template>
+
+</odoo>

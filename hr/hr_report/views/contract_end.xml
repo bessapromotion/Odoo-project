@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="hr_contract_end_view">
+        <field name="name">hr.contract.end.tree</field>
+        <field name="model">hr.contract.end</field>
+        <field name="arch" type="xml">
+            <tree create="false" decoration-danger="delai == 1">
+                <field name="employe_id"/>
+                <field name="contract_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="delai"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'"
+                       decoration-warning="state == 'close'" decoration-success="state == 'open'"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_hr_contract_end">
+        <field name="name">Analyse date fin de contrat</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.contract.end</field>
+        <field name="view_id" ref="hr_contract_end_view"/>
+    </record>
+    <menuitem name="Fin de contrat" action="action_hr_contract_end" id="menu_contract_end"
+              parent="hr.hr_menu_hr_reports"/>
+</odoo>

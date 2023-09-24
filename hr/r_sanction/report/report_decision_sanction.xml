@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_decision_sanction">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div t-call="web.internal_layout">
+
+                    <div>
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <td style="o.text-align:left">Réf, N°:
+                                        <span t-field="o.name"/>
+                                    </td>
+                                    <td style="text-align:right;">Alger le,
+                                        <span t-field="o.s_date"/>
+                                    </td>
+                                </td>
+                            </tr>
+                        </table>
+
+                            <div align="center">
+                                <div class="titre-style">
+                                    <h1 style="text-align: center;font-size:40px;">
+                                        Décision
+                                    </h1>
+                                </div>
+                            </div>
+                        <br/>
+                        <t t-if="o.questionnaire_id.decision_drh.type in ['mise_pied']">
+                            <t t-set="variables" t-value="o.get_variables()"/>
+                            <t t-set="nb_article" t-value="1"/>
+                            <p>
+                                <t t-foreach="o.article_mise_1_lines" t-as="a">
+                                    <p t-if="a and a.article_id">
+                                        <t t-raw="a.article_id.set_values(variables)"/>
+                                    </p>
+                                </t>
+                            </p>
+                        </t>
+                        <t t-if="o.questionnaire_id.decision_drh.type in ['sanct']">
+                            <t t-set="variables" t-value="o.get_variables()"/>
+                            <t t-set="nb_article" t-value="1"/>
+                            <p>
+                                <t t-foreach="o.article_sanction_1_lines" t-as="a">
+                                    <p t-if="a and a.article_id">
+                                        <t t-raw="a.article_id.set_values(variables)"/>
+                                    </p>
+                                </t>
+                            </p>
+                        </t>
+                        <t t-if="o.questionnaire_id.decision_drh.type in ['avert']">
+                            <t t-set="variables" t-value="o.get_variables()"/>
+                            <t t-set="nb_article" t-value="1"/>
+                            <p>
+                                <t t-foreach="o.article_avertissement_1_lines" t-as="a">
+                                    <p t-if="a and a.article_id">
+                                        <t t-raw="a.article_id.set_values(variables)"/>
+                                    </p>
+                                </t>
+                            </p>
+                        </t>
+                        <br/>
+                        <div style="text-align:center;font-size:30px;">
+                            <strong>D E C I D E</strong>
+                        </div>
+                        <br/>
+                        <t t-if="o.questionnaire_id.decision_drh.type in ['mise_pied']">
+                            <t t-set="variables" t-value="o.get_variables()"/>
+                            <t t-foreach="o.article_mise_2_lines" t-as="a">
+                                <t t-if="a and a.article_id">
+                                    <div class="contract-article">
+                                        <div class="contract-article_content">
+                                            <t t-raw="a.article_id.set_values(variables)"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                        </t>
+                        <t t-if="o.questionnaire_id.decision_drh.type in ['sanct']">
+                            <t t-set="variables" t-value="o.get_variables()"/>
+                            <t t-foreach="o.article_sanction_2_lines" t-as="a">
+                                <t t-if="a and a.article_id">
+                                    <div class="contract-article">
+                                        <div class="contract-article_content">
+                                            <t t-raw="a.article_id.set_values(variables)"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                        </t>
+                        <t t-if="o.questionnaire_id.decision_drh.type in ['avert']">
+                            <t t-set="variables" t-value="o.get_variables()"/>
+                            <t t-foreach="o.article_avertissement_2_lines" t-as="a">
+                                <t t-if="a and a.article_id">
+                                    <div class="contract-article">
+                                        <div class="contract-article_content">
+                                            <t t-raw="a.article_id.set_values(variables)"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                        </t>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div style="text-align:right;margin-right:50px;font-size:25px;">
+                            <u>Le Directeur</u>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

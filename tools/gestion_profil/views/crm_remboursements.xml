@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--        remboursement-->
+        <record id="crm_remboursement.menu_remboursement_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(3,ref('sales_team.group_sale_salesman')),
+            (4,ref('base.user_admin')),(4,ref('base.group_system')),(4,ref('base.group_erp_manager')),
+            (4,ref('gestion_profil.group_commercial')),
+            (4,ref('gestion_profil.group_res_commercial')),
+            (4,ref('gestion_profil.group_charg_recouvrement')),
+            (4,ref('gestion_profil.group_res_recouvrement')),
+            (4,ref('gestion_profil.group_adv')),
+            (4,ref('gestion_profil.group_res_adv')),
+            (4,ref('gestion_profil.group_comptable_stock')),
+            (4,ref('gestion_profil.group_caissier')),
+            (4,ref('gestion_profil.group_res_compta'))]"/>
+        </record>
+    </data>
+</odoo>

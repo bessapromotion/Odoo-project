@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="crm_lifecycle_tree_view">
+            <field name="name">crm.lifecycle.tree</field>
+            <field name="model">crm.lifecycle</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="CRM Lifecycle Stages" editable="top">
+                    <field name="name"/>
+                    <field name="crm_stage_id"/>
+                    <field name="etat"/>
+                </tree>
+            </field>
+        </record>
+
+    <record model="ir.actions.act_window" id="action_crm_lifecycle_tree_view">
+            <field name="name">CRM LifeCycle Stage</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.lifecycle</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="filter" eval="True"/>
+            <field name="view_id" ref="crm_lifecycle_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer un nouvel etat.
+                </p><p>
+
+                </p><p>
+
+                </p>
+            </field>
+        </record>
+
+    <menuitem id="crm_lifecycle_menu" name="CRM Lifecycle Stages" parent="crm.crm_config_settings_menu" sequence="91" action="action_crm_lifecycle_tree_view" groups="base.group_system"/>
+
+    </data>
+</odoo>

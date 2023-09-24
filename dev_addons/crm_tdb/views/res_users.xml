@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_res_user_recouvrement_form" model="ir.ui.view">
+            <field name="name">res.users.recouvrement.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//page[@name='preferences']" position="after">
+                        <page string="Recouvrment" name="recouvrement">
+                            <group>
+                                <group>
+                                    <field name="objectif_ids">
+                                        <tree editable="bottom">
+                                            <field name="year"/>
+                                            <field name="month"/>
+                                            <field name="objectif"/>
+                                            <field name="currency_id" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </group>
+
+                            </group>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

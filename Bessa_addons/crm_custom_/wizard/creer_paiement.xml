@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="creer_paiement_wizard_form_view_1" model="ir.ui.view">
+            <field name="name">creer.paiement.wizard.form</field>
+            <field name="model">creer.paiement.wizard</field>
+            <field name="inherit_id" ref="crm_echeancier.creer_paiement_wizard_form_view"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                    <data>
+                    <xpath expr="//field[@name='amount']" position="after">
+                        <field name="amount_state" widget="Radio"/>
+                        <field name="button_state" invisible="1"/>
+                    </xpath>
+                        <xpath expr="//field[@name='payment_date']" position="after">
+                        <field name="date_state" widget="Radio"/>
+                    </xpath>
+                    <xpath expr="//field[@name='mode_paiement_id']" position="after">
+                        <field name="mode_state" widget="Radio"/>
+                    </xpath>
+                    <xpath expr="//button[@name='action_appliquer']" position="replace">
+                      <button class="oe_highlight" string="Appliquer" name="action_appliquer" type="object" />
+                    </xpath>
+                    <!-- <xpath expr="//button[@name='action_appliquer']" position="after">
+                      <button class="oe_highlight" string="Valider la vérification" name="set_button_state" type="object" attrs="{'invisible':[('button_state','=', True)]}" />
+                    </xpath> -->
+                 </data>
+            </field>
+        </record>
+    </data>
+</odoo>

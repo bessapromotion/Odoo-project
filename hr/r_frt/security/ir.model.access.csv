@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_frt_user,hr.frt user,model_hr_frt,hr.group_hr_user,1,1,1,1
+access_hr_frt_motif_user,hr.frt.motif user,model_hr_frt_motif,hr.group_hr_user,1,1,1,1
+access_hr_frt_motif_line_user,hr.frt.motif.line user,model_hr_frt_motif_line,hr.group_hr_user,1,1,1,1
+access_hr_frt_motif_article_user,hr.frt.motif.article user,model_hr_frt_motif_article,hr.group_hr_user,1,1,1,1
+access_hr_frt_article_line_user,hr.frt.article.line user,model_hr_frt_article_line,hr.group_hr_user,1,1,1,1

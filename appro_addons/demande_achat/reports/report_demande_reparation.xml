@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="demande_achat.report_demande_reparation">
+
+    <t t-call="report.html_container">
+    <t t-foreach="docs" t-as="o">
+
+        <div class="header">
+
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="2">
+                            <h1><strong>SARL BNC BOISSONS NOUVELLE COMPAGNIE </strong></h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width:50%;"><span style="margin-left:2px;">Z.E A 2 EME TRANCHE N°5 SETIF</span></td>
+                        <td rowspan="3" style="width:50%;">
+                            <img t-att-src="'data:image/png;base64,%s' %res_company.logo" style="width:10%"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span style="margin-left:2px;">Tél. :036.93.85.10 , Fax. :036.93.85.58 </span></td>
+                    </tr>
+                    <tr>
+                        <td><span style="margin-left:2px;">Capital social: 0.00 DA</span></td>
+                    </tr>
+                    <tr>
+
+                    </tr>
+
+            </table>
+                <table style="border: 1px solid black;width:100%" >
+                    <tr style="border: 1px solid black;width:100%">
+                        <td style="width:25%"><span>R.C: 19/00-0086596 B06 </span></td>
+                        <td style="width:25%"><span>M.F: 000619008659694  </span></td>
+                        <td style="width:25%"><span>A.I: 19018040041 </span></td>
+                        <td style="width:25%"><span>N.I.S:  </span></td>
+                    </tr>
+
+                </table>
+        </div>
+
+        <div class="page">
+            <div>
+
+                <div style="float:left;width:65%;padding:30px;border: 1px solid black;border-radius: 10px 30px 10px 30px;text-align:right;font-size:20px">
+                    <strong>
+                          Code: C0084<br/>
+                          R.social: ADDA MOHAMED AMINE<br/>
+                          Activité: COMMERCE EN GROS DE PRODUIT LIES A L'ALIMENTATION HUMAINE<br/>
+                          Adresse: El- Sehaouria commune mohamadia MASCARA
+                    </strong>
+                </div>
+                <div style="float:left;width:35%">
+
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+    </t>
+    </t>
+</template>
+</odoo>

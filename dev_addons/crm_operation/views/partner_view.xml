@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="action_partner_reservation_button" model="ir.actions.act_window">
+            <field name="name">Reservation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.reservation</field>
+            <field name="context">{'search_default_partner_id': [active_id], 'default_partner_id': active_id}</field>
+            <!--<field name="domain"></field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_crm_reservation_filter"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Cliquez pour créer une réservation.
+              </p><p>
+              </p>
+            </field>
+        </record>
+
+        <record id="view_partner_reservation_form" model="ir.ui.view">
+            <field name="name">res.partner.reservation.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                    <button name="toggle_active" position="before">
+                        <button
+                                class="oe_stat_button"
+                                type="action"
+                                name="%(action_partner_reservation_button)d"
+                                attrs="{'invisible':[('nbr_reservation','=', 0)]}"
+                                context="{'default_partner_id': active_id}"
+                                icon="fa-home">
+                                <field string="Réservation(s)" name="nbr_reservation" widget="statinfo" />
+                        </button>
+                    </button>
+            </field>
+        </record>
+
+    </data>
+</openerp>

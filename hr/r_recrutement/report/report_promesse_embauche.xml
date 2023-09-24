@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_promesse_embauche">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+
+                    <div class="page" style="font-size:20px;">
+                        <h1 style="text-align:center;">
+                            <b><u>Promesse d'embauche</u></b>
+                        </h1>
+                        <br/>
+                        Monsieur,<span t-field="o.partner_name"/>,
+                        <br/>
+                        <br/>
+                        Suite à notre entretien en date du <b><span t-field="o.date_promesse"/>,</b> nous avons le plaisir de
+                        vous notifier notre intention de
+                        vous engager pour rejoindre
+                        <b>
+                            <span t-field="o.company_id"/>
+                        </b>
+                        , sur la base des conditions ci-après :
+                        <br/>
+                        <br/>
+                        <b>
+                            •
+                            <u>Type de contrat :</u>
+                            <span t-field="o.contract_type_id"/>
+
+                        </b>
+                        <span t-if="o.duree_contract > 0">
+                            , pour une durée de
+                            <b>
+                                <span t-field="o.duree_contract"/>
+                            </b>
+                            mois
+                        </span>
+                        , avec une période
+                        d’essai de trois (03, 06) mois (Selon le cas Cadre, Maitrise), reconductible une (01) fois pour
+                        maitrise.
+                        <br/>
+                        <br/>
+
+                        <b>
+                            •
+                            <u>Date de prise de fonction :</u>
+                        </b>
+                        <span t-field="o.date_prise_fonction"/>
+                        <br/>
+                        <br/>
+                        <b>
+                            •
+                            <u>Intitulé du Poste : </u>
+                        </b>
+                        <span t-field="o.job_id"/>
+                        <b>
+                            <u> Structure :
+                            </u>
+                        </b>
+                        <span t-field="o.job_id.department_id"/>
+                        <br/>
+                        <br/>
+                        <b>
+                            •
+                            <u> Affectation :</u>
+                        </b>
+                        <span t-field="o.project_id"/>
+                        <br/>
+                        <br/>
+                        <b>
+                            •
+                            <u> Salaire Net mensuel :</u>
+                        </b>
+                        <span t-field="o.salary_validate"/>DA auquel s’ajoutent les primes variables octroyées par la
+                        société
+                        <br/>
+                        <br/>
+                        <br/>
+                        Vous êtes libre de nous donner votre accord dans un délai de 48h pour conclure le contrat de
+                        travail déterminé dans les conditions décrites ci-dessus.
+                        <br/>
+                        <br/>
+                        Le poste est libre de suite, ainsi nous attendons votre retour, en espérant que vous soyez aussi
+                        enthousiaste de rejoindre notre équipe, que nous de vous y accueillir.
+                        <br/>
+                        <br/>
+                        Meilleures salutation.
+                        <br/>
+                        <br/>
+                        <div style="text-align:right;">
+                            <b>Alger le
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>
+                            </b>
+                            <br/>
+                            <b>Direction Ressources Humaines</b>
+                            <br/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

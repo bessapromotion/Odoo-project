@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_contract_pv_form" model="ir.ui.view">
+        <field name="name">contract.pv.form.inherit</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='state']" position="after">
+                    <button name="action_print_pv" string="Imprimer PV" type="object"
+                            attrs="{'invisible': [('hr_instalation_id', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='hr_responsible_id']" position="after">
+                    <field name="hr_instalation_id" options="{'no_create': True}"
+                           attrs="{'invisible': [('hr_instalation_id', '=', False)]}"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

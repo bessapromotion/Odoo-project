@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_reservation_user,crm.reservation user,model_crm_reservation,sales_team.group_sale_salesman,1,1,0,0
+access_crm_reservation_manager,crm.reservation manager,model_crm_reservation,sales_team.group_sale_manager,1,1,1,1
+access_crm_pre_reservation_user,crm.pre.reservation user,model_crm_pre_reservation,sales_team.group_sale_salesman,1,1,0,0
+access_crm_pre_reservation_manager,crm.pre.reservation manager,model_crm_pre_reservation,sales_team.group_sale_manager,1,1,1,1
+access_crm_annulation_user,crm.annulation user,model_crm_annulation,sales_team.group_sale_salesman,1,1,0,0
+access_crm_annulation_manager,crm.annulation manager,model_crm_annulation,sales_team.group_sale_manager,1,1,1,1
+access_crm_annulation_type_user,crm.annulation.type user,model_crm_annulation_type,sales_team.group_sale_salesman,1,1,0,0
+access_crm_annulation_type_manager,crm.annulation.type manager,model_crm_annulation_type,sales_team.group_sale_manager,1,1,1,1
+access_crm_reservation_product_user,crm.reservation.product user,model_crm_reservation_product,sales_team.group_sale_salesman,1,1,0,0
+access_crm_reservation_product_manager,crm.reservation.product manager,model_crm_reservation_product,sales_team.group_sale_manager,1,1,1,1

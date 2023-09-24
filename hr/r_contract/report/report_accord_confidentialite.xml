@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_accord_confidentialite">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+
+                    <div class="page" style="font-size:20px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td/>
+                                <td style="text-align:right;">
+                                    <b>Alger le
+                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                                    </b>
+                                </td>
+                            </tr>
+                        </table>
+                        <b>Nom et Prénom :</b>
+                        <span t-field="o.employee_id"/>
+                        <br/>
+                        <b>Poste occupé :</b>
+                        <span t-field="o.job_id"/>
+                        <br/>
+                        <b>Date d’embauche :</b>
+                        <span t-field="o.date_start"/>
+                        <br/>
+                        <br/>
+                        <div style="text-align:center;">
+                            <b>Adhésion à la Charte d’Ethique
+                                <br/>
+                                (Confidentialité / Protection des données<span t-field="o.company_id"/>)
+                            </b>
+                        </div>
+                        <br/>
+                        Par la présente,
+                        <br/>
+                        Je soussigné (e), certifie <b>m’engager</b>à maintenir confidentielles l’ensemble des
+                        informations et
+                        documents, physiques ou électronique de toutes nature appartenant ou concernant
+                        <b><span t-field="o.company_id"/>,
+                        </b>
+                        dont j’ai pris connaissance ou eu accès de manière directe ou indirecte à
+                        l’occasion de l’exercice de mes fonctions et <b>m’engager</b> à les garder confidentielles même
+                        après
+                        mon départ de la société
+                        <b><span t-field="o.company_id"/>.
+                        </b>
+                        <br/>
+                        <br/>
+                        Je <b>m’engager</b> également à prendre toutes les mesures nécessaires pour protéger le secret
+                        professionnel et la confidentialité des informations et documents dont j’ai pu disposer, qu’ils
+                        soient de nature stratégique, financières, sociales et concernant également les clients et
+                        projets de
+                        <b><span t-field="o.company_id"/>.
+                        </b>
+                        <br/>
+                        <br/>
+
+                        Je <b>m’engager</b> également à respecter les principes d’intégrité et de loyauté dans mes
+                        rapports avec
+                        les clients de
+                        <b><span t-field="o.company_id"/>.
+                        </b>
+                        ou ses fournisseurs et sous-traitants.
+                        <br/>
+                        <br/>
+
+                        Je m’interdis de solliciter tout cadeau ou avantage directement ou indirectement à nos
+                        fournisseurs, clients et sous-traitants. Cet engagement s’applique également à toutes
+                        invitations non justifiées.
+                        <br/>
+                        <br/>
+
+                        Je <b>m’engager</b> à honorer mes engagement pendants l’exercice de mes fonctions et après avoir
+                        quitté
+                        la société
+                        <b><span t-field="o.company_id"/>.
+                        </b>
+                        <br/>
+                        <br/>
+                        <div style="text-align:right;">
+                            <b>Nom ; Prénom et Signatures</b>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

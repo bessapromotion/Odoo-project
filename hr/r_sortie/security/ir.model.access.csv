@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_sortie_user,hr.employee.sortie user,model_hr_employee_sortie,hr.group_hr_user,1,1,1,1
+access_hr_employee_recup_user,hr.employee.recup user,model_hr_employee_recup,hr.group_hr_user,1,1,1,1
+access_hr_employee_absence_user,hr.employee.absence user,model_hr_employee_absence,hr.group_hr_user,1,1,1,1

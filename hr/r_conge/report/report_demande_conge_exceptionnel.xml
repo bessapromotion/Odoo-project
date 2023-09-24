@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_demande_conge_exceptionnel">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page" style="font-size:20px;">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h1 style="text-align: center;font-size:25px;">Demande de
+                            <strong t-field="o.holiday_status_id"/>
+                        </h1>
+                        <br/>
+                        <t t-foreach="o.employee_ids" t-as="e">
+                            Nom / Prénom :
+                            <strong t-field="e.name"/>
+                            <br/>
+                            <br/>
+                            Service :
+                            <strong t-field="e.department_id"/>
+                            <br/>
+                            <br/>
+                            Fonction :
+                            <strong t-field="e.job_id"/>
+                            <br/>
+                            <br/>
+                            Nom et Prénom du remplaçant :
+                            <strong t-field="o.employee_remplacent_id"/>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </t>
+                        <table style="width:100%; clear:both;">
+                            <tr style="height: 70px;">
+                                <td style="text-align: left;height: 90px;border:None">Nom du chef de service :</td>
+                                <td style="text-align: center;height: 90px;border: 1px solid #000000;">
+                                    <b>Favorable</b>
+                                </td>
+                                <td style="text-align: center;border: 1px solid #000000;">
+                                    <b>Défavorable</b>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <br/>
+                        <div>
+                            ● Date souhaitée pour le début de congé exceptionnel :
+                            <strong t-field="o.request_date_from"/>.
+                            <br/>
+                            <br/>
+                            ● Date souhaitée pour la fin de congé exceptionnel :
+                            <strong t-field="o.request_date_from"/>.
+                            <br/>
+                            <br/>
+                            ● Nombre de jours :
+                            <strong t-field="o.number_of_days"/>.
+                            <br/>
+                            <br/>
+                            <br/>
+
+                        </div>
+                        <div style="text-align: right;">Ouled Fayet le :
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y/%m/%d %H:%M')"/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <table style="width:100%;height: 200px;">
+                            <tr>
+                                <td style="text-align: center;border: 1px solid #000000;">Le collaborateur</td>
+                                <td style="text-align: center;border: 1px solid #000000;">Le chef de service</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

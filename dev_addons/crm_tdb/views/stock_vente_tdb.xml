@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--        analyse vente et stock-->
+    <record model="ir.ui.view" id="crm_tdb_product_graph_view_2">
+        <field name="name">crm.tdb.sale</field>
+        <field name="model">product.template</field>
+        <field name="type">graph</field>
+        <field name="arch" type="xml">
+            <graph string="project par ensoleiment">
+                <field name="project_id"/>
+                <field name="ensoleillement_id"/>
+            </graph>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="product_graph">
+        <field name="name">graph</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="crm_tdb_product_graph_view_2"/>
+        <!--        <field name="context">{'group_by': ['project_id','format_id'], 'pivot_measures':-->
+        <!--            ['__count','mt_encaiss', 'list_price', 'taux_encaisse_p'],-->
+        <!--            'pivot_column_groupby': ['type_difficulte'], 'pivot_row_groupby': ['project_id','format_id'],-->
+        <!--            'orderedBy':-->
+        <!--            []}-->
+        <!--        </field>-->
+    </record>
+    <record model="ir.actions.act_window" id="action_crm_tdb_project_vente_typologie">
+        <field name="name">Etat des Ventes par projet/typologie</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+        <field name="domain">[('etat', '=', 'Réservé')]</field>
+        <field name="context">{'search_default_filter_appartement': 1,'group_by': ['project_id','format_id'],
+            'pivot_measures':
+            ['__count','mt_encaiss', ],
+            'pivot_row_groupby': ['project_id','format_id'],
+            'orderedBy':
+            []}
+        </field>
+<!--        'prix_vente_devis'-->
+    </record>
+    <record model="ir.ui.view" id="view_sale_order_graph2">
+        <field name="name">sale.order.graph</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <graph string="Sales Orders" sample="1" type="pie">
+                <field name="partner_id"/>
+                <field name="amount_total" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_crm_tdb_project_commercial">
+        <field name="name">Etat des Ventes par commercial/projet</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="view_id" ref="view_sale_order_graph2"/>
+        <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+        <field name="context">{'search_default_type_bien_apt_and_current_month': 1,'group_by': ['user_id',
+            'project_id'],
+            'pivot_measures': ['__count', 'mt_encaisse', 'amount_total'],
+            'pivot_row_groupby': ['user_id', 'project_id'],
+            }
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_crm_tdb_project_vente_encaissement_commercial">
+        <field name="name">Vente et encaissement sur vente par commercial</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="view_id" ref="view_sale_order_graph2"/>
+        <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+        <field name="context">{'search_default_type_bien_apt_and_current_month': 1,'group_by': ['user_id'],
+            'graph_measures':
+            ['mt_encaisse'], 'graph_mode': 'bar','pivot_measures': ['__count', 'mt_encaisse', 'amount_total'],
+            'graph_groupbys': ['user_id'], 'orderedBy': [], 'graph_measure': 'mt_encaisse',
+            'dashboard_merge_domains_contexts': False}
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_crm_tdb_project_vente_encaissement_total">
+        <field name="name">Nombre de ventes par projet avec encaissement sur vente total</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="view_id" ref="view_sale_order_graph2"/>
+        <field name="context">{'search_default_type_bien_apt_and_current_month': 1,'group_by': ['project_id'],
+            'graph_measure':
+            'mt_encaisse', 'graph_mode': 'bar','pivot_measures': ['__count', 'mt_encaisse', 'amount_total','taux'],
+            'graph_groupbys': ['project_id']}
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_crm_tdb_stock_nombre">
+        <field name="name">stock en nombre</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+        <field name="domain"></field>
+        <field name="context">{'search_default_filter_appartement': 1,'group_by': ['project_id',], 'pivot_measures':
+            ['__count'],
+            'pivot_column_groupby': ['etat'], 'pivot_row_groupby': ['project_id'],
+            'orderedBy':
+            []}
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_crm_tdb_stock_valeur">
+        <field name="name">stock en valeur</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+        <field name="domain"/>
+        <field name="context">{'search_default_filter_appartement': 1,'group_by': ['project_id',], 'pivot_measures':
+            ['list_price'],
+            'pivot_column_groupby': ['etat'], 'pivot_row_groupby': ['project_id'],
+            'orderedBy':
+            []}
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_crm_tdb_appt_typologie">
+        <field name="name">Appartement par nombre de typologie</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="domain"></field>
+        <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+        <field name="context">{'search_default_filter_appartement': 1,'group_by': ['format_id','project_id'],
+            'pivot_measures':
+            ['__count'],
+            'pivot_column_groupby': ['etat'], 'pivot_row_groupby': ['format_id','project_id'],
+            'orderedBy':
+            []}
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="formation_historique_tree_view">
+            <field name="name">formation.session.historique.tree</field>
+            <field name="model">formation.session.historique</field>
+            <field name="arch" type="xml">
+                <tree create="false" delete="false">
+                    <field name="employe_id"/>
+                    <field name="theme_id"/>
+                    <field name="formateur_id"/>
+                    <field name="theme_id"/>
+                    <field name="date_debut"/>
+                    <field name="date_fin"/>
+                    <field name="duree"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_formation_historique">
+            <field name="name">Historique formation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">formation.session.historique</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="formation_historique_tree_view"/>
+            <field name="groups_id" eval="[(4, ref('r_formation.group_formation_manager'))]"/>
+            <field name="domain">[('employe_id','=', active_id)]</field>
+        </record>
+        <!-- interface employé -->
+        <record id="view_hr_employe_historique_formation" model="ir.ui.view">
+            <field name="name">hr.employee.dl.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="priority">2</field>
+            <field name="groups_id" eval="[(4, ref('r_formation.group_formation_manager'))]"/>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//div[@name='button_box']" position="inside">
+                        <button class="oe_stat_button" type="action" name="%(action_formation_historique)d"
+                                icon="fa-history" groups="r_formation.group_formation_manager">
+                            <field string="Formation" name="nbr_formation" widget="statinfo"/>
+                        </button>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>

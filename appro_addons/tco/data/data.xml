@@ -1,0 +1,36 @@
+<openerp>
+    <data>
+        <!-- chargement de la table type produit-->
+        <record model="product.category" id="cat_purchase">
+             <field name="name">Achat</field>
+             <field name="parent_id">1</field>
+         </record>
+
+         <record model="product.category" id="cat_fourniture">
+             <field name="name">Fourniture de Bureau</field>
+             <field name="parent_id" ref="dl_product.cat_purchase"/>
+         </record>
+
+         <record model="product.category" id="cat_informatique">
+             <field name="name">Matériel Informatique</field>
+             <field name="parent_id" ref="dl_product.cat_purchase"/>
+         </record>
+
+         <record model="product.category" id="cat_reprographie">
+             <field name="name">Matériel reprographie</field>
+             <field name="parent_id" ref="dl_product.cat_purchase"/>
+         </record>
+
+         <record model="product.category" id="cat_carburant">
+             <field name="name">Carburant</field>
+             <field name="parent_id" ref="dl_product.cat_purchase"/>
+         </record>
+
+         <record model="product.category" id="cat_outillage">
+             <field name="name">Outillage</field>
+             <field name="parent_id" ref="dl_product.cat_purchase"/>
+         </record>
+
+
+    </data>
+</openerp>

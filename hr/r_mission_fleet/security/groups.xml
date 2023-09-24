@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.module.category" id="mission_fleet_group_category">
+            <field name="name">Autorisation véhicule</field>
+            <field name="description">Qui peut autoriser l'utilisation d'un véhicule.</field>
+            <field name="sequence">40</field>
+        </record>
+
+        <record model="res.groups" id="group_mission_autorisation_fleet">
+            <field name="name">Peut autoriser l'utilisation d'un véhicule</field>
+            <field name="category_id" ref="r_mission_fleet.mission_fleet_group_category"/>
+        </record>
+
+    </data>
+</openerp>

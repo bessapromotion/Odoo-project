@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- suspension -->
+        <record model="ir.ui.view" id="suspension_tree_view">
+            <field name="name">suspension.tree</field>
+            <field name="model">hr.suspension</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                    <field name="name"/>
+                    <field name="employe_id"/>
+                    <field name="s_date"/>
+                    <field name="duree_susp"/>
+                    <field name="date_effet"/>
+                    <field name="user_id"/>
+                    <field name="company_id"/>
+                    <field name="state" decoration-success="state == 'done'"
+                           decoration-muted="state == 'cancel'"
+                           decoration-warning="state == 'valid'"
+                           decoration-info="state == 'draft'" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="suspension_filter" model="ir.ui.view">
+            <field name="name">hr.suspension.filter</field>
+            <field name="model">hr.suspension</field>
+            <field name="arch" type="xml">
+                <search string="suspension">
+                    <field name="employe_id"/>
+                    <field name="name"/>
+
+                    <filter name="draft" string="Nouveaux" domain="[('state','=','draft')]"/>
+                    <filter name="done" string="Terminés" domain="[('state', '=', 'done')]"/>
+                    <filter name="cancel" string="Annulés" domain="[('state', '=', 'cancel')]"/>
+
+                    <group expand="0" string="Grouper par...">
+                        <filter name="employee" string="Employé" domain="[]" context="{'group_by':'employe_id'}"
+                                help="Employé"/>
+                        <filter name="company" string="Société" domain="[]" context="{'group_by':'company_id'}"
+                                help="Société"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="suspension_form_view">
+            <field name="name">hr.suspension.form</field>
+            <field name="model">hr.suspension</field>
+            <field name="arch" type="xml">
+                <form string="Suspension">
+                    <header>
+                        <button name="action_validate" string="Valider" states="draft" class="oe_highlight"
+                                type="object"
+                                confirm="Voulez-vous valider cette suspension ?"/>
+                        <button name="action_prise_effet" string="Entrer en application" states="valid"
+                                class="oe_highlight" type="object"
+                                confirm="Voulez-vous faire rentrer en vigueur cette suspension ?"/>
+                        <!--                        <button name="action_print" states="valid,done" string="Imprimer" class="oe_highlight" type="object"/>-->
+
+                        <button name="action_cancel" string="Annuler" states="draft,valid" type="object"
+                                confirm="Voulez-vous annuler cette suspension ?"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,valid,done"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label for="name" string="Décision de suspension # "/>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                        <field name="image" widget='image' class="oe_avatar"/>
+                        <div class="oe_title">
+                            <label for="employe_id" class="oe_edit_only"/>
+                            <h1>
+                                <field name="employe_id" placeholder="Employé  "
+                                       options='{"no_open": True, "no_create": True}'/>
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="user_id" options='{"no_open": True, "no_create": True}'/>
+                                <field name="company_id" options='{"no_open": True, "no_create": True}'/>
+                                <field name="s_date"/>
+                                <label for="duree_susp" string="Durée de suspension"/>
+                                <div>
+                                    <field name="duree_susp"/>
+                                    <span>jours</span>
+                                </div>
+                                <!--								<field name="duree_susp"/>-->
+                                <field name="date_effet"/>
+                                <field name="restitution_mi"/>
+                            </group>
+                            <group>
+                                <field name="contract_id"
+                                       domain="[('employee_id','=', employe_id), ('state','not in', ('draft','cancel'))]"
+                                       options='{"no_open": True, "no_create": True}'/>
+                                <field name="matricule"/>
+                                <field name="job_id"/>
+                            </group>
+                            <group>
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Fautes">
+                                <field name="faute_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="degre"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_suspension_tree_view">
+            <field name="name">Décisions de suspension</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.suspension</field>
+            <field name="search_view_id" ref="suspension_filter"/>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="suspension_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer une nouvelle suspension.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <!-- Top menu item -->
+
+
+        <menuitem name="Suspensions" action="action_suspension_tree_view" id="menu_suspension"
+                  parent="hr_base.menu_carriere" sequence="30"/>
+
+    </data>
+</openerp>

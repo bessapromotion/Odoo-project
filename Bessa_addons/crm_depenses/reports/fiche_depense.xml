@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="fiche_depense">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <p class="text-left" style="">
+                            Réf :
+                            <span t-field="o.name"/>
+                        </p>
+                        <p style="margin-top : -40px;" align="right">
+                            Alger le :
+                            <span t-field="o.date"/>
+                        </p>
+                        <h2 class="text-center">
+                            <strong>
+                                FICHE DE <span t-field="o.tags_ids[0].name"/>
+                            </strong>
+                        </h2>
+                        <table style="margin-top:50px;">
+                            <tr>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    Type de dépense
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    :
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    <strong>
+                                        <span t-esc="o.type_id.name"/>
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    Projet
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    :
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    <strong>
+                                        <span t-esc="o.project_id.name"/>
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    Libelle
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    :
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    <strong>
+                                        <span t-esc="o.libelle"/>
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    Nature
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    :
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    <strong>
+                                        <span t-esc="o.nature_id.name"/>
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    Type du bénificiaire
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    :
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    <strong>
+                                        <span t-esc="o.type_ben_id.name"/>
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    Nom et prénom du bénificiaire
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    :
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    <strong>
+                                        <span t-esc="o.benificiaire"/>
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    Type
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    :
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    <strong>
+                                        <span t-field="o.tags_ids[0].name"/>
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    Montant
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    :
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    <t t-if="o.debit_ok == True">
+                                        <strong>
+                                            <span t-field="o.mt_debit"/>
+                                        </strong>
+                                    </t>
+                                    <t t-else="">
+                                        <strong>
+                                            <span t-field="o.mt_credit"/>
+                                        </strong>
+                                    </t>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    Trésorerie
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    :
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    <strong>
+                                        <span t-esc="o.tresorerie"/>
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    Compte
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    :
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    <strong>
+                                        <span t-esc="o.compte_id.name"/>
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    Document d'origine
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    :
+                                </td>
+                                <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                    <strong>
+                                        <span t-esc="o.origin"/>
+                                    </strong>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+
+
+                        </table>
+
+                      <!-- Signature -->
+                        <div>
+                            <br/>
+                            <br/>
+                            <div style="padding-top: 10px; width:100%;">
+                                <div style="float: left;width:50%;;text-align:center">
+                                    <div style="">
+                                        Signature du bénificiaire
+                                    </div>
+
+                                </div>
+                                <div style="float: right;width:50%;text-align:center">
+                                    <div style="">Signature du caissier</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

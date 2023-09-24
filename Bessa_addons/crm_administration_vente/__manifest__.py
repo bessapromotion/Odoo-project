@@ -1,0 +1,52 @@
+# -*- coding: utf-8 -*-
+
+{
+    'name': 'Gestion de la copropriété',
+    'version': '15.0',
+    'author': 'OMARI Rahma Nour elhouda',
+    'license': 'LGPL-3',
+    'category': 'CRM',
+    'sequence': 1,
+    'summary': 'Suivre les charges des acquérreurs',
+    'description': """
+
+    """,
+    'images': ['static/description/icon.png', ],
+    'depends': ['base', 'mail', 'crm_product', 'account', 'sale', 'crm_operation', 'crm_echeancier', 'hr_base','crm_custom','gestion_profil','crm_cloture_caisse'],
+    'data': [
+        'security/crm_administration_vente_security.xml',
+        'security/ir.model.access.csv',
+        # 'report/pv_appartement.xml',
+        # 'report/pv_cellier.xml',
+        # 'report/cahier_charge.xml',
+        'report/autorisation_travaux.xml',
+        'report/autorisation_revente.xml',
+        'report/ordre_paiement_charge.xml',
+        'report/recu_paiement_charge.xml',
+        'report/autorisation_location.xml',
+        'report/reports_menu.xml',
+        'wizard/print_ordre_paiement.xml',
+        'wizard/creer_paiement.xml',
+        'wizard/creer_paiement_direct.xml',
+        'views/ordre_paiement_charge_view.xml',
+        'views/payment_charge_view.xml',
+        'views/charge_annual_view.xml',
+        'views/year_view.xml',
+        'views/month_view.xml',
+        # 'views/remise_cles_view.xml',
+        # 'views/article_view.xml',
+        'views/autorisation_travaux_view.xml',
+        'views/autorisation_location_view.xml',
+        'views/autorisation_revente_view.xml',
+        'views/company_view.xml',
+        'views/menu_view.xml',
+
+    ],
+    'demo': [],
+    'test': [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'css': [],
+}
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

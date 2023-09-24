@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_contrat_cdd">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <style>
+                        * { font-family:Arial;}
+
+                        .report-header-table { font-size: 14px; }
+                        .report-header-table tr,
+                        .report-header-table td { border: 1px solid #999999; }
+                        .report-header-table td { width: 50%; text-align: center; }
+
+                        .report-title { font-size: 2rem; text-align: center; padding: 0 25%; }
+
+                        .contract-article { margin-bottom:10px; page-break-inside: avoid; }
+                        .contract-article_title { text-transform: uppercase; }
+                        .contract-article_content > p { margin-bottom: 0; }
+
+                        .signature-block { page-break-inside: avoid; text-align: center; margin-top: 20px; }
+                    </style>
+
+                    <div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div style="border: solid;text-align:center;font-size:40px;background-color: #979393">CONTRAT DE
+                            TRAVAIL
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div style="border: solid;text-align:center;font-size:40px;background-color: #979393">
+                            <span t-field="o.modele_id"/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div style="border: solid;text-align:center;font-size:40px;background-color: #878585;color:#FBF7F7;">
+                            CONTRAT N°
+                            <span t-field="o.name"/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div style="page-break-before:always;">
+                            Entre les soussignés :
+                            <br/>
+
+                            D’une part
+                            <br/>
+
+                            <b>La société :<strong t-field="o.company_id"/>.
+                                <br/>
+                                Sise à :
+                                <span t-field="o.company_id.street"/>
+                                <span t-field="o.company_id.city"/>
+                                <span t-field="o.company_id.state_id.name"/>,
+                                <br/>
+                                Représentée par :<span t-field="o.company_id.contract_represente"/>.
+                                <br/>
+                                Assumant la fonction de :
+                                <span t-field="o.company_id.contract_represente_fonction"/>
+                                <br/>
+                            </b>
+
+                        </div>
+                        <div style="text-align: left;">Et d'autre part,</div>
+
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <strong t-field="o.employee_id.civilite_id"/>
+                                        <strong t-field="o.employee_id.name"/>
+                                        dénommé (e) ci- après, « le salarié (e)»
+                                    </td>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td>Né(e) le :
+                                        <strong t-field="o.employee_id.birthday"/>
+                                        à
+                                        <strong t-field="o.employee_id.place_of_birth"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Demeurant :
+                                        <strong><span t-field="o.employee_id.adresse_simple"/>,<span
+                                                t-field="o.employee_id.residence_commune.name"/>,
+                                            <span t-field="o.employee_id.residence_wilaya_id.name"/>
+                                        </strong>
+                                    </td>
+                                    <td/>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                        <div>Il a été convenu ce qui suit:</div>
+                        <br/>
+
+
+                        <!-- Articles -->
+                        <div>
+                            <t t-set="variables" t-value="o.get_variables()"/>
+                            <t t-set="nb_article" t-value="1"/>
+                            <t t-foreach="o.article_lines" t-as="a">
+                                <t t-if="a and a.article_id">
+                                    <div class="contract-article">
+                                        <strong>
+                                            Article
+                                            <t t-esc="nb_article"/>
+                                            :
+                                            <span t-field="a.name"/>
+                                        </strong>
+                                        <div class="contract-article_content">
+                                            <t t-raw="a.article_id.set_values(variables)"/>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <t t-set="nb_article" t-value="nb_article + 1"/>
+                                </t>
+                            </t>
+                        </div>
+
+
+                        <!-- Signature -->
+                        <div>
+                            <div style="margin-top:0px;text-align:right;">Fait à Alger le :
+                                <span t-field="o.date_start"/>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div style="padding-top: 10px; width:100%;">
+                                <div style="float: left;width:50%;">
+                                    <div style="">
+                                        Le salarié(e)
+                                        <span t-field="o.employee_id.civilite_id"/>
+                                        <span t-field="o.employee_id.name"/>
+                                    </div>
+                                    <div style="">Lu et approuvé</div>
+                                </div>
+                                <div style="float: right;width:50%;text-align:center">
+                                    <div style="">Pour la société</div>
+                                    <span t-field="o.company_id"/>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

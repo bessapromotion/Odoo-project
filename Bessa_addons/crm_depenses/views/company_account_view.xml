@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_res_company_tree" model="ir.ui.view">
+        <field name="name">res.company.account.tree</field>
+        <field name="model">res.company.account</field>
+        <field name="arch" type="xml">
+            <tree string="Comptes" create="1" editable="top">
+                <field name="type"/>
+                <field name="name"/>
+ 		<field name="bank" />
+                <field name="ref_bancaire"/>
+                <field name="date"/>
+                <field name="solde"/>
+                <field name="company_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_account_res_company_search">
+            <field name="name">res.company.account.filter</field>
+            <field name="model">res.company.account</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+		    <field name="bank" />
+                    <field name="company_id"/>
+                </search>
+            </field>
+        </record>
+
+    <record id="action_account_res_company_tree" model="ir.actions.act_window">
+        <field name="name">Comptes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.company.account</field>
+        <field name="view_mode">tree</field>
+    </record>
+</odoo>

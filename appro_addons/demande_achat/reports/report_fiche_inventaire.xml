@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_extend" inherit_id="stock.report_inventory">
+
+        <xpath expr="//div[@class='page']" position="replace">
+            <div class="page">
+
+                <table>
+                    <tr>
+                        <td style="width:500px;text-align:left;padding:7px"><strong>N°</strong><span t-field="o.name"/></td>
+                        <td style="width:500px;text-align:right;padding:7px"><strong>Staouéli, le</strong><span t-field="o.date"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width:500px;text-align:left;padding:7px"><strong>Réf: </strong>-</td>
+                    </tr>
+                </table>
+                <br></br><br></br>
+                <br></br><br></br>
+
+                    <h2 style="text-align:center;">FICHE INVENTAIRE</h2>
+
+                <br></br><br></br>
+
+                    <div>
+                        <td style="width:500px;text-align:left;padding:7px"><strong>SITE : </strong>-</td>
+                    </div>
+
+                <br></br><br></br>
+
+                <table  style="border: 1px solid black;font-size:15px; min-height:500px;">
+
+                    <tr>
+                        <th class="text-center" style="width:100px;border: 1px solid black;"><strong>N°ord.</strong></th>
+                        <th class="text-center" style="width:100px;border: 1px solid black;"><strong>Catégorie</strong></th>
+                        <th class="text-center" style="width:400px;border: 1px solid black;"><strong>Désignation</strong></th>
+                        <th class="text-center" style="width:100px;border: 1px solid black;"><strong>Qté</strong></th>
+                        <th class="text-center" style="width:400px;border: 1px solid black;"><strong>Observations</strong></th>
+                    </tr>
+                    <tr t-foreach="o.line_ids" t-as="l">
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;padding:5px;"><span t-esc='l_index + 1' /></td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;padding:5px;">-</td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;padding:5px;"><span t-field="l.product_id"/></td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;padding:5px;"><span t-field="l.product_qty"/></td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;padding:5px;">-</td>
+                    </tr>
+
+                </table>
+                <br></br><br></br>
+
+                <table>
+                    <tr>
+                        <td style="width:700px;text-align:left;padding:7px"><strong>1.CHEF DE SITE <br/> (signature + nom et prénom) </strong></td>
+                        <td style="width:500px;text-align:left;padding:7px"><strong>RESPONSABLE LOGISTIQUE </strong></td>
+                    </tr>
+
+                </table>
+
+                 <br></br><br></br><br></br><br></br><br></br>
+<!---->
+                    <div>
+                        <td style="width:500px;text-align:left;padding:7px"><strong> 2.CHEF DE SITE <br/> (signature + nom et prénom) </strong></td>
+                    </div>
+
+            </div>
+        </xpath>
+    </template>
+</odoo>

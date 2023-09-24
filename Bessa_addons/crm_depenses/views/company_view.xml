@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_crm_depenses_company_form" model="ir.ui.view">
+        <field name="name">res.crm.depense.form</field>
+        <field name="model">res.company</field>
+        <field name="priority">20</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//notebook" position="inside">
+                    <page name="configuration_crm_depenses" string="Configuration Trésorerie">
+
+                            <group string="Comptes">
+                                <field name="account_ids"/>
+                            </group>
+
+                    </page>
+
+                </xpath>
+
+            </data>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Article Form -->
+        <record model="ir.ui.view" id="article_form_view">
+            <field name="name">hr.contract.article</field>
+            <field name="model">hr.contract.article</field>
+            <field name="arch" type="xml">
+                <form string="Article">
+                    <header class="oe_read_only">
+                        <button name="action_new_revision" string="Nouvelle révision" class="oe_highlight"
+                                type="object"/>
+                    </header>
+                    <sheet>
+                        <strong>Nom</strong>
+                        <h1>
+                            <field name="name" class="oe_inline" placeholder="Nom"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Révision">
+                                <field name="parent"/>
+                                <field name="en_cours"/>
+                            </group>
+                            <group string="Validité">
+                                <field name="date_debut_application"/>
+                                <field name="date_fin_application"/>
+                            </group>
+                        </group>
+                        <div>
+                            <separator string="Contenu"/>
+                            <div class="oe_edit_only">
+                                <p>Vous pouvez utiliser les <i>mots-clés</i> suivants dans le contenu de l'article:
+                                    <br/>
+                                    <code style="color: inherit;">[[civilité]] [[employé]] [[poste_travail]]
+                                        [[type_contrat]] [[date_debut_contrat]] [[date_fin_contrat]] [[salaire_base]]
+                                        [[durée_periode_essai]] [[durée_préavis]]
+                                        [[trial_nbr_mois]] [[affectation]]
+                                    </code>
+                                </p>
+                            </div>
+                            <field name="contenu" nolabel="1"/>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Article Tree -->
+        <record model="ir.ui.view" id="article_tree_view">
+            <field name="name">contract.article.tree</field>
+            <field name="model">hr.contract.article</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Article Filter -->
+        <record id="article_filter" model="ir.ui.view">
+            <field name="name">contract.article.filter</field>
+            <field name="model">hr.contract.article</field>
+            <field name="arch" type="xml">
+                <search string="Article">
+                    <field name="name"/>
+                    <field name="code"/>
+
+                    <group expand="0" string="Grouper par...">
+                        <filter name="en_cours" string="Dernière version" domain="[['en_cours', '=', True]]"
+                                help="Dernière version"/>
+                        <filter name="anciens" string="Ancienne version" domain="[['en_cours', '=', False]]"
+                                help="Ancienne version"/>
+
+                        <!-- <filter name="parent" string="Article parent" domain="[]" context="{'group_by':'parent'}" help="Article parent" /> -->
+                        <!-- <filter name="parent" string="Article parent" domain="[]" context="{'group_by':'name'}" help="Article parent" /> -->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Article Tree View Action -->
+        <record model="ir.actions.act_window" id="action_article_tree_view">
+            <field name="name">Articles de contrat</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.contract.article</field>
+            <field name="search_view_id" ref="article_filter"/>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="article_tree_view"/>
+            <field name="context">{"search_default_en_cours":1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer un nouvel article de contrat.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <!-- Articles Menu -->
+        <menuitem name="Article de contrat" action="action_article_tree_view" id="menu_article"
+                  parent="menu_group_contrat" sequence="90"/>
+
+    </data>
+</openerp>

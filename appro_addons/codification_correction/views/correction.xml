@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="product_codification_correction_tree_view">
+            <field name="name">product.codification.correction.tree</field>
+            <field name="model">product.codification.correction</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Correction codification">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="state" invisible="0"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_codification_correction_form_view" model="ir.ui.view">
+            <field name="name">product.codification.correction.form</field>
+            <field name="model">product.codification.correction</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Correction sequence">
+                    <header>
+<!--                        <button name="action_load_product" type="object" string="Charger les produits" class="oe_highlight" />-->
+<!--                        <button name="correction_code" type="object" string="Corriger" class="oe_highlight" />-->
+                        <button name="search_code_famille" type="object" string="Recherche code erroné" states="famille" class="oe_highlight" />
+                        <button name="search_double" type="object" string="Recherche code en double" states="double" class="oe_highlight" />
+                        <button name="search_code_vide" type="object" string="Recherche code vide" states="vide" class="oe_highlight" />
+                        <button name="correction_code" type="object" string="Attribuer des codes" states="vide" class="oe_highlight" />
+                        <button name="passer_1" type="object" string="Passer cette étape" states="famille" />
+<!--                        <button name="resize_sequence2" type="object" string="taille 4" class="oe_highlight" />-->
+                        <field name="state" nolabel="1" widget="statusbar" statusbar_visible="famille,double,vide,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                                <label for="name" class="oe_edit_only"/>
+                                <h1>
+                                    <field name="name"/>
+                                </h1>
+                            </div>
+                        <group>
+                            <group>
+<!--                                <field name="famille_id"/>-->
+<!--                                <field name="sousfamille_id"/>-->
+                                
+                            </group>
+                            <group>
+                                <field name="date"/>
+                            </group>
+                        </group>
+                        <field name="note"/>
+                        <notebook>
+                            <page string="Produits">
+                                <field name="line_ids" readonly="1">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="famille_id"/>
+                                        <field name="sousfamille_id"/>
+                                        <field name="old_code" invisible="1"/>
+                                        <field name="default_code"/>
+                                        <field name="note"/>
+                                        <button name="action_effacer" string="Effacer" class="btn-warning" type="object" attrs="{'invisible': [('default_code', '=', False)]}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_product_codification_correction_view">
+            <field name="name">Correction codification produits</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.codification.correction</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="filter" eval="True"/>
+            <field name="view_id" ref="product_codification_correction_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Cliquez ici pour créer une nouvelle correction.
+                </p><p>
+
+                </p><p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="product_correction_menu" name="Correction codification produits" parent="stock.menu_stock_config_settings"
+                  sequence="99" action="action_product_codification_correction_view"
+
+        />
+<!--groups="account.group_account_invoice"-->
+    </data>
+</odoo>

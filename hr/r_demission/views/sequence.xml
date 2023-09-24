@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="seq_demission" model="ir.sequence">
+            <field name="name">number_demission_sequence</field>
+            <field name="code">hr.demission</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">DIM/%(range_year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="use_date_range" eval="True" />
+        </record>
+
+        <record model="ir.rule" id="demission_rule">
+            <field name="name">Demission multi-company</field>
+            <field name="model_id" ref="model_hr_demission"/>
+            <field name="domain_force">['|',('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+    </data>
+</openerp>

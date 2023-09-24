@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_suspension_user,hr.suspension user,model_hr_suspension,hr.group_hr_user,1,1,1,1
+access_hr_suspension_faute_user,hr.suspension.faute user,model_hr_suspension_faute,hr.group_hr_user,1,1,1,1
+

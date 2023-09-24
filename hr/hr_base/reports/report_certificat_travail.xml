@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_certificat_travail">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <table style="width:100%;font-size:20px;">
+                            <tr>
+                                <td>
+                                    <div style="margin-top:0px">N° Adhérent:
+                                        <span t-field="o.company_id.num_cnas"/>
+                                    </div>
+                                </td>
+                                <td/>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    <div style="margin-top:0px;">Réf N°:
+                                        <span t-field="o.num_certificat"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="margin-top:0px;text-align:right;">Alger le :
+                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="font-size:32px; font-weight:bold; text-align:center;padding-top:120px;">
+                            CERTIFICAT DE TRAVAIL
+                        </div>
+
+                        <div style="font-size:20px;padding-top:80px;">Nous, Soussignés
+                            <strong>
+                                <span t-field="o.contract_id.company_id"/>
+                            </strong>
+                            sise à
+                            <strong>
+                                <span t-field="o.contract_id.company_id.street"/>
+                                <span t-field="o.contract_id.company_id.city"/>
+                                <span t-field="o.contract_id.company_id.state_id.name"/>
+                            </strong>
+                            ,attestons que
+                            <span t-field="o.civilite_id"/>
+                            :
+                            <strong>
+                                <span t-field="o.name"/>
+                            </strong>
+                            né (e) le
+                            <strong>
+                                <span t-field="o.birthday"/>
+                            </strong>
+                            à
+                            <strong>
+                                <span t-field="o.place_of_birth"/>
+                            </strong>
+                            .
+                            <br/>
+                            <br/>
+                            <div style="font-size:20px;">Demeurant à :
+                                <strong>
+                                    <span t-field="o.adresse_simple"/>.
+                                </strong>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div style="font-size:20px;">N° Sécurité sociale :
+                                <strong>
+                                    <span t-field="o.ss_num"/>
+                                </strong>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div style="font-size:20px; ">A été employé (e) au sein de notre entreprise
+                                depuis
+                                :
+                                le
+                                <strong>
+                                    <span t-field="o.contract_id.date_start"/>
+                                </strong>
+                                au
+                                <strong>
+                                    <span t-field="o.contract_id.date_end"/>
+                                </strong>
+                            </div>
+                            <br/>
+                            <div style="font-size:20px;">En qualité de
+                                <strong>
+                                    <span t-field="o.contract_id.job_id"/>.
+                                </strong>
+                            </div>
+
+                            <div style="padding-top:70px;font-size:20px;">En foi de quoi, le présent certificat est
+                                délivré à l'intéressé (e) pour servir et valoir ce que de droit.
+                            </div>
+
+                            <div style="text-align:right; padding-top:80px;margin-right:50px;font-size:25px;">
+                                <b>
+                                    <u>Le Directeur</u>
+                                </b>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

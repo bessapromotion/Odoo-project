@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="paperformat_sod" model="report.paperformat">
+            <field name="name">SOD paperformat</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">4</field>
+            <field name="margin_bottom">4</field>
+            <field name="margin_left">4</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">0</field>
+            <field name="dpi">96</field>
+        </record>
+
+        <!-- V13 -->
+        <!-- <report
+                string="Fiche de Présence (vièrge)"
+                id="act_report_fiche_presence"
+                model="formation.session"
+                report_type="qweb-pdf"
+                menu="True"
+                name="r_formation.report_fiche_presence"
+                file="r_formation.report_presence"
+                paperformat="paperformat_sod"
+        /> -->
+
+        <!-- V14 -->
+        <record id="act_report_fiche_presence" model="ir.actions.report">
+            <field name="name">Fiche de Présence</field>
+            <field name="model">formation.session</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">r_formation.report_fiche_presence</field>
+            <field name="report_file">r_formation.report_presence</field>
+            <field name="paperformat_id" ref="r_formation.paperformat_sod"/>
+            <field name="binding_model_id" ref="model_formation_session"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- V13 -->
+        <!-- <report
+                string="Fiche expression de besoin (vièrge)"
+                id="act_report_besoin_formation"
+                model="formation.demande"
+                report_type="qweb-pdf"
+                menu="True"
+                name="r_formation.report_besoin_formation"
+                file="r_formation.report_besoin_formation"
+                paperformat="paperformat_sod"
+        /> -->
+
+        <!-- V14 -->
+        <record id="act_report_besoin_formation" model="ir.actions.report">
+            <field name="name">Fiche expression de besoin</field>
+            <field name="model">formation.session</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">r_formation.report_besoin_formation</field>
+            <field name="report_file">r_formation.report_besoin_formation</field>
+            <field name="paperformat_id" ref="r_formation.paperformat_sod"/>
+            <field name="binding_model_id" ref="model_formation_demande"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- detail de la session -->
+        <record model="ir.ui.view" id="formation_session_tree_view">
+            <field name="name">formation.session.tree</field>
+            <field name="model">formation.session</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                    <field name="name"/>
+                    <field name="theme_id"/>
+                    <field name="partner_id"/>
+                    <field name="formateur_id"/>
+                    <field name="date_debut"/>
+                    <field name="date_fin"/>
+                    <field name="duree"/>
+                    <field name="res_nbr"/>
+                    <field name="cout"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="state" decoration-success="state == 'done'"
+                           decoration-muted="state == 'cancel'"
+                           decoration-warning="state == 'planned'"
+                           decoration-info="state == 'draft'" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="formation_session_form_view">
+            <field name="name">formation.session.form</field>
+            <field name="model">formation.session</field>
+            <field name="arch" type="xml">
+                <form string="Session de formation">
+                    <header>
+                        <button name="action_planifier" string="Planifier" states="draft" class="oe_highlight"
+                                type="object"/>
+                        <button name="action_done" string="Valider" states="planned" class="oe_highlight" type="object"
+                                confirm="Voulez-vous cloturer cette session de formation ?"/>
+                        <button name="action_print" states="planned,done" string="Imprimer une fiche de présence"
+                                type="object"/>
+
+                        <button name="action_cancel" string="Remettre en brouillon" states="planned" type="object"
+                                confirm="Voulez-vous annuler la planification ?"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,planned,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="action" states="planned,done"
+                                    name="%(action_evaluation_session_button_view)d" icon="fa-check-square-o">
+                                <field string="Evaluation a chaud" name="nbr_eval" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <h1>
+                            <label for="name" string="Session # "/>
+                            <field name="name" class="oe_inline" readonly="1"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="plan_id" domain="[('state','=','done')]"
+                                       options='{"no_open": True, "no_create": True}'/>
+                                <field name="plan_line_id" domain="[('plan_id','=', plan_id)]"
+                                       options='{"no_open": True, "no_create": True}'/>
+                                <field name="typologie_id"/>
+                                <field name="categorie_id"/>
+                            </group>
+                            <group>
+                                <field name="theme_id" options='{"no_open": True, "no_create": True}'/>
+                                <field name="partner_id" domain="[('organisme_formation','=', True)]"/>
+                                <field name="formateur_id" domain="[('formateur','=',True)]"/>
+                                <field name="type_session"/>
+                                <field name="lieu"/>
+                            </group>
+                            <group>
+                                <field name="date_debut"/>
+                                <field name="date_fin"/>
+                                <field name="duree"/>
+                            </group>
+                            <group>
+                                <field name="res_nbr"/>
+                                <field name="cout"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Ressources">
+                                <field name="res_ids">
+                                    <tree editable="Bottom">
+                                        <field name="name" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="job_id"/>
+                                        <field name="department_id"/>
+                                        <field name="csp_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Objectif">
+                                <field name="objectif"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" modifiers="{}"/>
+                        <field name="message_ids" widget="mail_thread" modifiers="{}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="formation_session_filter" model="ir.ui.view">
+            <field name="name">formation.session.filter</field>
+            <field name="model">formation.session</field>
+            <field name="arch" type="xml">
+                <search string="Formation">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="objectif"/>
+                    <field name="theme_id"/>
+                    <field name="plan_id"/>
+
+                    <!-- <filter name="draft" string="Brouillons" domain="[('state','=','draft')]"/> -->
+                    <!-- <filter name="prevue" string="Prevues" domain="[('state', '=', 'prevue')]"/> -->
+                    <!-- <filter name="planned" string="Planifiées" domain="[('state', '=', 'planned')]"/> -->
+                    <!-- <filter name="done" string="Terminés" domain="[('state', '=', 'done')]"/> -->
+                    <!-- <filter name="cancel" string="Annulés" domain="[('state', '=', 'cancel')]"/> -->
+
+                    <!-- <group expand="0" string="Grouper par...">
+                        <filter name="partner_id" string="Organisme de formation" domain="[]" context="{'group_by':'partner_id'}" help="Organisme de formation"/>
+                        <filter name="Etat" string="Etat" domain="[]" context="{'group_by':'state'}" help="Etat"/>
+                        <filter string="Formateur" name="formateur_id" domain="[]" context="{'group_by':'formateur_id'}" />
+                        <filter string="Theme" name="theme_id" domain="[]" context="{'group_by':'theme_id'}" />
+                    </group> -->
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_formation_session">
+            <field name="name">Sessions de Formation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">formation.session</field>
+            <field name="search_view_id" ref="formation_session_filter"/>
+            <field name="view_mode">tree,gantt,form</field>
+            <field name="view_id" ref="formation_session_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer une nouvelle session de formation.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <record id="action_session_button_view" model="ir.actions.act_window">
+            <field name="name">Sessions de formation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">formation.session</field>
+            <field name="context">{'search_default_plan_id': [active_id], 'default_plan_id': active_id}</field>
+            <field name="domain">[('plan_id','=', active_id)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="formation_session_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer une nouvelle session de formation.
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="seq_hr_employee_sortie" model="ir.sequence">
+            <field name="name">number_sortie_sequence</field>
+            <field name="code">hr.employee.sortie</field>
+            <field name="active">TRUE</field>
+            <field name="prefix"/>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="use_date_range" eval="True"/>
+        </record>
+        <record id="seq_hr_employee_recup" model="ir.sequence">
+            <field name="name">number_recup_sequence</field>
+            <field name="code">hr.employee.recup</field>
+            <field name="active">TRUE</field>
+            <field name="prefix"/>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="use_date_range" eval="True"/>
+        </record>
+        <record id="seq_hr_employee_absence" model="ir.sequence">
+            <field name="name">number_absence_sequence</field>
+            <field name="code">hr.employee.absence</field>
+            <field name="active">TRUE</field>
+            <field name="prefix"/>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="use_date_range" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

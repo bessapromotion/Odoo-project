@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<template id="report_avenant_contrat">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <style>
+                  .page-style{
+                    padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px; margin-top:10px;
+                  }
+                  .titre-style{
+                    text-align: center; font-size: 24px; font-style: normal; font-variant: normal;
+                    padding: 0px;font-weight: bold;
+                  }
+                  .bold-style{
+                    font-size: 22px; font-style: normal; font-variant: normal;
+                    padding: 0px;font-weight: bold;
+                  }
+
+                  div, p {
+                    font-family: Arial;
+                  }
+
+                  th, td {
+                    border: 1px solid black; text-align: left; padding: 10px; border-radius: 8px; height: 20px; border :none;
+                  }
+                  .transp{
+                  border :none;
+                  }
+
+                </style>
+
+                <div class="page-style">
+
+                     <!-- PAGE HEADER -->
+                    <div style="position:absolute; top:-15px; left:5px;">
+                            <img src='/hr_base/static/src/img/logo.png' style="height:175px; padding:0px; margin:0px;"/>
+                    </div>
+
+                    <div style="position:absolute; top:3px; left:612px;">
+                            <img src='/hr_base/static/src/img/iso.png' style="height:130px; padding:0px; margin:0px;"/>
+                    </div>
+
+                    <div style="position: absolute; left: 320px; top:15px; font-size:18px; font-weight: bolder; font-family: Arial;">Sarl Star of Desert</div>
+                    <div style="position: absolute; left: 180px; top:40px; font-size:14px; font-family: Arial;">Travaux de Soudure, Montage, Charpente Métallique et Formation</div>
+                    <div style="position: absolute; left: 290px; top:65px; font-size:14px; font-family: Arial;">Capital social : 40 000 000,00 DA</div>
+                    <div style="position: absolute; left: 330px; top:90px; font-size:12px; font-family: Arial;">RC : 16/00-0122506 B99</div>
+
+                    <hr style="border-top: 1px solid black; margin-left:0px; margin-right:0px; margin-top:125px;"/>
+                    <!-- -->
+
+<!--                    <div style="margin-left:10px; display: inline-block;">Réf, N°: <span t-field="o.name"/></div>-->
+                    <div class="titre-style" style="margin-top:10px">Avenant N° <span t-field="o.name"/></div>
+                    <div class="titre-style" style="margin-top:00px">Au Contrat de Travail à Durée Déterminée </div>
+                    <table width="700" style="margin-left:10px; margin-top:0px;font-size:16px;">
+                        <tr>
+                            <td class="transp" style="text-align: right">N°: <strong><span t-field="o.parent_id.name"/></strong></td>
+                            <td class="transp" style="text-align: left;margin-left:20px"> du : <strong><span t-field="o.parent_id.date_etablissement"/></strong></td>
+                        </tr>
+                    </table>
+
+                    <div>Entre:</div>
+                    <div style="padding-right:20px;">La Société «Sarl Star of Desert» dont le siège  sis à cité des PTT, villa N° 42 B  Hydra représentée par son gérant
+                        Monsieur <strong>DLIMI Merzoug</strong>. Ci-après dénommer l’employeur.   <strong style="padding-left:50px;">d'une part.</strong>
+                    </div>
+                    <div>Et:</div>
+
+                    <table width="800" style="; margin-top:0px;margin-left:0px; border-collapse: separate;  border-spacing: 0px 0px;">
+                        <tr>
+                            <td style="width:20%; border :none;">
+                                <span t-field="o.employee_id.civilite_id"/> <br/>
+                                Fonction<br/>
+                                Date de naissance
+                                Demeurant à
+                            </td>
+                            <td style="width:30%;">
+                                <span t-field="o.employee_id" style="font-weight: bold;"/><br/>
+                                <span t-field="o.job_id" style="font-weight: bold;"/><br/>
+                                <span t-field="o.employee_id.birthday" style="font-weight: bold;"/>
+                                <span t-field="o.employee_id.address_home_id" style="font-weight: bold;"/>
+                            </td>
+                            <td style="width:20%;">
+                                Matricule <br/>
+                                Site <br/>
+                                Lieu de naissance
+                            </td>
+                            <td style="width:30%;">
+                                <span t-field="o.employee_id.matricule" style="font-weight: bold;"/><br/>
+                                <span t-field="o.employee_id.site_id" style="font-weight: bold;"/><br/>
+                                <span t-field="o.employee_id.place_of_birth" style="font-weight: bold;"/>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <div style="font-weight:bold; margin-left:400px; margin-top:0px"> d'autre part,</div>
+                    <div>Ci - après dénommé le contractant, Il a été convenu et arrêté ce qui suit.</div>
+
+                    <div t-if="o.prolongation">
+                        <div style="font-weight:bold; padding-top:10px; text-align:center;">P R O L O N G A T I O N</div>
+                        <div style="font-weight:bold;"><u>Article N°01: Objet de l'avenant:</u></div>
+                        <div>Le present avenant au contrat a pour objet La prolongation de la durée de la relation de travail</div>
+                        <div style="font-weight:bold;"><u>Article N°02: Objet de l'avenant:</u></div>
+                        <div>Le présent avenant est prolongé de <strong><span t-field="o.nbr_mois"/> mois</strong> soit du : <strong><span t-field="o.date_start"/></strong> au : <strong><span t-field="o.date_end"/></strong></div>
+                        <div>Et ce dans les mêmes conditions</div>
+                    </div>
+
+                    <div t-if="o.promotion">
+                        <div style="font-weight:bold; padding-top:10px; text-align:center;">P R O M O T I O N</div>
+                        <div style="font-weight:bold;"><u>Article N°03: Objet de l'avenant:</u></div>
+                        <div>le present avenant au contrat de travail à durée determinée a pour objet le changement de fonction avec augmentation de salaire</div>
+                        <div style="font-weight:bold;"><u>Article N°04: Nouvelle situation professionnelle:</u></div>
+                        <div> L'employé sus-cité bénéficie d'un changement de fonction avec augmentation de salaire a compter du <strong><span t-field="o.date_promotion"/></strong></div>
+
+                        <table width="800" style="margin-left:0px; margin-top:0px; border-collapse: separate;  border-spacing: 0px 0px;">
+                            <tr>
+                                <td style="width:30%; border :none;">
+                                    Fonction initiale<br/>
+                                    Nouvelle fonction
+                                </td>
+                                <td style="width:40%;">
+                                    <span t-field="o.old_job_id" style="font-weight: bold;"/><br/>
+                                    <span t-field="o.job_id" style="font-weight: bold;"/>
+                                </td>
+                                <td style="width:20%;">
+                                    Salaire <br/>
+                                    Salaire
+                                </td>
+                                <td style="width:30%;">
+                                    <span t-field="o.old_wage" style="font-weight: bold;"/><br/>
+                                    <span t-field="o.wage" style="font-weight: bold;"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div t-if="o.affectation">
+                        <div style="font-weight:bold; padding-top:10px; text-align:center;">C H A N G E M E N T  D' A F F E C T A T I O N</div>
+                        <div><strong><u>Article N°05: Objet de l'avenant :</u></strong> Le present avenant au contrat a pour objet Le changement d'affectation</div>
+                        <div><strong><u>Article N°06:</u></strong> à compter du <strong><span t-field="o.date_changement"/></strong>
+                        la nouvelle affectation est  : <strong><span t-field="o.site_id"/></strong> au lieu de : <strong><span t-field="o.old_site_id"/></strong></div>
+                    </div>
+
+                    <div t-if="o.regime">
+                        <div style="font-weight:bold; padding-top:10px; text-align:center;">C H A N G E M E N T  de  R E G I M E  de  T R A V A I L</div>
+                        <div><strong><u>Article N°07: Objet de l'avenant:</u></strong> Le present avenant au contrat a pour objet La modification du régime de travail conformément </div>
+                        <table width="800" style="margin-left:0px; margin-top:0px; border-collapse: separate;  border-spacing: 0px 0px;">
+                            <tr>
+                                <td style="width:40%; border :none;">
+                                    à l'article n°06 du contrat n° <br/>
+                                    à l'avenant n°
+                                </td>
+                                <td style="width:40%;">
+                                    <span t-field="o.parent_id.name" style="font-weight: bold;"/><br/>
+                                </td>
+                                <td style="width:5%;">
+                                    du <br/>
+                                    du
+                                </td>
+                                <td style="width:15%;">
+                                    <span t-field="o.parent_id.date_etablissement" style="font-weight: bold;"/><br/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div><strong><u>Article N°08: Changement de régime :</u></strong> A compter du <strong><span t-field="o.date_changement"/></strong>,
+                            le régime de travail sera comme suit :</div>
+                        <div> <strong><span t-field="o.type_id.presence"/> <span t-field="o.type_id.unit"/> </strong> de travail, suivies de
+                            <strong><span t-field="o.type_id.recup"/> <span t-field="o.type_id.unit"/> </strong> de congé de récuperation.
+                        </div>
+                    </div>
+
+                    <div t-if="o.rectification">
+                        <div style="font-weight:bold; padding-top:10px; text-align:center;">C H A N G E M E N T  D' A F F E C T A T I O N</div>
+                        <div><strong><u>Article N°09: Objet de l'avenant :</u></strong> Le present avenant au contrat a pour objet La rectification de la fonction de travail</div>
+                        <div><strong><u>Article N°10: Fonction touchée par la rectification : </u></strong> La fonction est rectifiée pour des raisons techniques qui devient
+                            <strong><span t-field="o.job_id"/></strong> au lieu de <strong><span t-field="o.old_job_id"/></strong>.
+                        </div>
+                        <div><strong><u>Article N°11: Durée touchée par la Réctification : </u></strong> La fonction est réctifiée à effet rétroactif sur une période de
+                            <strong><span t-field="o.nbr_mois"/> mois</strong>,soit du <strong><span t-field="o.date_start"/></strong> au <strong><span t-field="o.date_end"/></strong> Et ce dans les mêmes conditions.
+                        </div>
+                    </div>
+
+                    <div style="font-weight:bold; padding-top:10px; text-align:center;">D I S P O S I T I O N S        G E N E R A L E S</div>
+                    <div><strong><u>Article N°12: Dispositions générales :</u></strong></div>
+                    <div>Le présent Avenant au Contrat est établi en deux exemplaires originaux dont un pour l'intéressé.</div>
+                    <div>Le présent Avenant doit être signé par l'intéressé qui doit faire précéder sa signature de la mention lu et approuvé et apposé l'empreinte de son index gauche.</div>
+
+                    <div style="margin-top:10px; margin-left:50px; display: inline-block; font-weight:bold;">Lu et approuvé</div>
+                    <div style="margin-left:420px; display: inline-block; font-weight:bold;">Alger, le </div><br></br>
+                    <div style="margin-left:50px; display: inline-block; font-weight:bold;">L'interessé</div>
+                    <div style="margin-left:420px; display: inline-block; font-weight:bold;">Le Directeur Général</div>
+
+                    <!-- FOOTER -->
+                        <hr style="position: absolute; left: 25px; top: 1290px; width:900px; border:1px dash grey"/>
+                        <div style="position: absolute; left: 200px; top: 1317px; font-size: 10px;">Siège Social: Cité des PTT, villa 42B - Hydra, Alger - Algérie. Direction des Opérations HMD-PO Box: 1353 Ouargla.</div>
+                        <div style="position: absolute; left: 270px; top: 1332px; font-size: 10px;">Tél: 029 73.06.50/51, Fax: 029 73.06.49, Email: recruteur.do@starofdesert.com</div>
+                        <strong style="position: absolute; left: 850px; top: 1332px; font-size: 10px; font-weight: bolder;">F-RH-AVC-04</strong>
+                        <!-- -->
+
+
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+</odoo>

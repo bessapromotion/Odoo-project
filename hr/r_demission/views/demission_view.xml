@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- demission -->
+        <record model="ir.ui.view" id="demission_tree_view">
+            <field name="name">demission.tree</field>
+            <field name="model">hr.demission</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="employe_id"/>
+                    <field name="matricule"/>
+                    <field name="job_id"/>
+
+                    <field name="date_demission"/>
+                    <field name="date_reception"/>
+                    <field name="date_depart"/>
+                    <field name="state" decoration-success="state == 'done'"
+                           decoration-muted="state == 'cancel'"
+                           decoration-info="state == 'draft'" widget="badge"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="demission_filter" model="ir.ui.view">
+            <field name="name">hr.demission.filter</field>
+            <field name="model">hr.demission</field>
+            <field name="arch" type="xml">
+                <search string="Demission">
+                    <field name="employe_id"/>
+                    <field name="name"/>
+                    <field name="note"/>
+
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="demission_form_view">
+            <field name="name">hr.demission.form</field>
+            <field name="model">hr.demission</field>
+            <field name="arch" type="xml">
+                <form string="Sanction">
+                    <header>
+                        <button name="action_validate" string="Valider" states="draft" class="oe_highlight"
+                                type="object"
+                                confirm="Voulez-vous valider ce document ?"/>
+                        <button name="action_cancel" string="Annuler" states="draft"
+                                type="object"
+                                confirm="Voulez-vous annuler ce document ?"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,valid"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label for="name" string="Démission # "/>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                        <field name="image" widget='image' class="oe_avatar"/>
+                        <div class="oe_title">
+                            <label for="employe_id" class="oe_edit_only"/>
+                            <h1>
+                                <field name="employe_id" placeholder="Employé  "
+                                       options='{"no_open": True, "no_create": True}'/>
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="user_id" options='{"no_open": True, "no_create": True}'/>
+                                <field name="date_reception"/>
+                                <field name="date_demission"/>
+                                <field name="date_depart"/>
+                            </group>
+                            <group>
+                                <field name="contract_id"
+                                       domain="[('employee_id','=', employe_id), ('state','not in', ('draft','cancel'))]"
+                                       options='{"no_open": True, "no_create": True}'/>
+                                <field name="matricule" readonly="1"/>
+                                <field name="job_id" readonly="1"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <label for="preavis"/>
+                                <div class="o_row">
+                                    <field name="preavis"/>
+                                    <field name="uom_preavis"/>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Notes">
+                                <field name="note"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_demission_tree_view">
+            <field name="name">Démissions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.demission</field>
+            <field name="search_view_id" ref="demission_filter"/>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="demission_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Enregistrer une nouvelle démission.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <!-- Top menu item -->
+
+
+        <!--        <menuitem name="Démissions" action="action_demission_tree_view" id="menu_demission"-->
+        <!--            parent="r_frt.menu_preav_demiss" sequence="10"/>-->
+
+    </data>
+</odoo>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<!--        regime de travail-->
+  		<record model="ir.ui.view" id="contrat_type_tree_view">
+            <field name="name">contract.type.tree</field>
+            <field name="model">hr.contract.type</field>
+            <field name="arch" type="xml">
+				<tree><!-- editable="bottom" -->
+                	<field name="name"/>
+                	<field name="code"/>
+                	<field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+		<record id="contrat_type_filter" model="ir.ui.view">
+            <field name="name">contract.type.filter</field>
+            <field name="model">hr.contract.type</field>
+            <field name="arch" type="xml">
+                <search string="Demission">
+                    <field name="name" />
+                    <field name="code" />
+                </search>
+            </field>
+        </record>
+
+
+		<record model="ir.ui.view" id="contrat_type_form_view">
+            <field name="name">hr.contract.type</field>
+            <field name="model">hr.contract.type</field>
+            <field name="arch" type="xml">
+				<form string="Régime de travail">
+					<sheet>
+                        <strong>Nom</strong>
+                        <h1>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+						<group>
+                            <group string="Description">
+								<field name="code"/>
+								<field name="company_id"/>
+						    </group>
+						</group>
+					</sheet>
+				</form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_contrat_type_tree_view">
+            <field name="name">Types de contrat</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.contract.type</field>
+			<field name="search_view_id" ref="contrat_type_filter"/>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="contrat_type_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer un nouveau type de contrat.
+                </p><p>
+
+                </p><p>
+
+                </p>
+            </field>
+		</record>
+
+		<menuitem name="Type de contrat" action="action_contrat_type_tree_view" id="menu_type_contrat"
+            parent="menu_group_contrat" sequence="90"/>
+    </data>
+</openerp>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<template id="report_fiche_renseignement">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <style>
+                  .page-style{
+                    padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px; margin-top:10px;
+                  }
+                  .titre-style{
+                    text-align: center; font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif; font-size: 36px; font-style: normal; font-variant: normal;
+                    padding: 0px;font-weight: bold;
+                  }
+                  .bold-style{
+                    font-size: 22px; font-style: normal; font-variant: normal;
+                    padding: 0px;font-weight: bold;
+                  }
+
+                  th, td {
+                    border: 1px solid black; text-align: left; padding: 3px; border-radius: 0px; font-size: 14px; border :none;
+                  }
+                  .transp{
+                  border :none;
+                  }
+                </style>
+
+                <div class="page-style">
+                    <!-- PAGE HEADER -->
+                    <div style="position:absolute; top:-15px; left:5px;">
+                            <img src='/hr_base/static/src/img/logo.png' style="height:175px; padding:0px; margin:0px;"/>
+                    </div>
+                    <div style="position:absolute; top:3px; left:612px;">
+                            <img src='/hr_base/static/src/img/iso.png' style="height:130px; padding:0px; margin:0px;"/>
+                    </div>
+
+                    <div style="position: absolute; left: 320px; top:15px; font-size:18px; font-weight: bolder; font-family: Arial;">Sarl Star of Desert</div>
+                    <div style="position: absolute; left: 180px; top:40px; font-size:14px; font-family: Arial;">Travaux de Soudure, Montage, Charpente Métallique et Formation</div>
+                    <div style="position: absolute; left: 290px; top:65px; font-size:14px; font-family: Arial;">Capital social : 40 000 000,00 DA</div>
+                    <div style="position: absolute; left: 330px; top:90px; font-size:12px; font-family: Arial;">RC : 16/00-0122506 B99</div>
+
+                    <hr style="border-top: 1px solid black; margin-left:0px; margin-right:0px; margin-top:125px;"/>
+                    <!-- -->
+
+                    <div class="titre-style" style="margin-top:30px">Fiche de Renseignements</div>
+
+
+                    <p style="-webkit-transform: rotate(-90deg); position: absolute; left: -17px; top: 500px; font-size: 14px;">IDENTIFICATION</p>
+                    <p style="-webkit-transform: rotate(-90deg); position: absolute; left: 22px; top: 715px;">ALEM</p>
+                    <p style="-webkit-transform: rotate(-90deg); position: absolute; left: -7px; top: 865px; font-size: 14px;">Situation cible</p>
+                    <table width="910" style="font-family:Arial; margin-left:0px; border-collapse: separate;  border-spacing: 0px 0px; border: 1px solid #000000;">
+                    <tr>
+                        <td width="20" style="border: 1px solid #000000; border-top: none; border-bottom: none;"></td>
+                    <td>
+                    <div>
+                    <div width="800">
+                    <div style="vertical-align:bottom; display: inline-block; padding-right:30px;">
+                        <table width="700" style="margin-left:10px; border-collapse: separate;  border-spacing: 0px 0px;">
+                          <tr>
+                            <td style="width:20%;">Matricule :</td>
+                            <td style="width:25%;"><span t-field="o.matricule" style="font-weight: bold;"/></td>
+                            <td style="width:30%;">Qualification :</td>
+                            <td style="width:25%;"><span t-field="o.job_id" style="font-weight: bold;"/></td>
+                          </tr>
+                          <tr>
+                            <td>N° Sécurité Sociale :</td>
+                            <td><span t-field="o.ss_num" style="font-weight: bold;"/></td>
+                            <td>N° d'affiliation d'employeur :</td>
+                            <td><span t-field="o.company_id.num_employeur" style="font-weight: bold;"/></td>
+                          </tr>
+                          <tr>
+                            <td >Nom et prénom :</td>
+                            <td colspan="3"><span t-field="o.name" style="font-weight: bold;"/></td>
+                          </tr>
+                          <tr>
+                            <td >Lieu de naissance :</td>
+                            <td ><span t-field="o.place_of_birth" style="font-weight: bold;"/></td>
+                            <th >Wilaya :</th>
+                            <td ><span t-field="o.wilaya_naissance_id" style="font-weight: bold;"/></td>
+                          </tr>
+                        </table>
+                        <table width="700" style="margin-left:10px; border-collapse: separate;  border-spacing: 0px 0px;">
+                          <tr>
+                            <td style="width:30%;">N° d'indentification National :</td>
+                            <td style="width:70%;"><span t-field="o.identification_id" style="font-weight: bold;"/></td>
+                          </tr>
+                          <tr>
+                            <td >N° d'Acte de Naissance :</td>
+                            <td ><span t-field="o.act_naissance" style="font-weight: bold;"/></td>
+                          </tr>
+                        </table>
+                    </div>
+                        <img style="vertical-align:top; display: inline-block; border: 2px solid #000000; border-radius: 5px; width: 35mm; height: 45mm; margin-left:0px;" t-att-src="'data:image/png;base64,%s' % to_text(o.image_1920)">
+                        </img>
+                    </div>
+                    <table width="800" style="margin-left:10px; border-collapse: separate;  border-spacing: 0px 0px;">
+                          <tr>
+                            <td style="width:20%;">fils / fille de :</td>
+                            <td style="width:30%;"><span t-field="o.prenom_pere" style="font-weight: bold;"/></td>
+                            <td style="width:15%;">et de :</td>
+                            <td style="width:35%;"><span t-field="o.nom_prenom_mere" style="font-weight: bold;"/></td>
+                          </tr>
+                          <tr>
+                            <td >Adresse personnelle :</td>
+                            <td colspan="3"><span t-field="o.address_home_id" style="font-weight: bold;"/></td>
+                          </tr>
+                    </table>
+                    <table width="800" style="margin-left:10px; border-collapse: separate;  border-spacing: 0px 0px;">
+                          <tr>
+                            <td style="width:30%;">Situation Familiale :</td>
+                            <td style="width:15%;"><span t-field="o.marital" style="font-weight: bold;"/></td>
+                            <td style="width:20%;">Nbre d'enfants :</td>
+                            <td style="width:10%;"><span t-field="o.children" style="font-weight: bold;"/></td>
+                            <td style="width:15%;">G. Sangin :</td>
+                            <td style="width:10%;"><span t-field="o.grp_sanguin" style="font-weight: bold;"/></td>
+                          </tr>
+                    </table>
+                    <table width="700" style="margin-left:10px; border-collapse: separate;  border-spacing: 0px 0px;">
+                          <tr>
+                            <td style="width:30%;">Nom et prénom du conjoint :</td>
+                            <td style="width:30%;"><span t-field="o.spouse_complete_name" style="font-weight: bold;"/></td>
+                            <td style="width:20%;">Date de mariage :</td>
+                            <td style="width:20%;"><span t-field="o.mariage_date" style="font-weight: bold;"/></td>
+                          </tr>
+                          <tr>
+                            <td style="width:25%;">N° d'acte de mariage :</td>
+                            <td ><span t-field="o.mariage_acte" style="font-weight: bold;"/></td>
+                          </tr>
+                    </table>
+                    <table width="800" style="margin-left:10px; border-collapse: separate;  border-spacing: 0px 0px;">
+                          <tr>
+                            <td style="width:15%;">CNI :</td>
+                            <td style="width:25%;"><span t-field="o.pi_num" style="font-weight: bold;"/></td>
+                            <td style="width:20%;">Délivré le :</td>
+                            <td style="width:15%;"><span t-field="o.pi_date" style="font-weight: bold;"/></td>
+                            <td style="width:15%;">Par la daira de :</td>
+                            <td style="width:10%;"><span t-field="o.pi_par" style="font-weight: bold;"/></td>
+                          </tr>
+                    </table>
+                    <table width="700" style="margin-left:10px; border-collapse: separate;  border-spacing: 0px 0px;">
+                          <tr>
+                            <td style="width:40%;">Situation vis-à-vis le service national :</td>
+                            <td style="width:70%;"><span t-field="o.sn_situation" style="font-weight: bold;"/></td>
+                          </tr>
+                    </table>
+                    <table width="700" style="margin-left:10px; border-collapse: separate;  border-spacing: 0px 0px;">
+                          <tr>
+                            <td style="width:25%;">N° cpt CCP ou Banque :</td>
+                            <td style="width:25%;"><span t-field="o.compte_num" style="font-weight: bold;"/></td>
+                            <td style="width:25%;">Domiciliation :</td>
+                            <td style="width:25%;"><span t-field="o.compte_domiciliation" style="font-weight: bold;"/></td>
+                          </tr>
+                          <tr>
+                            <td style="width:25%;">N° RIP ou RIB :</td>
+                            <td style="width:25%;"><span t-field="o.rip_rib_num" style="font-weight: bold;"/></td>
+                            <td style="width:25%;">Domiciliation :</td>
+                            <td style="width:25%;"><span t-field="o.rip_rib_domiciliation" style="font-weight: bold;"/></td>
+                          </tr>
+                    </table>
+
+                    <table width="700" style="margin-left:10px; border-collapse: separate;  border-spacing: 0px 0px;">
+                          <tr>
+                            <td >Personne à prévenir en cas de besoins :</td>
+                            <td ><span t-field="o.emergency_nature" style="font-weight: bold;"/></td>
+                          </tr>
+                          <tr>
+                            <td style="width:40%;">Nom et prénom :</td>
+                            <td style="width:25%;"><span t-field="o.emergency_contact" style="font-weight: bold;"/></td>
+                            <td style="width:10%;">Tel :</td>
+                            <td style="width:25%;"><span t-field="o.emergency_phone" style="font-weight: bold;"/></td>
+                          </tr>
+                    </table>
+                    </div>
+                        </td>
+                    </tr>
+                    </table>
+
+                    <table width="910" style=" font-family:Arial; margin-left:0px; border-collapse: separate;  border-spacing: 0px 0px;  border: 1px solid #000000;">
+                          <tr  style="border: 1px solid #000000;">
+                            <td rowspan="2" style="width:30px; border: 1px solid #000000;"></td>
+                            <td style="height:20px; border: 1px solid #000000; text-align: center;">N° de l'offre </td>
+                            <td style="border: 1px solid #000000; text-align: center;">date</td>
+                            <td style="border: 1px solid #000000; text-align: center;">Réf de l'ALEM</td>
+                            <td style="border: 1px solid #000000; text-align: center;">Date</td>
+                            <td style="border: 1px solid #000000; text-align: center;">Observations</td>
+                          </tr>
+                         <tr>
+                            <td style="height:20px; border: 1px solid #000000;"></td>
+                            <td style="border: 1px solid #000000;"></td>
+                            <td style="border: 1px solid #000000;"></td>
+                            <td style="border: 1px solid #000000;"></td>
+                            <td style="border: 1px solid #000000;"></td>
+                         </tr>
+                    </table>
+
+                    <table width="910" style="font-family:Arial; margin-left:0px; border-collapse: separate;  border-spacing: 0px 0px; border: 1px solid #000000;">
+                        <tr>
+                            <td width="20" style="border: 1px solid #000000; border-top: none; border-bottom: none;"></td>
+                        <td>
+                           <table width="800" style="margin-left:10px; border-collapse: separate;  border-spacing: 0px 0px;">
+                                  <tr>
+                                    <td style="width:20%;">Code fonction :</td>
+                                    <td style="width:30%;"><span t-field="o.job_id.code" style="font-weight: bold;"/></td>
+                                    <td style="width:15%;">Fonction :</td>
+                                    <td style="width:35%;"><span t-field="o.job_id" style="font-weight: bold;"/></td>
+                                  </tr>
+                                  <tr>
+                                    <td style="width:20%;">Date d'entrée :</td>
+                                    <td style="width:30%;"><span t-field="o.contract_id.date_start" style="font-weight: bold;"/></td>
+                                    <td style="width:15%;">Date de fin :</td>
+                                    <td style="width:35%;"><span t-field="o.contract_id.date_end" style="font-weight: bold;"/></td>
+                                  </tr>
+                           </table>
+                           <table width="800" style="margin-left:10px; border-collapse: separate;  border-spacing: 0px 0px;">
+                                  <tr>
+                                    <td style="width:25%;">Durée de contrat :</td>
+                                    <td><span t-field="o.contract_id.nbr_jour" style="font-weight: bold;"/></td>
+                                  </tr>
+                                  <tr>
+                                    <td style="width:25%;">Salaire net mensuel :</td>
+                                    <td style="width:25%;"><span t-field="o.contract_id.wage" style="font-weight: bold;"/></td>
+                                    <td style="width:25%;">Salaire net journalier :</td>
+                                    <td style="width:25%;">.......................</td>
+                                  </tr>
+                            </table>
+                            <table width="800" style="margin-left:10px; border-collapse: separate;  border-spacing: 0px 0px;">
+                                  <tr>
+                                    <td style="width:25%;">Cycle de travail :</td>
+                                    <td style="width:25%;"><span t-field="o.contract_id.type_id" style="font-weight: bold;"/></td>
+                                    <td style="width:35%;">Nbre d'heures de travail par semaine :</td>
+                                    <td style="width:15%;"><span t-field="o.contract_id.resource_calendar_id" style="font-weight: bold;"/></td>
+                                  </tr>
+                                  <tr>
+                                    <td style="width:25%;">Affectation :</td>
+                                    <td></td>
+                                  </tr>
+                            </table>
+
+
+
+                        </td>
+                        </tr>
+                    </table>
+
+                    <br></br>
+                    <div style="margin-left: 550px;">Informations certifiées exactes - Signature - </div>
+                    <br></br>
+                    <div style="margin-left: 50px; font-weight: bold;">Fait à Alger le, <span t-field="o.create_date" t-options='{"format": "d/M/Y"}' style="font-weight: bold;"/></div>
+                    <div style="margin-left: 50px; font-weight: bold;">Mise à jour le, <span t-field="o.write_date" t-options='{"format": "d/M/Y"}' style="font-weight: bold;"/></div>
+
+
+                </div>
+
+            </t>
+        </t>
+    </t>
+</template>
+
+</odoo>

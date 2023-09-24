@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_engagement_confidentialite">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+
+                    <div class="page" style="font-size:20px;">
+                        <br/>
+                        <div style="text-align:center;">
+                            <b>ENGAGEMENT DE CONFIDENTIALITÉ ET CESSION DE  LA PROPRIÉTÉ INTELLECTUELLE
+                            </b>
+                        </div>
+                        <br/>
+                        <br/>
+                        <strong> ENTRE LES SOUSSIGNÉ(E)S :</strong>
+                        <br/>
+                        <b><span t-field="o.company_id"/></b> à responsabilité limitée, dont le siège social est situé à
+                        <span t-field="o.company_id.street"/>
+                        <span t-field="o.company_id.city"/>
+                        <span t-field="o.company_id.state_id.name"/>,
+                        immatriculée au Registre de Commerce de la wilaya
+                        <t t-if = "o.company_id.id in (2,7)" >
+                        de Tipaza  </t>
+                        <t t-else="">
+                         d'Alger
+                        </t>
+                        sous le numéro -<span t-field="o.company_id.company_registry"/>,
+                        représentée par son <span t-field="o.company_id.contract_represente_fonction"/>,
+                        <span t-field="o.company_id.contract_represente"/>, dûment habilité à l’effet des présentes,
+                        <br/>
+                        <br/>
+                        Ci-après dénommé(e)  la <b> « Partie Divulgatrice » </b>,
+                        <br/>
+                        <div style="text-align: right;"> <strong>D’une part,</strong></div>
+                        <br/>
+
+                        <b>ET :</b>
+                        <br/>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <strong t-field="o.employee_id.civilite_id"/>
+                                        <strong t-field="o.employee_id.name"/>
+                                    </td>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td>Né(e) le :
+                                        <strong t-field="o.employee_id.birthday"/>
+                                        à
+                                        <strong t-field="o.employee_id.place_of_birth"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Titulaire de la carte nationale N° :
+                                        <strong><span t-field="o.employee_id.pi_num"/>
+                                        </strong>
+                                    </td>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td>Demeurant :
+                                        <strong><span t-field="o.employee_id.adresse_simple"/>,<span
+                                                t-field="o.employee_id.residence_commune.name"/>,
+                                            <span t-field="o.employee_id.residence_wilaya_id.name"/>
+                                        </strong>
+                                    </td>
+                                    <td/>
+                                </tr>
+                            </table>
+                        </div>
+                        <br/>
+                        <div>ci-après dénommé(e) la <b> « Partie Destinataire » </b>,</div>
+                        <br/>
+                        <div style="text-align: right;"> <strong>D’autre part,</strong></div>
+                        <br/>
+
+                        <div> <strong>Ci-après individuellement ou collectivement désignés(es) la ou les « Partie(s) »,</strong></div>
+                        <br/>
+                        <br/>
+                        <b>Etant préalablement rappelé que :</b>
+
+                        Dans le cadre du contrat de travail à <b> <span t-field="o.contract_type_id.name"/> <span t-field="o.name"/></b> <b> qui lie les deux parties </b>,
+                        <b> L’employeur</b> s’apprête à fournir à <b>L’employé (e)</b> de nombreuses informations la concernant.
+                        Ces informations ont un caractère confidentiel que <b>L’employeur</b> entend protéger.
+
+                        <br/>
+                         <b> L’employeur</b> désire donc arrêter avec <b>L’employé (e)</b>, dans le cadre du présent engagement de confidentialité,
+                         les conditions de divulgation de ces <b>Informations Confidentielles </b> et fixer les règles relatives à leur utilisation et à leur protection.
+                        <br/>
+                        <div> <strong>Il a été convenu et arrêté ce qui suit :</strong></div>
+                        <br/>
+                        <br/>
+                        Dans le cadre du présent accord, les termes <b> « Informations Confidentielles » </b>recouvrent notamment
+                        les données, bases de données, rapports, études, prévisions, contrats, analyses, compilations, notes,
+                        tableaux, dessins, graphismes, diagrammes, plans, concepts, équipements, modèles, échantillons
+                        prototypes, logiciels, développements informatiques, matériels ou enregistrements et plus généralement,
+                        tous documents écrits ou imprimés, tous fichiers informatiques, éditions, représentations, ou impressions
+                        numériques, ainsi que toutes informations écrites ou orales, de nature notamment commerciale,
+                        financière, administrative, juridique ou technique, appartenant à <b> L’employeur</b>.
+                        <br/>
+                        <br/>
+                        Les <b>Informations Confidentielles </b> sont notamment contenues dans toutes les pièces qui seront
+                        communiquées par <b>L’employeur </b>au titre de la relation de travail décrite au préambule, mais également
+                        dans les réponses ainsi que les échanges écrits et/ou oraux qui s’ensuivront.
+                        <br/>
+                        <br/>
+                        <b>L’employeur</b> ne donne aucune garantie expresse ou implicite quant à l’exactitude ou l’exhaustivité des
+                        <b> Informations Confidentielles</b>,ni quant à leur adéquation aux objectifs poursuivis par  <b>L’employé (e)</b>
+                        dans le cadre la relation décrite en préambule.
+                        <br/>
+                        <br/>
+                        <b>L’employé (e) </b>s’engage à ce que les <b>Informations Confidentielles </b>:
+                        <br/>
+                        <br/>
+                        <div>
+
+                                <p style="padding-left:20px; margin-bottom:20px">
+                                     a.	 &#160;&#160;&#160; Soient gardées strictement secrètes ;
+                                </p>
+
+                                <p style="padding-left:20px; margin-bottom:20px">
+                                    b.	&#160;&#160;&#160; Ne soient divulguées de manière interne qu'aux seuls membres de son personnel ayant à en
+                                    connaître ainsi qu’à ses conseils ou prestataires externes tenus aux mêmes obligations
+                                    de confidentialité que celles prévues aux présentes et ne soient utilisées par
+                                    ces derniers que dans le but défini au préambule du présent accord ;
+
+                                </p>
+                                <p style="padding-left:20px; margin-bottom:20px">
+                                    c.	&#160;&#160;&#160;  Ne soient pas utilisées, totalement ou partiellement, dans un autre but que celui défini par le présent accord,
+                                    sans le consentement préalable et écrit de <b>L’employeur</b> ;
+
+                                </p>
+                                <p style="padding-left:20px; margin-bottom:20px">
+                                    d.	&#160;&#160;&#160;  Ne soient ni divulguées ni susceptibles d'être divulguées, soit directement, soit indirectement,
+                                    à tout tiers ou à toutes personnes autres que celles mentionnées à l'alinéa (b) ci-dessus ;
+
+                                </p>
+                                 <p style="padding-left:20px; margin-bottom:20px">
+                                    e.	&#160;&#160;&#160;Ne soient ni copiées, ni reproduites, ni dupliquées totalement ou partiellement lorsque de telles
+                                     copies, reproductions ou duplications ne sont pas pour ses besoins propres ou n'ont pas été
+                                     autorisées par <b>L’employeur</b> et ce, de manière expresse et par écrit.
+                                     <br/><br/>
+                                </p>
+
+                        </div>
+
+
+                        <b>Exceptions à la règle de confidentialité  </b>:
+                        <br/>
+                        Les dispositions ci-dessus, ne s’appliqueront pas dans les cas suivants :
+                        <br/><br/>
+                        <div>
+                               <p style="padding-left:20px; margin-bottom:20px">
+                                     a.	&#160;&#160;&#160;Dont <b>L’employé (e)</b> avait déjà connaissance ;
+                                </p>
+                               <p style="padding-left:20px; margin-bottom:20px">
+                                    b.	&#160;&#160;&#160;Les informations transmises sont accessibles au public et mise à sa disposition ;
+                               </p>
+                               <p style="padding-left:20px; margin-bottom:20px">
+                                    c.	&#160;&#160;&#160;Les informations sont réclamées au concerné sur l’ordre d’un tribunal ou une autorité reconnue,
+                                    à condition que l’information ne soit utilisée que dans le cadre de l’objet de la demande ;
+                               </p>
+                               <p style="padding-left:20px; margin-bottom:20px">
+                                    d.	&#160;&#160;&#160;Qui auraient été reçus d’un tiers de manière licite ;
+                               </p>
+                               <p style="padding-left:20px; margin-bottom:20px">
+                                    e.	&#160;&#160;&#160;La société autorise par écrit le concerné à divulguer telle ou telle information, réputée jusque-là confidentielle,
+                                     dans les limites de cette autorisation ;
+                               </p>
+
+                        </div>
+                        <br/>
+
+
+                        <b>L’employé (e)</b> reconnaît que ces engagements décrits ci-dessus subsistent même dans le cas où, il était
+                        décidé de ne pas conclure <b>le projet de collaboration</b>.
+                        <b>L’employé (e)</b> s’engage, sur la demande de <b>L’employeur</b>, à lui restituer et/ou à détruire tous les
+                        documents et/ou fichiers informatiques et/ou éléments de quelque nature que ce soit contenant ou
+                        constituant des <b>Informations Confidentielles</b> et à ne pas en conserver de copie.
+                        <br/>
+                        <br/>
+
+                        Il est expressément convenu entre les Parties que les <b>Informations Confidentielles</b> resteront la propriété
+                        de <b>L’employeur </b>et que la divulgation des <b>Informations Confidentielles</b> au titre du présent accord ne
+                        peut en aucun cas être interprétée comme conférant de manière expresse ou implicite à <b>L’employé (e)</b>
+                        un droit quelconque, notamment de propriété intellectuelle, sur celles-ci.
+
+                        <br/>
+                        <br/>
+                        Le présent engagement de confidentialité prend effet dès sa signature et se poursuivra pendant toute la
+                        durée des échanges entre les Parties dans le cadre de la relation décrites en préambule.
+
+                        <br/>
+
+                        <p class="text-danger" style="margin-top: 20px;">
+                            Une stricte obligation de loyauté et de confidentialité à l’égard des <b>Informations Confidentielles</b>
+                            subsistera en outre à la charge de <b>L’employé (e)</b> au-delà de ces échanges, il prendra fin Deux (02) ans
+                            suivant la fin de la dites relation ;
+                        </p>
+                        <br/>
+
+
+                        Les dispositions ci-dessus bénéficient à <b>L’employeur</b>, ainsi qu’à toute société qui
+                        se substituerait à elle dans le cadre de l’Opération décrite au préambule du présent accord.
+
+                        <br/>
+                        <br/>
+                        Le présent accord est soumis au droit Algérien. Tout différend entre les Parties relatif à la validité,
+                        l’interprétation ou l’exécution de celui-ci sera porté au tribunal territorialement compétent
+                        <br/><br/>
+                        <div style="text-align:right;">
+                            Fait à <b>Alger le ................................... </b>
+                        </div>
+                        <br/>
+                        En deux exemplaires originaux.
+                        <br/><br/>
+                        <!-- Signature -->
+                        <div>
+                            <div style="padding-top: 10px; width:100%;">
+                                <div style="float: left;width:50%;">
+                                    <div style="">
+                                        <b>Pour l'employé (e) </b>
+                                        <span t-field="o.employee_id.civilite_id"/>
+                                        <span t-field="o.employee_id.name"/>
+                                    </div>
+                                    <div style="">Lu et approuvé</div>
+                                </div>
+                                <div style="float: right;width:50%;">
+                                    <div style="">Pour l'employeur</div>
+                                    <span t-field="o.company_id.name"/>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
+
+
+

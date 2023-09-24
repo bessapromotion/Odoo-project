@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <report-->
+<!--                string="Ordre de mission employée"-->
+<!--                id="act_report_ordre_mission_employee"-->
+<!--                model="hr.mission"-->
+<!--                report_type="qweb-pdf"-->
+<!--                menu="True"-->
+<!--                name="r_mission.report_ordre_mission_employee"-->
+<!--                file="r_mission.report_ordre_mission_employee"-->
+<!--                paperformat="hr_base.paperformat_hr"-->
+<!--                print_report_name="'Mission'+ object.name"-->
+<!--        />-->
+
+        <record id="act_report_ordre_mission" model="ir.actions.report">
+            <field name="name">Ordre de mission</field>
+            <field name="model">hr.mission</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">r_mission.report_ordre_mission</field>
+            <field name="report_file">r_mission.report_ordre_mission</field>
+            <field name="binding_model_id" eval="False"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'Mission'+ object.name</field>
+            <field name="paperformat_id" ref="hr_base.paperformat_hr"/>
+        </record>
+
+    </data>
+</odoo>

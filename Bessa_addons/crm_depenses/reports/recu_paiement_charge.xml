@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_recu_paiement_depense">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <p class="text-left" style="">
+                            Réf :
+                            <span t-field="o.name"/>
+                        </p>
+                        <p style="margin-top : -40px;" align="right">
+                            Ouled fayet le :
+                            <span t-field="o.date"/>
+                        </p>
+                        <h2 class="text-center">
+                            <strong>
+                                Recu de paiement des <span t-field="o.nature_id.name"/>
+                            </strong>
+                        </h2>
+
+                        <table style="margin-top:50px;">
+                                <tr>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        NOM ET PR&#201;NOM
+                                    </td>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        :
+                                    </td>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        <strong>
+                                            <span t-esc="o.benificiaire"/>
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        RESIDENCE
+                                    </td>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        :
+                                    </td>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        <strong>
+                                            <span t-field="o.project_id.name"/>
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        BLOC
+                                    </td>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        :
+                                    </td>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        <strong>
+                                            <span t-field="o.bloc"/>
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        MONATNT EN CHIFFRES
+                                    </td>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        :
+                                    </td>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        <strong>
+                                            <span t-field="o.mt_debit"/>
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        MONATNT EN LETTRES
+                                    </td>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        :
+                                    </td>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        <strong>
+                                            <span t-field="o.mt_debit_lettre"/>
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        PERIODE
+                                    </td>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        :
+                                    </td>
+                                    <td class="text-left" style="vertical-align:top;padding-left:10px;">
+                                        <strong>
+                                            <span t-field="o.periode"/>
+                                        </strong>
+                                        <br/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                        <p class="text-center">
+                            <strong>
+                                Signature du caissier
+                            </strong>
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+         <record id="action_ouverture_button" model="ir.actions.act_window">
+            <field name="name">Ouverture de caisse</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">open.caisse.wizard</field>
+            <field name="context">{'search_default_caisse_id': [active_id]}</field>
+            <!--<field name="domain"></field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_open_caisse_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez pour Ouvrir une caisse.
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_caisse_form_view">
+            <field name="name">CRM CAISSE</field>
+            <field name="model">crm.caisse</field>
+            <field name="arch" type="xml">
+                <form string="Caisse">
+                    <header>
+                        <button name="action_calculer" string="Calculer les montants" class="oe_highlight"
+                                type="object" states="draft" groups="gestion_profil.group_caissier,base.group_system,gestion_profil.group_comptable_stock"/>
+                        <button name="action_validate" string="Calculer l'ecart" class="oe_highlight"
+                                type="object" states="open" groups="gestion_profil.group_caissier,base.group_system,gestion_profil.group_comptable_stock"/>
+                        <button name="action_cloturer" string="Cloturer la caisse" class="oe_highlight"
+                                type="object" states="valid" groups="gestion_profil.group_caissier,base.group_system,gestion_profil.group_comptable_stock"/>
+                        <button name="print_payment_report" string="Imprimer le rapport de cloture" class="oe_highlight"
+                                type="object" states="done" groups="gestion_profil.group_caissier,base.group_system,gestion_profil.group_comptable_stock"/>
+                        <button name="print_pv_caisse" string="Imprimer le pv de caisse" class="oe_highlight"
+                                type="object" states="done" groups="gestion_profil.group_caissier,base.group_system,gestion_profil.group_comptable_stock"/>
+                        <button name="action_cancel" string="Annuler la caisse" type="object"
+                                groups="base.group_system"/>
+                        <button name="action_reopen" string="Reouvrir la caisse" type="object"
+                                groups="base.group_system,gestion_profil.group_comptable_stock" states="done,valid"/>
+                        <field name="state" nolabel="1" widget="statusbar"
+                               statusbar_visible="draft,open,valid,done,cancel"
+                               groups="gestion_profil.group_caissier,base.group_system"/>
+
+                    </header>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box" position="inside">
+                            <button
+                                    class="oe_stat_button"
+                                    type="action"
+                                    name="%(action_ouverture_button)d"
+                                    icon="fa-money">
+                                <field string="Détail Ouverture" name="nbr_opens" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="date_today" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                <field name="ecart" attrs="{'invisible':[('state','in', ('draft','open'))]}"/>
+                            </group>
+                            <group>
+                                <field name="mt_coffre_depart" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                <field name="solde_today" attrs="{'invisible':[('state','in', ('draft','open'))]}"/>
+                                <field name="mt_coffre_cloture"
+                                       attrs="{'invisible':[('state','in', ('draft','open'))]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="company_id" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                        </group>
+
+                        <notebook>
+                            <page string="Paiements" name="payments_lines">
+                                <tree string="Paiements Lines">
+                                    <field name="payment_ids"/>
+                                </tree>
+                                <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                    <group colspan="4">
+                                        <field name="note" class="oe-bordered-editor" nolabel="1"
+                                               placeholder="Terms and conditions..."/>
+                                    </group>
+                                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                        <field name="mt_total" colspan="2"/>
+                                        <field name="mt_tva" colspan="2"/>
+                                        <field name="mt_notaire" colspan="2"/>
+                                        <field name="mt_liquidite" colspan="2"/>
+                                        <field name="mt_banque" colspan="2"/>
+                                    </group>
+                                    <div class="oe_clear"/>
+                                </group>
+
+                            </page>
+                            <page string="Dépenses" name="depenses_lines">
+                                <tree string="Dépenses Lines">
+                                    <field name="depense_ids"/>
+                                </tree>
+                               <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                    <group colspan="4">
+                                        <field name="note" class="oe-bordered-editor" nolabel="1"
+                                               placeholder="Terms and conditions..."/>
+                                    </group>
+                                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                        <field name="mt_debit" colspan="2"/>
+                                        <field name="mt_credit" colspan="2"/>
+                                        <field name="mt_total_depense" colspan="2"/>
+                                        <field name="mt_total_transfert" colspan="2"/>
+                                        <field name="mt_total_alimentation_destination" colspan="2"/>
+                                        <field name="mt_total_alimentation_company" colspan="2"/>
+                                        <field name="mt_cloture_depense" colspan="2"/>
+                                        <field name="mt_alimentation_centrale" colspan="2"/>
+                                        <field name="mt_total_alimentation_source" colspan="2"/>
+                                    </group>
+                                    <div class="oe_clear"/>
+                                </group>
+
+                            </page>
+                            <page string="Pieces/Billets" attrs="{'invisible':[('state','=', 'draft')]}">
+                                <field name="bill_ids" attrs="{'readonly': [ ('state', '==', 'done')]}" nolabel="1" widget="section_and_note_one2many">
+                                    <tree editable="bottom" create="1">
+                                        <field name="bill_id"/>
+                                        <field name="nombre"/>
+                                        <field name="montant" force_save="1"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                                <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                        <field name="mt_total_physique" colspan="2"/>
+                                        <field name="nombre_total_physique" colspan="2"/>
+                                    </group>
+                                    <div class="oe_clear"/>
+                                </group>
+
+                            </page>
+                            <page string="Observation">
+                                <group>
+                                        <field name="observation"/>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="crm_caisse_tree_view" model="ir.ui.view">
+            <field name="name">crm.caisse.tree</field>
+            <field name="model">crm.caisse</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="date_today"/>
+                    <field name="mt_coffre_depart" />
+                    <field name="solde_today" />
+                    <field name="mt_coffre_cloture" />
+                    <field name="mt_total_physique"/>
+                    <field name="ecart"/>
+                    <field name="state" widget="badge" decoration-info="state == 'open'" decoration-success="state == 'done'" decoration-danger="state == 'valid'" decoration-muted="state == 'cancel'"/>
+                    <field name="company_id"/>
+                    <field name="mt_tva" optional="hide"/>
+                    <field name="mt_notaire" optional="hide"/>
+                    <field name="mt_total_transfert" optional="hide"/>
+                    <field name="mt_total_alimentation_destination" optional="hide"/>
+
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_crm_caisse_view">
+            <field name="name">CRM CAISSE</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.caisse</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="crm_caisse_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer un nouveau changement de pré réservation.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <!--        &lt;!&ndash;reservation / devis &ndash;&gt;-->
+        <!--        <record id="action_order_reservation_button" model="ir.actions.act_window">-->
+        <!--            <field name="name">Reservation</field>-->
+        <!--            <field name="type">ir.actions.act_window</field>-->
+        <!--            <field name="res_model">crm.reservation</field>-->
+        <!--            <field name="context">{'search_default_order_id': [active_id], 'default_order_id': active_id}</field>-->
+        <!--            &lt;!&ndash;<field name="domain"></field>&ndash;&gt;-->
+        <!--            <field name="view_mode">tree,form</field>-->
+        <!--            <field name="search_view_id" ref="view_crm_reservation_filter"/>-->
+        <!--            <field name="help" type="html">-->
+        <!--                <p class="o_view_nocontent_smiling_face">-->
+        <!--                    Cliquez pour créer une réservation.-->
+        <!--                </p>-->
+        <!--                <p>-->
+        <!--                </p>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--        -->
+
+
+        <!--    <div name="button_box" position="inside">-->
+        <!--                    <button-->
+        <!--                            class="oe_stat_button"-->
+        <!--                            type="action"-->
+        <!--                            name="%(action_order_reservation_button)d"-->
+        <!--                            attrs="{'invisible':[('nbr_reservation','=', 0)]}"-->
+        <!--                            context="{'default_partner_id': active_id}"-->
+        <!--                            icon="fa-home">-->
+        <!--                        <field string="Réservation(s)" name="nbr_reservation" widget="statinfo"/>-->
+        <!--                    </button>-->
+        <!--                </div>-->
+    </data>
+</openerp>

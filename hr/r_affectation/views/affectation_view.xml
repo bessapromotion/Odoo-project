@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Sanction -->
+        <record model="ir.ui.view" id="affectation_tree_view">
+            <field name="name">hr.affectation2.tree</field>
+            <field name="model">hr.affectation</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="employe_id"/>
+                    <field name="date"/>
+                    <field name="date_effet"/>
+                    <field name="project_actuel_id"/>
+                    <field name="project_id"/>
+                    <field name="company_id"/>
+
+                    <field name="state"
+                           decoration-success="state == 'done'"
+                           decoration-muted="state == 'cancel'"
+                           decoration-warning="state == 'valid'"
+                           decoration-info="state == 'draft'" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="affectation_filter" model="ir.ui.view">
+            <field name="name">hr.affectation.filter</field>
+            <field name="model">hr.affectation</field>
+            <field name="arch" type="xml">
+                <search string="Affectation">
+                    <field name="name"/>
+                    <field name="employe_id"/>
+                    <field name="project_id"/>
+
+                    <filter name="draft" string="Nouveaux" domain="[('state','=','draft')]"/>
+                    <filter name="valid" string="Validés non confirmées" domain="[('state', '=', 'valid')]"/>
+                    <filter name="done" string="Terminés" domain="[('state', '=', 'done')]"/>
+                    <filter name="cancel" string="Annulés" domain="[('state', '=', 'cancel')]"/>
+
+                    <group expand="0" string="Grouper par...">
+                        <filter string="Site d'affectation" name='project' domain="[]"
+                                context="{'group_by':'project_id'}"/>
+                        <filter string="Société" name='project' domain="[]" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="affectation_form_view">
+            <field name="name">hr.affectation.form</field>
+            <field name="model">hr.affectation</field>
+            <field name="arch" type="xml">
+                <form string="Affectation">
+                    <header>
+                        <button name="action_validate" string="Valider" states="draft" class="oe_highlight"
+                                type="object"
+                                confirm="Voulez-vous valider cette affectation ?"/>
+                        <button name="action_prise_effet" string="Entrer en application" states="valid"
+                                class="oe_highlight" type="object"
+                                confirm="Voulez-vous faire rentrer en vigueur cette affectation ?"/>
+                        <button name="action_cancel" string="Annuler" states="draft,valid" type="object"
+                                confirm="Voulez-vous annuler cette affectation ?"/>
+                        <button name="action_print_affect" string="Imprimer" states="valid,done" type="object"/>
+
+                        <field name="state" clickable="True" widget="statusbar" statusbar_visible="draft,valid,done"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label for="name" string="Décision d'affectation # "/>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                        <field name="image" widget='image' class="oe_avatar"/>
+                        <div class="oe_title">
+                            <label for="employe_id" class="oe_edit_only"/>
+                            <h1>
+                                <field name="employe_id" placeholder="Employé  "
+                                       options='{"no_open": True, "no_create": True}'/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="contract_id"
+                                       domain="[('employee_id','=', employe_id), ('state','not in', ('draft','cancel'))]"
+                                       options='{"no_open": True, "no_create": True}'/>
+                                <field name="company_id" options='{"no_open": True, "no_create": True}'/>
+                            </group>
+                            <group>
+
+                            </group>
+                            <group string="Situation actuelle">
+                                <field name="matricule" readonly="1"/>
+                                <field name="job_id"/>
+                                <field name="project_actuel2_id" invisible="1"/>
+                                <field name="project_actuel_id"/>
+                            </group>
+                            <group string="Nouvelle affectation">
+                                <field name="project_id" options='{"no_open": True, "no_create": True}'/>
+                                <field name="date_effet"/>
+                            </group>
+                        </group>
+                        <field name="observation"/>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_affectation_tree_view">
+            <field name="name">Affectations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.affectation</field>
+            <field name="search_view_id" ref="affectation_filter"/>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="affectation_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer une nouvelle affectation.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <!-- Top menu item -->
+
+        <menuitem name="Affectations" action="action_affectation_tree_view" id="menu_affectation"
+                  parent="hr_base.menu_carriere" sequence="20"/>
+
+    </data>
+</openerp>

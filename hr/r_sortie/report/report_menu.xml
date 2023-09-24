@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                string="Bon de sortie"
+                id="act_report_bon_sortie"
+                model="hr.employee.sortie"
+                report_type="qweb-pdf"
+                menu="True"
+                name="r_sortie.report_bon_sortie"
+                file="r_sortie.report_bon_sortie"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'Bon de sortie_'+ object.employe_id.name"
+        />
+        <report
+                string="Demande de récuperation"
+                id="act_report_bon_recup"
+                model="hr.employee.recup"
+                report_type="qweb-pdf"
+                menu="True"
+                name="r_sortie.report_bon_recup"
+                file="r_sortie.report_bon_recup"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'demande de recuperation_'+ object.employe_id.name"
+        />
+        <report
+                string="Autorisation d'absence"
+                id="act_report_auto_absence"
+                model="hr.employee.absence"
+                report_type="qweb-pdf"
+                menu="True"
+                name="r_sortie.report_auto_absence"
+                file="r_sortie.report_auto_absence"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'Autorisation absence_'+ object.employe_id.name"
+        />
+
+    </data>
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                string="Pv de remise des cl&#232;s Appartement"
+                id="act_report_pv_remise_appartement"
+                model="remise.cles"
+                report_type="qweb-pdf"
+                name="crm_remise_cles.report_pv_appartement"
+                file="crm_remise_cles.report_pv_appartement"
+                menu="True"
+        />
+        <report
+                string="Pv de remise des cl&#232;s Cellier"
+                id="act_report_pv_remise_cellier"
+                model="remise.cles"
+                report_type="qweb-pdf"
+                name="crm_remise_cles.report_pv_cellier"
+                file="crm_remise_cles.report_pv_cellier"
+                menu="True"
+        />
+
+        <report
+                string="Cahier des charges"
+                id="act_report_cahier_charge"
+                model="remise.cles"
+                report_type="qweb-pdf"
+                name="crm_remise_cles.report_cahier_charge"
+                file="crm_remise_cles.report_cahier_charge"
+                menu="True"
+        />
+        <report
+                string="D&#233;cision d&#39;affectation du client"
+                id="act_decision_affectation_client"
+                model="decision.affectation"
+                report_type="qweb-pdf"
+                name="crm_remise_cles.decision_affectation"
+                file="crm_remise_cles.decision_affectation"
+                menu="False"
+        />
+        <report
+                string="D&#233;cision d&#39;affectation du client dosssier credit"
+                id="act_decision_affectation_client_credit"
+                model="decision.affectation"
+                report_type="qweb-pdf"
+                name="crm_remise_cles.decision_affectation_credit"
+                file="crm_remise_cles.decision_affectation_credit"
+                menu="False"
+        />
+
+    </data>
+</odoo>

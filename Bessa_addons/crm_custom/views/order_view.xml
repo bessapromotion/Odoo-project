@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="order_view_tree_3" model="ir.ui.view">
+            <field name="name">sale.order.tree.3</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='create_date']" position="after">
+                    <field name="validity_date" string="Date de conctrétisation"/>
+                    <field name="project_id" string="Projet"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="order_view_form_3" model="ir.ui.view">
+            <field name="name">sale.order.form.3</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='project_id']" position="replace">
+                    <field name="project_id" options='{"no_create": True, "no_open": True}'/>
+                </xpath>
+                <xpath expr="//field[@name='num_dossier']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '=', 'done')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='mode_achat']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '=', 'done')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='charge_recouv_id']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '=', 'done')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '=', 'done')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '=', 'done')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '=', 'done')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='origin']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('state', '=', 'done')]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!--        Deverrouiller - Button-->
+        <record model="ir.ui.view" id="hide_button_sale_order_form_view2">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_unlock']" position="attributes">
+                    <attribute name="groups">base.group_system,gestion_profil.group_res_commercial,base.user_admin
+                    </attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_done']" position="attributes">
+                    <attribute name="groups">base.group_system,gestion_profil.group_res_commercial,base.user_admin
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+       <!-- Verrouillage de prix_m2, prix unitaire, discount  de la ligne de sale_order / rajouter les bouton et le detail lie a la remise applique-->
+        <record id="view_order_project2_form" model="ir.ui.view">
+            <field name="name">sale.order.project1.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+               <xpath expr="//button[@name='action_done']" position="after">
+                    <button name="action_appliquer_remise" string="Appliquer une remise" class="oe_highlight"
+                             attrs="{'invisible': ['|',('discount_state', '=',True),('state', '=','cancel')]}"       
+                         type="object" />
+                    <field name="discount_state" invisible="1" />
+                </xpath>
+                 <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='price_unit']"
+                       position="replace">
+			           <field name="price_unit" attrs="{'readonly': [('parent.state', 'in', ('sale','done','draft'))]}" force_save="1"/>
+                 </xpath>
+                 <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='prix_m2']"
+                       position="replace">
+			           <field name="prix_m2" attrs="{'readonly': [('parent.state', 'in', ('sale','done','draft'))]}" force_save="1"/>
+                 </xpath>
+                 <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='discount']"
+                       position="attributes">
+                        <attribute name="attrs">{'readonly': [('parent.state', 'in', ('sale','done','draft'))]}</attribute>
+                 </xpath>
+                <xpath expr="//group[@name='sale_header']" position="after">
+                    <group name="detail_discount" string="Détail Remise" attrs="{'invisible': [ ('discount_state', '=', False)]}">
+                        <field name="discount_state"  widget="Radio"/>
+                        <field name="type" attrs="{'invisible': [ ('discount_state', '=', False)]}" />
+                         <field name="new_price_m2" attrs="{'invisible': [ ('discount_state', '=', False)]}"  />
+                    </group>
+
+
+                </xpath>
+
+              
+
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

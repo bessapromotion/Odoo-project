@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Préavis fin de contrat -->
+  		<record model="ir.ui.view" id="preavis_tree_view">
+            <field name="name">preavis.tree</field>
+            <field name="model">hr.preavis</field>
+            <field name="arch" type="xml">
+				<tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                	<field name="name"/>
+                    <field name="employe_id"/>
+                    <field name="contract_id"/>
+				  	<field name="date_end"/>
+				  	<field name="s_date"/>
+                    <field name="company_id" groups="base.group_multi_company" />
+					<field name="state" decoration-success="state == 'done'"
+                           decoration-muted="state == 'cancel'"
+                           decoration-info="state == 'draft'" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+		<record id="preavis_filter" model="ir.ui.view">
+            <field name="name">hr.preavis.filter</field>
+            <field name="model">hr.preavis</field>
+            <field name="arch" type="xml">
+                <search string="Préavis fin de contrat">
+                    <field name="employe_id" />
+                    <field name="contract_id" />
+
+                    <filter name="draft" string="Nouveaux" domain="[('state','=','draft')]"/>
+                    <filter name="done" string="Terminés" domain="[('state', '=', 'done')]"/>
+                    <filter name="cancel" string="Annulés" domain="[('state', '=', 'cancel')]"/>
+
+                </search>
+            </field>
+        </record>
+
+
+		<record model="ir.ui.view" id="preavis_form_view">
+            <field name="name">hr.preavis.form</field>
+            <field name="model">hr.preavis</field>
+            <field name="arch" type="xml">
+				<form string="Mise en demeure">
+                    <header>
+                        <button name="action_validate" string="Valider" states="draft" class="oe_highlight" type="object"
+                        confirm="Voulez-vous valider ce préavis ?"/>
+                        <button name="action_cancel" string="Annuler" states="draft" type="object"
+                        confirm="Voulez-vous annuler ce préavis ?"/>
+                        <button name="action_print" states="done" string="Imprimer" class="oe_highlight" type="object"/>
+
+                        <field name="state"  widget="statusbar" statusbar_visible="draft,done" />
+				    </header>
+					<sheet>
+                        <h1>
+                            <label for="name" string="Préavis fin de contrat # "/>
+                            <field name="name" class="oe_inline" />
+                        </h1>
+                        <field name="image" widget='image' class="oe_avatar" />
+                        <div class="oe_title">
+                            <label for="employe_id" class="oe_edit_only"/>
+                            <h1>
+                                <field name="employe_id" placeholder="Employé  " options='{"no_open": True, "no_create": True}'/>
+                            </h1>
+                        </div>
+
+						<group>
+                            <group>
+                                <field name="user_id" options='{"no_open": True, "no_create": True}'/>
+                                <field name="contract_id" domain="[('employee_id', '=', employe_id), ('state', 'in', ('open', 'close'))]" options='{"no_create": True}'/>
+								<separator attrs="{'invisible': [('warning_contract_state', '=', '')]}"/>
+
+                                <field name="warning_contract_state" style="color:Red;" nolabel="1" attrs="{'invisible': [('warning_contract_state', '=', '')]}"/>
+								<field name="date_start"/>
+								<field name="date_end"/>
+								<field name="s_date"/>
+                           </group>
+							<group>
+
+                                <field name="matricule" readonly="1"/>
+								<field name="job_id"/>
+								<field name="company_id" groups="base.group_multi_company" />
+            				</group>
+						</group>
+					</sheet>
+                    <div class="oe_chatter">
+                    	<field name="message_follower_ids" widget="mail_followers" modifiers="{}"/>
+                    	<field name="message_ids" widget="mail_thread" modifiers="{}"/>
+                	</div>
+				</form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_preavis_tree_view">
+            <field name="name">Préavis fin de contrat</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.preavis</field>
+            <field name="search_view_id" ref="preavis_filter"/>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="preavis_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer un nouveau préavis fin de contrat.
+                </p><p>
+
+                </p><p>
+
+                </p>
+            </field>
+		</record>
+
+ <!-- Top menu item -->
+
+        
+<!--        <menuitem name="Préavis fin de contrat" action="action_preavis_tree_view" id="menu_preavis"-->
+<!--            parent="r_frt.menu_preav_demiss" sequence="50"/>-->
+
+    </data>
+</openerp>

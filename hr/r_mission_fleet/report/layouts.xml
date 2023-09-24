@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="custom_autorisation">
+            <!-- HEADER -->
+            <div class="header"></div>
+            <!-- BODY -->
+            <div t-attf-class="article o_report_layout_standard "  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <!-- <div class="pt-5"></div> -->
+                <t t-raw="0"/>
+            </div>
+            <!-- FOOTER -->
+            <!--
+            <div class="footer o_standard_footer">
+                <div t-if="report_type == 'pdf'" class="text-muted" style="text-align:right;">Page: <span class="page"/>/<span class="topage" style=" font-weight:12px;"/></div>
+            </div>
+            -->
+        </template>
+
+    </data>
+</odoo>
+
+

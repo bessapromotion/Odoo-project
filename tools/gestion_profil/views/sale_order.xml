@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--        sale - Button-->
+        <record model="ir.ui.view" id="hide_button_sale_order_form_view">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="groups">base.group_erp_manager,base.user_admin</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_quotation_send']" position="attributes">
+                    <attribute name="groups">base.group_erp_manager,base.user_admin</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

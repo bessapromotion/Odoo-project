@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id='criter_1' model='hr.evaluation.criters'>
+            <field name='name'>CONNAISSANCE TECHNIQUE ET METIER</field>
+            <field name='description'>
+                - Connait bien les principes et les techniques du métier
+                - Fournit dans les temps les prestations attendues
+            </field>
+        </record>
+        <record id='criter_2' model='hr.evaluation.criters'>
+            <field name='name'>DISCRÉTION – CONFIDENTIALITÉ</field>
+            <field name='description'>- Fait preuve de discrétion</field>
+        </record>
+        <record id='criter_3' model='hr.evaluation.criters'>
+            <field name='name'>CAPACITÉ D’ADAPTATION</field>
+            <field name='description'>
+                - S’intègre à l’équipe de travail
+                - Respecte les règles de l’entreprise
+            </field>
+        </record>
+        <record id='criter_4' model='hr.evaluation.criters'>
+            <field name='name'>ESPRIT D’ANALYSE ET DE SYNTHESE</field>
+            <field name='description'>
+                - Fait des efforts d’analyse et de synthèse
+                - Présente de façon structurée les résultats de ses réflexions et travaux
+            </field>
+        </record>
+        <record id='criter_5' model='hr.evaluation.criters'>
+            <field name='name'>MOTIVATION POUR LE POSTE</field>
+            <field name='description'>
+                - Montre un intérêt pour son poste de travail et ses activités</field>
+        </record>
+        <record id='criter_6' model='hr.evaluation.criters'>
+            <field name='name'>CONDUITE ET ANIMATION D’EQUIPE (*)</field>
+            <field name='description'>
+                - Planifie les activités, définit les priorités et donne les instructions nécessaires
+                - Assiste les membres de l’équipe et se rend disponible
+            </field>
+        </record>
+        <record id='criter_7' model='hr.evaluation.criters'>
+            <field name='name'>INITIATIVE</field>
+            <field name='description'>
+                - Prend des initiatives et entreprend des actions dans le cadre des directives
+            </field>
+        </record>
+        <record id='criter_8' model='hr.evaluation.criters'>
+            <field name='name'>ESPRIT D’EQUIPE /COOPERATION</field>
+            <field name='description'>
+                - Participe activement aux travaux d’équipe
+                - Fait preuve de disponibilité Est apte à travailler avec autrui
+            </field>
+        </record>
+        <record id='criter_9' model='hr.evaluation.criters'>
+            <field name='name'>COMMUNICATION</field>
+            <field name='description'>
+                - Communique de façon précise et concise les informations nécessaires (orales et écrites)
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

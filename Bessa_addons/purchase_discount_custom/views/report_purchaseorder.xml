@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+            id="report_purchaseorder_document"
+            inherit_id="purchase.report_purchaseorder_document"
+    >
+        <!-- Section de la remise-->
+        <!--        <xpath expr="//table[1]/thead/tr//th[last()]" position="before">-->
+        <!--            <th name="th_discount" class="text-right">-->
+        <!--                <strong>Disc. (%)</strong>-->
+        <!--            </th>-->
+        <!--        </xpath>-->
+        <!--        <xpath expr="//td[span[@t-field='line.price_subtotal']]" position="before">-->
+        <!--            <td name="td_discount" class="text-right">-->
+        <!--                <span t-field="line.discount"/>-->
+        <!--            </td>-->
+        <!--        </xpath>-->
+        <!-- Appelation commande-->
+        <xpath expr="//h2[2]" position="replace">
+            <h2 t-if="o.state in ['purchase', 'done']">Commande
+                <span t-field="o.name"/>
+            </h2>
+
+        </xpath>
+        <!--        <xpath expr="//t[@t-set='tax_totals']" position="inside">-->
+        <!--            <t t-if="line.display_type == 'line_section'">-->
+        <!--                <td colspan="99" id="section">-->
+        <!--                    <span t-field="line.name"/>-->
+        <!--                </td>-->
+        <!--                <t t-set="current_section" t-value="line"/>-->
+        <!--                <t t-set="current_subtotal" t-value="0"/>-->
+        <!--            </t>-->
+        <!--        </xpath>-->
+        <!-- Update for service products-->
+        <xpath expr="//table[@class='table table-sm o_main_table']" position="replace">
+
+            <table class="table table-sm o_main_table" style="font-size:100%;">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            <strong>N°</strong>
+                        </th>
+                        <th>
+                            <strong>Désignation</strong>
+                        </th>
+                        <th class="text-right">
+                            <strong>Qté.</strong>
+                        </th>
+                        <th class="text-right">
+                            <strong>UDM</strong>
+                        </th>
+                        <th class="text-right">
+                            <strong>Prix U.</strong>
+                        </th>
+                        <th name="th_discount" class="text-right">
+                            <strong>Remise. (%)</strong>
+                        </th>
+                        <th class="text-right">
+                            <strong>Montant</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="o.order_line" t-as="line">
+                        <td class="text-center">
+                            <span t-esc="line_index + 1"/>
+                        </td>
+                        <t t-if="line.product_id.detailed_type== 'service'">
+                            <td>
+                                <span t-field="line.name"/>
+                            </td>
+                        </t>
+                        <t t-else="">
+                            <td>
+                                <span t-field="line.product_id.name"/>
+                            </td>
+                        </t>
+
+                        <!--                        <td>-->
+                        <!--                            <t t-foreach="line.product_id.product_variant_ids" t-as="v">-->
+                        <!--                                <span t-field="v.name"/>-->
+                        <!--                            </t>-->
+
+                        <!--                        </td>-->
+                        <td class="text-right">
+                            <span t-field="line.product_qty"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.product_uom"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.price_unit"/>
+                        </td>
+                        <td name="td_discount" class="text-right">
+                            <span t-field="line.discount"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.price_subtotal"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </xpath>
+        <!-- Print total discount-->
+        <xpath expr="//div[@id='total']" position="replace">
+            <div id="total" class="row justify-content-end" style="font-size:70%;">
+                <div class="col-4">
+                    <table class="table table-sm">
+                        <t t-if="o.total_discount_amount !=0">
+                            <tr class="border-black">
+                                <td>
+                                    <strong>Total HT avant remise</strong>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="o.total_amount_initial"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Remise</strong>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="o.total_discount_amount"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr class="border-black">
+                            <td>
+                                <strong>Total HT</strong>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="o.amount_untaxed"
+                                      t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <t t-if="o.taxe">
+                                <td>Total TVA (<span t-field="o.taxe"/>)
+                                </td>
+                            </t>
+                            <td class="text-right">
+                                <span t-field="o.amount_tax"
+                                      t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                            </td>
+                        </tr>
+                        <tr class="border-black o_total">
+                            <td>
+                                <strong>Total TTC</strong>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="o.amount_total"
+                                      t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

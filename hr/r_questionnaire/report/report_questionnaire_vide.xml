@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_questionnaire_vide">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div t-call="web.internal_layout">
+                    <div class="page">
+                        <h1 style="text-align: center;font-size:30px;">
+                            <b>Questionnaire</b>
+                        </h1>
+                        <div style="float:right;">Le
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/>
+                        </div>
+                        <br/>
+                        <table style="width:100%;">
+                            <tr>
+                                <td>Nom et Prénom :
+                                    <span t-field="o.employe_id.name"/>
+                                </td>
+                                <td>Fonction :
+                                    <strong>
+                                        <span t-field="o.job_id.name"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Direction / Département :
+                                    <span t-field="o.employe_id.direction_id"/>
+                                </td>
+                                <td>Nom et Fonction du Demandeur :
+                                    <strong>
+                                        <span t-field="o.resp_commission_id.name"/>
+                                        <br/>
+                                        <span t-field="o.resp_commission_id.job_id.name"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="line"/>
+                        <br/>
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="float:left;">Faute professionnelle :
+                                    <span t-field="o.faute_ids[0].name"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="float:left;">Question :
+                                </td>
+                                <td style="float:right;">السؤال :
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:100%;">
+                                    <span style="width:100%;" t-field="o.question"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <style>
+                            .dotted {border: 1px dotted #000000; border-style: none none dotted; color: #fff;
+                            background-color: #fff;}
+                        </style>
+                        <hr class='dotted'/>
+                        <hr class='dotted' style="margin-top:30px;"/>
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="float:left;">Réponse de l’employé :
+                                </td>
+                                <td style="float:right;">االجواب :
+                                </td>
+                            </tr>
+                        </table>
+                        <hr class='dotted'/>
+                        <hr class='dotted' style="margin-top:30px;"/>
+                        <hr class='dotted' style="margin-top:30px;"/>
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="float:left;">Si l’espace de réponse ne suffit pas, le dos de la feuille peut
+                                    être utilisé,
+                                    Joindre à ce questionnaire tout document jugé nécessaire à la réponse, Antécédents
+                                    (A demander à la DARH avant proposition de sanction) :
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <hr class='dotted'/>
+                        <hr class='dotted' style="margin-top:30px;"/>
+                        <br/>
+                        <div>
+                            <p style="float:left;">
+                                Degré de la faute (se référer au Règlement Intérieur) :
+                            </p>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div>
+                            <p style="float:left;">
+                                Nature de la faute (se référer au Règlement Intérieur) :
+                            </p>
+                        </div>
+                        <br/>
+                        <hr class='dotted'/>
+                        <br/>
+                        <div>
+                            <p style="float:left;">
+                                Sanction proposé par le responsable Hiérarchique:
+                            </p>
+                        </div>
+                        <hr class='dotted'/>
+                        <br/>
+                        <div>
+                            <p style="float:right;">
+                                Date et Signature du Responsable Hiérarchique
+                            </p>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div>
+                            <p style="float:left;">
+                                Avis et visa du Directeur de structure :
+                            </p>
+                        </div>
+                        <hr class='dotted'/>
+                        <br/>
+                        <div>
+                            <p style="float:right;">
+                                Date et Signature du Responsable structure
+                            </p>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div>
+                            <p style="float:left;">
+                                Avis et visa de la DARH :
+                            </p>
+                        </div>
+                        <hr class='dotted'/>
+                        <br/>
+                        <div>
+                            <p style="float:right;">
+                                Date et Signature du Responsable DARH
+                            </p>
+                            <p style="float:right;">
+                                Date de Réceptio de la Direction AR
+                            </p>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div style="text-align: center;margin-right:20%;">
+                            « Propriété; toute Reproduction interdite »
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

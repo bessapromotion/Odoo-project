@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <!-- boite vocale -->
+    <record model="ir.ui.view" id="crm_vocale_tree_view">
+        <field name="name">crm.vocale.tree</field>
+        <field name="model">crm.vocale</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top" string="Boite vocale">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="etat"/>
+                <field name="phone"/>
+                <field name="heure_appel"/>
+                <field name="user_id"/>
+                <field name="observation"/>
+                <field name="feedback" />
+                <field name="tags_ids"  widget="many2many_tags"  options="{'color_field': 'color'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_crm_vocale_tree_view">
+        <field name="name">Boite vocale</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">crm.vocale</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="crm_vocale_tree_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Cliquez ici pour créer un appel recu dans la boite vocale.
+            </p><p>
+
+            </p><p>
+
+            </p>
+         </field>
+    </record>
+    <record id="view_crm_vocale_filter" model="ir.ui.view">
+            <field name="name">crm.vocale.search.view</field>
+            <field name="model">crm.vocale</field>
+            <field name="arch" type="xml">
+                <search string="Status Search">
+             <!-- permet une recherche "directe" -->
+                     <group col="10" colspan="4">
+                        <field name="name" filter_domain="['|', '|',  ('name.name', 'ilike', self), ('name.code_client', 'ilike', self), ('name.num_pi', 'ilike', self)]"/>
+                        <field name="phone"/>
+                        <!--<field name="etat"/>-->
+                        <field name="user_id"/>
+                        <field name="observation" />
+                        <field name="tags_ids" />
+                    </group>
+                    <!-- Permet le regroupement -->
+                    <separator/>
+                    <group expand="0" string="Grouper par" >
+                        <filter string="Client" name="Client" context="{'group_by':'name'}" />
+                    </group>
+                    <separator/>
+                     <!-- permet un filtrage -->
+                </search>
+            </field>
+    </record>
+        <!--tags-->
+    <record model="ir.ui.view" id="visite_tags_tree_view">
+        <field name="name">visite.tags.tree</field>
+        <field name="model">visite.tags</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top" string="Etiquettes">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_visite_tags_tree_view">
+        <field name="name">Etiquettes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">visite.tags</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="visite_tags_tree_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Cliquez ici pour créer une nouvelle etiquette.
+            </p><p>
+
+            </p><p>
+
+            </p>
+         </field>
+    </record>
+
+    </data>
+</openerp>

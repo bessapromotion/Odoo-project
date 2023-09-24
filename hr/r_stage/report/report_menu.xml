@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                string="Attestation de stage"
+                id="act_report_att_stage"
+                model="hr.employee.stage"
+                report_type="qweb-pdf"
+                menu="False"
+                name="r_stage.report_att_stage"
+                file="r_stage.report_att_stage"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'Attestation de stage_'+ object.employee_id.name"
+        />
+    </data>
+</odoo>

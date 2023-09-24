@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<template id="tco.report_tco">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+            <!--<t t-call="web.external_layout">-->
+         <!--   <t t-set="o"/>-->
+                <style>
+                  .page-style{
+                    padding-top:10px; padding-bottom:10px; padding-left:60px; padding-right:30px; border: 2px solid #FFFFFF; background: #FFFFFF;
+                  }
+                  .titre-style{
+                    text-align: center; font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif; font-size: 16px; font-style: normal; font-variant: normal;
+                    padding: 0px;
+                  }
+
+                  table {
+                      border-collapse: collapse;
+                    }
+
+                    table, th, td {
+                      border: 1px solid black;
+                    }
+                    th, td {
+                      padding: 15px;
+                      text-align: left;
+                    }
+                </style>
+                <div class="page-style">
+                    <p style="font-weight: bold; text-align: right; margin-right: 30px;">Bessa Promotion  </p>
+                    <p style="font-weight: bold; text-decoration: underline; text-align: right; margin-right: 180px;">Date: <span t-field="o.commission_date"/></p>
+
+                    <p style="font-size: 26px; font-weight: bold; text-decoration: underline; text-align: center; ">Tableau Comparatif des Offres (TCO) </p>
+
+                    <p style="font-weight: bold; margin-left: 80px;">Objet : <span t-field="o.objet"/></p>
+                    <div>
+                    <table style=" width: 100%; padding-top:100px;">
+                          <tr>
+                            <th  rowspan="2">
+                               Designation
+                            </th>
+                            <t t-set="i" t-value="1"/>
+                            <t t-foreach="o.orders_ids" t-as="line">
+                            <th colspan="3">
+                               Fournisseur <span t-esc="i"/> : <span t-field="line.partner_id"/>
+                                <t t-set="i" t-value="i+1"/>
+                            </th>
+                          </t>
+                          </tr>
+                          <tr>
+                              <td>Quantité
+                              </td>
+                              <td>Prix unitaire HT
+                              </td>
+                              <td>Montant H.T
+                              </td>
+                              <td>Quantité
+                              </td>
+                              <td>Prix unitaire HT
+                              </td>
+                              <td>Montant H.T
+                              </td>
+                              <td>Quantité
+                              </td>
+                              <td>Prix unitaire HT
+                              </td>
+                              <td>Montant H.T
+                              </td>
+                          </tr>
+                          <tr t-foreach="o.tco_ids" t-as="line">
+                              <td>
+                                  <span t-field="line.product_id"/>
+                              </td>
+                              <td>
+                                  <span t-field="line.qty_1"/>
+                              </td>
+                              <td>
+                                  <span t-field="line.pu_1"/>
+                              </td>
+                              <td>
+                                  <span t-field="line.amount_1"/>
+                              </td>
+                              <td>
+                                  <span t-field="line.qty_2"/>
+                              </td>
+                              <td>
+                                  <span t-field="line.pu_2"/>
+                              </td>
+                              <td>
+                                  <span t-field="line.amount_2"/>
+                              </td>
+                              <td>
+                                  <span t-field="line.qty_3"/>
+                              </td>
+                              <td>
+                                  <span t-field="line.pu_3"/>
+                              </td>
+                              <td>
+                                  <span t-field="line.amount_3"/>
+                              </td>
+                          </tr>
+
+                        <tr>
+                            <td style="border-left-color: transparent; border-bottom-color: transparent;">
+
+                            </td>
+                            <t t-foreach="o.orders_ids" t-as="line">
+                            <td colspan="2">
+                               total H.T
+                            </td>
+                            <td>
+                               <span t-field="line.amount_untaxed"/>
+                            </td>
+                          </t>
+                          </tr>
+
+                        <tr>
+                            <td style="border-left-color: transparent; border-bottom-color: transparent;">
+
+                            </td>
+                            <t t-foreach="o.orders_ids" t-as="line">
+                            <td colspan="2">
+                              T. V.A
+                            </td>
+                            <td>
+                               <span t-field="line.amount_tax"/>
+                            </td>
+                          </t>
+                          </tr>
+
+                        <tr>
+                            <td style="border-left-color: transparent; border-bottom-color: transparent;">
+
+                            </td>
+                            <t t-foreach="o.orders_ids" t-as="line">
+                            <td colspan="2">
+                              total T.T.C
+                            </td>
+                            <td>
+                               <span t-field="line.amount_total"/>
+                            </td>
+                          </t>
+                          </tr>
+                    </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+</odoo>

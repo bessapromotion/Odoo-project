@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_mission_arrivee_wizard_user,hr.mission.arrivee.wizard user,model_hr_mission_arrivee_wizard,hr.group_hr_user,1,1,1,1
+access_hr_mission_depart_wizard_user,hr.mission.depart.wizard user,model_hr_mission_depart_wizard,hr.group_hr_user,1,1,1,1
+access_hr_mission_autorisation_wizard_user,hr.mission.autorisation.wizard user,model_hr_mission_autorisation_wizard,hr.group_hr_user,1,1,1,1

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!--       motif mise en demeure -->
+        <record id="med_motif_absence" model="hr.demeure.motif">
+            <field name="name">Abscence</field>
+        </record>
+    </data>
+
+    <data>
+        <record id="archiver_demeure" model="ir.actions.server">
+            <field name="name">Archiver demeure</field>
+            <field name="model_id" ref="r_mise_en_demeure.model_hr_demeure"/>
+            <field name="binding_model_id" ref="r_mise_en_demeure.model_hr_demeure"/>
+            <field name="state">code</field>
+            <field name="code">records.action_archive()</field>
+            <!-- <field name="code">action = model.action_archive()</field> -->
+        </record>
+        <record id="ir_cron_data_hr_demeure_2" model="ir.cron">
+            <field name="name">HR Mise en demeure : Creation 2eme mise</field>
+            <field name="model_id" ref="model_hr_demeure"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">model._check_2_mise()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+    </data>
+</openerp>

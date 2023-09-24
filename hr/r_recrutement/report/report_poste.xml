@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_poste">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page" style="font-size:25px;">
+                        <h1>
+                            <p style="text-align:center;margin-top:30%;font-size:50px;">
+                                <b>
+                                    Fiche de poste
+                                </b>
+                            </p>
+                        </h1>
+                        <div style="margin-top:10%;">
+                            <b>
+                                <u>Intitulé du poste :</u>
+                                <span t-field="o.name"/>
+                            </b>
+                            <br/>
+                            <br/>
+                            <span t-field="o.description"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

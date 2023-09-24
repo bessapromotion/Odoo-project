@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+
+    <data noupdate="0">
+        <!-- Direction-->
+        <record model="hr.direction" id="hr_direction_1">
+            <field name="name">DIRECTION ADMINISTRATION DES BIENS</field>
+        </record>
+        <record model="hr.direction" id="hr_direction_2">
+            <field name="name">DIRECTION COMMERCIAL ET MARKETING</field>
+        </record>
+        <record model="hr.direction" id="hr_direction_3">
+            <field name="name">DIRECTION ADMINISTRATION GENERALE</field>
+        </record>
+        <record model="hr.direction" id="hr_direction_4">
+            <field name="name">DIRECTION FINANCES ET COMPTABILITE</field>
+        </record>
+        <record model="hr.direction" id="hr_direction_5">
+            <field name="name">DIRECTION INFORMATIQUE</field>
+        </record>
+        <record model="hr.direction" id="hr_direction_7">
+            <field name="name">DIRECTION TECHNIQUE</field>
+        </record>
+        <record model="hr.direction" id="hr_direction_8">
+            <field name="name">DIRECTION LOGISTIQUE</field>
+        </record>
+    </data>
+</odoo>

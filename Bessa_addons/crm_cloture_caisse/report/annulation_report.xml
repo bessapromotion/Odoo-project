@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<template id="annulation_report">
+    <t t-call="web.html_container">
+            <t t-call="web.layout">
+                <div class="page">
+                    <div class="text-center">
+                          <h2 style="text-align:center;"> Rapport des annulations </h2>
+                    </div>
+                    <table>
+                        <tr>
+                            <td style="font-size: 14px;width:100px;"> <strong>Type de Rapport: </strong></td>
+                            <td style="font-size: 14px">
+                               <p t-if="form_data['type'] == 'day'" >Journalier </p>
+                               <p t-if="form_data['type'] == 'period'" >PÃ©riodique </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14px;width:100px;"> <strong> Date de dÃ©but : </strong></td>
+                            <td style="font-size: 14px;width:100px;"> <t t-esc="form_data['date_start']"/> </td>
+                        </tr>
+                        <t t-if="form_data['type'] == 'period'">
+                          <tr>
+                            <td style="font-size: 14px;width:100px;"> <strong> Date de fin : </strong> </td>
+                            <td style="font-size: 14px;width:100px;"> <t t-esc="form_data['date_end']"/> </td>
+                           </tr>
+                        </t>
+                    </table>
+                    <table class="table table-condensed" style="margin-top:50px;">
+                        <thead>
+                            <tr>
+                                   <th style="border: 1px solid black;padding:2px;border-radius: 10px"><strong>RÃ©ference</strong></th>
+                                   <th style="border: 1px solid black;padding:2px;border-radius: 10px"><strong>Client</strong></th>
+                                   <th style="border: 1px solid black;padding:2px;border-radius: 10px"><strong>Projet</strong></th>
+                                   <th style="border: 1px solid black;padding:2px;border-radius: 10px"><strong>Appartement</strong></th>
+                                   <th style="border: 1px solid black;padding:2px;border-radius: 10px"><strong>Date de rÃ©servation</strong></th>
+                                   <th style="border: 1px solid black;padding:2px;border-radius: 10px"><strong>Total payer</strong></th>
+                             </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="annulations" t-as="o">
+                                  <tr>
+                                   <td style="border: 1px solid black;padding:2px" ><span t-esc =" o['ref']"/></td>
+                                   <td style="border: 1px solid black;padding:2px" ><span t-esc =" o['client']"/></td>
+                                   <td style="border: 1px solid black;padding:2px" ><span t-esc =" o['projet']"/></td>
+                                   <td style="border: 1px solid black;padding:0px"><span t-esc =" o['Appartement']"/></td>
+                                   <td style="border: 1px solid black;padding:2px"><span t-esc =" o['date_reservation']"/></td>
+                                   <td style="border: 1px solid black;padding:2px"><span t-esc =" o['Total_paye']"/></td>
+                                  </tr>
+                            </t>
+                        </tbody>
+
+                   </table>
+                </div>
+            </t>
+    </t>
+
+</template>
+
+</odoo>

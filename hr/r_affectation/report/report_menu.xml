@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                string="Décision affectation"
+                id="act_report_affectation"
+                model="hr.affectation"
+                report_type="qweb-pdf"
+                menu="False"
+                name="r_affectation.report_affectation"
+                file="r_affectation.report_affectation"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'Décision de Sanction_'+ object.employe_id.name"
+        />
+    </data>
+</odoo>

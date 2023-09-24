@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_questionnaire_user,hr.questionnaire user,model_hr_questionnaire,hr.group_hr_user,1,1,1,1
+access_hr_questionnaire_faute_user,hr.questionnaire.faute user,model_hr_questionnaire_faute,hr.group_hr_user,1,1,1,1
+access_hr_faute_professionnelle_user,hr.faute.professionnelle user,model_hr_faute_professionnelle,hr.group_hr_user,1,1,1,1
+access_hr_sanction_type_user,hr.sanction.type user,model_hr_sanction_type,hr.group_hr_user,1,1,1,1
+
+
+

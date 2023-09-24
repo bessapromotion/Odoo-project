@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.rule" id="hr_affectation_rule">
+        <field name="name">Affectation multi-company</field>
+        <field name="model_id" ref="model_hr_affectation"/>
+        <field name="domain_force">['|',('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record model="ir.rule" id="hr_direction_rule">
+        <field name="name">Direction multi-company</field>
+        <field name="model_id" ref="model_hr_direction"/>
+        <field name="domain_force">['|',('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

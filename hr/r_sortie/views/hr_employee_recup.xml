@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    filter-->
+    <record id="hr_employee_recup_filter" model="ir.ui.view">
+        <field name="name">hr.employee.recup.filter</field>
+        <field name="model">hr.employee.recup</field>
+        <field name="arch" type="xml">
+            <search string="Bon de recup">
+                <field name="employe_id"/>
+                <field name="name"/>
+
+                <filter name="draft" string="Nouveaux" domain="[('state','=','draft')]"/>
+                <filter name="valid" string="Validé" domain="[('state', '=', 'valid')]"/>
+                <filter name="cancel" string="Annulés" domain="[('state', '=', 'cancel')]"/>
+
+                <group expand="0" string="Grouper par...">
+                    <filter name="employee" string="Employé" domain="[]" context="{'group_by':'employe_id'}"
+                            help="Employé"/>
+                    <filter name="company_id" string="Société" domain="[]" context="{'group_by':'company_id'}"
+                            help="Employé"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- tree -->
+    <record model="ir.ui.view" id="hr_employee_recup_tree_view">
+        <field name="name">hr.employee.recup.tree</field>
+        <field name="model">hr.employee.recup</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                <field name="name"/>
+                <field name="employe_id"/>
+                <field name="company_id"/>
+                <field name="state"
+                       decoration-muted="state == 'cancel'"
+                       decoration-warning="state == 'valid'"
+                       decoration-info="state == 'draft'" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+    <!--    from-->
+    <record model="ir.ui.view" id="hr_employee_recup_from_view">
+        <field name="name">hr.employee.recup.form</field>
+        <field name="model">hr.employee.recup</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_validate" string="Valider" states="draft" class="oe_highlight" type="object"
+                            confirm="Voulez-vous valider ce bon de recup ?"/>
+                    <button name="action_cancel" string="Annuler" states="draft" type="object"
+                            confirm="Voulez-vous annuler ce bon de recup ?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,valid"/>
+
+                </header>
+                <sheet>
+                    <h1>
+                        <label for="name" string="Bon de recup # "/>
+                        <field name="name" class="oe_inline" readonly="1"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="employe_id" options='{"no_create": True}'/>
+                            <field name="job_id"/>
+                            <field name="department_id"/>
+
+                        </group>
+                        <group>
+                            <field name="date_debut" t-options='{"format": "d/M/Y"}'/>
+                            <field name="date_fin"/>
+                            <field name="duree"/>
+                        </group>
+                        <group>
+                            <field name="company_id"/>
+                            <field name="user_id" options='{"no_create": True}'/>
+                            <field name="parent_id"/>
+                            <field name="remplacant_id"/>
+                        </group>
+                        <group>
+                            <field name="motif"/>
+                        </group>
+                    </group>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_hr_employee_recup_tree_view">
+        <field name="name">Récupération</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.employee.recup</field>
+        <field name="search_view_id" ref="hr_employee_recup_filter"/>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="hr_employee_recup_tree_view"/>
+    </record>
+    <!-- Top menu item -->
+    <menuitem name="Recupération" action="action_hr_employee_recup_tree_view" id="menu_hr_employee_recup"
+              parent="hr_base.menu_mouvements" sequence="40"/>
+</odoo>

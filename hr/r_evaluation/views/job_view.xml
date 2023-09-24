@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+ <!-- interface fonction -->
+		<record id="view_hr_job_3_tree" model="ir.ui.view">
+            <field name="name">hr.job.2.form.inherit</field>
+            <field name="model">hr.job</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="hr_base.view_miniros_hr_job_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='csp_id']" position="after">
+                        <field name="evaluation"/>
+                    </xpath>
+                </data>
+			</field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <report
+                string="Fiche d'évaluation individuelle "
+                id="act_report_fiche_evaluation_individuelle"
+                model="hr.evaluation"
+                report_type="qweb-pdf"
+                menu="True"
+                name="r_evaluation.report_fiche_evaluation_individuelle"
+                file="r_evaluation.report_fiche_evaluation_individuelle"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'Evaluation_'+ object.employe_id.name"
+        />
+     </data>
+</odoo>

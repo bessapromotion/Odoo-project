@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--Etat de sortie Devis / Bc-->
+<odoo>
+    <template id="report_ordre_mission_fleet" inherit_id="r_mission.report_ordre_mission">
+        <xpath expr="//tr[@name='date_depart']" position="replace">
+                        <tr name="date_depart">
+                            <td class="transp">Date de départ</td>
+                            <td style="width:auto;"><strong><span t-field="o.date_depart_prevue"/></strong></td>
+                        </tr>
+        </xpath>
+        <xpath expr="//tr[@name='date_retour']" position="replace">
+                        <tr name="date_retour">
+                            <td class="transp">Date de retour</td>
+                            <td t-if="o.date_retour" style="width:auto;"><strong><span t-field="o.date_retour_prevue"/></strong></td>
+                            <td t-if="not o.date_retour" style="width:auto;"><strong>Fin de mission</strong></td>
+                        </tr>
+        </xpath>
+
+    </template>
+</odoo>

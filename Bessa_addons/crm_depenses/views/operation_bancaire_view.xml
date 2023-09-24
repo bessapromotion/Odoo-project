@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="operation_bancaire_pivot_view">
+            <field name="name">operation.bancaire.pivot</field>
+            <field name="model">operation.bancaire</field>
+            <field name="arch" type="xml">
+                <pivot string="Journal Des Mouvements Bancaires" sample="1">
+                    <field name="date" type="row"/>
+                    <field name="name" type="row"/>
+                    <field name="mt_debit" type="measure"/>
+                    <field name="mt_credit" type="measure"/>
+                    <field name="mt_balance" type="measure"/>
+                    <field name="mt_cumulated_balance" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="operation_bancaire_search_view">
+            <field name="name">operation.bancaire.filter</field>
+            <field name="model">operation.bancaire</field>
+            <field name="arch" type="xml">
+                <search string="Mouvements Bancaires">
+                    <field name="name"/>
+                    <field name="benificiaire"/>
+                    <field name="type_id"/>
+                    <field name="project_id"/>
+                    <field name="nature_id"/>
+                    <field name="mode_paiement_id"/>
+                    <field name="compte_id"/>
+                    <field name="debit_ok"/>
+                    <field name="credit_ok"/>
+                    <filter name="debit" string="Recette" domain="[('debit_ok', '=', True)]"/>
+                    <filter name="credit" string="Dépense" domain="[('credit_ok', '=', True)]"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <filter name="today" string="Ajourd'hui"
+                            domain="[('date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+                    <group expand="0" string="Grouper par...">
+                        <filter name="type_id" string="Type" domain="[]" context="{'group_by':'type_id'}"/>
+                        <filter name="project_id" string="Projet" domain="[]" context="{'group_by':'project_id'}"/>
+                        <filter name="nature_id" string="Nature" domain="[]" context="{'group_by':'nature_id'}"/>
+                        <filter name="benificiaire" string="Bénificiaire" domain="[]"
+                                context="{'group_by':'benificiaire'}"/>
+                        <filter name="state" string="Etat" domain="[]"
+                                context="{'group_by':'state'}"/>
+                        <filter name="company" string="Société" domain="[]" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="operation_bancaire_form_view">
+            <field name="name">operation.bancaire.form</field>
+            <field name="model">operation.bancaire</field>
+            <field name="arch" type="xml">
+                <form string="Mouvements Bancaires" duplicate="false">
+                    <header>
+                        <button name="action_validate" string="Valider l&#39;op&#233;ration" class="oe_highlight"
+                                type="object" states="draft"/>
+
+                        <button name="print_fiche_operation" string="Imprimer la fiche de l&#39;op&#233;ration" class="oe_highlight"
+                                type="object" states="valid"/>
+
+                        <button name="action_cancel" string="Rejeter l&#39;op&#233;ration" type="object"
+                        />
+
+                        <field name="state" nolabel="1" widget="statusbar"
+                               statusbar_visible="draft,open,valid,done,cancel"
+                               groups="base.group_system"/>
+
+                    </header>
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="date" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                <field name="type_id" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                <field name="project_id" attrs="{'readonly':[('state','!=', 'draft')]}"
+                                       domain="[('type_id', '=', type_id)]"/>
+                                <field name="libelle" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                <field name="nature_id" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                <field name="type_ben_id" options="{'color_field': 'color'}"/>
+                                <field name="employee_id"
+                                       attrs="{'readonly':[('state','!=', 'draft')],'invisible':[('type_ben_id','!=', 1)]}"/>
+                                <field name="partner_id"
+                                       attrs="{'readonly':[('state','!=', 'draft')],'invisible':[('type_ben_id','=', 1)]}"/>
+                                <field name="mode_achat" attrs="{'invisible':[('type_ben_id','!=', 3)]}"/>
+                                <field name="company_id"/>
+
+
+                            </group>
+                            <group>
+                                <field name="month" force_save="1"/>
+                                <field name="week" force_save="1"/>
+                                <field name="credit_ok" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                <field name="mt_credit" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                <field name="debit_ok" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                <field name="mt_debit" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                <field name="mt_balance" force_save="1"/>
+                                <field name="mt_cumulated_balance" force_save="1"/>
+                                <field name="tresorerie"
+                                       attrs="{'readonly':[('state','in', ('open'))]}"/>
+                                <field name="compte_id"
+                                       attrs="{'readonly':[('state','in', ('open'))]}"
+                                       domain="[('type', '=', tresorerie),('company_id', '=',company_id)]"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="benificiaire" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                <field name="tags_ids" widget="many2many_tags" options="{'color_field': 'color'}"
+                                       force_save="1"/>
+                                <field name="origin" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="mode_paiement_id" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="cheque_num"
+                                       attrs="{'invisible':[('mode_paiement_id','not in', (1,3,4))]}"/>
+                                <field name="cheque_ordonateur"
+                                       attrs="{'invisible':[('mode_paiement_id','not in', (1,3,4))]}"/>
+                                <field name="cheque_domiciliation"
+                                       attrs="{'invisible':[('mode_paiement_id','not in', (1,3,4))]}"/>
+                                <!-- Field Date -->
+                                <field name="cheque_date" string="Date Chèque"
+                                       attrs="{'invisible':[('mode_paiement_id','not in', (1))]}"/>
+                                <field name="cheque_date" string="Date Virement"
+                                       attrs="{'invisible':[('mode_paiement_id','not in', (3))]}"/>
+                                <field name="cheque_date" string="Date Versement"
+                                       attrs="{'invisible':[('mode_paiement_id','not in', (4))]}"/>
+
+                                <field name="cheque_objet"
+                                       attrs="{'invisible':[('mode_paiement_id','not in', (1))]}"/>
+                                <field name="cheque_type"
+                                       attrs="{'invisible':[('mode_paiement_id','not in', (1))]}"/>
+                            </group>
+
+
+                        </group>
+                        <notebook>
+                            <page string="Observation">
+                                <group>
+                                    <field name="observation" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="operation_bancaire_tree_view" model="ir.ui.view">
+            <field name="name">operation.bancaire.tree</field>
+            <field name="model">operation.bancaire</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree default_order='create_date'>
+                    <field name="create_date" optional="hide"/>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="origin"/>
+                    <field name="mode_achat"/>
+                    <field name="month" force_save="1"/>
+                    <field name="week" force_save="1"/>
+                    <field name="type_id"/>
+                    <field name="project_id"/>
+                    <field name="nature_id"/>
+                    <field name="mode_paiement_id"/>
+                    <field name="libelle"/>
+                    <field name="type_ben_id"/>
+                    <field name="benificiaire"/>
+                    <field name="tags_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    <field name="mt_debit" sum="Total Débit"/>
+                    <field name="mt_credit" sum="Total Crédit"/>
+                    <field name="mt_balance" sum="Total Balance"/>
+                    <field name="mt_cumulated_balance"/>
+                    <field name="tresorerie"/>
+                    <field name="compte_id"/>
+                    <field name="state" widget="badge" decoration-info="state == 'draft'"
+                           decoration-success="state == 'valid'" decoration-warning="state == 'cancel'"/>
+                    <field name="company_id"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_operation_bancaire">
+            <field name="name">Journal</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">operation.bancaire</field>
+            <field name="context">{'search_default_today': 1, 'pivot_measures': ['__count'],}</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="view_id" ref="operation_bancaire_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer une nouveau mouvement bancaire.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_operation_bancaire_recette">
+            <field name="name">Recettes Bancaires</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">operation.bancaire</field>
+            <field name="domain">[('debit_ok','=',True)]</field>
+            <field name="context">{'search_default_today': 1, 'search_default_debit':1,'default_debit_ok':True}</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="view_id" ref="operation_bancaire_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer une nouveau mouvement bancaire.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_operation_bancaire_depense">
+            <field name="name">Dépenses Bancaires</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">operation.bancaire</field>
+             <field name="domain">[('credit_ok','=',True)]</field>
+            <field name="context">{'search_default_today': 1, 'search_default_credit':1,'default_credit_ok':True}</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="view_id" ref="operation_bancaire_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer une nouveau mouvement bancaire.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+    </data>
+</openerp>

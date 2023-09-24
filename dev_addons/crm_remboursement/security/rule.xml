@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.rule" id="crm_desistement_rule">
+        <field name="name">Desistement multi-company</field>
+        <field name="model_id" ref="model_crm_desistement"/>
+        <field name="domain_force">['|',('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record model="ir.rule" id="crm_desistement_dossier_rule">
+        <field name="name">Desistement dossier multi-company</field>
+        <field name="model_id" ref="model_crm_desistement_dossier"/>
+        <field name="domain_force">['|',('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record model="ir.rule" id="crm_remboursement_rule">
+        <field name="name">Remboursement multi-company</field>
+        <field name="model_id" ref="model_crm_remboursement"/>
+        <field name="domain_force">['|',('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

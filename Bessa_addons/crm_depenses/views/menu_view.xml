@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Menu pricipal -->
+        <menuitem name="Tr&#233;sorerie" id="menu_depense_root"
+                  sequence="30"
+                  web_icon="crm_depenses,static/description/icon.png"
+                  groups="crm_depenses.group_crm_depenses_user,crm_depenses.group_crm_depenses_manager,crm_depenses.group_crm_depenses,crm_depenses.group_operation_bancaire,crm_depenses.group_crm_depenses_manager"/>
+        <!-- journal des depenses/ Recette -->
+        <menuitem name="Journal de recettes et dépenses" id="menu_journal_recette_depense"
+                  parent="crm_depenses.menu_depense_root"
+                  sequence="30"
+                  action="action_journal_recette_depenses" groups="crm_depenses.group_crm_depenses_user,crm_depenses.group_crm_depenses,crm_depenses.group_operation_bancaire,crm_depenses.group_crm_depenses_manager"/>
+        <menuitem name="Journal de recettes" id="menu_journal_recette"
+                  parent="crm_depenses.menu_journal_recette_depense"
+                  sequence="30"
+                  action="action_journal_recette" groups="crm_depenses.group_crm_depenses_user,crm_depenses.group_crm_depenses,crm_depenses.group_crm_depenses_manager"/>
+        <menuitem name="Journal de dépenses" id="menu_journal_depense"
+                  parent="crm_depenses.menu_journal_recette_depense"
+                  sequence="40"
+                  action="action_journal_depense" groups="crm_depenses.group_crm_depenses_user,crm_depenses.group_crm_depenses,crm_depenses.group_crm_depenses_manager"/>
+        <menuitem name="Mouvements de caisse" id="menu_mouvement_caisse"
+                  parent="crm_depenses.menu_journal_recette_depense"
+                  sequence="50"
+                  action="action_journal_mouvement" groups="crm_depenses.group_crm_depenses_user,crm_depenses.group_crm_depenses,crm_depenses.group_crm_depenses_manager"/>
+        <menuitem name="Versements Client" id="menu_recette_versement_client"
+                  parent="crm_depenses.menu_journal_recette_depense"
+                  sequence="60"
+                  action="action_journal_versement_client" groups="crm_depenses.group_crm_depenses_user,crm_depenses.group_crm_depenses,crm_depenses.group_operation_bancaire,crm_depenses.group_crm_depenses_manager"/>
+        <menuitem name="Brouillard" id="menu_brouillard_recette_depense"
+                  parent="crm_depenses.menu_journal_recette_depense"
+                  sequence="70"
+                  action="action_journal_recette_depenses" groups="crm_depenses.group_crm_depenses_user,crm_depenses.group_crm_depenses,crm_depenses.group_crm_depenses_manager"/>
+
+         <!-- Mouvements Bancaires des depenses/ Recette -->
+        <menuitem name="Journal des mouvements bancaires" id="menu_journal_opertaion_bancaire"
+                  parent="crm_depenses.menu_depense_root"
+                  sequence="30"
+                  action="action_operation_bancaire" groups="crm_depenses.group_crm_depenses_user,crm_depenses.group_operation_bancaire"/>
+        <menuitem name="Journal de recettes" id="menu_operation_bancaire_recette"
+                  parent="crm_depenses.menu_journal_opertaion_bancaire"
+                  sequence="30"
+                  action="action_operation_bancaire_recette" groups="crm_depenses.group_crm_depenses_user,crm_depenses.group_operation_bancaire,crm_depenses.group_crm_depenses_manager"/>
+        <menuitem name="Journal de dépenses" id="menu_operation_bancaire_depense"
+                  parent="crm_depenses.menu_journal_opertaion_bancaire"
+                  sequence="40"
+                  action="action_operation_bancaire_depense" groups="crm_depenses.group_crm_depenses_user,crm_depenses.group_operation_bancaire,crm_depenses.group_crm_depenses_manager"/>
+
+        <menuitem name="Brouillard" id="menu_brouillard_opeartion_bancaire"
+                  parent="crm_depenses.menu_journal_opertaion_bancaire"
+                  sequence="50"
+                  action="action_operation_bancaire" groups="crm_depenses.group_crm_depenses_user,crm_depenses.group_operation_bancaire,crm_depenses.group_crm_depenses_manager"/>
+
+        <!-- Configuration -->
+        <menuitem name="Configuration" id="menu_depense_configuration" parent="crm_depenses.menu_depense_root"
+                  sequence="99"
+                  groups="crm_depenses.group_crm_depenses_manager"/>
+        <menuitem name="Mois de dépense" id="menu_mois_depense_configuration" sequence="1"
+                  parent="menu_depense_configuration"
+                  groups="crm_depenses.group_crm_depenses_manager" action="action_depense_mois"/>
+        <menuitem name="Nature de dépense" id="menu_nature_depense_configuration" sequence="2"
+                  parent="menu_depense_configuration"
+                  groups="crm_depenses.group_crm_depenses_manager" action="action_depense_nature"/>
+        <menuitem name="Projet de dépense" id="menu_projet_depense_configuration" sequence="3"
+                  parent="menu_depense_configuration"
+                  groups="crm_depenses.group_crm_depenses_manager" action="action_depense_project"/>
+        <menuitem name="Type de dépense" id="menu_type_depense_configuration" sequence="4"
+                  parent="menu_depense_configuration"
+                  groups="crm_depenses.group_crm_depenses_manager" action="action_depense_type"/>
+        <menuitem name="semaine de dépense" id="menu_semaine_depense_configuration" sequence="4"
+                  parent="menu_depense_configuration"
+                  groups="crm_depenses.group_crm_depenses_manager" action="action_depense_week"/>
+        <menuitem name="Etiquette de dépense " id="menu_tag_depense_configuration"
+                  parent="menu_depense_configuration"
+                  action="action_depense_tag_tree_view" sequence="10" groups="crm_depenses.group_crm_depenses_manager"/>
+        <menuitem name="Type de benificiaire" id="menu_type_benificiaire_configuration"
+                  parent="menu_depense_configuration"
+                  action="action_depense_type_benificaire" sequence="10" groups="crm_depenses.group_crm_depenses_manager"/>
+        <menuitem name="Comptes de societes" id="menu_account_company_configuration"
+                  parent="menu_depense_configuration"
+                  action="action_account_res_company_tree" sequence="15" groups="crm_depenses.group_crm_depenses_manager"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="module_category_crm_administration_vente" model="ir.module.category">
+        <field name="name">Gestion de la copropriété</field>
+        <field name="sequence">700</field>
+    </record>
+
+    <record id="group_crm_admin_vente_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="comment">Peut consulter les dossiers des charges et tags</field>
+        <field name="category_id" ref="module_category_crm_administration_vente"/>
+    </record>
+
+    <record id="group_crm_admin_vente_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="comment">Peut creer et valider les dossiers des charges et tags </field>
+        <field name="implied_ids" eval="[Command.link(ref('group_crm_admin_vente_user'))]"/>
+        <field name="category_id" ref="module_category_crm_administration_vente"/>
+
+    </record>
+
+</odoo>

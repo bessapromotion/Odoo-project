@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.module.category" id="validation_group_category">
+            <field name="name">Validation demande achat</field>
+            <field name="description">Qui peut valider une demande d'achat interne</field>
+            <field name="sequence">40</field>
+        </record>
+
+        <record model="res.groups" id="validation_group">
+            <field name="name">Peut valider une demande d'achat interne</field>
+            <field name="category_id" ref="demande_achat.validation_group_category"/>
+        </record>
+
+
+    </data>
+</openerp>

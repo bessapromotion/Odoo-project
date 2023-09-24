@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_decision_fin_relation_travail">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div>
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <td style="o.text-align:left">Réf, N°:
+                                        <span t-field="o.name"/>
+                                    </td>
+                                    <td style="text-align:right;">Alger le,
+                                        <span t-field="o.date_effet"/>
+                                    </td>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <div align="center">
+                            <div class="titre-style">
+                                <h1 style="text-align: center;padding: 24px;font-size:40px;">
+                                    Decision
+                                </h1>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <t t-set="variables" t-value="o.get_variables()"/>
+                        <t t-set="nb_article" t-value="1"/>
+                        <p>
+                            <t t-foreach="o.article_1_lines" t-as="a">
+                                <p t-if="a and a.article_id">
+                                    <t t-raw="a.article_id.set_values(variables)"/>
+                                </p>
+                            </t>
+
+                        </p>
+                        <br/>
+                        <div style="text-align:center;font-size:30px;">
+                            <strong>D E C I D E</strong>
+                        </div>
+                        <br/>
+                        <t t-set="variables" t-value="o.get_variables()"/>
+                        <p>
+                            <t t-foreach="o.article_2_lines" t-as="a">
+                                <p t-if="a and a.article_id">
+                                    <t t-raw="a.article_id.set_values(variables)"/>
+                                </p>
+                            </t>
+
+                        </p>
+
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div style="text-align:right;margin-right:50px;font-size:25px;">
+                            <u>Le Directeur</u>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+
+    </template>
+</odoo>

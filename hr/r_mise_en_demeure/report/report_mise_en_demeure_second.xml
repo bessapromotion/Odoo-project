@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_mise_en_demeure_second">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <style>
+                        .page-style{
+                        padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px; margin-top:10px;
+                        }
+                        .titre-style{
+                        text-align: center; font-size: 24px; font-style: normal; font-variant: normal;
+                        padding: 0px;font-weight: bold;
+                        }
+                        .bold-style{
+                        font-size: 22px; font-style: normal; font-variant: normal;
+                        padding: 0px;font-weight: bold;
+                        }
+
+                        div, p {
+                        font-family: Arial;
+                        }
+
+                        th, td {
+                        border: 1px solid black; text-align: left; padding: 10px; border-radius: 8px; height: 20px;
+                        }
+                        .transp{
+                        border :none;
+                        }
+                    </style>
+
+                    <div class="page-style">
+                        <table width="840" style="margin-left:10px; margin-top:40px;font-size:18px;">
+                            <tr>
+                                <td class="transp">Réf, N°:
+                                    <span t-field="o.name"/>
+                                </td>
+                                <td class="transp" style="text-align: right">Alger le,
+                                    <span t-field="o.s_date"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div style="margin-top:20px; margin-left:350px;">
+                            <span t-field="o.employe_id.civilite_id"/>
+                            :
+                            <span t-field="o.employe_id" style="font-weight: bold;"/>
+                        </div>
+                        <div style="margin-left:350px;">Adresse :
+                            <!--                                    <span t-field="o.employe_id.residence" style="font-weight: bold;"/>,-->
+                            <!--                                    <span t-field="o.employe_id.residence_commune" style="font-weight: bold;"/>,-->
+                            <!--                                    <span t-field="o.employe_id.residence_wilaya_id" style="font-weight: bold;"/>-->
+                        </div>
+                        <div style="margin-left:350px;">Fonction :
+                            <span t-field="o.employe_id.job_id" style="font-weight: bold;"/>
+                        </div>
+                        <div style="margin-left:350px;">Matricule :
+                            <span t-field="o.employe_id.matricule" style="font-weight: bold;"/>
+                        </div>
+
+                        <div style="margin-left:10px; padding-top:60px; padding-bottom:20px;"><strong>Objet :</strong>
+                            2ére Mise en demeure.
+                        </div>
+
+                        <div style="margin-left:10px; padding-bottom:20px;"><strong>N°, Réf :</strong>1ére mise en
+                            demeure N° :
+                            <span t-field="o.first_med"/>
+                            du :<span t-field="o.first_med_date"/>,
+                        </div>
+
+                        <div style="margin-left:10px; text-indent: 20px;">Nous vous adressons la 2ième mise en demeure
+                            pour justifier votre absence irrégulière depuis le :<span t-field="o.date_debut_abscence"/>,
+                        </div>
+
+                        <div style="margin-left:10px; padding-top:20px; text-indent: 20px;">Nous vous mettons en demeure
+                            par la présente de rejoindre votre poste de travail
+                            dés la réception de ce courrier, muni de toutes pièces justificatives ou de nous les
+                            transmettre dans les quarante-huit (48) heures,
+                            le justificatif de réception faisant foi.
+                        </div>
+
+                        <div style="margin-left:10px; padding-top:20px; text-indent: 20px;">Sans réponse de votre part
+                            et passé le délai cité plus haut, vous serez considéré en abandon de poste, avec
+                            application des mesures réglementaires à votre encontre
+                        </div>
+
+                        <div style="margin-left:10px; padding-top:20px;">Veuillez agréer,<span
+                                t-field="o.employe_id.civilite_id"/>, nos salutations distinguées
+                        </div>
+
+
+                        <!-- SIGNATURE -->
+                        <p style="padding-top:120px; margin-left:650px; font-weight: bold; font-size: 18px;">
+                            <u>Le Directeur</u>
+                        </p>
+
+
+                    </div>
+
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

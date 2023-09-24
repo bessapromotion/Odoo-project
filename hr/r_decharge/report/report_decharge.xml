@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_decharge">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <div style="font-size:32px;font-weight:bold;text-align:center; padding-top:80px;">
+                            <b>Décharge de
+                                <t t-if="o.decharge_id.type=='restitution'">réstitution</t>
+                                <t t-if="o.decharge_id.type=='reception'">réception</t>
+                            </b>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div style="font-size:25px;">
+                            <p>Je soussigné (e) M. Mme
+                                <b>
+                                    <span t-field="o.decharge_id.employe_id"/>
+                                </b>
+                            </p>
+                            <p>Ayant pour fonction
+                                <b>
+                                    <span t-field="o.decharge_id.employe_id.contract_id.job_id"/>
+                                </b>
+                                , au sein de
+                                <b>
+                                    <span t-field="o.decharge_id.company_id"/>
+                                </b>
+                                <br/>
+                                <br/>
+                                <b>Lieu :</b>
+                                <span t-field="o.lieu"/>
+                                <br/>
+                                <br/>
+                                Déclare avoir
+                                <t t-if="o.decharge_id.type=='restitution'">remis</t>
+                                <t t-if="o.decharge_id.type=='reception'">reçu</t>
+                                ce jour le :
+                                <b>
+                                    <span t-field="o.date"/>
+                                </b>
+                                :
+                                <br/>
+                                <br/>
+                                <span t-field="o.description"/>
+                            </p>
+                        </div>
+                        <table width="780" style="margin-left:40px;margin-top:100px;font-size:25px;">
+                            <tr>
+                                <td>
+                                    <strong>L'intéressé (e)</strong>
+                                </td>
+                                <td style="text-align: right">
+                                    <strong>Ouled Fayet, le
+                                        <span t-field="o.date"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

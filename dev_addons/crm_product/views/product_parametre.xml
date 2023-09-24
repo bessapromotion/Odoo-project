@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="product_type_appt_tree_view">
+            <field name="name">product.type.appt.tree</field>
+            <field name="model">product.type.appt</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Type d'Appartement">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="configuration_product_type_appt_action" model="ir.actions.act_window">
+            <field name="name">Typologie d'Appartement</field>
+            <field name="res_model">product.type.appt</field>
+            <field name="view_mode">tree</field>
+
+        </record>
+        <menuitem name="Type d'Appartement" id="menu_product_type_appt"
+                  parent="crm_operation.menu_configuration_article"
+                  groups="sales_team.group_sale_manager" sequence="32" action="configuration_product_type_appt_action"/>
+        <!--        product.ensoleillement-->
+        <record model="ir.ui.view" id="product_ensoleillement_tree_view">
+            <field name="name">product.ensoleillementt.tree</field>
+            <field name="model">product.ensoleillement</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Ensoleillement">
+                    <field name="name"/>
+                    <field name="note"/>
+                    <field name="coef"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="configuration_product_ensoleillement_action" model="ir.actions.act_window">
+            <field name="name">Ensoleillement</field>
+            <field name="res_model">product.ensoleillement</field>
+            <field name="view_mode">tree</field>
+
+        </record>
+        <menuitem name="Type Ensoleillement" id="menu_product_ensoleillement"
+                  parent="crm_operation.menu_configuration_article"
+                  groups="sales_team.group_sale_manager" sequence="33"
+                  action="configuration_product_ensoleillement_action"/>
+
+        <!--        product.vis-->
+        <record model="ir.ui.view" id="product_vis_tree_view">
+            <field name="name">product.vis.tree</field>
+            <field name="model">product.vis</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Vis-à-vis">
+                    <field name="name"/>
+                    <field name="note"/>
+                    <field name="coef"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="configuration_product_vis_action" model="ir.actions.act_window">
+            <field name="name">Vis-à-vis</field>
+            <field name="res_model">product.vis</field>
+            <field name="view_mode">tree</field>
+
+        </record>
+        <menuitem name="Type Vis-à-vis" id="menu_product_vis"
+                  parent="crm_operation.menu_configuration_article"
+                  groups="sales_team.group_sale_manager" sequence="33"
+                  action="configuration_product_vis_action"/>
+        <!--        product.superficie.type-->
+        <record model="ir.ui.view" id="product_superficie_type_tree_view">
+            <field name="name">product.superficie.type.tree</field>
+            <field name="model">product.superficie.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Superficie">
+                    <field name="name"/>
+                    <field name="note"/>
+                    <field name="coef"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="configuration_product_superficie_type_action" model="ir.actions.act_window">
+            <field name="name">Superficie</field>
+            <field name="res_model">product.superficie.type</field>
+            <field name="view_mode">tree</field>
+
+        </record>
+        <menuitem name="Type Superficie" id="menu_product_Superficie"
+                  parent="crm_operation.menu_configuration_article"
+                  groups="sales_team.group_sale_manager" sequence="34"
+                  action="configuration_product_superficie_type_action"/>
+
+        <!--        product.agencement.type-->
+        <record model="ir.ui.view" id="product_agencement_type_tree_view">
+            <field name="name">product.agencement.type.tree</field>
+            <field name="model">product.agencement.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Agencement">
+                    <field name="name"/>
+                    <field name="note"/>
+                    <field name="coef"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="configuration_product_agencement_type_action" model="ir.actions.act_window">
+            <field name="name">Agencement</field>
+            <field name="res_model">product.agencement.type</field>
+            <field name="view_mode">tree</field>
+
+        </record>
+        <menuitem name="Type Agencement" id="menu_product_agencement"
+                  parent="crm_operation.menu_configuration_article"
+                  groups="sales_team.group_sale_manager" sequence="34"
+                  action="configuration_product_agencement_type_action"/>
+
+        <!--        product.etage.type-->
+        <record model="ir.ui.view" id="product_etage_type_tree_view">
+            <field name="name">product.etage.type.tree</field>
+            <field name="model">product.etage.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Etage">
+                    <field name="name"/>
+                    <field name="note"/>
+                    <field name="coef"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="configuration_product_etage_type_action" model="ir.actions.act_window">
+            <field name="name">Etage</field>
+            <field name="res_model">product.etage.type</field>
+            <field name="view_mode">tree</field>
+
+        </record>
+        <menuitem name="Type Etage" id="menu_product_etage"
+                  parent="crm_operation.menu_configuration_article"
+                  groups="sales_team.group_sale_manager" sequence="35"
+                  action="configuration_product_etage_type_action"/>
+
+        <!--        product.positionnement-->
+        <record model="ir.ui.view" id="product_positionnement_tree_view">
+            <field name="name">product.positionnement.tree</field>
+            <field name="model">product.positionnement</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Positionnement">
+                    <field name="ensoleillement_id" options='{"no_create": True, "no_open": True}'/>
+                    <field name="vis_id" options='{"no_create": True, "no_open": True}'/>
+                    <field name="name"/>
+                    <field name="note"/>
+                    <field name="coef"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="configuration_product_positionnement_action" model="ir.actions.act_window">
+            <field name="name">Positionnement</field>
+            <field name="res_model">product.positionnement</field>
+            <field name="view_mode">tree</field>
+
+        </record>
+        <menuitem name="Type Positionnement" id="menu_product_positionnement"
+                  parent="crm_operation.menu_configuration_article"
+                  groups="sales_team.group_sale_manager" sequence="36"
+                  action="configuration_product_positionnement_action"/>
+
+        <!--        product.difficulte.type-->
+        <record model="ir.ui.view" id="product_type_difficulte_tree_view">
+            <field name="name">product.difficulte.type.tree</field>
+            <field name="model">product.difficulte.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Type de difficulté">
+                    <field name="name"/>
+                    <field name="min"/>
+                    <field name="max"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="configuration_product_type_difficulte_action" model="ir.actions.act_window">
+            <field name="name">Difficulté</field>
+            <field name="res_model">product.difficulte.type</field>
+            <field name="view_mode">tree</field>
+
+        </record>
+        <menuitem name="Type Difficulte" id="menu_product_difficulte"
+                  parent="crm_operation.menu_configuration_article"
+                  groups="sales_team.group_sale_manager" sequence="36"
+                  action="configuration_product_type_difficulte_action"/>
+
+
+        <!--        sale.order.simulation-->
+        <record model="ir.ui.view" id="sale_order_simulation_tree_view">
+            <field name="name">sale.order.simulation.tree</field>
+            <field name="model">sale.order.simulation</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Simulation">
+                    <field name="name"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="configuration_sale_order_simulation_action" model="ir.actions.act_window">
+            <field name="name">Simulation</field>
+            <field name="res_model">sale.order.simulation</field>
+            <field name="view_mode">tree</field>
+
+        </record>
+        <menuitem name="Type Simulation" id="menu_sale_order_simulation"
+                  parent="crm_operation.menu_configuration_operation"
+                  groups="sales_team.group_sale_manager" sequence="36"
+                  action="configuration_sale_order_simulation_action"/>
+
+    </data>
+</openerp>

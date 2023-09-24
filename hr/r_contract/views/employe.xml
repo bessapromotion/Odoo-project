@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- interface employé -->
+    <record id="view_hr_employe_kanban_first_contract" model="ir.ui.view">
+        <field name="name">hr.employee.first.contract.kanban.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='job_title']" position="after">
+
+                    <span class="o_kanban_record_subtitle">
+                        <field name="first_contract_date"/>
+                        <field name="active" invisible="1"/>
+                        <field name="last_contract_date" attrs="{'invisible': [('active', '=', True)]}"/>
+                    </span>
+                </xpath>
+            </data>
+        </field>
+    </record>
+    <!-- interface employé tree-->
+    <record id="view_hr_employe_contract_dl_tree" model="ir.ui.view">
+        <field name="name">hr.employee.contract.dl.tree.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='job_id']" position="after">
+<!--                    <field name="first_contract_date" optional="show"/>-->
+                    <field name="last_contract_date" optional="show"/>
+                    <field name="contract_state" optional="show"/>
+                    <field name="contract_trial_start" optional="show"/>
+                    <field name="contract_trial_end" optional="show"/>
+                    <field name="contract_trial_state" optional="show"
+                           string="Etat de la période d'essai"
+                           decoration-success="contract_trial_state == 'open'"
+                           decoration-info="contract_trial_state == 'renewed'"
+                           decoration-danger="contract_trial_state == 'expired'"
+                           decoration-muted="contract_trial_state == 'done'"
+                           widget="badge"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+    <record id="view_hr_employe_contract_dl_form_date" model="ir.ui.view">
+        <field name="name">hr.employee.contract.dl.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//notebook/page[@name='hr_settings']/group[1]/group[1]/field[@name='user_id']"
+                       position="before">
+                    <field name="contract_state" attrs="{'invisible':[('contract_state', '=', False)]}"/>
+                    <field name="contract_trial_start" attrs="{'invisible':[('contract_trial_start', '=', False)]}"/>
+                    <field name="contract_trial_end" attrs="{'invisible':[('contract_trial_end', '=', False)]}"/>
+<!--                    <field name="contract_trial_state" attrs="{'invisible':[('contract_trial_state', '=', False)]}"-->
+                    <!--                           string="Etat de la période d'essai"-->
+                    <!--                           decoration-success="contract_trial_state == 'open'"-->
+                    <!--                           decoration-info="contract_trial_state == 'renewed'"-->
+                    <!--                           decoration-danger="contract_trial_state == 'expired'"-->
+                    <!--                           decoration-muted="contract_trial_state == 'done'"-->
+                    <!--                           widget="badge"/>-->
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

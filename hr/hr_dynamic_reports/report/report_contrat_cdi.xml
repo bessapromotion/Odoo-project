@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<template id="report_contrat_cdi">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="r_contract.custom_contract">
+                <style>
+                    * {	font-family:Arial;}
+
+                    .report-title { font-size: 2rem; text-align: center; padding: 0 25%; }
+
+                    .contract-article             { margin-bottom:20px; page-break-inside: avoid; }
+                    .contract-article_title       { text-transform: uppercase; }
+                    .contract-article_content > p { margin-bottom: 0; }
+
+                    .signature-block { page-break-inside: avoid; text-align: center; margin-top: 100px; }
+                </style>
+
+                <div class="page">
+                    <h1 class="report-title">CONTRAT DE TRAVAIL À DURÉE INDÉTERMINÉE</h1>
+                    <br/>
+                    <br/>
+                    <div>Ce contrat de travail a été conclu conformément à la législation de travail en vigueur entre <strong>GRINTED</strong>, représentée par Mr ............., en sa qualité de Gérant,</div>
+                    <div style="text-align: right;">d’une part, </div>
+
+                    <div>
+                        <table>
+                            <tr>
+                                <td>Et <strong t-field="o.employee_id.civilite_id"/> <strong t-field="o.employee_id.name"/></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Date de naissance : <strong t-field="o.employee_id.birthday"/></td>
+                                <td>Lieu de naissance : <strong t-field="o.employee_id.place_of_birth"/></td>
+                            </tr>
+                            <tr>
+                                <td>Adresse : <strong><span t-field="o.employee_id.adresse_simple"/>, <span t-field="o.employee_id.residence_commune"/>, <span t-field="o.employee_id.residence_wilaya_id"/></strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>En qualité de: <strong><span t-field="o.job_id"/></strong></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="text-align: right;">d’autre part</div>
+
+                    <div>Les deux parties contractantes ont convenu de ce qui suit :</div>
+                    <br/>
+
+
+                    <!-- Articles -->
+                    <t t-set="variables" t-value="o.get_variables()" />
+                    <t t-set="nb_article" t-value="1" />
+                    <t t-foreach="o.article_lines" t-as="a">
+                        <t t-if="a and a.article_id">
+                            <div class="contract-article">
+                                <strong class="contract-article_title">Article <t t-esc="nb_article" /> : <span t-field="a.name"></span>:</strong>
+                                <div class="contract-article_content"><t t-raw="a.article_id.set_values(variables)"></t></div>
+                            </div>
+                            <t t-set="nb_article" t-value="nb_article + 1" />
+                        </t>
+                    </t>
+
+                    <!-- Signature -->
+                    <div class="signature-block">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>
+                                    <span t-field="o.employee_id.name"/><br/><strong>Employé(e)</strong><br/>Lu et approuvé<br/>(Mention manuscrite)
+                                </td>
+                                <td>Monsieur ...............<br/><strong>Gérant</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+
+            </t>
+        </t>
+    </t>
+</template>
+
+</odoo>

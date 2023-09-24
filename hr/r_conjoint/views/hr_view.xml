@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- interface Employé -->
+
+        <record id="view_lun2_hr_form" model="ir.ui.view">
+            <field name="name">lun.hr2.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="hr_base.view_hr_employe_dl_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='spouse_complete_name']" position="replace"/>
+                    <xpath expr="//field[@name='spouse_birthdate']" position="replace"/>
+                    <xpath expr="//field[@name='mariage_date']" position="replace"/>
+                    <xpath expr="//field[@name='mariage_acte']" position="replace"/>
+
+
+                    <xpath expr="//page[@name='personal_information']" position="after">
+                        <page name="conjoint_enfant" string="Enfants et conjoint"
+                              attrs="{'invisible': [('marital','=', 'single')]}" groups="hr.group_hr_user">
+                            <group>
+                                <group string="Marital Status">
+                                    <field name="spouse_complete_name" string="Nom et prenom"
+                                           groups="hr.group_hr_user"/>
+                                    <field name="spouse_birthdate" string="Date de naissance"
+                                           groups="hr.group_hr_user"/>
+                                </group>
+                            </group>
+                            <group string="Conjoint">
+                                <field name="conjoint_ids" nolabel="1">
+                                    <tree editable="top">
+                                        <field name="name" required="1"/>
+                                        <field name="date_naissance"/>
+                                        <field name="presume"/>
+                                        <field name="mariage_date"/>
+                                        <field name="mariage_acte"/>
+                                        <field name="wilaya_id"/>
+                                        <field name="commune"/>
+                                        <field name="pays_id" invisible="1"/>
+                                        <field name="affililiation"/>
+                                        <field name="num_ss"/>
+                                        <field name="ayant_droit"/>
+                                        <field name="nombre_enfant"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Enfants">
+                                <field name="enfant_ids" nolabel="1">
+                                    <tree editable="top">
+                                        <field name="name"/>
+                                        <field name="genre"/>
+                                        <field name="date_naissance"/>
+                                        <field name="wilaya_id"/>
+                                        <field name="commune"/>
+                                        <field name="pays_id"/>
+                                        <field name="ayant_droit"/>
+                                        <field name="scolarise"/>
+                                        <field name="niveau_scolaire"/>
+                                        <field name="employe_id" invisible="0"/>
+                                        <field name="conjoint_id" domain="[('employe_id', '=', employe_id)]"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<template id="report_basculement">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <p class="text-right">Date : <span t-field="o.date"/></p>
+                    <h2 class="text-center" ><strong>Décision de Transfert</strong></h2>
+                    <h3 class="text-center" style="">N° <span t-field="o.name"/></h3>
+
+                    <table class="table table-condensed" style="margin-top:50px;border:1px solid black;">
+                       <tr>
+                           <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;"><strong>Réservation</strong></td>
+                           <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;"><strong>Client</strong></td>
+                           <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;"><strong>Suivi par</strong></td>
+                       </tr>
+                       <tr>
+                            <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;">
+                                Numéro : <strong><span t-esc="o.reservation_id.name"/></strong><br/>
+                                Date   : <span t-esc="o.reservation_id.date"/><br/>
+                                <span t-if="o.reservation_id.mode_achat=='1'">Mode achat : Auto</span>
+                                <span t-if="o.reservation_id.mode_achat=='2'">Mode achat : Crédit</span>
+                            </td>
+                           <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;">
+                                <strong><span t-esc="o.partner_id.name"/></strong><br/>
+                                <span t-esc="o.partner_id.phone"/><br/>
+                                <span t-esc="o.partner_id.birthday"/>
+                            </td>
+
+                           <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;">
+                               Commerical   : <strong><span t-esc="o.commercial_id.name"/></strong><br/>
+                               Recouvrement : <strong><span t-esc="o.reservation_id.charge_recouv_id.name"/></strong>
+                           </td>
+                       </tr>
+                    </table>
+
+                    <table  class="table table-condensed"  style="margin-top:50px;border: 1px solid black;float: right;">
+                        <!--<head>-->
+                            <tr>
+                                <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;"><strong>Réservé</strong></td>
+                                <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;"><strong>Nouvelle affectation</strong></td>
+                            </tr>
+                        <!--</head>-->
+                        <tr>
+                            <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;">
+                                Bien : <strong><span t-esc="o.a_product_id.name"/></strong><br/>
+                                Projet : <span t-esc="o.a_project_id.name"/><br/><br/>
+
+                                Bloc : <span t-esc="o.a_bloc"/><br/>
+                                Etage : <span t-esc="o.a_etage.name"/><br/>
+                                Type : <span t-esc="o.a_format_id.name"/><br/>
+                                Orientation : <span t-esc="o.a_orientation"/><br/>
+                                Superficie : <span t-esc="o.a_superficie"/><br/>
+                                Prix m2 : <span t-esc="o.a_prix_m2"/> m2<br/>
+                                Montant : <span t-esc="o.a_price_2"/> DZD<br/>
+                            </td>
+                            <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;">
+                                Bien : <strong><span t-esc="o.b_product_id.name"/></strong><br/>
+                                Projet : <span t-esc="o.b_project_id.name"/><br/><br/>
+
+                                Bloc : <span t-esc="o.b_bloc"/><br/>
+                                Etage : <span t-esc="o.b_etage.name"/><br/>
+                                Type : <span t-esc="o.b_format_id.name"/><br/>
+                                Orientation : <span t-esc="o.b_orientation"/><br/>
+                                Superficie : <span t-esc="o.b_superficie"/><br/>
+                                Prix m2 : <span t-esc="o.b_prix_m2"/> m2<br/>
+                                Montant : <span t-esc="o.b_price_2"/> DZD<br/>                            </td>
+                        </tr>
+
+                    </table>
+
+
+                    <table class="table table-condensed" style="margin-top:50px;border:1px solid;">
+                        <tr style="background-color:#000000;color:#FFFFFF;">
+                            <td class="text-center"><strong>Motif de basculement</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><span t-esc="o.motif"/></td>
+                        </tr>
+                    </table>
+
+                   <table class="table table-condensed" style="border:1px solid;position:absolute;top:850px;">
+                       <tr>
+                           <td  class="text-center"  style="width:25%;border:1px solid black;vertical-align:middle;padding-left:10px;">
+                               <strong><u>VISA RECOUVREMENT</u></strong>
+                           </td>
+
+                           <td  class="text-center" style="width:25%;border:1px solid black;vertical-align:middle;padding-left:10px;">
+                               <strong><u>VISA RECOUVREMENT</u></strong>
+
+                           </td>
+
+                           <td class="text-center" style="width:25%;border:1px solid black;vertical-align:middle;padding-left:10px;">
+                               <strong><u>VISA DAF</u></strong>
+                           </td>
+
+                           <td class="text-center" style="width:25%;border:1px solid black;vertical-align:middle;padding-left:10px;">
+                               <strong><u>VISA DGA</u></strong>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td  class="text-center"  style="width:25%;border:1px solid black;">
+                               <br/><br/><br/><br/><br/>
+                           </td>
+
+                           <td  class="text-center" style="width:25%;border:1px solid black;">
+
+                           </td>
+
+                           <td class="text-center" style="width:25%;border:1px solid black;">
+
+                           </td>
+
+                           <td class="text-center" style="width:25%;border:1px solid black;">
+
+                           </td>
+                       </tr>
+                   </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+</odoo>

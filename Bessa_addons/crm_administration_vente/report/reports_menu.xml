@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                string="Ordre de paiement Charge"
+                id="act_report_ordre_paiement_charge"
+                model="ordre.paiement.charge"
+                report_type="qweb-pdf"
+                name="crm_administration_vente.ordre_paiement_charge"
+                file="crm_administration_vente.ordre_paiement_charge"
+                menu="True"
+        />
+
+        <report
+                string="Reçu de Paiement Charge"
+                id="act_report_recu_paiement_charge"
+                model="account.payment"
+                report_type="qweb-pdf"
+                name="crm_administration_vente.report_recu_paiement"
+                file="crm_administration_vente.report_recu_paiement"
+                menu="True"
+        />
+        <!--        <report-->
+        <!--                string="Pv de remise des cl&#232;s Appartement"-->
+        <!--                id="act_report_pv_remise_appartement"-->
+        <!--                model="remise.cles"-->
+        <!--                report_type="qweb-pdf"-->
+        <!--                name="crm_administration_vente.report_pv_appartement"-->
+        <!--                file="crm_administration_vente.report_pv_appartement"-->
+        <!--                menu="True"-->
+        <!--        />-->
+        <!--        <report-->
+        <!--                string="Pv de remise des cl&#232;s Cellier"-->
+        <!--                id="act_report_pv_remise_cellier"-->
+        <!--                model="remise.cles"-->
+        <!--                report_type="qweb-pdf"-->
+        <!--                name="crm_administration_vente.report_pv_cellier"-->
+        <!--                file="crm_administration_vente.report_pv_cellier"-->
+        <!--                menu="True"-->
+        <!--        />-->
+
+        <!--        <report-->
+        <!--                string="Cahier des charges"-->
+        <!--                id="act_report_cahier_charge"-->
+        <!--                model="remise.cles"-->
+        <!--                report_type="qweb-pdf"-->
+        <!--                name="crm_administration_vente.report_cahier_charge"-->
+        <!--                file="crm_administration_vente.report_cahier_charge"-->
+        <!--                menu="True"-->
+        <!--        />-->
+        <report
+                string="Demande d'autorisation des travaux"
+                id="act_report_autorisation_travaux"
+                model="autorisation.travaux"
+                report_type="qweb-pdf"
+                name="crm_administration_vente.report_autorisation_travaux"
+                file="crm_administration_vente.report_autorisation_travaux"
+                menu="True"
+        />
+        <report
+                string="Autorisation des locations"
+                id="act_report_autorisation_location"
+                model="autorisation.location"
+                report_type="qweb-pdf"
+                name="crm_administration_vente.report_autorisation_location"
+                file="crm_administration_vente.report_autorisation_location"
+                menu="True"
+        />
+        <report
+                string="Autorisation des reventes"
+                id="act_report_autorisation_revente"
+                model="autorisation.revente"
+                report_type="qweb-pdf"
+                name="crm_administration_vente.report_autorisation_revente"
+                file="crm_administration_vente.report_autorisation_revente"
+                menu="True"
+        />
+    </data>
+</odoo>

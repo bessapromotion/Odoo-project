@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_fiche_signaletique">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <div style="position: absolute;top: 100px;right: 16px;font-size: 18px;">
+                            <img style="vertical-align:top; display: inline-block; border: 2px solid #000000; border-color:black;border-radius: 5px; width: 45mm; height: 55mm; margin-right:0px;"
+                                 t-att-src="'data:image/png;base64,%s' % to_text(o.image_1920)">
+                            </img>
+                        </div>
+                        <div style="text-align:center;">
+                            <h1>Fiche signalétique</h1>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div>
+                            NOM ET PRENOM :
+                            <b>
+                                <span t-field="o.name"/>
+                            </b>
+                            <br/>
+                            <br/>
+                            DATE DE NAISSANCE :
+                            <b>
+                                <span t-field="o.birthday"/>
+                            </b>
+                            <br/>
+                            <br/>
+                            LIEU DE NAISSANCE :
+                            <b>
+                                <span t-field="o.place_of_birth"/>
+                            </b>
+                            <br/>
+                            <br/>
+
+                            ADRESSE :
+                            <b>
+                                <span t-field="o.adresse_simple"/>
+                                <span t-field="o.residence_commune.name"/>
+                                <span t-field="o.residence_wilaya_id.name"/>
+                            </b>
+                            <br/>
+                            <br/>
+
+                            SITUATION FAMILIALE :
+                            <b>
+                                <span t-field="o.marital"/>
+                            </b>
+                            <hr style="border-top: 1px solid black; margin-left:0px; margin-right:0px;"/>
+                            <br/>
+                            DATE D'ENTREE :
+                            <b>
+                                <span t-field="o.contract_id.date_entree"/>
+                            </b>
+                            <br/>
+                            <br/>
+                            DATE DE SORTIE:
+                            <br/>
+                            <br/>
+                            MOTIF DE SORTIE:
+                            <br/>
+                            <br/>
+                            FONCTION :
+                            <b>
+                                <span t-field="o.contract_id.job_id"/>
+                            </b>
+                            <br/>
+                            <br/>
+                            PROJET :
+                            <b>
+                                <span t-field="o.project_id"/>
+                            </b>
+                            <br/>
+                            <br/>
+                            N° TELEPHONE: :
+                            <b>
+                                <span t-field="o.mobile_phone"/>
+                            </b>
+                            <hr style="border-top: 1px solid black; margin-left:0px; margin-right:0px;"/>
+                            <br/>
+                            CONGÉ :
+                            <table style="border: 1px solid black;width:70%;margin-top:20px;">
+                                <tr style="border: 1px solid black;text-align:center;">
+                                    <td style="border: 1px solid black;">
+                                        <b>EXERCICE</b>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <b>DROIT</b>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <b>CONGE</b>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <b>RESTE</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;height:25px;"/>
+                                    <td style="border: 1px solid black;height:25px;"/>
+                                    <td style="border: 1px solid black;height:25px;"/>
+                                    <td style="border: 1px solid black;height:25px;"/>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;height:25px;"/>
+                                    <td style="border: 1px solid black;height:25px;"/>
+                                    <td style="border: 1px solid black;height:25px;"/>
+                                    <td style="border: 1px solid black;height:25px;"/>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;height:25px;"/>
+                                    <td style="border: 1px solid black;height:25px;"/>
+                                    <td style="border: 1px solid black;height:25px;"/>
+                                    <td style="border: 1px solid black;height:25px;"/>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

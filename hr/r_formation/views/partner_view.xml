@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- interface Clients -->
+        <record id="view_partner_formation_form" model="ir.ui.view">
+            <field name="name">res.partner.formation.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//page[@name='sales_purchases']" position="after">
+                        <page string="Formation">
+                            <group>
+                                <field name="organisme_formation"/>
+                                <field name="formateur"/>
+
+                            </group>
+                            <group>
+<!--                                <label for="organisme_agree" string="Agrée par l'état"/>-->
+                                <field name="organisme_agree" string="Agrée par l'état"/>
+                            </group>
+
+
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!--        <record id="view_partner_inherit_search" model="ir.ui.view">-->
+        <!--              <field name="name">res.ppartner.expand2.filter</field>-->
+        <!--              <field name="model">res.partner</field>-->
+        <!--              <field name="inherit_id" ref="base.view_res_partner_filter"/>-->
+        <!--              <field name="arch" type="xml">-->
+        <!--                    <xpath expr="//search" position="inside">-->
+        <!--                        <field name="code_tiers" />-->
+        <!--                    </xpath>-->
+        <!--              </field>-->
+        <!--        </record>-->
+
+
+        <record id="view_partner_organisme_tree" model="ir.ui.view">
+            <field name="name">res.partner.organisme.tree</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="display_name" string="Name"/>
+                    <field name="function" invisible="1"/>
+                    <field name="phone" optional="show"/>
+                    <!--                    <field name="fax" optional="show"/>-->
+                    <field name="email" optional="show"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="city" optional="hide"/>
+                    <field name="state_id" optional="hide"/>
+                    <field name="country_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_organisme_formation_tree_view">
+            <field name="name">Organismes de formation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="base.res_partner_kanban_view"/>
+            <field name="domain">[('is_company', '=', True), ('organisme_formation', '=', True)]</field>
+            <field name="context">{'default_is_company': True,'default_organisme_formation': True}</field>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer un nouvel organisme de formation.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <record id="view_partner_formateur_tree" model="ir.ui.view">
+            <field name="name">res.partner.formateur.tree</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="display_name" string="Name"/>
+                    <field name="function" invisible="1"/>
+                    <field name="phone" optional="show"/>
+                    <field name="mobile" optional="show"/>
+                    <field name="email" optional="show"/>
+                    <field name="parent_id" optional="show"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="city" optional="hide"/>
+                    <field name="state_id" optional="hide"/>
+                    <field name="country_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_formateur_tree_view">
+            <field name="name">Formateurs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="base.res_partner_kanban_view"/>
+            <field name="domain">[('is_company', '=', False), ('formateur', '=', True)]</field>
+            <field name="context">{'default_is_company': False,'default_formateur': True}</field>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer une nouveau formateur.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

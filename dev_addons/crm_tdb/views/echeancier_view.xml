@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="crm_echeancier_filtre_current_month_search_view" model="ir.ui.view">
+            <field name="name">crm.echeancier.search.form</field>
+            <field name="model">crm.echeancier</field>
+            <field name="inherit_id" ref="crm_echeancier.view_crm_echeancier_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter name="current_month_filter" string="Mois actual"
+                            domain="[('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), ('create_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+                    <filter name="type_bien_apt" string="Appartement"
+                            domain="[('type_bien','=','Appartement')]"/>
+                    <filter name="type_bien_apt_and_current_month" string="Appartement et Mois actual"
+                            domain="[('type_bien','=','Appartement'),('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), ('create_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+
+                    <filter name="current_year_filter" string="Année actual"
+                            domain="[('create_date','&lt;',(context_today()+relativedelta(years=1)).strftime('%%Y-01-01')), ('create_date','&gt;=',time.strftime('%%Y-01-01'))]"/>
+                    <filter name="current_year_date_payment_filter" string="Année actual de paiment"
+                            domain="[('date_paiement','&lt;',(context_today()+relativedelta(years=1)).strftime('%%Y-01-01')), ('create_date','&gt;=',time.strftime('%%Y-01-01'))]"/>
+
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_tdb_prevision_graph_view">
+            <field name="name">crm.tdb.prevision.graph</field>
+            <field name="model">crm.echeancier</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+                <graph string="Echeancier">
+                    <!--                    <field name="date_prevue" domain="[('date_prevue', '&gt;', time.strftime('%%Y-%%m-%%d')), ('state', '=', 'open')]" />-->
+                    <field name="project_id"/>
+                    <!--<field name="commercial_id" />-->
+                    <field name="montant_prevu" type="measure"/>
+
+                </graph>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="crm_tdb_recouvrement1_graph_view">
+            <field name="name">crm.tdb.recouvrement1.graph</field>
+            <field name="model">crm.echeancier</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+                <graph string="Echeancier">
+                    <!--                    <field name="date_paiement" interval="quarter" domain="['&amp;', ('date_paiement', '&lt;', time.strftime('%%Y-%%m-%%d')), ('state', 'in', ('open','done',))]" />-->
+                    <field name="project_id"/>
+                    <!--<field name="commercial_id" />-->
+                    <field name="montant" type="measure"/>
+
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_tdb_recouvrement2_graph_view">
+            <field name="name">crm.tdb.recouvrement2.graph</field>
+            <field name="model">crm.echeancier</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+                <graph string="Echeancier">
+                    <!--                    <field name="date_paiement" interval="quarter" domain="['&amp;', ('date_paiement', '&lt;', time.strftime('%%Y-%%m-%%d')), ('state', 'in', ('open','done',))]" />-->
+                    <field name="charge_recouv_id"/>
+                    <field name="montant" type="measure"/>
+
+                </graph>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="crm_tdb_echeancier_pivot_view">
+            <field name="name">crm.tdb.echeancier.pivot</field>
+            <field name="model">crm.echeancier</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="Echeancier">
+                    <!--                    <field name="date_paiement" interval="quarter" domain="['&amp;', ('date_paiement', '&lt;', time.strftime('%%Y-%%m-%%d')), ('state', 'in', ('open','done',))]" />-->
+                    <field name="charge_recouv_id"/>
+                    <field name="montant" type="measure"/>
+
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_crm_tdb_echeancier_filter" model="ir.ui.view">
+            <field name="name">crm.tdb.echeancier.search.view</field>
+            <field name="model">crm.echeancier</field>
+            <field name="arch" type="xml">
+                <search string="Analyse Echeancier Search">
+                    <!-- permet une recherche "directe" -->
+                    <group col="10" colspan="4">
+                        <field name="name"/>
+                        <field name="order_id"/>
+                        <field name="partner_id"/>
+                        <field name="project_id"/>
+                        <field name="observation"/>
+                        <separator/>
+                        <filter name="draft" string="Brouillon" domain="[('state','=','draft')]"/>
+                        <filter name="unpaid" string="Impayée" domain="[('state', '=', 'open')]"/>
+                        <filter name="paid" string="Payée" domain="[('state', '=', 'done')]"/>
+                        <filter name="late" string="En retard"
+                                domain="['&amp;', ('date_prevue', '&lt;', time.strftime('%%Y-%%m-%%d')), ('state', '=', 'open')]"/>
+                        <separator/>
+
+                    </group>
+                    <!-- Permet le regroupement -->
+                    <separator/>
+                    <group expand="0" string="Grouper par">
+                        <filter string="Commercial" name="commercial_id" context="{'group_by':'commercial_id'}"/>
+                        <filter string="Projet" name="project_id" context="{'group_by':'project_id'}"/>
+                        <filter string="Date de paiement prevue" name="date_prevue"
+                                context="{'group_by':'date_prevue'}"/>
+                        <filter string="Date de paiement" name="date_paiement" context="{'group_by':'date_paiement'}"/>
+                    </group>
+                    <separator/>
+                    <!-- permet un filtrage -->
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_crm_tdb_recouvrement1">
+            <field name="name">Analyse Echeanciers par projets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.echeancier</field>
+            <field name="view_mode">graph,pivot</field>
+            <field name="view_id" ref="crm_tdb_recouvrement1_graph_view"/>
+            <field name="search_view_id" ref="view_crm_tdb_echeancier_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer une nouvelle echeance.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_crm_tdb_recouvrement2">
+            <field name="name">Analyse Paiements par chargés de recouvrement</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.echeancier</field>
+            <field name="view_mode">graph,pivot</field>
+            <field name="view_id" ref="crm_tdb_recouvrement2_graph_view"/>
+            <field name="search_view_id" ref="view_crm_tdb_echeancier_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer une nouvelle echeance.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_prevision">
+            <field name="name">Analyse Previsions de paiement</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.echeancier</field>
+            <field name="view_mode">graph,pivot</field>
+            <field name="view_id" ref="crm_tdb_prevision_graph_view"/>
+            <field name="search_view_id" ref="view_crm_tdb_echeancier_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer une nouvelle echeance.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+    </data>
+</openerp>

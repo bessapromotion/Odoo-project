@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_autorisation_revente">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+
+                        <p align="left">R&#233;f:
+                            <span t-field="o.name"/>
+                        </p>
+                        <p style="margin-top : -45px;" align="right">Alger le :
+                            <span t-field="o.date"/>
+                        </p>
+                        <br/>
+                        <br/>
+                        <h3 class="text-center" style="margin-bottom : 45px;font-size:25px">
+                            <u>
+                                <strong>
+                                    ATTESTATION
+                                </strong>
+                            </u>
+
+                        </h3>
+
+                        <br/>
+                        <br/>
+
+                        <p>
+                            <b>
+                                <span t-field="o.company_id.name"/>
+                            </b>
+                            dont le si&#233;ge se trouve &#224;
+                            <b>
+                                <span t-field="o.company_id.street"/>
+                            </b>
+                            , constitu&#233;e en vertu
+                            d&#39;un acte &#233;tabli par l&#39;&#233;tude natoriale de Ma&#238;tre
+                            <b>
+                                <span t-field="o.company_id.maitre"/>
+                            </b>
+                            sise &#224;
+                            <b>
+                                <span t-field="o.company_id.adresse_maitre"/>
+                            </b>
+                            , tenant compte du droit de pr&#233;emption
+                            d&#233;tenu par
+                            <b>
+                                <span t-field="o.company_id.name"/>
+                            </b>
+                            et transcrit sur l&#39;acte de propri&#233;t&#233; de M/Mme.
+                            <b>
+                                <span t-field="o.acquereur_id.name.name"/>
+                            </b>
+                            pour le
+                            <b>
+                                <span t-field="o.order_id.type_bien"/>
+                            </b>
+                            sise
+                            <b>
+                                <span t-esc="o.etage.name"/>
+                            </b>
+                            du bloc
+                            <b>
+                                <span t-esc="o.bloc"/>
+                            </b>
+                            , de la r&#233;sidence:
+                            <b>
+                                <span t-esc="o.project_id.name"/>
+                            </b>
+                            :
+                            <b>
+                                <span t-esc="o.project_id.street"/>
+                            </b>
+                            , conform&#233;ment &#224; l&#39;acte de propri&#233;t&#233; &#233;tabli par l&#39;&#233;tude
+                            natoriale de Ma&#238;tre:
+                            <b>
+                                <span t-field="o.maitre2"/>
+                            </b>
+                            sise &#224;
+                            <b>
+                                <span t-field="o.adresse_maitre2"/>
+                            </b>
+                            publi&#233; le :
+                            <b>
+                                <span t-field="o.date_publication" t-options='{"format": "MM/dd/yyyy"}'/>
+                            </b>
+                            sous le volume :
+                            <b>
+                                <span t-field="o.volume"/>
+                            </b>
+                            c&#233;d&#233;
+                            &#224;
+                            M/Mme.
+                            <b>
+                                <span t-esc="o.nv_reservataire"/>
+                            </b>
+                            n&#233; le
+                            <b>
+                                <span t-field="o.date_naissance" t-options='{"format": "MM/dd/yyyy"}'/>
+                            </b> &#224;
+                            <b>
+                                <span t-field="o.lieu_naissance"/>
+                            </b>
+                            .
+                        </p>
+
+                        <p align="justify">
+                            Vu la demande formul&#233;e par la propri&#233;taire cit&#233; ci-dessus, Le Promoteur Bessa
+                            Promotion, signifie
+                            son accord pour la cession du bien suscit&#233; &#224; condition que ce droit de
+                            pr&#233;emption soit reconduit dans tous les actes des nouveaux acqu&#233;reurs, et dans les
+                            mêmes conditions pr&#233;c&#233;dentes.
+                        </p>
+
+                        <div>
+
+                            <table style="width:100%;margin-top:30px;">
+                                <tr>
+                                    <td style="text-align:end;padding:5px;padding-right:10px">
+                                        <u>
+                                            <b>LA DIRECTION</b>
+                                        </u>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+
+    </template>
+
+</odoo>

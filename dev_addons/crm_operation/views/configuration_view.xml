@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+    <record model="ir.ui.view" id="product_type_tree_view">
+        <field name="name">product.type.tree</field>
+        <field name="model">product.type</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top" string="Type de Bien"  >
+               <field name="name"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="configuration_product_type_action" model="ir.actions.act_window">
+        <field name="name">Type de Bien</field>
+        <field name="res_model">product.type</field>
+        <field name="view_mode">tree</field>
+
+    </record>
+
+         <record model="ir.ui.view" id="product_format_tree_view">
+        <field name="name">product.format.tree</field>
+        <field name="model">product.format</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top" string="Type d'Appartement"  >
+               <field name="name"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="configuration_product_format_action" model="ir.actions.act_window">
+        <field name="name">Typologie d'Appartement</field>
+        <field name="res_model">product.format</field>
+        <field name="view_mode">tree</field>
+
+    </record>
+     <record model="ir.ui.view" id="product_orientation_tree_view">
+        <field name="name">product.orientation.tree</field>
+        <field name="model">product.orientation</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top" string="Orientation d'Appartement"  >
+               <field name="name"/>
+<!--               <field name="note"/>-->
+               <field name="coef"/>
+            </tree>
+        </field>
+     </record>
+     <record id="configuration_product_orientation_action" model="ir.actions.act_window">
+        <field name="name">Orientation d'Appartement</field>
+        <field name="res_model">product.orientation</field>
+        <field name="view_mode">tree</field>
+     </record>
+         <record model="ir.ui.view" id="product_etage_tree_view">
+        <field name="name">product.etage.tree</field>
+        <field name="model">product.etage</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top" string="N° Etage"  >
+               <field name="name"/>
+               <field name="note"/>
+               <field name="coef"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="configuration_product_etage_action" model="ir.actions.act_window">
+        <field name="name">N° Etage</field>
+        <field name="res_model">product.etage</field>
+        <field name="view_mode">tree</field>
+
+    </record>
+ <!--Type d'Annulation -->
+
+      <record model="ir.ui.view" id="crm_annulation_type_tree_view">
+        <field name="name">crm.annulation.type.tree</field>
+        <field name="model">crm.annulation.type</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top" string="Type d'Annulation"  >
+               <field name="name"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="configuration_annulation_type_action" model="ir.actions.act_window">
+        <field name="name">Type d'Annulation</field>
+        <field name="res_model">crm.annulation.type</field>
+        <field name="view_mode">tree</field>
+
+    </record>
+
+    </data>
+</openerp>

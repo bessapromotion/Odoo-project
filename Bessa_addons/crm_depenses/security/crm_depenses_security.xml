@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="module_category_crm_depenses" model="ir.module.category">
+        <field name="name">Journal des recettes et dépenses</field>
+        <field name="sequence">500</field>
+    </record>
+    <record id="group_crm_depenses_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="comment">Peut consulter le journal de recettes et dépenses</field>
+        <field name="category_id" ref="module_category_crm_depenses"/>
+        <!--<field name="implied_ids" eval="[(4, ref('crm_echeancier.group_caisse_user'))]"/>-->
+    </record>
+    <record id="group_crm_depenses_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="comment">Peut creer et valider les recettes et les dépenses </field>
+        <field name="implied_ids" eval="[Command.link(ref('group_crm_depenses_user'))]"/>
+        <field name="category_id" ref="module_category_crm_depenses"/>
+        <!--        <field name="implied_ids" eval="[(4, ref('crm_echeancier.group_caisse_user'))]"/>-->
+    </record>
+    <record id="group_crm_depenses" model="res.groups">
+        <field name="name">Caisse</field>
+        <field name="comment">Peut consulter et executer les opérations de caisse (recettes et dépenses)</field>
+        <field name="category_id" ref="module_category_crm_depenses"/>
+    </record>
+
+    <record id="group_operation_bancaire" model="res.groups">
+        <field name="name">Banque</field>
+        <field name="comment">Peut consulter et executer les opérations de banque (recettes et dépenses) </field>
+        <field name="category_id" ref="module_category_crm_depenses"/>
+    </record>
+<!-- access_operation_bancaire_caissier,operation.bancaire user_cloture_caisse,model_operation_bancaire, crm_depenses.group_operation_bancaire,1,1,1,0 -->
+</odoo>

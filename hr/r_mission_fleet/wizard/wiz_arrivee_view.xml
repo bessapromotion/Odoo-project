@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hr_mission_arrivee_wizard_form_view">
+            <field name="name">hr.mission.arrivee.wizard.form</field>
+            <field name="model">hr.mission.arrivee.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Marquer l'arrivée">
+                    <group>
+                        <group>
+                            <field name="mission_id" invisible="0"/>
+                            <field name="vehicule_id" invisible="1"/>
+                            <field name="date_arrivee" />
+                        </group>
+                        <group>
+                            <field name="km_arrivee_actuel" attrs="{'invisible':[('vehicule_id','=',False)]}"/>
+                            <field name="km_arrivee" attrs="{'invisible':[('vehicule_id','=',False)]}" />
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button name="action_validate" type="object" string="Appliquer" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Annuler"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

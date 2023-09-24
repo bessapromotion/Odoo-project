@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+ <!-- interface Clients -->
+		<record id="view_conge_site_tree" model="ir.ui.view">
+            <field name="name">conge.site.tree.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="hr_base.site_tree_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='name']" position="after">
+                        <field name="region_id"/>
+                    </xpath>
+                </data>
+			</field>
+        </record>
+
+		<record id="view_conge_site_form" model="ir.ui.view">
+            <field name="name">conge.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="hr_base.site_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='site']" position="after">
+                        <field name="region_id" widget="selection"/>
+                    </xpath>
+                </data>
+			</field>
+        </record>
+
+<!---->
+
+  		<record model="ir.ui.view" id="region_tree_view">
+            <field name="name">hr.conge.region.tree</field>
+            <field name="model">hr.conge.region</field>
+            <field name="arch" type="xml">
+				<tree editable="bottom">
+                	<field name="name"/>
+                	<field name="nbr_jour"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_region_tree_view">
+            <field name="name">Regions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.conge.region</field>
+			<field name="view_mode">tree</field>
+<!--            <field name="search_view_id" ref="region_filter"/>-->
+<!--            <field name="filter" eval="True"/>-->
+            <field name="view_id" ref="region_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer une nouvelle région, pour paramétrer le calcul des congés par région.
+                </p><p>
+
+                </p><p>
+
+                </p>
+            </field>
+		</record>
+
+
+	<!-- Top menu item -->
+
+        <menuitem name="Régions" id="menu_region"  parent="r_mouvement_base.menu_pointage_config" action="action_region_tree_view" sequence="50" />
+        <menuitem name="Sites" id="menu_sites"  parent="r_mouvement_base.menu_pointage_config" action="hr_base.action_site_tree_view" sequence="10" />
+
+    </data>
+</openerp>
+

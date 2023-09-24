@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+
+        <record id="view_crm_tdb_reservation_filter" model="ir.ui.view">
+            <field name="name">crm.tdb.reservation.search.view</field>
+            <field name="model">crm.reservation</field>
+            <field name="arch" type="xml">
+                <search string="reservation Search">
+             <!-- permet une recherche "directe" -->
+                     <group col="10" colspan="4">
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="commercial_id"/>
+                        <field name="project_id"/>
+                        <!--<field name="product_id"/>-->
+                        <field name="observation" />
+                    </group>
+                    <!-- Permet le regroupement -->
+                    <filter name="draft" string="Nouvelle" domain="[('state', '=', 'draft')]"/>
+                    <filter name="valid" string="Validée" domain="[('state', '=', 'valid')]"/>
+                    <filter name="cancel" string="Annulée" domain="[('state', '=', 'cancel')]"/>
+                    <filter name="late" string="En retard" domain="['&amp;', ('date_limite', '&lt;', time.strftime('%%Y-%%m-%%d')), ('state', '=', 'draft')]" />
+                    <separator/>
+                    <group expand="0" string="Grouper par" >
+                        <filter string="Commercial" name="commercial_id" context="{'group_by':'commercial_id'}" />
+                        <filter string="Projet" name="project_id" context="{'group_by':'project_id'}" />
+                    </group>
+                    <separator/>
+                     <!-- permet un filtrage -->
+                </search>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="crm_reservation_pivot_view">
+             <field name="name">crm.reservation.pivot</field>
+             <field name="model">crm.reservation</field>
+             <field name="type">pivot</field>
+             <field name="arch" type="xml">
+                 <pivot display_quantity="true" string="Réservation">
+                     <field name="name" />
+                     <field name="partner_id" />
+                     <field name="date" />
+                     <field name="date_limite" />
+                     <field name="project_id" type="col"/>
+                     <field name="opportunity_id" />
+                     <field name="order_id" />
+                     <field name="commercial_id" />
+                     <field name="state"/>
+            </pivot>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="crm_reservation_graph_view">
+                 <field name="name">crm.reservation.graph</field>
+                 <field name="model">crm.reservation</field>
+                 <field name="type">graph</field>
+                 <field name="arch" type="xml">
+                      <graph string="Réservation par Projet">
+<!--                        <field name="date" interval="quarter" domain="['&amp;', ('date', '&lt;', time.strftime('%%Y-%%m-%%d')), ('state', '=', 'open')]" />-->
+                        <field name="project_id"/>
+                        <field name="commercial_id" type="col" />
+                      </graph>
+            </field>
+    </record>
+
+        <record model="ir.ui.view" id="crm_tdb_product_graph_view">
+                 <field name="name">crm.tdb.product.graph</field>
+                 <field name="model">product.product</field>
+                 <field name="type">graph</field>
+                 <field name="arch" type="xml">
+                      <graph string="Etat des BIENS">
+                          <field name="project_id"/>
+                          <field name="etat" />
+
+                      </graph>
+            </field>
+    </record>
+
+     <record model="ir.actions.act_window" id="action_crm_tdb__reservation_graph_view">
+            <field name="name">Reservation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.reservation</field>
+            <field name="view_mode">graph,pivot</field>
+            <field name="view_id" ref="crm_reservation_graph_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer un nouvelle reservation.
+                </p><p>
+
+                </p><p>
+
+                </p>
+             </field>
+     </record>
+
+        <record model="ir.actions.act_window" id="action_crm_tdb__product_graph_view">
+            <field name="name">Etat des biens par projets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="crm_tdb_product_graph_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer un nouvelle reservation.
+                </p><p>
+
+                </p><p>
+
+                </p>
+             </field>
+     </record>
+
+
+
+
+    </data>
+</openerp>

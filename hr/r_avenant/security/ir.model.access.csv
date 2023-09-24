@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_contract_avenant_line_user,hr.contract.avenant.line user,model_hr_contract_avenant_line,hr.group_hr_user,1,1,1,1
+access_create_avenant_wizard,create.avenant.wizard user,model_create_avenant_wizard,hr.group_hr_user,1,1,1,1
+access_rnv_contract_wizard,rnv.contract.wizard user,model_rnv_contract_wizard,hr.group_hr_user,1,1,1,1
+access_create_avenant_wizard_line,create.avenant.wizard.line user,model_create_avenant_wizard_line,hr.group_hr_user,1,1,1,1
+access_create_avenant_wizard_rubrique,create.avenant.wizard.rubrique user,model_create_avenant_wizard_rubrique,hr.group_hr_user,1,1,1,1
+access_hr_avenant_article_line,hr.avenant.article.line user,model_hr_avenant_article_line,hr.group_hr_user,1,1,1,1

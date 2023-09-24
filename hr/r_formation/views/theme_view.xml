@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <!--theme.categorie-->
+    <record model="ir.ui.view" id="theme_categorie_tree_view">
+        <field name="name">formation.theme.categorie.tree</field>
+        <field name="model">formation.theme.categorie</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_theme_categorie">
+        <field name="name">Categories theme</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">formation.theme.categorie</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="theme_categorie_tree_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle catégorie.
+            </p><p>
+
+            </p><p>
+
+            </p>
+         </field>
+    </record>
+
+    <!--theme-->
+    <record model="ir.ui.view" id="formation_theme_tree_view">
+        <field name="name">formation.theme.tree</field>
+        <field name="model">formation.theme</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+                <field name="code" />
+                <field name="categorie_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_formation_theme">
+        <field name="name">Themes de formation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">formation.theme</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="formation_theme_tree_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau theme de formation.
+            </p><p>
+
+            </p><p>
+
+            </p>
+         </field>
+    </record>
+
+    <!--typologie-->
+    <record model="ir.ui.view" id="formation_typologie_tree_view">
+        <field name="name">formation.typologie.tree</field>
+        <field name="model">formation.typologie</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_formation_typologie">
+        <field name="name">Typologies de formation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">formation.typologie</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="formation_typologie_tree_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouvelle typologie de formation.
+            </p><p>
+
+            </p><p>
+
+            </p>
+         </field>
+    </record>
+
+    </data>
+</openerp>

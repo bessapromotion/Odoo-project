@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_mise_en_demeure_first_ar">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <style>
+                        .page-style{
+                        padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px; margin-top:10px;
+                        }
+                        .titre-style{
+                        text-align: center; font-size: 24px; font-style: normal; font-variant: normal;
+                        padding: 0px;font-weight: bold;
+                        }
+                        .bold-style{
+                        font-size: 22px; font-style: normal; font-variant: normal;
+                        padding: 0px;font-weight: bold;
+                        }
+
+                        div, p {
+                        font-family: Arial;font-size:20px
+                        }
+
+                        }
+                        .transp{
+                        border :none;
+                        }
+
+                    </style>
+                    <div class="page-style">
+                        <table style="padding-left: 5px;width:100%;" dir="rtl" lang="ar">
+                            <tr>
+                                <td style="text-align:right;">
+                                    <strong>رقم:</strong>
+                                    <span t-field="o.name"/>
+                                </td>
+                                <td style="text-align:left;">
+                                    <strong>الجزائر، في:</strong>
+                                    <span t-field="o.s_date" t-options='{"format": "yyy/MM/dd"}'/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div style="text-align:right;font-size:20px;" dir="rtl" lang="ar">
+                            <strong>المرسل إليه:</strong>
+                            <span t-field="o.employe_id.name_arab"/>
+                            <br/>
+                            <strong>العنـــــــــــــــــــــــــــــــوان:</strong>
+                            <span t-field="o.employe_id.address_ar"/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div style="text-align:right;font-size:20px;" dir="rtl" lang="ar">
+                            <strong>الموضوع:</strong>إعــــــــــــــــــــذار.
+                            <br/>
+                            <strong>المرجـــــــــــع:</strong>
+                            المادة 31 من النظام الداخلي.
+                        </div>
+                        <br/>
+                        <br/>
+                        <div style="text-align:right;font-size:20px;" dir="rtl" lang="ar">
+                            سيـــــــــــدي،
+                        </div>
+                        <br/>
+
+                        <div style="text-align:right;font-size:20px;" dir="rtl" lang="ar">
+                            تتأسف الشركة ذات المسؤولية المحدودة ذات الشخص الوحيد بسة للترقية العقارية، أن تعلمكم
+                            بتسجيلها لتخليكم عن منصب عملكم بها، منذ تاريخ:<span t-field="o.date_debut_abscence"
+                                                                                t-options='{"format": "yyy/MM/dd"}'/>.
+                        </div>
+                        <br/>
+                        <div style="text-align:right;font-size:20px;" dir="rtl" lang="ar">
+                            عليه يرسل إليكم هذا الإعذار للالتحاق بمنصبكم في أقرب أجل ممكن، مصحوبين بالوثائق التبريرية
+                            للغياب.
+                        </div>
+                        <br/>
+                        <div style="text-align:right;font-size:20px;" dir="rtl" lang="ar">
+                            وحتى لا تجهلوا، ودون المساس بالعقوبات المنصوص عنها في نظامها الداخلي، فإنه في حال عدم
+                            امتثالكم لهذا الإعذار في خلال 24 ساعة من استلامه، فإن الشركة تحتفظ بحقها في إنهاء علاقة
+                            العمل التي تربطها بكم دون إشعار مسبق أو تعويض.
+                        </div>
+                        <br/>
+                        <br/>
+                        <table style="width:100%;font-size:20px;" dir="rtl" lang="ar">
+                            <tr>
+
+                                <td style="text-align:left;">
+                                    المديـــــــــــــــــــــــــــــــــــــــــــــــــــــــر
+                                </td>
+                            </tr>
+
+                        </table>
+                        <br/>
+                        <div style="text-align:right" dir="rtl" lang="ar">
+                            <strong>نسخة إلى:</strong>
+                            <br/>
+                            - ملف المعني.
+                            <br/>
+                            - الأرشيف.
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+        <!--</t>-->
+    </template>
+</odoo>

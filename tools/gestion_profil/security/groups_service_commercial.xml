@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="group_category_service_commercial">
+            <field name="name">SERVICE COMMERCIAL</field>
+            <field name="sequence">40</field>
+        </record>
+
+        <record model="res.groups" id="group_receptionniste">
+            <field name="name">Receptionniste</field>
+            <field name="category_id" ref="gestion_profil.group_category_service_commercial"/>
+        </record>
+        <record model="res.groups" id="group_commercial">
+            <field name="name">Commercial</field>
+            <field name="category_id" ref="gestion_profil.group_category_service_commercial"/>
+        </record>
+        <record model="res.groups" id="group_res_commercial">
+            <field name="name">Res. Commercial</field>
+            <field name="category_id" ref="gestion_profil.group_category_service_commercial"/>
+        </record>
+
+    </data>
+</odoo>

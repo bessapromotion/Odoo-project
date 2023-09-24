@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                string="Première Mise en demeure "
+                id="act_report_mise_en_demeure_first"
+                model="hr.demeure"
+                report_type="qweb-pdf"
+                menu="False"
+                name="r_mise_en_demeure.report_mise_en_demeure_first"
+                file="r_mise_en_demeure.report_mise_en_demeure_first"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'Mise_en_demeure_1_'+ object.employe_id.name"
+        />
+
+        <report
+                string="Deuxième Mise en demeure "
+                id="act_report_mise_en_demeure_second"
+                model="hr.demeure"
+                report_type="qweb-pdf"
+                menu="False"
+                name="r_mise_en_demeure.report_mise_en_demeure_second"
+                file="r_mise_en_demeure.report_mise_en_demeure_second"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'Mise_en_demeure_2_'+ object.employe_id.name"
+        />
+
+        <report
+                string="Première Mise en demeure Arabe"
+                id="act_report_mise_en_demeure_first_ar"
+                model="hr.demeure"
+                report_type="qweb-pdf"
+                menu="False"
+                name="r_mise_en_demeure.report_mise_en_demeure_first_ar"
+                file="r_mise_en_demeure.report_mise_en_demeure_first_ar"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'Mise_en_demeure_1_arabe_'+ object.employe_id.name"
+        />
+
+
+    </data>
+</odoo>

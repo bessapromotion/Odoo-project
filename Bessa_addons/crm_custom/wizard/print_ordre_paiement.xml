@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="print_ordre_paiement_wizard_form_view2">
+            <field name="name">print.ordre.paiement.form</field>
+            <field name="model">print.ordre.paiement.wizard</field>
+            <field name="inherit_id" ref="crm_echeancier.print_ordre_paiement_wizard_form_view"/>
+            <field name="arch" type="xml">
+               <data>
+                   <xpath expr="//field[@name='cheque_num']" position="replace">
+                      <field name="cheque_num" attrs="{'invisible':[('mode_paiement_id','not in', (1,3,4))],'required':[('mode_paiement_id','=', 1)]}"/>
+                    </xpath>
+                   <xpath expr="//field[@name='cheque_ordonateur']" position="replace">
+                      <field name="cheque_ordonateur" attrs="{'invisible':[('mode_paiement_id','not in', (1,3,4))],'required':[('mode_paiement_id','=', 1)]}"/>
+                    </xpath>
+                   <xpath expr="//field[@name='cheque_domiciliation']" position="replace">
+                      <field name="cheque_domiciliation" attrs="{'invisible':[('mode_paiement_id','not in', (1,3,4))],'required':[('mode_paiement_id','=', 1)]}"/>
+                    </xpath>
+                   <xpath expr="//field[@name='cheque_date']" position="replace">
+                     <field name="cheque_date" string="Date Chèque" attrs="{'invisible':[('mode_paiement_id','not in', (1))],'required':[('mode_paiement_id','=', 1)]}"/>
+                    </xpath>
+                   <xpath expr="//field[@name='cheque_objet']" position="replace">
+                     <field name="cheque_objet" attrs="{'invisible':[('mode_paiement_id','not in', (1))],'required':[('mode_paiement_id','=', 1)]}"/>
+                    </xpath>
+                   <xpath expr="//field[@name='cheque_type']" position="replace">
+                     <field name="cheque_type" attrs="{'invisible':[('mode_paiement_id','not in', (1))],'required':[('mode_paiement_id','=', 1)]}"/>
+                    </xpath>
+                 </data>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

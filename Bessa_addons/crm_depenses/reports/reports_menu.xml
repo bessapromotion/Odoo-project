@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                string="Fiche de mouvement"
+                id="act_report_fiche_mouvement"
+                model="crm.depense"
+                report_type="qweb-pdf"
+                name="crm_depenses.fiche_mouvement"
+                file="crm_depenses.fiche_mouvement"
+                menu="False"
+        />
+        <report
+                string="Fiche de depense"
+                id="act_report_fiche_depense"
+                model="crm.depense"
+                report_type="qweb-pdf"
+                name="crm_depenses.fiche_depense"
+                file="crm_depenses.fiche_depense"
+                menu="False"
+        />
+        <report
+                string="Fiche d'operation bancaire"
+                id="act_report_fiche_operation_bancaire"
+                model="operation.bancaire"
+                report_type="qweb-pdf"
+                name="crm_depenses.fiche_operation_bancaire"
+                file="crm_depenses.fiche_operation_bancaire"
+                menu="False"
+        />
+        <report
+                string="Recu Paiement"
+                id="act_report_recu_paiement"
+                model="crm.depense"
+                report_type="qweb-pdf"
+                name="crm_depenses.report_recu_paiement_depense"
+                file="crm_depenses.recu_paiement_depense"
+                menu="False"
+        />
+        <report
+                string="Recu Paiement Versement Classique"
+                id="act_report_recu_paiement_classique"
+                model="crm.depense"
+                report_type="qweb-pdf"
+                name="crm_depenses.report_recu_paiement_classique"
+                file="crm_depenses.recu_paiement_classique"
+                menu="False"
+        />
+
+
+
+    </data>
+</odoo>

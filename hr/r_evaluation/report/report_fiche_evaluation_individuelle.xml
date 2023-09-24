@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_fiche_evaluation_individuelle">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+
+                    <div class="page-style">
+                        <b>Nom et prénom de l’employé(e) :
+                            <span t-field="o.employe_id"/>
+                            <br/>
+                            Poste de travail :
+                            <span t-field="o.job_id"/>
+                            <br/>
+                            Affectation :
+                            <br/>
+                            Date de prise de service :
+                            <span t-field="o.date_start"/>
+                            <br/>
+                            Date fin de contrat :
+                            <span t-field="o.date_end"/>
+                            <br/>
+                        </b>
+                        <div style="margin-top:200px;">
+                            <u>
+                                <b>Notice</b>
+                            </u>
+                            <br/>
+                            <br/>
+                            <b>Pour l’évaluation initiale,</b>
+                            cochez la case correspondant à l’évaluation pour chacun des
+                            critères présentés ci-dessous.
+                            L’échelle des critères est la suivante :
+                            <br/>
+                            1. Insuffisant
+                            <br/>
+                            2. Suffisant
+                            <br/>
+                            3. Plus que Suffisant
+                            <br/>
+                            <br/>
+
+                            <b>Pour l’évaluation finale,</b>
+                            il y a lieu de se référer à l’évaluation initiale et inscrire en
+                            face du critère correspondant le signe :
+                            <br/>
+                            + : en cas d’amélioration depuis l’évaluation initiale
+                            <br/>
+                            - : en cas de régression depuis l’évaluation initiale
+                            <br/>
+                            = : en cas de constance depuis l’évaluation initiale
+                            <br/>
+                        </div>
+                        <div style="page-break-before: always;">
+                            <table style="border: 1px solid black;width:100%;">
+                                <tr style="border: 1px solid black;text-align:center;">
+                                    <td style="border: 1px solid black;" rowspan="2">
+                                        <b>CRITERES</b>
+                                    </td>
+                                    <td style="border: 1px solid black;width:20%;" colspan="3">
+                                        <b>Initial</b>
+                                    </td>
+                                    <td style="border: 1px solid black;width:20%;" colspan="3">
+                                        <b>Final</b>
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td style="border: 1px solid black;text-align:center;">
+                                        <b>1</b>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align:center;">
+                                        <b>2</b>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align:center;">
+                                        <b>3</b>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align:center;">
+                                        <b>+</b>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align:center;">
+                                        <b>=</b>
+                                    </td>
+                                    <td style="border: 1px solid black;text-align:center;">
+                                        <b>-</b>
+                                    </td>
+                                </tr>
+                                <t t-foreach="o.evaluation_line_ids" t-as="line">
+                                    <tr style="border: 1px solid black;">
+                                        <td style="border: 1px solid black;margin-left:10px;">
+                                            <b>
+                                                <p style="margin-left: 30px;">
+                                                    <strong>
+                                                        <span t-field="line.criter_id"/>
+                                                    </strong>
+                                                </p>
+                                            </b>
+                                            <p style="margin-left: 40px;">
+                                                <span t-field="line.description"/>
+                                            </p>
+                                        </td>
+                                        <t t-if="line.evaluation_initial == '1'">
+                                            <td style="border: 1px solid black;text-align:center;">x</td>
+                                            <td style="border: 1px solid black;"/>
+                                            <td style="border: 1px solid black;"/>
+                                        </t>
+                                        <t t-if="line.evaluation_initial == '2'">
+                                            <td style="border: 1px solid black;"/>
+                                            <td style="border: 1px solid black;text-align:center;">x</td>
+                                            <td style="border: 1px solid black;"/>
+                                        </t>
+                                        <t t-if="line.evaluation_initial == '3'">
+                                            <td style="border: 1px solid black;"/>
+                                            <td style="border: 1px solid black;"/>
+                                            <td style="border: 1px solid black;text-align:center;">x</td>
+                                        </t>
+
+                                        <t t-if="line.evaluation_final == '+'">
+                                            <td style="border: 1px solid black;text-align:center;">x</td>
+                                            <td style="border: 1px solid black;"/>
+                                            <td style="border: 1px solid black;"/>
+                                        </t>
+                                        <t t-if="line.evaluation_final == '='">
+                                            <td style="border: 1px solid black;"/>
+                                            <td style="border: 1px solid black;text-align:center;">x</td>
+                                            <td style="border: 1px solid black;"/>
+                                        </t>
+                                        <t t-if="line.evaluation_final == '-'">
+                                            <td style="border: 1px solid black;"/>
+                                            <td style="border: 1px solid black;"/>
+                                            <td style="border: 1px solid black;text-align:center;">x</td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                        <div style="page-break-before: always;">
+                            <p>
+                                <b>
+                                    <u>Propositions Du Responsable Direct
+                                    </u>
+                                </b>
+                            </p>
+                            <p>
+                                1. Commentaires du supérieur immédiat
+                                <br/>
+                                Faits ou réalisations significatifs.
+                                <br/>
+                                <span t-field="o.commentaire_sup"/>
+                            </p>
+                            <br/>
+                            <p>NB : Ces commentaires doivent, obligatoirement, être renseignés</p>
+                        </div>
+                        <div style="border: 1px solid black;width:100%;">
+                            <br/>
+                            <table style="width:100%;">
+                                <tr>
+                                    <t t-if="o.period_ess_juge == 'concluante'">
+                                        <td style="width:20%;text-align:center;">X</td>
+                                    </t>
+                                    <t t-else="">
+                                        <td style="width:20%;text-align:center;"/>
+                                    </t>
+
+                                    <td style="width:80%;">Concluante</td>
+                                </tr>
+                                <tr>
+                                    <t t-if="o.period_ess_juge == 'non_concluante'">
+                                        <td style="width:20%;text-align:center;">X</td>
+                                    </t>
+                                    <t t-else="">
+                                        <td style="width:20%;text-align:center;"/>
+                                    </t>
+                                    <td>Non concluante</td>
+                                </tr>
+                                <tr>
+                                    <t t-if="o.period_ess_juge == 'insuffisante'">
+                                        <td style="width:20%;text-align:center;">X</td>
+                                    </t>
+                                    <t t-else="">
+                                        <td style="width:20%;text-align:center;"/>
+                                    </t>
+                                    <td>Insuffisante et nécessitant une prorogation pour se prononcer</td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="text-align:left;">
+                                        <p style="margin-left:20px;">Visa du supérieur immédiat</p>
+                                    </td>
+                                    <td style="text-align:right;">
+                                        <p style="margin-right:20px;">Date
+                                            <span t-field="o.s_date"/>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <br/>
+                        </div>
+                        <br/>
+                        <p>2. Avis et visa du Responsable de structure de l’employé(e)</p>
+                        <div style="border: 1px solid black;width:100%;">
+                            <br/>
+                            <table style="width:100%;">
+                                <tr>
+                                    <t t-if="o.decision == 'confirmer'">
+                                        <td style="text-align:center;">X A CONFIRMER</td>
+                                        <td style="text-align:center;">A NE PAS CONFIRMER</td>
+                                        <td style="text-align:center;">ESSAI A PROLNOGER</td>
+                                    </t>
+                                    <t t-if="o.decision == 'non_confirmer'">
+                                        <td style="text-align:center;">A CONFIRMER</td>
+                                        <td style="text-align:center;">X A NE PAS CONFIRMER</td>
+                                        <td style="text-align:center;">ESSAI A PROLNOGER</td>
+                                    </t>
+                                    <t t-if="o.decision == 'prolonger'">
+                                        <td style="text-align:center;">A CONFIRMER</td>
+                                        <td style="text-align:center;">A NE PAS CONFIRMER</td>
+                                        <td style="text-align:center;">X ESSAI A PROLNOGER</td>
+                                    </t>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="text-align:left;">
+                                        <p style="margin-left:20px;">Qualité et visa</p>
+                                    </td>
+                                    <td style="text-align:right;">
+                                        <p style="margin-right:20px;">Date
+                                            <span t-field="o.s_date"/>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <br/>
+                        </div>
+
+                    </div>
+
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
+
+

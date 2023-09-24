@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+        <data>
+            <template id="custom_contract">
+                <!-- HEADER -->
+<!--                <div class="header">-->
+<!--                    <style>-->
+<!--                        .report-header-table { font-size: 14px; }-->
+<!--                        .report-header-table tr,-->
+<!--                        .report-header-table td { border: 1px solid #999999; }-->
+<!--                        .report-header-table td { width: 50%; text-align: center; }-->
+<!--                    </style>-->
+<!--                    <br/>-->
+<!--                    <table class="table report-header-table">-->
+<!--                        <tbody>-->
+<!--                            <tr>-->
+<!--                                <td>Date : <span t-field="o.date_etablissement" /></td>-->
+<!--                                <td>Réf : <span t-field="o.name" /></td>-->
+<!--                            </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+
+                <!-- BODY -->
+                <div t-attf-class="article o_report_layout_standard "  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                    <div class="pt-5"></div>
+                    <t t-raw="0"/>
+                </div>
+
+
+                <!-- FOOTER -->
+<!--                <div class="footer o_standard_footer">-->
+<!--                    <div t-if="report_type == 'pdf'" class="text-muted" style="text-align:right;">Page: <span class="page"/>/<span class="topage" style=" font-weight:12px;"/></div>-->
+<!--                </div>-->
+            </template>
+
+
+
+
+
+<!--            <template id="external_layout_footer_inherit" inherit_id="web.external_layout_standard">-->
+<!--                <xpath expr="//div[@class='footer o_standard_footer']" position="replace">-->
+<!--                    <div class="footer o_standard_footer">-->
+<!--                        <div t-if="report_type == 'pdf'" class="text-muted" style="text-align:right;">Page: <span class="page"/>/<span class="topage" style=" font-weight:12px;"/></div>-->
+<!--                    </div>-->
+<!--                </xpath>-->
+<!--            </template>-->
+
+            <!--
+            <template id="external_layout_header_inherit" inherit_id="web.external_layout_standard">
+                <xpath expr="//div[@class='header']" position="replace">
+                    <div class="header">
+                        <t t-if="o and o._name == 'hr.contract'">
+                            Contract header
+                        </t>
+                        <t t-else="">
+                            Not Contract
+                        </t>
+                    </div>
+                </xpath>
+            </template>
+            -->
+
+        </data>
+    </odoo>

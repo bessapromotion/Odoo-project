@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="view_concretisation_report_form" model="ir.ui.view">
+            <field name="name">concretisation.report.wizard.form</field>
+            <field name="model">concretisation.report.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Rapport de concretisation">
+                    <group >
+                        <group>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="date_start" />
+                            <field name="date_end"  attrs="{'invisible':[('type','=', 'day')]}"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                         <button class="oe_highlight" string="Imprimer" name="action_print_pdf_report" type="object"/>
+
+                         <button class="oe_link" string="Annuler" special="cancel"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="concretisation_report_action" model="ir.actions.act_window">
+            <field name="name">Rapport de concretisation</field>
+            <field name="res_model">concretisation.report.wizard</field>
+            <field name="view_id" ref="view_concretisation_report_form"/>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+    </data>
+
+
+</odoo>

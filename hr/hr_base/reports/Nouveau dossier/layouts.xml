@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+        <data>
+
+            <template id="external_layout_footer_inherit" inherit_id="web.external_layout_standard">
+                <xpath expr="//div[@class='footer o_standard_footer']" position="replace">
+                    <div class="footer o_standard_footer">
+                        <div t-if="report_type == 'pdf'" class="text-muted" style="text-align:right;">Page: <span class="page"/>/<span class="topage" style=" font-weight:12px;"/></div>
+                    </div>
+                </xpath>
+            </template>
+        </data>
+    </odoo>

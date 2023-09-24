@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="hr_demission_view_form_frt_inherit">
+        <field name="name">hr.demission.frt.form.inherit</field>
+        <field name="model">hr.demission</field>
+        <field name="inherit_id" ref="r_demission.demission_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='date_depart']" position="after">
+                <field name="frt_id" readonly="True"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

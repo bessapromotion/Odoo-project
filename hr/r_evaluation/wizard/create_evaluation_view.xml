@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="creer_evaluation_wizard_form_view">
+            <field name="name">create.evaluation.wizard.form</field>
+            <field name="model">create.evaluation.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Créer les evaluations du mois">
+                    <group>
+                        <group>
+                            <field name="annee" />
+                            <field name="mois" />
+                            <field name="state" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="s_date" />
+                            <field name="user_id" />
+                        </group>
+                        <group states="step2">
+                            <field name="nbr_ctr"/>
+                            <field name="nbr_ess"/>
+                        </group>
+                    </group>
+                    <notebook states="step2">
+                        <page string="Evaluations">
+                            <field name="line_ids" readonly="1">
+                                <tree>
+                                    <field name="employe_id"/>
+                                    <field name="job_id"/>
+<!--                                    <field name="site_id"/>-->
+                                    <field name="contract_id"/>
+                                    <field name="regime"/>
+                                    <field name="type_evaluation"/>
+                                    <field name="date_start_pe"/>
+                                    <field name="date_end_pe"/>
+<!--                                    <field name="reste"/>-->
+                                    <field name="exist"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="action_recherche" states="step1" type="object" string="Recherche" class="oe_highlight"/>
+                        <button name="action_create" states="step2" type="object" string="Créer" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Annuler"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        		<record id="launch_create_evaluation_wizard" model="ir.actions.act_window">
+					<field name="name">Création des évaluations du mois</field>
+					<field name="res_model">create.evaluation.wizard</field>
+					<field name="view_mode">form</field>
+					<field name="target">new</field>
+				</record>
+
+				<menuitem name="Création des évaluations du mois" parent="menu_evaluation_root" id="cerate_eval_wiz"
+                    action="launch_create_evaluation_wizard" sequence="90"/>
+
+
+    </data>
+</odoo>

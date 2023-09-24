@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- questionnaire -->
+        <record model="ir.ui.view" id="questionnaire_tree_view">
+            <field name="name">questionnaire.tree</field>
+            <field name="model">hr.questionnaire</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                    <field name="name"/>
+                    <field name="employe_id"/>
+                    <field name="s_date"/>
+                    <field name="user_id"/>
+                    <field name="state" decoration-success="state == 'done'"
+                           decoration-muted="state == 'cancel'"
+                           decoration-warning="state == 'progress'"
+                           decoration-info="state == 'draft'" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="questionnaire_filter" model="ir.ui.view">
+            <field name="name">hr.questionnaire.filter</field>
+            <field name="model">hr.questionnaire</field>
+            <field name="arch" type="xml">
+                <search string="questionnaire">
+                    <field name="employe_id"/>
+                    <field name="name"/>
+
+                    <filter name="draft" string="Nouveaux" domain="[('state','=','draft')]"/>
+                    <filter name="progress" string="En cours" domain="[('state', '=', 'progress')]"/>
+                    <filter name="done" string="Terminés" domain="[('state', '=', 'done')]"/>
+                    <filter name="cancel" string="Annulés" domain="[('state', '=', 'cancel')]"/>
+
+                    <group expand="0" string="Grouper par...">
+                        <filter name="employee" string="Employé" domain="[]" context="{'group_by':'employe_id'}"
+                                help="Employé"/>
+                        <filter string="resp_hierarchique_id" name="Responsable" domain="[]"
+                                context="{'group_by':'resp_hierarchique_id'}" help="Responsable hierarchique"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="questionnaire_form_view">
+            <field name="name">hr.questionnaire.form</field>
+            <field name="model">hr.questionnaire</field>
+            <field name="arch" type="xml">
+                <form string="Questionnnaire disciplinaire">
+                    <header>
+                        <field name="company_id" invisible="1"/>
+                        <button name="action_validate" string="Lancer" states="draft" class="oe_highlight"
+                                type="object"/>
+                        <button name="action_done" string="Valider" states="progress" class="oe_highlight" type="object"
+                                confirm="Voulez-vous valider ce questionnaire ?"/>
+                        <!--                        <button name="action_print" states="progress,done" string="Imprimer Questionnaire"-->
+                        <!--                                class="oe_highlight" type="object"/>-->
+                        <button name="action_print_vide" states="progress,done" string="Imprimer Questionnaire"
+                                type="object"/>
+
+                        <button name="action_cancel" string="Annuler" states="draft,progress" type="object"
+                                confirm="Voulez-vous annuler ce questionnaire ?"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,done"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label for="name" string="Questionnaire # "/>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                        <field name="image" widget='image' class="oe_avatar"/>
+                        <div class="oe_title">
+                            <label for="employe_id" class="oe_edit_only"/>
+                            <h1>
+                                <field name="employe_id" placeholder="Employé  "
+                                       options='{"no_open": True, "no_create": True}'/>
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="user_id" options='{"no_open": True, "no_create": True}'/>
+                                <field name="s_date"/>
+                                <field name="resp_commission_id" options='{"no_open": True, "no_create": True}'/>
+                                <field name="resp_hierarchique_id" options='{"no_open": True, "no_create": True}'/>
+                            </group>
+                            <group>
+                                <field name="contract_id"
+                                       domain="[('employee_id','=', employe_id), ('state','not in', ('draft','cancel'))]"
+                                       options='{"no_open": True, "no_create": True}'/>
+                                <field name="matricule"/>
+                                <field name="job_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Fautes">
+                                <field name="faute_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="degre"/>
+                                        <field name="description"/>
+                                        <field name="date_faute" string="Date"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Question">
+                                <field name="question" placeholder="Saisir la question ici ..."/>
+                            </page>
+                            <page string="Réponse">
+                                <group>
+                                    <group>
+                                        <field name="reponse_date"/>
+                                    </group>
+                                </group>
+                                <field name="reponse" placeholder="Saisir la réponse ici ..."/>
+                            </page>
+                            <page string="Décision">
+                                <!-- <separator string="Observation responsable hierarchique"/>
+                                <separator/>
+                                <field name="observation_resp" placeholder="Observations ..."/> -->
+                                <separator string="Décision RH"/>
+                                <separator/>
+                                <group>
+                                    <field name="decision_drh"/>
+                                </group>
+                                <field name="faute_degree" invisible="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_questionnaire_tree_view">
+            <field name="name">Questionnaire</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.questionnaire</field>
+            <field name="search_view_id" ref="questionnaire_filter"/>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="questionnaire_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer un nouveau questionnaire
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="Questionnaires" action="action_questionnaire_tree_view" id="menu_questionnaire"
+                  parent="hr_base.menu_carriere" sequence="20"/>
+
+    </data>
+</openerp>

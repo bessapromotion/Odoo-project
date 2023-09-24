@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <!-- visite -->
+    <record model="ir.ui.view" id="crm_basculement_tree_view">
+        <field name="name">crm.basculement.tree</field>
+        <field name="model">crm.basculement</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Basculement" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" >
+                <field name="name"/>
+                <field name="reservation_id"/>
+                <field name="partner_id"/>
+                <field name="date"/>
+                <field name="commercial_id"/>
+                <field name="charge_recouv_id"/>
+                <field name="a_product_id"/>
+<!--                <field name="b_project_id"/>-->
+<!--                <field name="b_product_id"/>-->
+                <field name="state"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="crm_basculement_form_view">
+        <field name="name">Basculement</field>
+        <field name="model">crm.basculement</field>
+        <field name="arch" type="xml">
+            <form string="Basculement">
+                <header>
+                    <button name="action_validate" string="Valider le basculement" class="oe_highlight" states="draft" type="object"
+                    confirm="Voulez-vous valider cette opération de basculement ?"/>
+                    <button name="action_print" string="Imprimer" type="object" states="done" class="oe_highlight"/>
+
+                    <button name="action_cancel" string="Annuler le basculement" states="draft" type="object" confirm="Voulez-vous annuler l'opération de basculement?"/>
+                    <field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_open_new_reservation"
+                                icon="fa-star" attrs="{'invisible':[ ('state','!=', 'done')]}">
+                            <span>La nouvelle<br/>réservation</span>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="action_open_new_order"
+                                icon="fa-file-o" attrs="{'invisible':[ ('state','!=', 'done')]}">
+                            <span>La nouvelle<br/>commande</span>
+                        </button>
+                    </div>
+                    <field name="photo" widget='image' class="oe_avatar" />
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <group>
+                            <field name="reservation_id" domain="[('state', '=', 'valid')]"  options='{"no_create": True}'/>
+                            <field name="partner_id" />
+                            <field name="date_reservation" />
+                            <field name="order_id"/>
+                            <field name="currency_id" invisible="1"/>
+<!--                            utilisés pour filtrer dans la nouvelle affectation-->
+                            <field name="product_ids" string='Bien affecté' invisible="1" domain="[('reservation_id', '=', reservation_id)]" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="a_product_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="date" />
+                            <field name="commercial_id"  options='{"no_create": True}'/>
+                            <field name="charge_recouv_id" options='{"no_create": True}' />
+                           <field name="company_id"/>
+                        </group>
+<!--                        <group string="Réservé">-->
+<!--                            <field name="a_project_id"/>-->
+<!--                            <field name="product_ids" string='Bien affecté' domain="[('reservation_id', '=', reservation_id)]" options="{'no_create': True, 'no_open': True}"/>-->
+<!--                            <field name="a_product_id" invisible="1"/>-->
+<!--                            <field name="a_bloc"/>-->
+<!--                            <field name="a_etage"/>-->
+<!--                            <field name="a_format_id"/>-->
+<!--                            <field name="a_orientation"/>-->
+<!--                            <field name="a_superficie"/>-->
+<!--                            <field name="a_prix_m2"/>-->
+<!--                        </group>-->
+<!--                        <group string="Nouvelle affectation">-->
+<!--                            <field name="b_project_id"  options='{"no_create": True}'/>-->
+<!--                            <field name="b_product_id" domain="[('project_id', '=', b_project_id), ('id', '!=', a_product_id)]" options='{"no_create": True}'/>-->
+<!--                            <field name="b_bloc"/>-->
+<!--                            <field name="b_etage"/>-->
+<!--                            <field name="b_format_id"/>-->
+<!--                            <field name="b_orientation"/>-->
+<!--                            <field name="b_superficie"/>-->
+<!--                            <field name="b_prix_m2"/>-->
+<!--                            <field name="b_price_2"/>-->
+<!--                        </group>-->
+
+                    </group>
+                    <separator string="Réservé"/><separator/>
+                        <field name="bien_ids">
+                            <tree editable="bottom">
+                                <field name="project_id"/>
+                                <field name="bloc"/>
+                                <field name="type_id"/>
+                                <field name="etage"/>
+                                <field name="name"/>
+                                <field name="num_lot"/>
+                                <field name="format_id"/>
+                                <field name="orientation"/>
+                                <field name="superficie"/>
+                                <field name="prix_m2"/>
+                                <field name="price_2"/>
+                                <field name="commercial_id"/>
+                                <field name="charge_recouv_id"/>
+                            </tree>
+                        </field>
+
+                    <group>
+                        <group string="Nouvelle affectation">
+                            <field name="b_num_dossier"/>
+                        </group>
+                    </group>
+                        <field name="affectation_ids" context="{'default_a_product_id': a_product_id}">
+                            <tree editable="bottom">
+                                <field name="project_id"/>
+                                <field name="name" domain="[('etat', '=', 'Libre')]"/>
+                                <field name="bloc"/>
+                                <field name="type_id"/>
+                                <field name="etage"/>
+                                <field name="num_lot"/>
+                                <field name="format_id"/>
+                                <field name="orientation"/>
+                                <field name="superficie"/>
+                                <field name="prix_m2"/>
+                                <field name="price_2"/>
+                            </tree>
+                        </field>
+
+                    <group>
+                        <group string="Paiements">
+                            <field name="prix_vente"/>
+                            <field name="total_paiement" readonly="1"/>
+                            <field name="reste_paiement"/>
+                        </group>
+
+                        <group string="Nouveaux paiements">
+                            <field name="b_reservation_id" states="done"/>
+                            <field name="b_order_id" states="done"/>
+                            <field name="b_price_2"/>
+                            <field name="b_reste_paiement"/>
+                            <field name="b_a_rembourser"/>
+                        </group>
+
+                    </group>
+                    <notebook>
+                        <page string="Motif">
+                            <field name="motif"/>
+
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_crm_basculement_tree_view">
+        <field name="name">Basculement</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">crm.basculement</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="view_id" ref="crm_basculement_tree_view"/>
+        <field name="domain">[('company_id','=',allowed_company_ids[0])]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Cliquez ici pour créer un nouveau basculement.
+            </p><p>
+
+            </p><p>
+
+            </p>
+         </field>
+    </record>
+
+
+        <record id="view_crm_basculement_filter" model="ir.ui.view">
+            <field name="name">crm.basculement.search.view</field>
+            <field name="model">crm.basculement</field>
+            <field name="arch" type="xml">
+                <search string="Basculement Search">
+             <!-- permet une recherche "directe" -->
+                     <group col="10" colspan="4">
+                        <field name="name"/>
+                        <field name="reservation_id"/>
+                        <field name="partner_id"  filter_domain="['|', '|',  ('partner_id.name', 'ilike', self), ('partner_id.code_client', 'ilike', self), ('partner_id.num_pi', 'ilike', self)]"/>
+                        <field name="commercial_id"/>
+                        <field name="charge_recouv_id"/>
+                        <field name="a_product_id"/>
+
+                        <field name="motif" />
+                    </group>
+                    <filter name="draft" string="Nouvelle" domain="[('state', '=', 'draft')]"/>
+                    <filter name="valid" string="Validée" domain="[('state', '=', 'valid')]"/>
+                    <filter name="cancel" string="Annulée" domain="[('state', '=', 'cancel')]"/>
+                    <!-- Permet le regroupement -->
+                    <separator/>
+                    <group expand="0" string="Grouper par" >
+                        <filter string="Commercial" name="commercial_id" context="{'group_by':'commercial_id'}" />
+                        <filter string="Chargé du recouverement" name="charge_recouv_id" context="{'group_by':'charge_recouv_id'}" />
+                    </group>
+                    <separator/>
+                     <!-- permet un filtrage -->
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_basculement_pivot_view">
+            <field name="name">crm.basculement.pivot</field>
+            <field name="model">crm.basculement</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot display_quantity="true" string="Basculement">
+                    <field name="name"/>
+                    <field name="reservation_id"/>
+                    <field name="partner_id"/>
+                    <field name="date"/>
+                    <field name="commercial_id"/>
+                    <field name="charge_recouv_id"/>
+<!--                    <field name="a_project_id"/>-->
+                    <field name="a_product_id"/>
+<!--                    <field name="b_project_id"/>-->
+<!--                    <field name="b_product_id"/>-->
+                    <field name="state"/>
+                </pivot>
+            </field>
+    </record>
+
+
+<!--        nouvelle affectation-->
+    <record model="ir.ui.view" id="crm_basculement_affectation_form_view">
+        <field name="name">Nouvelle affectation form</field>
+        <field name="model">crm.basculement.affectation</field>
+        <field name="arch" type="xml">
+            <form string="Nouvelle affectation">
+                <sheet>
+
+                    <h1><field name="a_product_id"/></h1>
+                    <group>
+                        <group>
+                            <field name="project_id" options='{"no_create": True}'/>
+                            <field name="name" domain="[('project_id', '=', project_id), ('id', '!=', a_product_id), ('etat', 'in', ('Libre', ))]"
+                                   options='{"no_create": True}'/>
+                        </group>
+                        <group></group>
+                        <group>
+                            <field name="bloc"/>
+                            <field name="etage"/>
+                            <field name="format_id"/>
+                            <field name="orientation"/>
+                        </group>
+                        <group>
+                            <field name="superficie"/>
+                            <field name="prix_m2"/>
+                            <field name="price_2"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    </data>
+</openerp>

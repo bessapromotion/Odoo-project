@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="creer_paiement_charge_wizard_direct_form_view" model="ir.ui.view">
+            <field name="name">creer.paiement.charge.wizard.direct.form</field>
+            <field name="model">creer.paiement.charge.wizard.direct</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Nouveau paiement">
+                    <field name="state" invisible="1"/>
+                    <group states="1">
+                        <group>
+
+                            <field name="order_id"/>
+                            <field name="charge_id"/>
+                            <field name="partner_id"/>
+                            <field name="type_doc" readonly="1"/>
+                            <field name="amount" readonly="0"/>
+                            <!--<field name="objet" />-->
+                            <field name="communication" string="Motif de paiement"/>
+                            <field name="num_dossier" string="N° Dossier"/>
+                            <field name="product" string="Appartement"/>
+                            <field name="remise" widget="Radio"/>
+                        </group>
+                        <group>
+                            <field name="journal_id" options='{"no_open": True, "no_create": True}'/>
+                            <field name="payment_date"/>
+                            <field name="mode_paiement_id" options='{"no_open": True, "no_create": True}'/>
+                            <field name="doc_payment_id" attrs="{'invisible':[('mode_paiement_id','=', 2)]}"/>
+                            <field name="cheque_objet" attrs="{'invisible':[('mode_paiement_id','!=', 1)]}"/>
+                            <field name="cheque_type" attrs="{'invisible':[('mode_paiement_id','!=', 1)]}"/>
+                            <field name="ordonateur" attrs="{'invisible':[('mode_paiement_id','=', 2)]}"/>
+                            <field name="domiciliation" readonly="0"
+                                   attrs="{'invisible':[('mode_paiement_id','=', 2)]} "/>
+                            <field name="partner_reference" attrs="{'invisible':[('mode_paiement_id','!=', 1)]}"/>
+                            <field name="type_paiement"
+                                   attrs="{'required': [('type_doc', '=', 'charge')],'invisible': [('type_doc', '=', 'tag')]}"/>
+                            <field name="duree" options='{"type": "number", "step": 1}'
+                                   attrs="{'readonly': [('state', '=', 'valid')],'required': [('type_doc', '=', 'charge')],'invisible': [('type_doc', '=', 'tag')]}"/>
+                            <field name="year_ids" widget="many2many_tags" options="{'color_field': 'color'}"
+                                   attrs="{'readonly': [('state', '=', 'valid')],'required': [('type_doc', '=', 'charge')],'invisible': [('type_doc', '=', 'tag')]}"
+                                   invisible="context.get('charge_ok')"/>
+                            <field name="month_ids" widget="many2many_tags" options="{'color_field': 'color'}"
+                                   attrs="{'readonly': [('state', '=', 'valid')],'invisible' : [('type_doc', 'in', ('versement','transfert')),('type_paiement','!=','month')],'required': [('type_doc', '=', 'charge'),('type_paiement','=','month')]}"
+                                   invisible="context.get('charge_ok')"/>
+
+
+                        </group>
+                    </group>
+                    <group states="1">
+                        <field name="observation"/>
+                    </group>
+                    <group states="2">
+                        <div class="row">
+                            <div class="text-success col-lg-8">
+                                Opération effectuée avec succés, veuillez consulter le paiement créé dans le menu
+                                Paiements -> Paiements des charges annuels]
+                            </div>
+                        </div>
+                    </group>
+
+                    <footer states="1">
+                        <button class="oe_highlight" string="Appliquer" name="action_appliquer" type="object"
+                                groups="gestion_profil.group_caissier,base.group_system"/>
+                        or
+                        <button class="oe_link" string="Annuler" special="cancel"/>
+                    </footer>
+                    <footer states="2">
+                        <button special="cancel" string="Fermer"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

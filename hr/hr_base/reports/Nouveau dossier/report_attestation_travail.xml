@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<template id="report_attestation_travail">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+<!--            <t t-set="o"/>-->
+                <style>
+                  .page-style{
+                    padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px; height:1320px; margin-top:10px;
+                  }
+                  .titre-style{
+                    text-align: center; font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif; font-size: 36px; font-style: normal; font-variant: normal;
+                    padding: 0px;font-weight: bold;
+                  }
+                  .bold-style{
+                    font-size: 22px; font-style: normal; font-variant: normal;
+                    padding: 0px;font-weight: bold;
+                  }
+
+                  th, td {
+                    border: 1px solid black; text-align: left; padding: 10px; border-radius: 8px; height: 20px;
+                  }
+                  .transp{
+                  border :none;
+                  }
+                </style>
+
+                <div class="page-style">
+
+                     <!-- PAGE HEADER -->
+                    <div style="position:absolute; top:-15px; left:5px;">
+                            <img src='/hr_base/static/src/img/logo.png' style="height:175px; padding:0px; margin:0px;"/>
+                    </div>
+                    <div style="position:absolute; top:3px; left:612px;">
+                            <img src='/hr_base/static/src/img/iso.png' style="height:130px; padding:0px; margin:0px;"/>
+                    </div>
+
+                    <div style="position: absolute; left: 320px; top:15px; font-size:18px; font-weight: bolder; font-family: Arial;">Sarl Star of Desert</div>
+                    <div style="position: absolute; left: 180px; top:40px; font-size:14px; font-family: Arial;">Travaux de Soudure, Montage, Charpente Métallique et Formation</div>
+                    <div style="position: absolute; left: 290px; top:65px; font-size:14px; font-family: Arial;">Capital social : 40 000 000,00 DA</div>
+                    <div style="position: absolute; left: 330px; top:90px; font-size:12px; font-family: Arial;">RC : 16/00-0122506 B99</div>
+
+                    <hr style="border-top: 1px solid black; margin-left:0px; margin-right:0px; margin-top:125px;"/>
+                    <!-- -->
+
+                    <div style="margin-left:22px;">Réf, N°: <span t-field="o.num_attestation"/></div>
+
+                    <div class="titre-style" style="margin-top:30px">Attestation de Travail</div>
+
+                    <p style="font-size: 16x; font-family: Arial; padding-top: 30px; margin-left: 20px; margin-right: 20px; padding-bottom: 20px;">
+                        Nous Soussignés, Sarl <strong>Star of Desert</strong> - Sise à la Cite es PTT villa 42B Hydra Alger - représentée par son Gérant en la personne de Monsieur, <strong>DILMI Merzoug</strong>.
+                    </p>
+
+                    <div style="margin-left: 20px;">Attestons par la présente que : (<span t-field="o.civilite_id"/>) </div>
+                    <div>
+                        <table width="770" style="margin-left:20px; border-collapse: separate;  border-spacing: 15px 20px;">
+                          <tr>
+                            <th width="150">Nom et prénom : </th>
+                            <td width="620" colspan="3"><strong><span t-field="o.name"/></strong></td>
+                          </tr>
+                          <tr>
+                            <th >Né(e) le : </th>
+                            <td><span t-field="o.birthday" style="font-weight: bold;"/></td>
+                            <td class="transp" style="text-align:right;" width="40">à : </td>
+                            <td><span t-field="o.place_of_birth" style="font-weight: bold;"/></td>
+                          </tr>
+                        </table>
+
+                        <div style="margin-left: 20px;">Est actuellement <strong>employé(e)</strong> au sein de notre organisme <strong>en qualité de </strong></div>
+
+
+                        <table width="770" style="margin-left:20px; border-collapse: separate;  border-spacing: 15px 20px;">
+                          <tr style="margin-bottom:20px;">
+                            <th colspan="4"><strong><span t-field="o.job_id"/></strong></th>
+                          </tr>
+                        </table>
+
+                        <table width="770" style="margin-left:20px; border-collapse: separate;  border-spacing: 15px 20px;">
+                          <tr>
+                                <th colspan="1" width="150">Affectation : </th>
+                                <td colspan="4" width="620"></td>
+                          </tr>
+                          <tr>
+                                <th colspan="1" class="transp" style="text-align:right;">Depuis le : </th>
+                                <td width="100"><strong><span t-field="o.contract_id.date_start"/></strong>, à ce jour</td>
+                                <td width="100" class="transp"></td>
+                          </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                    <p style="margin-left: 20px;">La présente attestation lui est délivrée pour servir et valoir ce que de droit</p>
+
+                    <p style="font-weight:bold; font-size: 16x; font-family: Arial; margin-left: 20px; margin-right: 20px; padding-bottom: 20px;">
+                        Motif de Délivrance : <strong><span t-field="o.motif_attestation"/></strong>
+                    </p>
+
+                    <p style="margin-left: 80px; font-family: Arial;"><strong><span t-field="o.user_print"/>, le :</strong><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/></p>
+
+                    <p style="font-family: Arial; font-size:18px; margin-left: 700px; font-weight:bold;">
+                        <u style="font-weight:bold;">Le Gérant</u>
+                    </p>
+
+                    </div>
+
+
+                    <!-- FOOTER -->
+                        <div style="position: absolute; left: 200px; top: 1330px; font-size: 10px;">Siège Social: Cité des PTT, villa 42B - Hydra, Alger - Algérie. Direction des Opérations HMD-PO Box: 1353 Ouargla.</div>
+                        <div style="position: absolute; left: 270px; top: 1345px; font-size: 10px;">Tél: 029 73.06.50/51, Fax: 029 73.06.49, Email: recruteur.do@starofdesert.com</div>
+                        <strong style="position: absolute; left: 870px; top: 1345px; font-size: 10px; font-weight: bolder; font-family: TimesNewRoman;">F-RH-ADT-03</strong>
+                        <!-- -->
+
+                </div>
+
+
+            </t>
+        </t>
+    </t>
+</template>
+
+</odoo>

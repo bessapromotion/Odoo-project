@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- detail de la demande -->
+        <record model="ir.ui.view" id="formation_demande_tree_view">
+            <field name="name">formation.demande.tree</field>
+            <field name="model">formation.demande</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="employe_id"/>
+                    <field name="department_id"/>
+                    <field name="plan_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="formation_demande_form_view">
+            <field name="name">formation.demande.form</field>
+            <field name="model">formation.demande</field>
+            <field name="arch" type="xml">
+                <form string="demande de formation">
+                    <header>
+                        <button string="Valider"  class="oe_highlight" name="action_validate"
+                                type="object" states="draft"
+                                confirm="Voulez-vous valider ce plan de formation ?"/>
+                        <button name="action_print" states="done" string="Imprimer la demande de formation" type="object"/>
+
+                        <button string="Annuler" states="done" name="action_cancel" type="object"
+                                confirm="Voulez-vous annuler ce plan de formation ?"/>
+                     <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label for="name" string="Demande de formation # "/>
+                            <field name="name" class="oe_inline" readonly="1"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="employe_id" options='{"no_open": True, "no_create": True}'/>
+                                <field name="matricule"/>
+                                <field name="job_id" readonly="1"/>
+                                <field name="department_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="besoin_action"/>
+                                <field name="date"/>
+                                <field name="plan_id" options='{"no_open": True, "no_create": True}'/>
+                                <field name="user_id" options='{"no_open": True, "no_create": True}'/>
+                            </group>
+                            <group>
+
+                                <field name="motif"/>
+                                <field name="typologie_id" states="done"/>
+
+
+                            </group>
+                            <group>
+                                <field name="commentaire"/>
+<!--                                <field name="theme_id" states="done"/>-->
+<!--                                <field name="categorie_id" states="done"/>-->
+                                <field name="theme_id" />
+                                <field name="categorie_id" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Ressources">
+                                <field name="res_ids">
+                                    <tree editable="Bottom">
+                                        <field name="name" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="job_id"/>
+                                        <field name="department_id"/>
+                                        <field name="csp_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Objectif">
+                                <field name="objectif"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" modifiers="{}"/>
+                        <field name="message_ids" widget="mail_thread" modifiers="{}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="formation_demande_filter" model="ir.ui.view">
+            <field name="name">formation.demande.filter</field>
+            <field name="model">formation.demande</field>
+            <field name="arch" type="xml">
+                <search string="formation">
+                    <field name="name"/>
+                    <field name="plan_id"/>
+                    <field name="employe_id"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_formation_demande">
+            <field name="name">Demande de Formation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">formation.demande</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer une nouvelle demande de formation.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <record id="action_demande_button_view" model="ir.actions.act_window">
+            <field name="name">Demande de formation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">formation.demande</field>
+            <field name="context">{'search_default_plan_id': [active_id], 'default_plan_id': active_id}</field>
+            <field name="domain">[('plan_id','=', active_id)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="formation_demande_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer une nouvelle demande de formation.
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+    </data>
+</openerp>

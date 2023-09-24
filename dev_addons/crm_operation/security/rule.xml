@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.rule" id="crm_annulation_rule">
+        <field name="name">crm annulation multi-company</field>
+        <field name="model_id" ref="model_crm_annulation"/>
+        <field name="domain_force">['|',('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="crm_basculement_rule">
+        <field name="name">crm basculement multi-company</field>
+        <field name="model_id" ref="model_crm_basculement"/>
+        <field name="domain_force">['|',('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record model="ir.rule" id="crm_pre_reservation_rule">
+        <field name="name">crm pre reservation multi-company</field>
+        <field name="model_id" ref="model_crm_pre_reservation"/>
+        <field name="domain_force">['|',('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+<!-- Mission -->
+  		<record model="ir.ui.view" id="mission_employee_tree_view">
+            <field name="name">mission.employee.tree</field>
+            <field name="model">hr.mission.employee</field>
+            <field name="arch" type="xml">
+				<tree create="false">
+                	<field name="numero"/>
+                	<field name="name"/>
+                	<field name="date"/>
+				   	<field name="job_id"/>
+				   	<field name="company_id" groups="base.group_multi_company" />
+				  	<field name="date_depart" />
+                    <field name="date_retour"/>
+                    <field name="destination" />
+                    <field name="motif"/>
+                    <field name="moyen_id"/>
+                    <field name="state" decoration-success="state == 'done'"
+                                        decoration-warning="state == 'planned'"
+                                        decoration-info="state == 'draft'"
+                                        decoration-muted="state == 'cancel'" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="mission_employee_filter" model="ir.ui.view">
+            <field name="name">hr.mission.employee.filter</field>
+            <field name="model">hr.mission.employee</field>
+            <field name="arch" type="xml">
+                <search string="Ordre de Mission">
+                    <field name="numero" />
+                    <field name="name" />
+
+                    <filter name="draft" string="Nouveaux" domain="[('state','=','draft')]"/>
+                    <filter name="planned" string="Planifiés" domain="[('state','=','planned')]"/>
+<!--                    <filter name="open" string="En cours" domain="[('state','=','open')]"/>-->
+                    <filter name="done" string="Terminés" domain="[('state', '=', 'done')]"/>
+                    <filter name="cancel" string="Annulés" domain="[('state', '=', 'cancel')]"/>
+
+                    <group expand="0" string="Grouper par...">
+                        <filter string="Etat" name="state" domain="[]" context="{'group_by':'state'}" help="Etat"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+		<record model="ir.ui.view" id="mission_employee_form_view">
+            <field name="name">mission.employee.form</field>
+            <field name="model">hr.mission.employee</field>
+            <field name="arch" type="xml">
+				<form  create="false" string="Ordre de mission">
+                    <header>
+                        <button name="action_print" states="planned,done" string="Imprimer" class="btn-success" type="object"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done" />
+				    </header>
+					<sheet>
+                        <h1>
+                            <label for="numero" string="Ordre de mission # "/>
+                            <field name="numero" class="oe_inline"/>
+                        </h1>
+                        <field name="image" widget='image' class="oe_avatar" />
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Employé  " readonly="1"/>
+                            </h1>
+                        </div>
+
+                        <group>
+							<group string="Ordre de mission">
+                                <field name="date" />
+                                <field name="company_id"  readonly="1" groups="base.group_multi_company"/>
+                            </group>
+                            <group string="Info. Missionnaire">
+								<field name="matricule"  />
+								<field name="job_id"  readonly="1"/>
+                            </group>
+                            <group string="Mission">
+                                <field name="mission_id" readonly="1"/>
+                                <field name="date_depart"/>
+                                <field name="date_retour"/>
+                                <field name="destination"/>
+                                <field name="motif"/>
+                                <field name="moyen_id"/>
+                            </group>
+<!--                            <group string="Observation">-->
+<!--                                <field name="observation"/>-->
+<!--                            </group>-->
+                        </group>
+					</sheet>
+
+				</form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_mission_employee_tree_view">
+            <field name="name">Ordre de mission</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.mission.employee</field>
+			<field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="mission_employee_filter"/>
+            <field name="filter" eval="True"/>
+            <field name="view_id" ref="mission_employee_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer un nouvel ordre de mission.
+                </p><p>
+
+                </p><p>
+
+                </p>
+            </field>
+		</record>
+
+<!--	 Top menu item -->
+
+<!--        <menuitem name="Individuel" id="menu_mission_individuel"  parent="menu_mission_root" action="action_mission_tree_view" />-->
+
+
+    </data>
+</openerp>

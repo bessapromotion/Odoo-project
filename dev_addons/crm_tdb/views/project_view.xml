@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="sale_order_filtre_current_month_search_view" model="ir.ui.view">
+            <field name="name">sale.order.crm.search.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter name="current_month_filter" string="Mois actual"
+                            domain="[('validity_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), ('validity_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+                    <filter name="type_bien_apt" string="Appartement"
+                            domain="[('type_bien','=','Appartement')]"/>
+                    <filter name="type_bien_parking" string="Parking"
+                            domain="[('type_bien','=','Place de parking')]"/>
+                    <filter name="type_bien_cellier" string="Cellier"
+                            domain="[('type_bien','=','Cellier')]"/>
+                    <filter name="type_bien_local" string="Local"
+                            domain="[('type_bien','=','Local')]"/>
+                    <filter name="type_bien_espace_menager" string="Espace a aménager"
+                            domain="[('type_bien','=','Espace a aménager')]"/>
+                    <filter name="type_bien_autre" string="Autre"
+                            domain="[('type_bien','=','Autre')]"/>
+                    <separator/>
+                    <filter name="order_basculement" string="Devis Basculements"
+                            domain="[('state','in',['done','cancel','sale']),('origin', 'ilike', 'BAS')]"/>
+                    <filter name="order_concretisations" string="Devis Concrétisations"
+                            domain="[('state','in',['done','cancel','sale']),('origin', 'not ilike', 'BAS')]"/>
+                    <filter name="order_desistements" string="Devis Desistements"
+                            domain="[('motif_annulation', '=', 'Annulation')]"/>
+                    <separator/>
+
+                    <filter string="Validité Date" name="filter_create_date" date="validity_date"
+                            default_period="this_year"/>
+                    <filter name="type_bien_apt_and_current_month" string="Appartement et Mois actual"
+                            domain="[('type_bien','=','Appartement'),('validity_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), ('validity_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+
+                </xpath>
+            </field>
+        </record>
+        <record id="crm_product_template_search_view_order" model="ir.ui.view">
+            <field name="name">product.template.search.order</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="crm_product.crm_product_template_2_search_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <separator/>
+                    <filter name="order_basculement" string="Devis Basculements"
+                            domain="[('state_order','=','done'),('origin_order', 'ilike', 'BAS')]"/>
+                    <filter name="order_concretisations" string="Devis Concrétisations"
+                            domain="[('state_order','in',['done','cancel','sale']),('origin_order', 'not ilike', 'BAS')]"/>
+                    <filter name="order_desistements" string="Devis Desistements"
+                            domain="[('motif_annulation_order', '=', 'Annulation')]"/>
+
+                    <separator/>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="crm_tdb_product_pivot_view_2">
+            <field name="name">crm.tdb.pivot</field>
+            <field name="model">product.template</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="project par ensoleiment">
+                    <field name="project_id"/>
+                    <field name="ensoleillement_id"/>
+                    <field name="etat" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="crm_tdb_product_graph_view_2">
+            <field name="name">crm.tdb.graph</field>
+            <field name="model">product.template</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+                <graph string="project par ensoleiment">
+                    <field name="project_id"/>
+                    <field name="ensoleillement_id"/>
+                    <field name="etat"/>
+                </graph>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

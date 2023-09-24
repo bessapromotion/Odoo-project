@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="annuler_paiement_wizard_form_view" model="ir.ui.view">
+            <field name="name">annuler.paiement.wizard.form</field>
+            <field name="model">annuler.paiement.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Annuler ordre paiement">
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="order_id"/>
+                        </group>
+                        <group>
+                            <field name="echeance_id"/>
+                            <field name="partner_id"/>
+                            <field name="payment_id"/>
+                        </group>
+                    </group>
+                    <group string="Motif">
+                        <field name="motif_annulation_id" />
+                    </group>
+
+                    <footer>
+                         <button class="oe_highlight" string="Appliquer" name="action_appliquer" type="object"/> or
+                         <button class="oe_link" string="Ne pas appliquer" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_quitus">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <style>
+                        table, th, td {
+                        border: 1px solid;
+                        }
+                        tr, td {
+                        border: 1px solid;
+                        margin-left: 10px;
+                        }
+                    </style>
+                    <div style="font-size:20px;">
+                        <h1 style="text-align: center;font-size:25px;">
+                            <b>Quitus</b>
+                        </h1>
+                        <br/>
+                        <b>Nom et Prénom :</b>
+                        <span t-field="o.employe_id"/>.
+                        <br/>
+                        <br/>
+                        <b>Affectation et Fonction :</b>
+                        <span t-field="o.employe_id.job_id"/>.
+                        <br/>
+                        <br/>
+                        <b>Date d’entrée :</b>
+                        <span t-field="o.date_start"/>.
+                        <br/>
+                        <br/>
+                        <b>Date de sortie :</b>
+                        <span t-field="o.date_effet"/>.
+						<br/>
+                        <br/>
+                        <b>Boite mail désactivée :</b>
+               
+
+                        <br/>
+                        <br/>
+
+                        <u>
+                            <b>Nombres de jours travaillés</b>
+                        </u>
+                        <br/>
+                        <br/>
+                        <b>Droits aux congés :</b>
+                        <br/>
+                        <br/>
+                        <b>Total jours travaillés:</b>
+                        <br/>
+                        <br/>
+
+                        <table style="border: 1px solid black;width:100%;">
+                            <tr style="border: 1px solid black;">
+                                <td style="text-align:center;">
+                                    <b>Visa du Responsable Hiérarchique</b>
+                                </td>
+                                <td style="text-align:center;">
+                                    <b>Visa du Responsable RH</b>
+                                </td>
+                                <td style="text-align:center;">
+                                    <b>Visa du DAF</b>
+                                </td>
+                                <td style="text-align:center;">
+                                    <b>Visa IT</b>
+                                </td>
+                            </tr>
+                            <tr style="border: 1px solid black;">
+                                <td>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td/>
+                                <td/>
+                                <td/>
+                            </tr>
+                            <tr style="border: 1px solid black;">
+                                <td>
+                                    <p style="text-align:center;">
+                                        <b>O.B.S</b>
+                                        <br/>
+                                        Passations Faites :
+                                    </p>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <p style="text-align:center;">
+                                        <b>O.B.S</b>
+                                        <br/>Equipements Rendus Avance / Prêt Remboursés :
+                                    </p>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <p style="text-align:center;">
+                                        <b>O.B.S</b>
+                                        <br/>
+                                        Préjudice :
+                                    </p>
+
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <p style="text-align:center;">
+                                        <b>O.B.S</b>
+                                        <br/>Préjudice :
+                                    </p>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr style="border: 1px solid black;">
+                                <td>
+                                    <p style="text-align:center;">
+                                        Documents et Cachets Restitués :
+                                    </p>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td/>
+                                <td>
+                                    <p style="text-align:center;">Montant à Déduire du STC:</p>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <p style="text-align:center;">Montant à Déduire du STC:</p>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

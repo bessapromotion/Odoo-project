@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_pv_installation_rh">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <br/>
+                        <br/>
+                        <table style="width:100%;font-size:20px;">
+                            <tr>
+                                <td/>
+                                <td>
+                                    <div style="margin-top:0px;text-align:right;">Alger le :
+                                        <span t-field="o.contract_id.date_start"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <br/>
+                        <div style="text-align:center;font-size:40px;">
+                            <b>Procès-Verbal d'Installation</b>
+                        </div>
+
+                        <p style="border-bottom:1px solid black;"/>
+
+                        <div style="text-align:right;font-size:20px;">
+                            <b>
+                                <br/>
+                                A remplir le jour même de la prise de fonction
+                            </b>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div style="margin-top:20px;">
+                            Société :
+                            <b><span t-field="o.company_id"/>.
+                            </b>
+                            <br/>
+                            <br/>
+                            Service :
+                            <b><span t-field="o.department_id"/>.
+                            </b>
+                            <br/>
+                            <br/>
+                            Lieu :
+                            <b>
+                                <span t-field="o.employe_id.project_id"/>
+                            </b>
+                        </div>
+                        <br/>
+                        <br/>
+                        Je soussigné (e) :
+                        <b>
+                            <span t-field="o.company_id.pv_soussigné_par"/>
+                        </b>
+                        <br/>
+                        <br/>
+                        Atteste de la prise de fonction le :
+                        <b>
+                            <span t-field="o.contract_id.date_entree"/>
+                        </b>
+                        <br/>
+                        <br/>
+                        Nom et prénom :
+                        <span t-field="o.employe_id.civilite_id" style="font-weight: bold;"/>
+                        <span t-field="o.employe_id" style="font-weight: bold;"/>
+                        <br/>
+                        <br/>
+                        <table style="width:100%; border:none;margin-top:10px;">
+                            <tr>
+                                <td>
+                                    En qualité de :
+                                    <span t-field="o.job_id" style="font-weight: bold;"/>
+                                </td>
+                                <td style="float:right;">
+                                    Contractuel (le) à
+                                    <span t-field="o.contract_id.contract_type_id"/>
+                                    <br/>
+                                    à compter du :
+                                    <b>
+                                        <span t-field="o.contract_id.date_start"/>
+                                    </b>
+                                    au
+                                    <b>
+                                        <span t-field="o.contract_id.date_end"/>
+                                    </b>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <br/>
+                        <br/>
+                        Fait à
+                        <b>
+                            Alger
+                        </b>
+                        le :
+                        <b>
+                            <span t-field="o.contract_id.date_start"/>
+                        </b>
+                        <table width="780" style="margin-left:40px; margin-top:60px;font-size:20px;">
+                            <tr>
+                                <td class="transp">
+                                    <b>
+                                        <u>L'intéressé(e)</u>
+                                    </b>
+                                </td>
+                                <td class="transp" style="text-align: right">
+                                    <b>
+                                        <u>Le Directeur</u>
+                                    </b>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

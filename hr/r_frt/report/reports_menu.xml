@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                string="Décision de Fin de Relation de Travail"
+                id="act_report_decision_fin_relation_travail"
+                model="hr.frt"
+                report_type="qweb-pdf"
+                menu="False"
+                name="r_frt.report_decision_fin_relation_travail"
+                file="r_frt.report_decision_fin_relation_travail"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'FRT_'+ object.employe_id.name"
+        />
+        <report
+                string="Annonce de départ"
+                id="act_report_annonce_depart"
+                model="hr.frt"
+                report_type="qweb-pdf"
+                name="r_frt.report_annonce_depart"
+                file="r_frt.report_annonce_depart"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'Annonce_depart_'+ object.employe_id.name"
+        />
+        <report
+                string="Quitus"
+                id="act_report_quitus"
+                model="hr.frt"
+                report_type="qweb-pdf"
+                name="r_frt.report_quitus"
+                file="r_frt.report_quitus"
+                paperformat="hr_base.paperformat_hr"
+                print_report_name="'Quitus_'+ object.employe_id.name"
+        />
+
+    </data>
+</odoo>

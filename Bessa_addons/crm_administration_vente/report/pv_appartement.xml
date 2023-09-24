@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_pv_appartement">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                        <p align="left">R&#233;f:
+                            <span t-field="o.name"/>
+                        </p>
+                        <p style="margin-top : -45px;" align="right">Alger le :
+                            <span t-field="o.date"/>
+                        </p>
+                        <h2 class="text-center" style="margin-bottom : 45px;">
+                            <u>
+                                <strong>
+                                    ATTESTATION DE LEVEE DES RESERVES
+                                </strong>
+                            </u>
+
+                        </h2>
+                        <p>
+                            <strong>Ce jour :
+                                <span t-field="o.date"/>
+                            </strong>
+                        </p>
+                        <p align="justify">Je soussign&#233;(e), M / MME
+                            <span t-field="o.partner_id.name"/>
+                            copropri&#233;taire du bien :
+                        </p>
+
+                        <table class="table table-condensed table-hover border"
+                               style="margin-top:10px;border:1px solid black;">
+                            <tr t-foreach="o.product_ids" t-as="l">
+                                <tr>
+                                    <tr>
+                                        <td>
+                                            <span>
+                                                <strong>Type :</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-esc="l.format_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>
+                                                <strong>Au :</strong>
+                                            </span>
+                                            <br/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="l.etage.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>
+                                                <strong>Bloc :</strong>
+                                            </span>
+                                            <br/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="l.bloc"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>
+                                                <strong>Sise :</strong>
+                                            </span>
+                                            <br/>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                A la r&#233;sidence
+                                                <span t-esc="o.project_id.name"/>
+                                                -
+                                                <span t-esc="o.commune_id.name"/>
+                                                dans la wilaya d&#39;Alger
+                                            </p>
+
+                                        </td>
+                                    </tr>
+
+                                </tr>
+                            </tr>
+                        </table>
+
+                        <p align="justify">D&#233;clare par la pr&#233;sente ;</p>
+                        <p align="justify">La r&#233;ception de mon bien sans aucune r&#233;serve.</p>
+                        <p align="justify">Je d&#233;clare que l&#39;&#233;tat g&#233;n&#233;ral du logement y compris
+                            les
+                            installations
+                            et &#233;quipements sont pos&#233;s et fournis conform&#233;ment aux r&#233;gles de l&#39;art
+                            et sans aucunes
+                            r&#233;serves.
+                        </p>
+                        <p align="justify">J&#39;assume pleinement et seul toutes les cons&#233;quences qui r&#233;sultent
+                            d&#39;un
+                            &#233;ventuel vol ou de perte des objets entrepos&#233;s &#224; l&#39;int&#233;rieur de
+                            l&#39;appartement quel
+                            que soit
+                            les conditions inh&#233;rentes
+                            et j&#39;affirme que
+                            <span t-esc="o.company_id.name"/>
+                            n&#39;est nullement responsable du gardiennage de mon logement.
+                        </p>
+                        <p align="justify">Aussi, j&#39;accepte toutes les conditions et d&#233;sagr&#233;ments de
+                            chantier en
+                            mati&#232;re
+                            d&#39;utilisation de l&#39;&#233;nergie d&#39;eau,
+                            et ce, jusqu&#39;&#224; l&#39;ach&#232;vement des travaux de branchement par la SONELGAZ et
+                            la
+                            SEAAL.
+                        </p>
+                        <div class="signature-block">
+
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td align="left">
+                                        <br/>
+                                        <strong>Signature Copropri&#233;taire</strong>
+                                    </td>
+                                    <td align="right">
+                                        <br/>
+                                        <strong>Signature de l&#39;Administrateur des biens de
+                                            <span t-esc="o.societe"/>
+                                        </strong>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

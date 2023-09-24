@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="action_charge_ordre_payment_button" model="ir.actions.act_window">
+            <field name="name">Ordre de paiement</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ordre.paiement.charge</field>
+            <field name="context">{'search_default_charge_id': [active_id], 'default_charge_id': active_id}</field>
+            <!--<field name="domain"></field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_ordre_paiement_charge_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez pour créer un ordre de paiement.
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <record id="action_charge_payment_button" model="ir.actions.act_window">
+            <field name="name">Recu de paiement</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.payment</field>
+            <field name="context">{'search_default_charge_id': [active_id], 'default_charge_id': active_id}</field>
+            <!--<field name="domain"></field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_payment_charge_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez pour créer un paiement.
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_charge_tag_filter">
+            <field name="name">charge.annual.filter</field>
+            <field name="model">charge.annual</field>
+            <field name="arch" type="xml">
+                <search string="Charge/Tag">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="project_id"/>
+                    <field name="type_doc"/>
+                    <field name="charge_recouv_id"/>
+                    <field name="commercial_id"/>
+                    <field name="product"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <group expand="0" string="Grouper par...">
+                        <filter name="type_doc" string="Type" domain="[]" context="{'group_by':'type_doc'}"/>
+                        <filter name="project_id" string="Projet" domain="[]" context="{'group_by':'project_id'}"/>
+                        <filter name="commercial_id" string="Commercial" domain="[]"
+                                context="{'group_by':'commercial_id'}"/>
+                        <filter name="charge_recouv_id" string="Chargé de Recouvrement" domain="[]"
+                                context="{'group_by':'charge_recouv_id'}"/>
+                        <filter name="company" string="Société" domain="[]" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_charge_annuel_form" model="ir.ui.view">
+            <field name="name">charge.annual.form</field>
+            <field name="model">charge.annual</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+
+                        <button name="action_validate" string="Valider le dossier" class="oe_highlight" states="draft"
+                                type="object"
+                                confirm="Voulez-vous Valider l'annulation de la réservation ?"
+                                groups="gestion_profil.group_adv,gestion_profil.group_res_adv,base.group_system"/>
+                        <button name="action_cancel" string="Annuler le document" states="draft" type="object"
+                                groups="base.group_system"/>
+                        <field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,valid,cancel"/>
+                        <button name="action_send_to_payment" string="Envoyer un ordre de paiement" type="object"
+                                states="valid" class="oe_highlight"
+                                groups="gestion_profil.group_adv,gestion_profil.group_res_adv,base.group_system"/>
+                        <button name="action_create_payment" string="Creer un paiement" type="object"
+                                states="valid" class="oe_highlight"
+                                groups="gestion_profil.group_caissier,base.group_system"/>
+                        />
+                    </header>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box" position="inside">
+                            <button
+                                    class="oe_stat_button"
+                                    type="action"
+                                    name="%(action_charge_ordre_payment_button)d"
+                                    attrs="{'invisible':[('nbr_ordres','=', 0)]}"
+                                    context="{'default_charge_id': active_id}"
+                                    icon="fa-folder-open">
+                                <field string="Ordres de Paiement(s)" name="nbr_ordres" widget="statinfo"/>
+                            </button>
+                            <button
+                                    class="oe_stat_button"
+                                    type="action"
+                                    name="%(action_charge_payment_button)d"
+                                    attrs="{'invisible':[('nbr_payments','=', 0)]}"
+                                    context="{'default_charge_id': active_id}"
+                                    icon="fa-money">
+                                <field string="Paiement(s)" name="nbr_payments" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <field name="photo" widget='image' class="oe_avatar"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+
+                                <field name="company_id" invisible="1"/>
+                                <field name="reservation_id" attrs="{'readonly': [('state', '=', 'valid')]}"/>
+                                <field name="order_id" readonly="1"/>
+                                <field name="num_dossier"/>
+                                <field name="project_id" readonly="1"/>
+                                <field name="acquereur_id" groups="base.group_user" string="Acquéreur"/>
+                                <field name="type_doc" attrs="{'readonly': [('state', '=', 'valid')]}"/>
+                                <field name="company_id" attrs="{'readonly': [('state', '=', 'valid')]}"/>
+                            </group>
+                            <group>
+                                <field name="date" string="Date"/>
+                                <field name="phone"/>
+                                <field name="mobile"/>
+                                <field name="partner_id"/>
+                                <field name="commercial_id" string="Commercial"/>
+                                <field name="charge_recouv_id" string="Chargé Recouvrement"/>
+                                <field name="currency_id" attrs="{'readonly': [('state', '=', 'valid')]}"/>
+
+                            </group>
+                        </group>
+                        <group>
+                            <field name="product"/>
+                            <field name="orientation"/>
+                        </group>
+
+                        <notebook>
+                            <page string="Les propriétaires de l'appartement">
+                                 <field name="partner_ids" >
+                                    <tree>
+                                        <field name="product_id" invisible="1"/>
+                                        <field name="name"/>
+                                        <field name="type"/>
+                                        <field name="origin"/>
+                                        <field name="etat"/>
+                                    </tree>
+                                </field>
+
+                            </page>
+
+                            <page string="Observation">
+                                <field name="observation"/>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="charge_annual_tree_view" model="ir.ui.view">
+            <field name="name">charge.annual.tree</field>
+            <field name="model">charge.annual</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="project_id"/>
+                    <field name="num_dossier"/>
+                    <field name="product"/>
+                    <field name="orientation"/>
+                    <field name="order_id" string="Référence BC"/>
+                    <field name="partner_id" groups="base.group_user" string="Réservataire"/>
+                    <field name="date" string="Date"/>
+                    <field name="type_doc" widget="badge" decoration-warning="type_doc == 'charge'"
+                           decoration-success="type_doc == 'tag'"/>
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                    <field name="commercial_id" string="Commercial"/>
+                    <field name="charge_recouv_id" string="Charge recouvrement"/>
+                    <field name="state" widget="badge" decoration-info="state == 'draft'"
+                           decoration-success="state == 'valid'" decoration-warning="state == 'cancel'"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_charge_annual_tree_view">
+            <field name="name">Charges Annuels</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">charge.annual</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="view_id" ref="charge_annual_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer un nouvelle annulation.
+                </p>
+                <p>
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_charge">
+            <field name="name">Charges Annuelles</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">charge.annual</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type_doc','=','charge')]</field>
+            <!--        <field name="context"/>-->
+            <field name="context">{'default_type_doc': 'charge'}</field>
+            <field name="search_view_id" ref="view_charge_tag_filter"/>
+            <field name="view_id" ref="charge_annual_tree_view"/>
+        </record>
+        <record model="ir.actions.act_window" id="action_tag">
+            <field name="name">Tags Acquérreur</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">charge.annual</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type_doc','=','tag')]</field>
+            <!--        <field name="context"/>-->
+            <field name="context">{'default_type_doc': 'tag'}</field>
+            <field name="search_view_id" ref="view_charge_tag_filter"/>
+            <field name="view_id" ref="charge_annual_tree_view"/>
+        </record>
+
+
+        <record id="action_charge_annual_tree_view1" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="charge_annual_tree_view"/>
+            <field name="act_window_id" ref="action_charge_annual_tree_view"/>
+        </record>
+
+        <record id="charge_annual_tree_view2" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_charge_annuel_form"/>
+            <field name="act_window_id" ref="action_charge_annual_tree_view"/>
+        </record>
+
+
+    </data>
+</openerp>

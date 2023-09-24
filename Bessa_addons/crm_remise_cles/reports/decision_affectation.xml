@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="decision_affectation">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+
+                        <p align="left">R&#233;f:
+                            <span t-field="o.name"/>
+                        </p>
+                        <p style="margin-top : -45px;" align="right">Alger le :
+                            <span t-field="o.date"/>
+                        </p>
+                        <h2 class="text-center" style="margin-bottom : 45px;">
+                            <u>
+                                <strong>
+                                    D&#233;cision d&#39;affectation
+                                </strong>
+                            </u>
+
+                        </h2>
+                        <p>
+                            Le G&#233;rant,
+                        </p>
+                        <p>
+                            - Vu les statuts de la
+                            <span t-field="o.company_id.name"/>
+                            <br/>
+                            <br/>
+                            - Vu le d&#233;cret l&#233;gislatif 11/04 du 17/02/2011 relatif à l&#39;activit&#233; de la
+                            promotion
+                            immobili&#232;re.
+                        </p>
+                        <br/>
+                        <h3 class="text-center" style="margin-bottom : 45px;">
+                            <u>
+                                <strong>
+                                    DECIDE
+                                </strong>
+                            </u>
+
+                        </h3>
+                        <br/>
+                        <h5>
+                            <strong>
+                                <u>ARTICLE UNIQUE :</u>
+                            </strong>
+
+                        </h5>
+                        <p align="justify">Monsieur (Mme)
+                            <t t-if="o.signataire">
+                                <strong>
+                                    <span t-field="o.new_partner_id.name"/>
+                                </strong>
+                                n&#233;(e) le
+                                <strong>
+                                    <span t-field="o.new_partner_id.birthday"/>
+                                </strong>&#224;
+                                <strong>
+                                    <span t-field="o.new_partner_id.place_of_birth"/>
+                                </strong>
+                            </t>
+                            <t t-else="">
+                                <strong>
+                                    <span t-field="o.partner_id.name.name"/>
+                                </strong>
+                                n&#233;(e) le
+                                <strong>
+                                    <span t-field="o.partner_id.name.birthday"/>
+                                </strong>&#224;
+                                <strong>
+                                    <span t-field="o.partner_id.name.place_of_birth"/>
+                                </strong>
+                            </t>
+                            est attributaire d&#39;un logement promotionel sise au :
+                        </p>
+                        <p style="margin-left :30px;" align="center">
+                            <p>
+                                <strong>Projet :</strong>
+                                Logements promotionnels &#224;
+                                <span t-field="o.project_id.name"/>
+                            </p>
+                            <p>
+                                <strong>Batiment :</strong>
+                                <span t-field="o.bloc"/>
+                            </p>
+                            <p>
+                                <strong>Type :</strong>
+                                <span t-field="o.format_id.name"/>
+                            </p>
+                            <p>
+                                <strong>Niveau :</strong>
+                                <span t-field="o.etage.name"/>
+                            </p>
+                            <p align="left">
+                                <strong>Superficie :</strong>
+                                <span t-field="o.superficie"/>
+                                m&#178;
+                            </p>
+                            <p align="left">
+                                <strong>Lot :</strong>
+                                <span t-field="o.num_lot"/>
+                            </p>
+                        </p>
+                        <br/>
+                        <table style="margin-left: auto;margin-right: auto; width: 700px;font-size:20px">
+                            <tr>
+                                <td>
+                                    <span>
+                                        <strong>Co&#251;t de cession appartement Hors Taxe :</strong>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span t-field="o.amount_untaxed"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="margin-left :105px;" align="right">
+                                        <strong>Dont une TVA :</strong>
+                                    </span>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <span t-field="o.amount_tva"/>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="margin-left :105px;" align="right">
+                                        <strong>TTC :</strong>
+                                    </span>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <span t-field="o.amount_ttc"/>
+
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p align="justify">Soit en lettre :
+                            <strong>
+                                <span t-field="o.amount_lettre_ttc"/>
+                            </strong>
+                        </p>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

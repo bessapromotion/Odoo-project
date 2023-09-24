@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="group_category_service_comptabilitee">
+            <field name="name">SERVICE COMPTABILITEE</field>
+            <field name="sequence">60</field>
+        </record>
+
+        <record model="res.groups" id="group_comptable_stock">
+            <field name="name">Comptable stock</field>
+            <field name="category_id" ref="gestion_profil.group_category_service_comptabilitee"/>
+        </record>
+        <record model="res.groups" id="group_res_compta">
+            <field name="name">Res. Compta.</field>
+            <field name="category_id" ref="gestion_profil.group_category_service_comptabilitee"/>
+        </record>
+        <record model="res.groups" id="group_caissier">
+            <field name="name">Caissier</field>
+            <field name="category_id" ref="gestion_profil.group_category_service_comptabilitee"/>
+        </record>
+        <record model="res.groups" id="group_reporting">
+            <field name="name">Reporting</field>
+            <field name="category_id" ref="gestion_profil.group_category_service_comptabilitee"/>
+        </record>
+
+    </data>
+</odoo>
