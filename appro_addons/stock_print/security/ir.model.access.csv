@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_ra_stock_print,ra.stock.print manager,model_ra_stock_print,stock.group_stock_manager,1,1,1,1
-access_ra_stock_print,ra.stock.print user,model_ra_stock_print,stock.group_stock_user,1,1,1,1
-access_ra_stock_print_line,ra.stock.print.line manager,model_ra_stock_print_line,stock.group_stock_manager,1,1,1,1
-access_ra_stock_print_line,ra.stock.print.line user,model_ra_stock_print_line,stock.group_stock_user,1,1,1,1
-

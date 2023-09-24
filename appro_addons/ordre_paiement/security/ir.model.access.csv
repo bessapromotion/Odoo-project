@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_ordre_paiement_user,ordre.paiement user,model_ordre_paiement,base.group_user,1,1,1,1
-access_payment_mode_user,payment.mode user,model_payment_mode,base.group_user,1,1,1,1
