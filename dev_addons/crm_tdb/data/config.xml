@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
-    <record id="encaissement_recouvrement" model="ir.config_parameter">
-        <field name="key">encaissement_recouvrement</field>
-        <field name="value">45</field>
-    </record>
-</odoo>
-

@@ -1,9 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_crm_superficie_user,crm.superficie user,model_crm_superficie,crm_superficie.group_superficie_user,1,0,0,0
-access_crm_superficie_manager,crm.superficie manager,model_crm_superficie,crm_superficie.group_superficie_manager,1,1,1,1
-access_crm_superficie_line_user,crm.superficie.line user,model_crm_superficie_line,crm_superficie.group_superficie_user,1,0,0,0
-access_crm_superficie_line_manager,crm.superficie.line manager,model_crm_superficie_line,crm_superficie.group_superficie_manager,1,1,1,1
-access_crm_superficie_charger_bien_manager,crm.superficie.charger.bien manager,model_crm_superficie_charger_bien,crm_superficie.group_superficie_manager,1,1,1,1
-access_crm_superficie_charger_bien_line_wizard_manager,crm.superficie.charger.bien.line.wizard manager,model_crm_superficie_charger_bien_line_wizard,crm_superficie.group_superficie_manager,1,1,1,1
-access_crm_superficie_bloc_wizard,crm.superficie.bloc.wizard manager,model_crm_superficie_bloc_wizard,crm_superficie.group_superficie_manager,1,1,1,1
-access_creer_paiement_out_wizard,creer.paiement.out.wizard manager,model_creer_paiement_out_wizard,crm_superficie.group_superficie_manager,1,1,1,1

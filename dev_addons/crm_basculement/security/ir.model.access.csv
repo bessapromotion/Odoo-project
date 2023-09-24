@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_crm_basculement_user,crm.basculement user,model_crm_basculement,sales_team.group_sale_salesman,1,1,0,0
-access_crm_basculement_manager,crm.basculement manager,model_crm_basculement,sales_team.group_sale_manager,1,1,1,1
-access_crm_basculement_affectation_user,crm.basculement.affectation user,model_crm_basculement_affectation,sales_team.group_sale_salesman,1,1,0,0
-access_crm_basculement_affectation_manager,crm.basculement.affectation manager,model_crm_basculement_affectation,sales_team.group_sale_manager,1,1,1,1
