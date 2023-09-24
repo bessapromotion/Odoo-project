@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <menuitem name="Suivi dossiers" id="menu_operation" sequence="30" web_icon="crm_operation,static/description/icon.png"  groups="sales_team.group_sale_salesman"/>
+
+            <menuitem name="Opérations" id="menu_operation_1" parent="menu_operation" sequence="10"  groups="sales_team.group_sale_salesman"/>
+                <menuitem name="Pré-réservations/Devis" id="menu_prereservation" sequence="5" parent="menu_operation_1" groups="sales_team.group_sale_salesman"
+                          action="sale.action_quotations_with_onboarding"/>
+                <menuitem name="Changements de Pré-réservation" id="menu_changement_prereservation" sequence="7" parent="menu_operation_1" groups="sales_team.group_sale_salesman"
+                          action="action_crm_pre_reservation_tree_view"/>
+                <menuitem name="Réservations" id="menu_reservation" sequence="10" parent="menu_operation_1" groups="sales_team.group_sale_salesman"
+                          action="action_crm_reservation_tree_view"/>
+<!--                <menuitem name="Basculements" id="menu_basculement" sequence="20" parent="menu_operation_1" groups="base.group_user"-->
+<!--                          action="action_crm_basculement_tree_view"/>-->
+                <menuitem name="Annulations" id="menu_annulation" sequence="30" parent="menu_operation_1" groups="sales_team.group_sale_salesman"
+                          action="action_crm_annulation_tree_view"/>
+
+            <menuitem name="Catalogue" id="menu_catalogue_root" parent="menu_operation" groups="sales_team.group_sale_salesman" sequence="15" />
+                <menuitem id="product_menu_1"     name="Biens"   action="crm_product.crm_product_template_action" parent="menu_catalogue_root" sequence="10" groups="sales_team.group_sale_salesman"/>
+                <menuitem id="res_partner_menu_1" name="Clients" parent="menu_catalogue_root" action="base.action_partner_form"  sequence="20" groups="sales_team.group_sale_salesman"/>
+                <menuitem id="projest_menu_1" name="Projets" parent="menu_catalogue_root" action="project.open_view_project_all"  sequence="30" groups="sales_team.group_sale_salesman"/>
+
+            <menuitem name="Paiements" id="menu_paiement_root" parent="menu_operation" groups="sales_team.group_sale_salesman" sequence="30"/>
+                <!--<menuitem name="Par Factures" id="menu_facture_1" parent="menu_paiement_root" groups="base.group_user" sequence="10" action="account.action_invoice_tree1"/>-->
+
+                <menuitem name="Commandes" id="menu_suivi_commande" parent="menu_paiement_root" groups="sales_team.group_sale_salesman"
+                          action="action_crm_suivi_commande_tree_view"  sequence="10"/>
+                <menuitem name="Journal des Paiements" id="menu_paiements" parent="menu_paiement_root" groups="sales_team.group_sale_salesman"
+                          action="account.action_account_payments"  sequence="50"/>
+            <!--Menu configuration-->
+            <menuitem name="Configuration" id="menu_configuration_root" parent="menu_operation" groups="sales_team.group_sale_manager" sequence="99"/>
+
+                <menuitem name="Configuration" id="menu_configuration_1" parent="menu_configuration_root" groups="sales_team.group_sale_manager" action="dl_crm_settings_action" sequence="10"/>
+                <menuitem name="Article" id="menu_configuration_article" parent="menu_configuration_root" groups="sales_team.group_sale_manager" sequence="20"/>
+                    <menuitem name="Type de Bien" id="menu_product_type" parent="menu_configuration_article" groups="sales_team.group_sale_manager" sequence="30" action="configuration_product_type_action"/>
+                    <menuitem name="Type d'Appartement" id="menu_product_format" parent="menu_configuration_article" groups="sales_team.group_sale_manager" sequence="30" action="configuration_product_format_action"/>
+                    <menuitem name="Orientation d'Appartement" id="menu_product_orientation" parent="menu_configuration_article" groups="sales_team.group_sale_manager" sequence="30" action="configuration_product_orientation_action"/>
+                    <menuitem name="N° Etage" id="menu_product_etage" parent="menu_configuration_article" groups="sales_team.group_sale_manager" sequence="30" action="configuration_product_etage_action"/>
+                 <menuitem name="Opérations" id="menu_configuration_operation" parent="menu_configuration_root" groups="sales_team.group_sale_manager" sequence="30"/>
+                    <menuitem name="Type Annulation" id="menu_annulation_type" parent="menu_configuration_operation" groups="sales_team.group_sale_manager" sequence="30" action="configuration_annulation_type_action"/>
+            <!--<menuitem name="Configuration" id="menu_visite_config" parent="menu_visite" sequence="90"  groups="base.group_user"/>-->
+                <!--<menuitem name="Etiquette" id="menu_visite_tags"  parent="menu_visite_config" action="action_visite_tags_tree_view" sequence="10" groups="base.group_user"/>-->
+
+    </data>
+</openerp>

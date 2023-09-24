@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tco_cell_user,tco.cell user,model_tco_cell,purchase.group_purchase_user,1,1,1,1
+access_tco_cell_manager,tco.cell manager,model_tco_cell,purchase.group_purchase_user,1,1,1,1
+access_tco_line_user,tco.line user,model_tco_line,purchase.group_purchase_user,1,1,1,1
+access_tco_line_manager,tco.line manager,model_tco_line,purchase.group_purchase_user,1,1,1,1
+access_tco_commission_user,tco.commission user,model_tco_commission,purchase.group_purchase_user,1,1,1,1
+access_tco_commission_manager,tco.commission manager,model_tco_commission,purchase.group_purchase_user,1,1,1,1

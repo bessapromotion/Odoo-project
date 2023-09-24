@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <menuitem name="Articles" id="menu_product_cat_root" sequence="3" parent="stock.menu_stock_root"
+                  groups="product.group_product_variant"/>
+<!-- Menu articles-->
+    <record model="ir.actions.act_window" id="action_article_film_view">
+            <field name="name">Produit Films</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="product.product_search_form_view"/>
+            <field name="domain">[('ra_category_type', '=', 'Film')]</field>
+            <field name="view_id" eval="False"/> <!-- Force empty -->
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to define a new product.
+              </p><p>
+                You must define a product for everything you sell, whether it's
+                a physical product, a consumable or a service you offer to
+                customers.
+              </p><p>
+                The product form contains information to simplify the sale
+                process: price, notes in the quotation, accounting data,
+                procurement methods, etc.
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Articles - Film" id="menu_product_film" sequence="10" parent="menu_product_cat_root"
+                          action="action_article_film_view" groups="product.group_product_variant"/>
+
+    <record model="ir.actions.act_window" id="action_article_encre_view">
+            <field name="name">Produit Encre</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="product.product_search_form_view"/>
+            <field name="domain">[('ra_category_type', '=', 'Encre')]</field>
+            <field name="view_id" eval="False"/> <!-- Force empty -->
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to define a new product.
+              </p><p>
+                You must define a product for everything you sell, whether it's
+                a physical product, a consumable or a service you offer to
+                customers.
+              </p><p>
+                The product form contains information to simplify the sale
+                process: price, notes in the quotation, accounting data,
+                procurement methods, etc.
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Articles - Encre" id="menu_product_encre" sequence="20" parent="menu_product_cat_root"
+                          action="action_article_encre_view" groups="product.group_product_variant"/>
+
+    <record model="ir.actions.act_window" id="action_article_autre_view">
+            <field name="name">Produit Autre</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="product.product_search_form_view"/>
+            <field name="domain">[('ra_category_type', 'in', ('Colle', 'Vernis', 'Autre'))]</field>
+            <field name="view_id" eval="False"/> <!-- Force empty -->
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to define a new product.
+              </p><p>
+                You must define a product for everything you sell, whether it's
+                a physical product, a consumable or a service you offer to
+                customers.
+              </p><p>
+                The product form contains information to simplify the sale
+                process: price, notes in the quotation, accounting data,
+                procurement methods, etc.
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Articles - Autre" id="menu_product_autre" sequence="30" parent="menu_product_cat_root"
+                          action="action_article_autre_view" groups="product.group_product_variant"/>
+
+        <record model="ir.actions.act_window" id="action_article_produit_fini_view">
+            <field name="name">Produits finis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="product.product_search_form_view"/>
+            <field name="domain">[('sale_ok', '=', True)]</field>
+            <field name="view_id" eval="False"/> <!-- Force empty -->
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to define a new product.
+              </p><p>
+                You must define a product for everything you sell, whether it's
+                a physical product, a consumable or a service you offer to
+                customers.
+              </p><p>
+                The product form contains information to simplify the sale
+                process: price, notes in the quotation, accounting data,
+                procurement methods, etc.
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Articles - produits finis" id="menu_product_fini" sequence="40" parent="menu_product_cat_root"
+                          action="action_article_produit_fini_view" groups="product.group_product_variant"/>
+    </data>
+</openerp>

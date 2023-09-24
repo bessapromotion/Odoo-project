@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="echeance_amount_wizard_form_view" model="ir.ui.view">
+            <field name="name">echeance.amount.wizard.form</field>
+            <field name="model">echeance.amount.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Changement du montant prevu">
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="montant_prevu"/>
+
+                        </group>
+                        <group>
+                            <label for="amount"/>
+                                <div name="amount_div" class="o_row">
+                                    <field name="amount"/>
+                                    <field name="currency_id" options="{'no_create': True, 'no_open': True}"/>
+                                </div>
+                            <field name="reste_global"/>
+                        </group>
+
+                    </group>
+                    <group>
+                        <field name="msg"/>
+                    </group>
+
+                    <footer>
+                         <button class="oe_highlight" string="Appliquer" name="action_appliquer2" type="object"/> or
+                         <button class="oe_link" string="Annuler" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

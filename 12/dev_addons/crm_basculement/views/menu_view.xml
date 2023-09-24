@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+                <menuitem name="Basculements" id="menu_basculement" sequence="20" parent="crm_operation.menu_operation_1" groups="sales_team.group_sale_salesman"
+                          action="action_crm_basculement_tree_view"/>
+
+    </data>
+</openerp>

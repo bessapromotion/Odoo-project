@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_project_echeancier_form" model="ir.ui.view">
+            <field name="name">project.project.echeancier.form</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+
+<!--                <field name="label_tasks" position="after">-->
+<!--                    <field name="code"/>-->
+<!--                </field>-->
+                <notebook position="inside">
+                    <page string="Détails">
+                        <group>
+                            <group>
+                                <label for="street" string="Adresse"/>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Rue..." class="o_address_street" />
+                                    <field name="street2" placeholder="Rue 2..." class="o_address_street" />
+                                    <field name="commune_id" placeholder="Commune" class="o_address_city" />
+                                    <!--<field name="city" placeholder="Ville" class="o_address_city" />-->
+                                    <field name="state_id" class="o_address_state" placeholder="Wilaya" options="{&quot;no_open&quot;: True}" context="{'country_id': country_id, 'zip': zip}"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip" />
+                                    <field name="country_id" placeholder="Pays" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                                </div>
+                            </group>
+                            <group>
+                                <field name="code"/>
+                                <field name="date_debut"/>
+                                <field name="date_fin"/>
+                                <field name="duree_estimee"/>
+                                <field name="taux_avancement"/>
+
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                                <field name="nbr_biens"/>
+                                <field name="nbr_libre"/>
+                                <field name="nbr_reserv"/>
+                                <field name="nbr_preres"/>
+                                <field name="nbr_livre"/>
+                            </group>
+
+                        </group>
+                    </page>
+                    <page string="Echéancier">
+                        <group>
+                            <group>
+                                <field name="ech_modele_id"/>
+                                <button string="Appliquer l'echeancier modele" name="appliquer_echeancier_modele" type="object" class="oe_highlight"/>
+                            </group>
+                            <group>
+                                <field name="taux_avancement_pi" nolabel="1" widget="percentpie"/>
+                                <button string="Mies a jour de l'echeancier" name="maj_echeancier" type="object" class="oe_highlight"/>
+                            </group>
+                        </group>
+                        <separator string="Echéancier modele"/>
+                        <field name="echeancier_modele_ids">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="project_id" invisible="1"/>
+                                <field name="taux_av"/>
+                                <field name="taux_py"/>
+                                <field name="nbr_jour"/>
+                            </tree>
+                        </field>
+                        <separator string="Echéancier a appliquer"/>
+                        <field name="echeancier_ids">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="project_id" invisible="1"/>
+                                <field name="taux_av"/>
+                                <field name="taux_py"/>
+                                <field name="date"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record id="view_project_echeancier_tree" model="ir.ui.view">
+            <field name="name">project.project.echeancier.tree</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="code"/>
+                    <field name="taux_avancement_pi" widget="progressbar"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="view_project_echeancier_kanban" model="ir.ui.view">
+            <field name="name">project.project.echeancier.kanban</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_kanban"/>
+            <field name="arch" type="xml">
+                <field name="alias_name" position="after">
+                    <field name="code"/>
+
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

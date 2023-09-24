@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="leads_import_model_tree_view">
+            <field name="name">leads.import.model.tree</field>
+            <field name="model">leads.import.model</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree toolbar="1" string="Modele importation des leads">
+                    <field name="name"/>
+                    <!--<field name="use_to"/>-->
+                    <field name="use_number_1"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="leads_import_model_form_view">
+        <field name="name">leads.import.model.form</field>
+        <field name="model">leads.import.model</field>
+
+        <field name="arch" type="xml">
+            <form string="Modele importation des leads">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="use_number_1"/>
+                    </group>
+                    <notebook>
+                        <page string="Numeros de colonnes"  attrs="{'invisible': [('use_number_1','!=', 'nombre')]}">
+                            <!--<label string="une colonne qui n'existe pas sur le fichier excel doit etre représentée par la valeur -1"/><separator/>-->
+                            <group>
+                                <group>
+                                    <field name="col_id"/>
+                                    <field name="col_nom"/>
+                                    <field name="col_prenom"/>
+                                    <field name="col_date"/>
+                                    <field name="col_adresse"/>
+
+                                </group>
+                                <group>
+                                    <field name="col_phone"/>
+                                    <field name="col_email"/>
+                                    <field name="col_stage"/>
+                                    <field name="col_owner"/>
+
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Noms des colonnes" attrs="{'invisible': [('use_number_1','=', 'nombre')]}">
+                            <!--<label string="une colonne qui n'existe pas sur le fichier excel doit etre représentée par un vide"/><separator/>-->
+                            <group>
+                                <group>
+                                    <field name="col_a_id"/>
+                                    <field name="col_a_nom"/>
+                                    <field name="col_a_prenom"/>
+                                    <field name="col_a_date"/>
+                                    <field name="col_a_adresse"/>
+                                </group>
+                                <group>
+                                    <field name="col_a_phone"/>
+                                    <field name="col_a_email"/>
+                                    <field name="col_a_stage"/>
+                                    <field name="col_a_owner"/>
+                                </group>
+                            </group>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_leads_import_model_tree_view">
+            <field name="name">Modele importation des leads</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">leads.import.model</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="filter" eval="True"/>
+            <field name="view_id" ref="leads_import_model_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cliquez ici pour créer un nouveau modele.
+                </p><p>
+
+                </p><p>
+
+                </p>
+            </field>
+        </record>
+
+    <menuitem id="lead_model_menu" name="Modèles importation des leads" parent="crm.crm_config_settings_menu" sequence="90" action="action_leads_import_model_tree_view" groups="base.group_system"/>
+
+    </data>
+</openerp>

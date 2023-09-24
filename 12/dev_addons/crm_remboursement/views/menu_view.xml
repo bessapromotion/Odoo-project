@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+            <menuitem name="Remboursements" id="menu_remboursement_root" parent="crm_operation.menu_operation" groups="sales_team.group_sale_salesman" sequence="40"/>
+                <!--<menuitem name="Par Factures" id="menu_facture_1" parent="menu_paiement_root" groups="base.group_user" sequence="10" action="account.action_invoice_tree1"/>-->
+
+                <menuitem name="Procédure d'annulation" id="menu_proc_annulation" parent="menu_remboursement_root" groups="sales_team.group_sale_salesman"
+                          action="action_crm_desistement_tree_view"  sequence="10"/>
+
+                <menuitem name="Suivi des remboursements" id="menu_proc_remboursement" parent="menu_remboursement_root" groups="sales_team.group_sale_salesman"
+                          action="action_crm_remboursement_tree_view"  sequence="20"/>
+
+    </data>
+</openerp>

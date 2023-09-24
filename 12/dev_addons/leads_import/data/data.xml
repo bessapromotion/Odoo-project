@@ -1,0 +1,35 @@
+<openerp>
+    <data>
+        <!-- chargement de la table type produit-->
+
+         <record model="crm.lifecycle" id="lc_subscriber">
+             <field name="name">Subscriber</field>
+         </record>
+
+         <record model="crm.lifecycle" id="lc_lead">
+             <field name="name">Lead</field>
+         </record>
+
+         <record model="crm.lifecycle" id="lc_sql">
+             <field name="name">Sales Qualified Lead</field>
+         </record>
+
+         <record model="crm.lifecycle" id="lc_mql">
+             <field name="name">Marketing Qualified Lead</field>
+         </record>
+
+         <record model="crm.lifecycle" id="lc_opportunity">
+             <field name="name">Opportunity</field>
+         </record>
+
+         <record model="crm.lifecycle" id="lc_customer">
+             <field name="name">Customer</field>
+         </record>
+
+         <record model="crm.lifecycle" id="lc_other">
+             <field name="name">Other</field>
+         </record>
+
+
+    </data>
+</openerp>

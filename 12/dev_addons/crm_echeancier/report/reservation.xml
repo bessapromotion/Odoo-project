@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_reservation" inherit_id="crm_operation.report_reservation">
+            <xpath expr="//table[3]" position="before">
+                <p><strong>Coût du logement : <span t-esc="o.amount_total"  t-options = '{"widget" : "float", "precision":2}'/> DA
+                <br/>
+                <span t-esc="o.montant_lettre"/>. Hors Taxes</strong></p>
+                <br/>
+			</xpath>
+
+    </template>
+
+</odoo>

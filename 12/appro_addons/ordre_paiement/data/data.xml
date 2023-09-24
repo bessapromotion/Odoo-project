@@ -1,0 +1,25 @@
+<openerp>
+    <data>
+         <!-- chargement de la table mode de paiement-->
+         <record model="payment.mode" id="mode_cheque">
+             <field name="name">Cheque</field>
+         </record>
+
+         <record model="payment.mode" id="mode_cheque_banque">
+             <field name="name">Cheque/Banque</field>
+         </record>
+
+         <record model="payment.mode" id="mode_espece">
+             <field name="name">Espece</field>
+         </record>
+
+         <record model="payment.mode" id="mode_virement">
+             <field name="name">Virement</field>
+         </record>
+
+         <record model="payment.mode" id="mode_no">
+             <field name="name">Non precisé</field>
+         </record>
+
+    </data>
+</openerp>

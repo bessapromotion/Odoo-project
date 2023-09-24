@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<!--    <record id="action_creer_paiement_out_wizard" model="ir.actions.act_window">-->
+<!--        <field name="name">Nouveau remboursement</field>-->
+<!--        <field name="type">ir.actions.act_window</field>-->
+<!--        <field name="res_model">creer.paiement.out.wizard</field>-->
+<!--        <field name="view_type">form</field>-->
+<!--        <field name="view_mode">form</field>-->
+<!--        <field name="target">new</field>-->
+<!--    </record>-->
+
+    <!-- visite -->
+    <record model="ir.ui.view" id="crm_remboursement_tree_view">
+        <field name="name">crm.remboursement.tree</field>
+        <field name="model">crm.remboursement</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree toolbar="1" string="Remboursement" decoration-info="state == 'open'" decoration-muted="state == 'cancel'" >
+                <field name="name"/>
+                <field name="reservation_id"/>
+                <field name="annulation_id"/>
+                <field name="date"/>
+                <field name="partner_id"/>
+                <field name="montant_a_rembourser"/>
+                <field name="montant_rembourse"/>
+                <field name="montant_restant"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="crm_remboursement_form_view">
+        <field name="name">Remboursement</field>
+        <field name="model">crm.remboursement</field>
+        <field name="arch" type="xml">
+            <form string="Remboursement">
+                <header>
+                    <button string="Enregistrer un paiement" name="action_create_payment" type="object" class="oe_highlight" states="open"/>
+
+<!--                    <button name="create_dossier" string="Créer le dossier" states="desistement" type="object"/>-->
+
+<!--                    <button name="action_create_annulation" string="Créer document d'annulation" class="oe_highlight" states="dossier" type="object"/>-->
+<!--                    <button name="action_scvalidation" string="Envoi au superviseur commercial pour validation" class="oe_highlight" states="annulation" type="object"/>-->
+<!--                    <button name="action_comptabilite" string="Valider et envoyer a la comptabilité pour controle" class="oe_highlight" states="scvalidation" type="object"/>-->
+                    <button name="action_cancel" string="Annuler le document" states="desistement" type="object"/>
+
+                    <field name="state" nolabel="1" widget="statusbar" statusbar_visible="open,done"/>
+                </header>
+                <sheet>
+                    <field name="photo" widget='image' class="oe_avatar" />
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <group>
+                            <field name="partner_id" />
+                            <field name="reservation_id"/>
+                            <field name="annulation_id"/>
+                        </group>
+                        <group>
+                            <field name="date" />
+                            <field name="commercial_id" />
+                            <field name="charge_rembours_id" />
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="montant_a_rembourser" />
+                            <field name="montant_rembourse" />
+                            <field name="montant_restant" />
+                        </group>
+
+                    </group>
+                    <notebook>
+                        <page string="Paiements">
+                            <field name="payment_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="payment_date"/>
+                                    <field name="communication"/>
+                                    <field name="amount" sum="totzl"/>
+                                    <field name="mode_paiement_id"/>
+                                    <field name="doc_payment_id"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Motif">
+                            <field name="motif"  />
+                        </page>
+                        <page string="Echéances payées">
+                            <field name="echeancier_ids">
+                                <tree readonly="1">
+                                    <field name="name"/>
+                                    <field name="label"/>
+                                    <field name="project_id"/>
+                                    <field name="date_creation"/>
+                                    <field name="date_prevue"/>
+                                    <field name="date_paiement"/>
+                                    <field name="montant_prevu" sum="Prevu"/>
+                                    <field name="montant" sum="Payed"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_crm_remboursement_tree_view">
+        <field name="name">Remboursements</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">crm.remboursement</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="crm_remboursement_tree_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Cliquez ici pour lancer une nouvelle procedure de remboursement.
+            </p><p>
+
+            </p><p>
+
+            </p>
+         </field>
+    </record>
+
+
+        <record id="view_crm_remboursement_filter" model="ir.ui.view">
+            <field name="name">crm.remboursement.search.view</field>
+            <field name="model">crm.remboursement</field>
+            <field name="arch" type="xml">
+                <search string="remboursement Search">
+             <!-- permet une recherche "directe" -->
+                     <group col="10" colspan="4">
+                        <field name="name"/>
+                        <field name="reservation_id"/>
+                        <field name="partner_id"/>
+                        <field name="commercial_id"/>
+                        <!--<field name="product_id"/>-->
+                        <field name="motif" />
+                    </group>
+                    <filter name="open" string="En cours" domain="[('state', '=', 'open')]"/>
+                    <filter name="cancel" string="Annulée" domain="[('state', '=', 'cancel')]"/>
+                    <!-- Permet le regroupement -->
+                     <!-- permet un filtrage -->
+                </search>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

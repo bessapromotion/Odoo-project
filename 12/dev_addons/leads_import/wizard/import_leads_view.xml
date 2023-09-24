@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="import_leads_wizard_form_view">
+            <field name="name">import.leads.wizard.form</field>
+            <field name="model">import.leads.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Importation leads">
+                    <!--<label string="Sélectionnez le fichier a importer"/><separator/>-->
+                    <group states="new">
+                        <group><field name="state" widget="radio"/></group>
+                        <group></group>
+                    </group>
+                    <group states="lead,payment,crm">
+                        <group>
+                            <field name="name" invisible="1"/>
+                            <field name="filename" invisible="1"/>
+                            <field name="w_file_name" widget='file'  filename="filename"/>
+                            <field name="model2_id" options="{'no_create':True}" states="lead"/>
+                            <field name="lifecycle_ids" widget='many2many_tags' options="{'no_create':True}" states="lead"/>
+                            <field name="print_report" invisible="1"/>
+                            <field name="cntrl_only"/>
+                        </group>
+                        <group></group>
+                    </group>
+                    <footer states="new">
+                        <button special="cancel" string="Annuler"/>
+                    </footer>
+                    <footer states="lead">
+                        <button name="action_import_lead" type="object" string="Importer Leads" class="oe_highlight"/>
+                        ou
+                        <button special="cancel" string="Annuler"/>
+                    </footer>
+                    <footer states="payment">
+                        <button name="action_import_payment" type="object" string="Importer Paiements" class="oe_highlight"/>
+                        ou
+                        <button special="cancel" string="Annuler"/>
+                    </footer>
+                    <footer states="crm">
+                        <button name="action_import_crm" type="object" string="Importer CRM" class="oe_highlight"/>
+                        ou
+                        <button special="cancel" string="Annuler"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="launch_import_leads_wizard"
+                    name="Opération d'importation"
+                    src_model="import.leads.wizard"
+                    res_model="import.leads.wizard"
+                    view_mode="form"
+                    target="new"
+                    key2="client_action_multi"/>
+
+        <menuitem action="launch_import_leads_wizard" id="import_leads_wizard_menu" parent="crm.crm_config_settings_menu" sequence="95"  groups="base.group_system"/>
+
+    </data>
+</openerp>

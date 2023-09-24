@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                string="Annulation"
+                id="act_report_annulation"
+                model="crm.annulation"
+                report_type="qweb-pdf"
+                menu="False"
+                name="crm_operation.report_annulation"
+                file="crm_operation.report_annulation"
+        />
+
+        <report
+                string="Réservation"
+                id="act_report_reservation"
+                model="crm.reservation"
+                report_type="qweb-pdf"
+                menu="False"
+                name="crm_operation.report_reservation"
+                file="crm_operation.report_reservation"
+        />
+
+<!--        <report-->
+<!--                string="Basculement"-->
+<!--                id="act_report_basculement"-->
+<!--                model="crm.basculement"-->
+<!--                report_type="qweb-pdf"-->
+<!--                name="crm_operation.report_basculement"-->
+<!--                file="crm_operation.report_basculement"-->
+<!--        />-->
+        <report
+            id="sale.action_report_saleorder"
+            string="Quotation / Order"
+            model="sale.order"
+            report_type="qweb-pdf"
+            menu="False"
+            file="sale.report_saleorder"
+            name="sale.report_saleorder"
+            print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)"
+        />
+    </data>
+</odoo>

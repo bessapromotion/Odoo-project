@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+ <!-- interface Clients -->
+		<record id="purchase_order_form_inherited" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherited</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='date_order']" position="after">
+                        <field name="mode_paiement_id" options ="{'no_create': True }"/>
+                        <field name="project_id" options ="{'no_create': True }"/>
+                        <field name="journal_id" options ="{'no_create': True }" domain = "[('type', '=', 'bank')]"/>
+                        <!--<field name="project_id" widget ="selection"/>-->
+                    </xpath>
+                    <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                          <attribute name="options">{"no_create": True}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='notes']" position="after">
+                        <group><field name="montant_lettre"/></group>
+                    </xpath>
+                </data>
+			</field>
+        </record>
+    </data>
+</odoo>

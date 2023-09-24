@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <!-- visite -->
+    <record model="ir.ui.view" id="crm_pre_reservation_tree_view">
+        <field name="name">crm.pre.reservation.tree</field>
+        <field name="model">crm.pre.reservation</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree toolbar="1" string="changement pre-reservation" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" >
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="product_id"/>
+                <field name="date"/>
+                <field name="commercial_id"/>
+                <field name="new_partner_id"/>
+                <field name="new_order_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="crm_pre_reservation_form_view">
+        <field name="name">Changement pre-reservation</field>
+        <field name="model">crm.pre.reservation</field>
+        <field name="arch" type="xml">
+            <form string="Changement Pre-reservation">
+                <header>
+                    <button name="action_validate" string="Valider le changement" class="oe_highlight" states="draft" type="object"/>
+                    <button name="action_cancel" string="Annuler le changement" states="draft" type="object"/>
+                    <field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,valid"/>
+                </header>
+                <sheet>
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <group>
+                            <field name="project_id" options='{"no_create": True}'/>
+                            <field name="product_id"  domain="[('project_id', '=', project_id)]" options='{"no_create": True}'/>
+                            <field name="order_id"/>
+                            <field name="client_id"/>
+
+                        </group>
+                        <group>
+                            <field name="date" />
+                            <field name="commercial_id" />
+                        </group>
+                        <group string="Information du bien">
+                            <field name="bloc"/>
+                            <field name="etage"/>
+                            <field name="format_id"/>
+                            <field name="orientation"/>
+                            <field name="superficie"/>
+                            <field name="prix_m2"/>
+                            <field name="price_2"/>
+                        </group>
+                        <group string="Nouvelle pré-réservation">
+                            <!--<field name="new_order_id"  domain="[('project_id', '=', b_project_id)]" domain="[('id', 'child_of', product_id.line_ids.order_id)]"/>-->
+                            <field name="new_order_id" options='{"no_create": True}' domain="[('project_id', '=', project_id)]"/>
+                            <field name="new_partner_id"/>
+                        </group>
+
+                    </group>
+                    <notebook>
+                        <page string="Motif">
+                            <field name="motif"/>
+
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_crm_pre_reservation_tree_view">
+        <field name="name">Changement PreReservation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">crm.pre.reservation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="crm_pre_reservation_tree_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Cliquez ici pour créer un nouveau changement de pré réservation.
+            </p><p>
+
+            </p><p>
+
+            </p>
+         </field>
+    </record>
+
+
+        <record id="view_crm_pre_reservation_filter" model="ir.ui.view">
+            <field name="name">crm.pre.reservation.search.view</field>
+            <field name="model">crm.pre.reservation</field>
+            <field name="arch" type="xml">
+                <search string="Changement Search">
+             <!-- permet une recherche "directe" -->
+                     <group col="10" colspan="4">
+                        <field name="name"/>
+                        <field name="new_partner_id"/>
+                        <field name="commercial_id"/>
+                        <field name="project_id"/>
+                        <field name="product_id"/>
+                        <field name="motif" />
+                    </group>
+                    <filter name="draft" string="Nouvelle" domain="[('state', '=', 'draft')]"/>
+                    <filter name="valid" string="Validée" domain="[('state', '=', 'valid')]"/>
+                    <filter name="cancel" string="Annulée" domain="[('state', '=', 'cancel')]"/>
+                    <!-- Permet le regroupement -->
+                    <separator/>
+                    <group expand="0" string="Grouper par" >
+                        <filter string="Commercial" name="commercial_id" context="{'group_by':'commercial_id'}" />
+                    </group>
+                    <separator/>
+                     <!-- permet un filtrage -->
+                </search>
+            </field>
+        </record>
+
+    </data>
+</openerp>

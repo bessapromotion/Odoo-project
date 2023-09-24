@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_type_user,product.type user,model_product_type,sales_team.group_sale_salesman,1,1,0,0
+access_product_type_manager,product.type manager,model_product_type,sales_team.group_sale_manager,1,1,1,1
+access_product_format_user,product.format user,model_product_format,sales_team.group_sale_salesman,1,1,0,0
+access_product_format_manager,product.format manager,model_product_format,sales_team.group_sale_manager,1,1,1,1
+access_product_orientation_user,product.orientation user,model_product_orientation,sales_team.group_sale_salesman,1,1,0,0
+access_product_orientation_manager,product.orientation manager,model_product_orientation,sales_team.group_sale_manager,1,1,1,1
+access_product_etage_user,product.etage user,model_product_etage,sales_team.group_sale_salesman,1,1,0,0
+access_product_etage_manager,product.etage manager,model_product_etage,sales_team.group_sale_manager,1,1,1,1
+access_mode_paiement_user,mode.paiement user,model_mode_paiement,account.group_account_user,1,0,0,0
+access_mode_paiement_manager,mode.paiement manager,model_mode_paiement,account.group_account_manager,1,1,1,1

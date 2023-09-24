@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<template id="report_basculement">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <p  align="left">Réf: <span t-esc="o.name"/></p>
+                    <p  style="margin-top : -40px;" align="right">Alger le : <span t-field="o.date"/></p>
+
+                    <h2 class="text-center" ><strong>DECISION DE BASCULEMENT</strong></h2>
+                    <br/>
+                    <!--<h3 class="text-center" style="">N° <span t-field="o.name"/></h3>-->
+                    <p style="font-size:16px;"> Le Gérant, </p>
+                    <p> Vu les statuts de la EURL BESSA PROMOTION IMMOBILIERE, B.P.I<br/>
+                     Vu le décret législatif 11/04/ du 17/02/2011 relatif à l'activité de la promotion immobilière</p>
+                    <p><strong>DECIDE</strong></p>
+                    <p> <strong t-esc="o.partner_id.title.name"/> &#160;&#160; <strong t-esc="o.partner_id.name"/> &#160; Né(e) le &#160; <strong t-esc="o.partner_id.birthday.strftime('%d/%m/%Y')" /> &#160; A <strong t-esc="o.partner_id.place_of_birth"/><br/>
+                        Est attributaire d'un logement promotionnel sis au <strong t-esc="o.a_product_id.project_id.street"/><t t-if="o.a_product_id.project_id.street2"> <span> , </span><strong t-esc="o.a_product_id.project_id.street2"/></t> <t t-if="o.a_product_id.project_id.commune_id"> <span> , </span><strong t-esc="o.a_product_id.project_id.commune_id"/></t>  <t t-if="o.a_product_id.project_id.state_id"> <span> , </span><strong t-esc="o.a_product_id.project_id.state_id.name"/></t>,  est basculé vers le logement promotionnel sis au
+                        <strong t-esc="o.affectation_ids[0].project_id.street"/><t t-if="o.affectation_ids[0].project_id.street2"> <span> , </span><strong t-esc="o.affectation_ids[0].project_id.street2"/></t> <t t-if="o.affectation_ids[0].project_id.commune_id"> <span> , </span><strong t-esc="o.affectation_ids[0].project_id.commune_id"/></t>  <t t-if="o.affectation_ids[0].project_id.state_id"> <span> , </span><strong t-esc="o.affectation_ids[0].project_id.state_id.name"/></t>.
+                    </p>
+                    <table class="table table-condensed" style="margin-top:20px;border:1px solid black;">
+                       <tr>
+                           <td class="text-center" style="border:1px solid black;vertical-align:middle;padding-left:10px;width:50%">
+                               <strong>Ancienne affectation</strong>
+                           </td>
+                           <td class="text-center" style="border:1px solid black;vertical-align:middle;padding-left:10px;;width:50%">
+                               <strong>Nouvelle affectation</strong>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;">
+                               Réservation : <strong><span t-esc="o.reservation_id.name"/></strong> du <strong><span t-esc="o.reservation_id.date.strftime('%d/%m/%Y')"/></strong><br/>
+                               Bien : <strong><span t-esc="o.a_product_id.name"/></strong><br/>
+                               Projet : <strong><span t-esc="o.a_product_id.project_id.name"/></strong><br/>
+                               Typologie : <strong><span t-esc="o.a_product_id.format_id.name"/></strong><br/>
+                               Bloc : <strong><span t-esc="o.a_product_id.bloc"/></strong><br/>
+                               Etage : <strong><span t-esc="o.a_product_id.etage.name"/></strong><br/>
+                               Orientation : <strong><span t-esc="o.a_product_id.orientation.name"/></strong><br/>
+                               Superficie : <strong><span t-esc="o.a_product_id.superficie"/> M²</strong><br/>
+                               Prix m2 : <strong><span t-esc="o.a_product_id.prix_m2"/> m2</strong><br/>
+                               Montant (Hors Taxes): <strong><span t-esc="o.prix_vente" t-options = '{"widget" : "float", "precision":2}'/> DZD</strong><br/>
+                               En lettres: <strong><span t-esc="o.a_montant_lettre"/> &#160;Algérien </strong><br/>
+                               Ancien numéro de contrat : <strong><span t-esc="o.order_id.num_dossier"/></strong><br/>
+                           </td>
+                           <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;">
+                               Réservation : <strong><span t-esc="o.b_reservation_id.name"/></strong> du <strong><span t-esc="o.b_reservation_id.date.strftime('%d/%m/%Y')"/></strong><br/>
+                               Bien : <strong><span t-esc="o.affectation_ids[0].name.name"/></strong><br/>
+                               Projet : <strong><span t-esc="o.affectation_ids[0].project_id.name"/></strong><br/>
+                               Typologie : <strong><span t-esc="o.affectation_ids[0].format_id.name"/></strong><br/>
+                               Bloc : <strong><span t-esc="o.affectation_ids[0].bloc"/></strong><br/>
+                               Etage : <strong><span t-esc="o.affectation_ids[0].etage.name"/></strong><br/>
+                               Orientation : <strong><span t-esc="o.affectation_ids[0].orientation.name"/></strong><br/>
+                               Superficie : <strong><span t-esc="o.affectation_ids[0].superficie"/> M²</strong><br/>
+                               Prix m2 : <strong><span t-esc="o.affectation_ids[0].prix_m2"/> m2</strong><br/>
+                               Montant (Hors Taxes): <strong><span t-esc="o.b_price_2" t-options = '{"widget" : "float", "precision":2}'/> DZD</strong><br/>
+                               En lettres: <strong><span t-esc="o.b_montant_lettre"/> &#160;Algérien </strong><br/>
+                               Nouveau numéro de contrat : <strong><span t-esc="o.b_order_id.num_dossier"/></strong><br/>
+                           </td>
+                       </tr>
+                    </table>
+                    <p>Commercial(e) chargé(e) du basculement : <strong><span t-esc="o.commercial_id.name"/></strong></p>
+                    <p>Motif de basculement : <strong><span t-esc="o.motif"/></strong></p>
+                    <!--<table class="table table-condensed" style="margin-top:20px;border:1px solid black;">-->
+                       <!--<tr>-->
+                           <!--<td class="text-center" style="border:1px solid black;vertical-align:middle;padding-left:10px;width:100%">-->
+                               <!--<strong>Motif de basculement</strong>-->
+                           <!--</td>-->
+                       <!--</tr>-->
+                        <!--<tr>-->
+                           <!--<td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;">-->
+                               <!--<span t-esc="o.motif"/>-->
+                           <!--</td>-->
+                        <!--</tr>-->
+                    <!--</table>-->
+                    <table class="table table-condensed" style="margin-top:20px;border:1px solid black;">
+                       <tr>
+                           <td class="text-center" style="border:1px solid black;vertical-align:middle;padding-left:10px;width:50%">
+                               <strong>Signature Client</strong>
+                           </td>
+                           <td class="text-center" style="border:1px solid black;vertical-align:middle;padding-left:10px;width:50%">
+                               <strong>Service Commerical</strong>
+                           </td>
+                       </tr>
+                        <tr>
+                           <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;">
+                               <br/><br/><br/>
+                           </td>
+                           <td class="text-left" style="border:1px solid black;vertical-align:middle;padding-left:10px;">
+                               <br/><br/><br/>
+                           </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+</odoo>

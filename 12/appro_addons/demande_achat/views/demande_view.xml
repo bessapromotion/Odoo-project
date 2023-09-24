@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<!-- la demande -->
+  		<record model="ir.ui.view" id="demande_achat_tree_view">
+            <field name="name">demande.achat.tree</field>
+            <field name="model">demande.achat</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+				<tree toolbar="1" string="Demandes approvisionnements"
+                           decoration-success="state == 'done'"
+                           decoration-muted="state == 'cancel'"
+                           decoration-warning="state in ('soumis', 'stock', 'service')"
+                           decoration-info="state == 'new'">
+                	<field name="name"/>
+                    <field name="ddate"/>
+                    <field name="user_id"/>
+                    <field name="type_demande"/>
+                    <field name="project_id"/>
+                    <field name="employe_id"/>
+				  	<field name="department_id"/>
+					<field name="location_id"/>
+                    <field name="destination"/>
+                    <field name="date_prevue"/>
+                    <field name="observation"/>
+                    <field name="company_id" groups="base.group_multi_company" />
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <!--filtre-->
+
+		<record id="demande_achat_filter" model="ir.ui.view">
+            <field name="name">demande.achat.filter</field>
+            <field name="model">demande.achat</field>
+            <field name="arch" type="xml">
+                <search string="Demande d'approvisienement">
+                    <field name="name"/>
+                    <field name="employe_id"/>
+                    <field name="department_id"/>
+                    <filter name="encours" string="En cours de traitement" domain="[('state','in',('new','soumis','stock','service'))]"/>
+                    <!--<filter name="encours" string="En cours de traitement" domain="[('state','in',('new','soumis','stock','purchase'))]"/>-->
+                    <filter name="traitees" string="Demandes Traitées" domain="[('state','in',['done'])]"/>
+                    <filter name="Annulees" string="Demandes annulées" domain="[('state','in',['cancel'])]"/>
+                    <group expand="0" string="Grouper par...">
+                        <filter name="department_id" string="Département" domain="[]" context="{'group_by':'department_id'}" help="Département demandeur"/>
+                        <filter name="type_demande" string="Type Demande" domain="[]" context="{'group_by':'type_demande'}" help="Type Demande"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_purchase_requisition_inherit2_search" model="ir.ui.view">
+          <field name="name">purchase.requisition.search.expand2.filter</field>
+          <field name="model">purchase.requisition</field>
+          <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_filter"/>
+          <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+              <field name="demande_id" />
+            </xpath>
+          </field>
+        </record>
+
+        <record id="action_requisition2_view" model="ir.actions.act_window">
+            <field name="name">Consultation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.requisition</field>
+            <field name="context">{'search_default_demande_id': [active_id], 'default_demande_id': active_id}</field>
+            <!--<field name="domain">[('picking_type_id','=',7)]</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_purchase_requisition_inherit2_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                 Créer une nouvelle consultation.
+              </p><p>
+              </p>
+            </field>
+        </record>
+
+		<record model="ir.ui.view" id="demande_achat_form_view">
+            <field name="name">demande.achat.form</field>
+            <field name="model">demande.achat</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+				<form string="Demande d'achat">
+                    <header>
+                        <button name="action_send_to_validation" string="Envoi pour validation" states="new" class="oe_highlight" type="object"
+                        confirm="Voulez-vous envoyer la demande pour validation ?"/>
+                        <button name="action_cancel" string="Annuler la demande" states="new" type="object"
+                        confirm="Voulez-vous annuler la demande ?" />
+                        <!--logistique-->
+                        <button name="action_valider_tout" string="Valider la demande" states="soumis" class="oe_highlight" type="object" groups="demande_achat.validation_group"
+                        confirm="Voulez-vous valider la demande ?"/>
+                        <button name="action_refuser_tout" string="Refuser la demande" states="soumis" type="object"  groups="demande_achat.validation_group"
+                        confirm="Voulez-vous annuler la demande ?"/>
+                        <!--<button name="action_verification_stock" string="envoir pour Verification stock" states="soumis" class="oe_highlight" type="object"  groups="purchase.group_purchase_manager,purchase.group_purchase_user"-->
+                        <!--confirm="Voulez-vous envoyer la demande pour verification les disponibilités en stock ?"/>-->
+                        <!--stock-->
+                        <button name="reverifie_stock" string="Revérifier la disponibilité" states="stock" type="object"  groups="stock.group_stock_manager,stock.group_stock_user"/>
+                        <button name="action_demande_wizard" string="Valider et créer les documents" states="stock,service" class="oe_highlight" type="object" groups="purchase.group_purchase_user,stock.group_stock_user"/>
+
+<!--                        <button name="action_create_document" string="Créer les documents (Mise a disposition) et (Achat)" states="stock" class="oe_highlight" type="object"  groups="stock.group_stock_manager,stock.group_stock_user"-->
+<!--                        confirm="Voulez-vous créer les documents d'affectation pour les produits disponibles et les demandes d'approvisionnement pour les produits non disponibles ?"/>-->
+<!--                        <button name="action_create_document" string="Créer le document de consultation (Achat)" states="service" class="oe_highlight" type="object"  groups="stock.group_stock_manager,stock.group_stock_user"-->
+<!--                        confirm="Voulez-vous créer le document de consultation pour les services demandés ?"/>-->
+<!--                        <button name="action_create_document" string="Créer le document consultation" states="service" class="oe_highlight" type="object"  groups="base.group_user"-->
+<!--                        confirm="Voulez-vous créer le document Achat (service) ?"/>-->
+
+                        <field name="state" widget="statusbar" statusbar_visible="new,soumis,done" />
+				    </header>
+					<sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="action" name="%(action_requisition2_view)d" attrs="{'invisible':[('has_requisition','=', False)]}" icon="fa-stack-exchange">
+                                <field string="Approvisionnement(s)" name="nbr_requisition" widget="statinfo" groups="purchase.group_purchase_user,stock.group_stock_user"/>
+                            </button>
+                            <button class="oe_stat_button" type="action" name="%(action_stock_affectation2)d" attrs="{'invisible':[('nbr_affectation','=', 0)]}" icon="fa-sign-out">
+                                <field string="Mise à dispositions" name="nbr_affectation" widget="statinfo" groups="stock.group_stock_user"/>
+                            </button>
+                        </div>
+                        <h1>
+                            <label for="name" string="Demande achat interne # "/>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+						<group>
+                            <group>
+                                <field name="ddate"/>
+                                <field name="user_id" readonly="1"/>
+                                <field name="dem_global" invisible="1"/>
+                                <field name="has_requisition" invisible="1"/>
+                                <field name="company_id" groups="base.group_multi_company" options='{"no_open": True, "no_create": True}'/>
+                                <field name="type_demande"/>
+                                <field name="project_id" options="{'no_create': True}"/>
+                                <field name="destination" attrs="{'invisible':[('type_demande','=', 'service')]}"/>
+                                <field name="stock_destination_id"
+                                       domain="[('usage', '=', 'internal'), ('id', '!=', location_id)]"
+                                       options='{"no_open": True, "no_create": True}'
+                                       attrs="{'invisible':['|', ('type_demande','=', 'service'), ('destination', '!=', 'entrepot')]}"/>
+                                <field name="location_id"
+                                       domain="[('usage', '=', 'internal')]"
+                                       options='{"no_open": True, "no_create": True}'
+                                       groups="stock.group_stock_user"
+                                       attrs="{'invisible':['|', ('type_demande','=', 'service'), ('state', 'not in', ('stock', 'done'))]}"/>
+
+                                <!--<field name="responsable_id" string="Assignée a"/>-->
+                            </group>
+							<group>
+								<field name="employe_id" options='{"no_open": True, "no_create": True}' attrs="{'invisible':[('dem_global','=',True)]}"/>
+								<field name="department_id" options='{"no_open": True, "no_create": True}' attrs="{'invisible':[('dem_global','=',True)]}"/>
+<!--								<field name="site_id" domain="[('site','=',True)]" options='{"no_open": True, "no_create": True}' attrs="{'invisible':[('dem_global','=',True)]}"/>-->
+
+                                <field name="employe_glb_id" options='{"no_open": True, "no_create": True}' attrs="{'invisible':[('dem_global','=',False)]}" />
+								<field name="department_glb_id" options='{"no_open": True, "no_create": True}' attrs="{'invisible':[('dem_global','=',False)]}"/>
+<!--								<field name="site_glb_id" domain="[('site','=',True)]" options='{"no_open": True, "no_create": True}' attrs="{'invisible':[('dem_global','=',False)]}"/>-->
+
+                                <field name="date_prevue"/>
+                                <!--<field name="location_id" required="1"  options='{"no_create": True}' domain="[('active','=',True), ('company_id','=',1), ('usage','=','internal'),]"/>-->
+                                <field name="dem_global" invisible="1"/>
+                                <!--attrs="{'invisible':[('state','!=','stock')]}"-->
+
+                                <field name="motif_refus" attrs="{'invisible':[('state','!=','cancel')]}"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Besoins" attrs="{'invisible':[('type_demande','=', 'service')]}">
+                                <field name="line_ids" nolabel="1" >
+										<tree editable="bottom"
+                                              decoration-warning="state == 'waiting'" decoration-success="state == 'dispo'"
+                                              decoration-info="state == 'purchase'" decoration-muted="state == 'refus'"
+                                              decoration-danger="state == 'error'">
+											<field name="product_id" domain="[('purchase_ok', '=', True),('type', '=', 'product')]" options='{"no_create": True}'/>
+											<field name="description"/>
+											<field name="location_id" invisible="1"/>
+											<field name="qty"/>
+											<field name="uom_id"/>
+											<field name="qty_dispo" groups="stock.group_stock_user" attrs="{'column_invisible': [('parent.state', 'in', ('new', 'soumis'))]}"/>
+											<field name="qty_achat" groups="stock.group_stock_user" attrs="{'column_invisible': [('parent.state', 'in', ('new', 'soumis'))]}"/>
+											<field name="observation"/>
+                                            <field name="state" groups="purchase.group_purchase_user,stock.group_stock_user" attrs="{'column_invisible': [('parent.state', 'in', ('new', 'soumis'))]}"/>
+                                            <button name="action_valider"  string="Valider la ligne" states="waiting" type="object" icon="fa-check" class="btn-success" groups="demande_achat.validation_group"/>
+                                            <button name="action_refuser"  string="Refuser la ligne" states="waiting" type="object" icon="fa-close" class="btn-danger" groups="demande_achat.validation_group"/>
+                                            <!--<button name="action_disponible"  string="Disponible en stock" states="valid" type="object" icon="fa-check-square-o" groups="stock.group_stock_user"/>-->
+                                            <!--<button name="action_a_acheter"  string="A acheter" states="valid" type="object" icon="fa-money" groups="stock.group_stock_user"/>-->
+                                        </tree>
+                                </field>
+							</page>
+                            <page string="Besoins" attrs="{'invisible':[('type_demande','=', 'achat')]}">
+                                <field name="line_service_ids" nolabel="1">
+                                    <tree editable="buttom" decoration-warning="state == 'waiting'" decoration-success="state == 'dispo'"
+                                              decoration-info="state == 'purchase'" decoration-muted="state == 'refus'">
+                                            <field name="product_id"  domain="[('purchase_ok', '=', True),('type', '=', 'service')]"/>
+											<field name="description"/>
+											<field name="qty"/>
+											<field name="uom_id"/>
+											<field name="observation"/>
+                                            <field name="state" groups="purchase.group_purchase_user,stock.group_stock_user" attrs="{'column_invisible': [('parent.state', 'in', ('new', 'soumis'))]}"/>
+                                            <button name="action_valider"  string="Valider la demande" attrs="{'invisible':[('state','!=', 'waiting')]}" type="object" icon="fa-check" class="btn-success" groups="purchase.group_purchase_manager"/>
+                                            <button name="action_refuser"  string="Refuser la demande" attrs="{'invisible':[('state','!=', 'waiting')]}" type="object" icon="fa-close" class="btn-danger" groups="purchase.group_purchase_manager"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Observation">
+                                <field name="observation"/>
+                            </page>
+						</notebook>
+					</sheet>
+                    <div class="oe_chatter">
+                    	<field name="message_follower_ids" widget="mail_followers" modifiers="{}"/>
+                    	<field name="message_ids" widget="mail_thread" modifiers="{}"/>
+                	</div>
+				</form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_demande_achat_tree_view">
+            <field name="name">Demandes internes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">demande.achat</field>
+            <field name="view_type">form</field>
+			<!--<field name="search_view_id" ref="demande_achat_filter"/>-->
+            <field name="domain">[('dem_global', '=', False)]</field>
+            <field name="context">{'search_default_encours': 1, 'default_dem_global': False}</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="demande_achat_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Cliquez ici pour créer une nouvelle demande interne.
+                </p><p>
+
+                </p><p>
+
+                </p>
+            </field>
+		</record>
+        <!--demande globale pour les stocks-->
+        <record model="ir.actions.act_window" id="action_demande_achat_globale_view">
+            <field name="name">Demandes internes gloables</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">demande.achat</field>
+            <field name="view_type">form</field>
+			<!--<field name="search_view_id" ref="demande_achat_filter"/>-->
+            <field name="domain">[('dem_global', '=', True)]</field>
+            <field name="context">{'default_state': 'stock', 'default_dem_global': True}</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="demande_achat_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Cliquez ici pour créer une nouvelle demande interne globale.
+                </p><p>
+
+                </p><p>
+
+                </p>
+            </field>
+		</record>
+
+        <record model="ir.actions.act_window" id="action_mes_demandes_appro_view">
+            <field name="name">Mes demandes internes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">demande.achat</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field eval="False" name="view_id"/>
+            <!--<field name="search_view_id" ref="demande_achat_filter"/>-->
+            <field name="domain">[('user_id','=',uid)]</field>
+            <field name="context">{'default_dem_global':False}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Cliquez ici pour créer une nouvelle demande interne.
+                </p><p>
+
+                </p><p>
+
+                </p>
+             </field>
+        </record>
+
+    <record id="action_mes_demandes_appro_view1" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="demande_achat_tree_view"/>
+        <field name="act_window_id" ref="action_mes_demandes_appro_view"/>
+    </record>
+
+    <record id="action_mes_demandes_appro_view2" model="ir.actions.act_window.view">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="demande_achat_form_view"/>
+        <field name="act_window_id" ref="action_mes_demandes_appro_view"/>
+    </record>
+
+ <!-- Top menu item -->
+
+        <!--menu-->
+        <menuitem name="Demandes" id="menu_demande_root" sequence="10" groups="base.group_user" web_icon="demande_achat,static/description/icon.png"/>
+            <menuitem name="Demandes" id="menu_demande_0" parent="menu_demande_root" sequence="0" groups="base.group_user"/>
+                <menuitem name="Mes demandes internes" action="action_mes_demandes_appro_view" id="menu_mes_demandes_achat" parent="menu_demande_0" sequence="10"  groups="base.group_user"/>
+                <menuitem name="Demandes internes" action="action_demande_achat_tree_view" id="menu_demande_0_1"
+                    parent="menu_demande_0" sequence="20"  groups="purchase.group_purchase_user,stock.group_stock_user"/>
+
+            <!--menu dans le module achat-->
+            <menuitem name="Demandes internes" id="menu_demande_1" parent="purchase.menu_purchase_root" sequence="0" groups="purchase.group_purchase_user"/>
+                <menuitem name="Demandes internes" action="action_demande_achat_tree_view" id="menu_demande_achat" parent="menu_demande_1" sequence="0"  groups="purchase.group_purchase_user"/>
+
+            <!--menu dans le module stock-->
+            <menuitem name="Demandes internes" id="menu_demande_2" parent="stock.menu_stock_root" sequence="0" groups="stock.group_stock_user"/>
+            <menuitem name="Suivi des demandes internes"  id="menu_demande_achat2" action="action_demande_achat_tree_view"
+                parent="menu_demande_2" sequence="10" groups="stock.group_stock_user"/>
+<!--            <menuitem name="Demandes internes globales"  id="menu_demande_globale" action="action_demande_achat_globale_view"-->
+<!--                parent="menu_demande_2" sequence="20" groups="stock.group_stock_user"/>-->
+
+            <!--<menuitem name="Demandes d'approvisionnement" id="menu_demande_0" parent="menu_demande_root" sequence="0" groups="base.group_user"/>-->
+            <!--<menuitem name="Demandes d'approvisienement" action="action_demande_achat_tree_view" id="menu_demande_0_1"-->
+                <!--parent="menu_demande_0" sequence="0"  groups="base.group_user"/>-->
+
+            <!--&lt;!&ndash;menu dans le module achat&ndash;&gt;-->
+            <!--<menuitem name="Demandes d'approvisionnement" id="menu_demande_1" parent="purchase.menu_purchase_root" sequence="0" groups="purchase.group_purchase_user"/>-->
+            <!--<menuitem name="Demandes d'approvisionnement" action="action_demande_achat_tree_view" id="menu_demande_achat"-->
+                <!--parent="menu_demande_1" sequence="0"  groups="purchase.group_purchase_user"/>-->
+
+            <!--&lt;!&ndash;menu dans le module stock&ndash;&gt;-->
+            <!--<menuitem name="Demandes d'approvisionnement" id="menu_demande_2" parent="stock.menu_stock_root" sequence="0" groups="stock.group_stock_user"/>-->
+            <!--<menuitem name="Demandes d'approvisionnement"  id="menu_demande_achat2" action="action_demande_achat_tree_view"-->
+                <!--parent="menu_demande_2" sequence="0" groups="stock.group_stock_user"/>-->
+    </data>
+</openerp>

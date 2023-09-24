@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_demande_achat_purchase_user,demande.achat,model_demande_achat,purchase.group_purchase_user,1,1,1,1
+access_demande_achat_stock_user,demande.achat,model_demande_achat,stock.group_stock_user,1,1,1,1
+access_demande_achat_base_user,demande.achat,model_demande_achat,base.group_user,1,1,1,1
+access_demande_achat_line_purchase_user,demande.achat.line,model_demande_achat_line,purchase.group_purchase_user,1,1,1,1
+access_demande_achat_line_stock_user,demande.achat.line,model_demande_achat_line,stock.group_stock_user,1,1,1,1
+access_demande_achat_line_base_user,demande.achat.line,model_demande_achat_line,base.group_user,1,1,1,1
+access_demande_achat_service_line_purchase_user,demande.achat.service.line,model_demande_achat_service_line,purchase.group_purchase_user,1,1,1,1
+access_demande_achat_service_line_stock_user,demande.achat.service.line,model_demande_achat_service_line,stock.group_stock_user,1,1,1,1
+access_demande_achat_service_line_base_user,demande.achat.service.line,model_demande_achat_service_line,base.group_user,1,1,1,1
+access_stock_picking_base_user,stock.picking,model_stock_picking,base.group_user,1,1,1,0
+access_stock_inventory_line_user,stock.stock.inventory.line user,stock.model_stock_inventory_line,stock.group_stock_user,1,1,1,1
+access_purchase_create_document_user,purchase.create.document.wizard user,model_purchase_create_document_wizard,stock.group_stock_user,1,1,1,1
+access_purchase_create_document_user,purchase.create.document.wizard user,model_purchase_create_document_wizard,purchase.group_purchase_user,1,1,1,1

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="group_category_service_recouvrement">
+            <field name="name">SERVICE RECOUVREMENT</field>
+            <field name="sequence">50</field>
+        </record>
+
+        <record model="res.groups" id="group_charg_recouvrement">
+            <field name="name">Chrg. Recouvrement</field>
+            <field name="category_id" ref="gestion_profil.group_category_service_recouvrement"/>
+        </record>
+        <record model="res.groups" id="group_res_recouvrement">
+            <field name="name">Res. Recouvrement</field>
+            <field name="category_id" ref="gestion_profil.group_category_service_recouvrement"/>
+        </record>
+
+    </data>
+</odoo>

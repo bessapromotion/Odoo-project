@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_annulation_echeancier_form" model="ir.ui.view">
+            <field name="name">crm.annulation.echeancier.form</field>
+            <field name="model">crm.annulation</field>
+            <field name="inherit_id" ref="crm_operation.crm_annulation_form_view"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Echéances payées">
+                            <field name="echeancier_ids">
+                                <tree readonly="1">
+                                    <field name="name"/>
+                                    <field name="label"/>
+                                    <field name="project_id"/>
+                                    <field name="date_creation"/>
+                                    <field name="date_prevue"/>
+                                    <field name="date_paiement"/>
+                                    <field name="montant_prevu" sum="Prevu"/>
+                                    <field name="montant" sum="Payed"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+    </data>
+</openerp>

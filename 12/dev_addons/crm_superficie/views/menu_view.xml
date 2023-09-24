@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <menuitem name="Changements surfaciques" id="menu_superficie_root" parent="crm_operation.menu_operation" groups="sales_team.group_sale_salesman" sequence="40"/>
+                <menuitem name="Opérations de changement" id="menu_superficie" sequence="20" parent="menu_superficie_root" groups="crm_superficie.group_superficie_user,crm_superficie.group_superficie_manager"
+                          action="action_crm_superficie_tree_view"/>
+                <menuitem name="Changements superficies" id="menu_superficie_line" sequence="30" parent="menu_superficie_root" groups="crm_superficie.group_superficie_user,crm_superficie.group_superficie_manager"
+                          action="action_crm_superficie_line_tree_view"/>
+
+    </data>
+</openerp>

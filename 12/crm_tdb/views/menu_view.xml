@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <menuitem name="Analyse" id="menu_analyse" parent="crm_operation.menu_operation" sequence="50"
+                  groups="sales_team.group_sale_salesman"/>
+
+        <menuitem name="Recouvrement par projets" id="menus_analyse_recouvrement1" sequence="10" parent="menu_analyse"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_recouvrement1"/>
+        <menuitem name="Recouvrement par chargés de recouvrement" id="menus_analyse_recouvrement2" sequence="10"
+                  parent="menu_analyse" groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_recouvrement2"/>
+        <menuitem name="Prévisions" id="menus_analyse_prevision" sequence="10" parent="menu_analyse"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_prevision"/>
+
+        <menuitem name="Réservations" id="menus_analyse_reservation" sequence="10" parent="menu_analyse"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb__reservation_graph_view"/>
+
+        <menuitem name="Etat des Biens" id="menus_analyse_product" sequence="10" parent="menu_analyse"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb__product_graph_view"/>
+        <menuitem name="Etat des Ventes" id="menus_sales" sequence="10" parent="menu_analyse"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_sale_view"/>
+        <!--        new-->
+        <!--        segmentation-->
+        <menuitem name="Segmentation" id="menus_analyse_segmentation" sequence="10" parent="menu_analyse"
+                  groups="sales_team.group_sale_salesman"/>
+        <menuitem name="Etat des Projet par Ensoleiment" id="menus_analyse_project_ensoleiment" sequence="10"
+                  parent="menus_analyse_segmentation"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_project_graph_view_2"/>
+        <menuitem name="Etat des Projet par VIS-À-VIS" id="menus_analyse_project_vis_a_vis" sequence="10"
+                  parent="menus_analyse_segmentation"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_project_graph_view_3"/>
+        <menuitem name="Etat des Projet par Orientation" id="menus_analyse_project_orientation" sequence="10"
+                  parent="menus_analyse_segmentation"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_project_graph_view_4"/>
+        <menuitem name="Etat des Projet par Superficie" id="menus_analyse_project_superficie" sequence="10"
+                  parent="menus_analyse_segmentation"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_project_graph_view_5"/>
+        <menuitem name="Etat des Projet par Agencement" id="menus_analyse_project_agencement" sequence="10"
+                  parent="menus_analyse_segmentation"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_project_graph_view_6"/>
+        <menuitem name="Etat des Projet par Type de dificulté" id="menus_analyse_project_type_dificulte" sequence="10"
+                  parent="menus_analyse_segmentation"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_project_graph_view_7"/>
+        <!--        stock et vente-->
+        <menuitem name="Stock et Vente" id="menus_analyse_stock_vente" sequence="20" parent="menu_analyse"
+                  groups="sales_team.group_sale_salesman"/>
+        <menuitem name="Etat des Vente par Projet / Typologie" id="menus_analyse_vente_project_typologie" sequence="10"
+                  parent="menus_analyse_stock_vente"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_project_vente_typologie"/>
+        <menuitem name="Vente et encaissement sur vente par commercial" id="menus_analyse_vente_encaissement_commercial"
+                  sequence="10" parent="menus_analyse_stock_vente"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_project_vente_encaissement_commercial"/>
+        <menuitem name="Vente et encaissement sur vente total" id="menus_analyse_vente_total" sequence="10"
+                  parent="menus_analyse_stock_vente"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_project_vente_encaissement_total"/>
+        <menuitem name="stock en nombre" id="menus_analyse_stock_nombre" sequence="10"
+                  parent="menus_analyse_stock_vente"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_stock_nombre"/>
+        <menuitem name="stock en valeur" id="menus_analyse_stock_valeur" sequence="10"
+                  parent="menus_analyse_stock_vente"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_stock_valeur"/>
+        <menuitem name="appartement par nombre de typologie" id="menus_analyse_appt_typologie" sequence="10"
+                  parent="menus_analyse_stock_vente"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_appt_typologie"/>
+        <!--        recouvrement-->
+        <menuitem name="Recouvrement" id="menus_analyse_recouvrement" sequence="22" parent="menu_analyse"
+                  groups="sales_team.group_sale_salesman"/>
+         <menuitem name="Encaissements par mode d'achat" id="menus_analyse_rec_encaissemen_mode_achat" sequence="10"
+                  parent="menus_analyse_recouvrement"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_analyse_rec_encaissemen_mode_achat"/>
+        <menuitem name="Réalisations par Chargées Recouvrement " id="menus_analyse_rec_charge_rcv" sequence="11"
+                  parent="menus_analyse_recouvrement"
+                  groups="sales_team.group_sale_salesman"
+                  action="action_crm_tdb_analyse_rec_charge_rcv"/>
+
+
+    </data>
+</openerp>

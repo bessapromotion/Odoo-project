@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<!--reservation / devis -->
+        <record id="action_order_reservation_button" model="ir.actions.act_window">
+            <field name="name">Reservation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.reservation</field>
+            <field name="context">{'search_default_order_id': [active_id], 'default_order_id': active_id}</field>
+            <!--<field name="domain"></field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_crm_reservation_filter"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Cliquez pour créer une réservation.
+              </p><p>
+              </p>
+            </field>
+        </record>
+
+    <record id="reservation_action_new" model="ir.actions.act_window">
+        <field name="name">Reservation</field>
+        <field name="res_model">crm.reservation</field>
+        <field name="view_mode">form,tree</field>
+        <field name="domain">[('order_id', '=', active_id)]</field>
+        <field name="context">{'search_default_order_id': active_id, 'default_order_id': active_id}</field>
+    </record>
+
+        <record id="order_reservation_form_view_oppor" model="ir.ui.view">
+            <field name="name">order.reservation.oppor.inherited.crm</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="have_reservation" invisible="1"/>
+                    <field name="ref"/>
+                </xpath>
+		<xpath expr="//field[@name='confirmation_date']" position="before">
+                    <field name="validity_date" invisible="0" />
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="motif_annulation" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
+                    <field name="num_pi"/>
+                    <field name="date_pi"/>
+                    <field name="street"/>
+                </xpath>
+<!--                <xpath expr="//button[@name='action_done']" position="before">-->
+<!--                    <button string="Créer une réservation" name="%(reservation_action_new)d" type="action" class="oe_highlight"-->
+<!--                            attrs="{'invisible': ['|', '|', ('have_reservation', '=', True), ('state', 'in', ('cancel', 'sent', 'draft')), ('invoice_count', '=', 0)]}"-->
+<!--                            context="{'search_default_partner_id': partner_id,-->
+<!--                                      'default_partner_id': partner_id,-->
+<!--                                      'default_project_id': project_id,-->
+<!--                                      'default_commercial_id': user_id}"/>-->
+<!--                </xpath>-->
+
+                <div name="button_box" position="inside">
+                        <button
+                                class="oe_stat_button"
+                                type="action"
+                                name="%(action_order_reservation_button)d"
+                                attrs="{'invisible':[('nbr_reservation','=', 0)]}"
+                                context="{'default_partner_id': active_id}"
+                                icon="fa-home">
+                                <field string="Réservation(s)" name="nbr_reservation" widget="statinfo" />
+                        </button>
+                </div>
+                <xpath expr="//button[@name='action_draft']" position="replace">
+                </xpath>
+                <xpath expr="//button[@name='preview_sale_order']" position="replace">
+                    <button name="preview_sale_order" type="object" string="Prévisualiser" attrs="{'invisible':[('state','=', 'cancel')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+ <!-- interface Clients -->
+		<record id="view_partner_rinfo_form" model="ir.ui.view">
+            <field name="name">res.partner.rinfo.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                	<xpath expr="//field[@name='email']" position="after">
+                        <separator/><separator/>
+                        <field name="hs_contact_id"/>
+                	</xpath>
+
+                </data>
+			</field>
+        </record>
+
+        <record id="view_partner_inherit_search" model="ir.ui.view">
+              <field name="name">res.ppartner.expand2.filter</field>
+              <field name="model">res.partner</field>
+              <field name="inherit_id" ref="base.view_res_partner_filter"/>
+              <field name="arch" type="xml">
+                    <xpath expr="//search" position="inside">
+                        <field name="hs_contact_id" />
+                        <field name="birthday" />
+                    </xpath>
+              </field>
+        </record>
+
+
+   		<record id="view_partner_dl_tree" model="ir.ui.view">
+            <field name="name">res.partner.dl.tree.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='phone']" position="before">
+                        <field name="hs_contact_id"/>
+
+                    </xpath>
+                </data>
+			</field>
+        </record>
+
+
+
+    </data>
+</openerp>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="creer_echeancier_tva_wizard_form_view" model="ir.ui.view">
+            <field name="name">creer.echeancier.tva.wizard.form</field>
+            <field name="model">creer.echeancier.tva.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Echeances TVA et Notaire">
+                    <sheet>
+                    <group>
+                        <group string="Informations">
+                            <field name="name"/>
+                            <field name="partner_id" invisible="1"/>
+                            <field name="origin" invisible="1"/>
+                            <field name="order_id" domain="[('name', '=', origin)]" options="{'no_create': True}"/>
+                            <field name="project_id"/>
+                            <field name="amount_total"/>
+                            <field name="amount_tva"/>
+                        </group>
+                        <group></group>
+                        <group string="TVA">
+                            <label for="montant_tva" />
+                                <div name="amount_div" class="o_row" >
+                                    <field name="montant_tva"/>
+                                    <field name="currency_id" options="{'no_create': True, 'no_open': True}"/>
+                                </div>
+                            <field name="date_tva"/>
+                        </group>
+                        <group string="Notaire">
+                            <label for="montant_notaire"/>
+                                <div name="amount_div" class="o_row" >
+                                    <field name="montant_notaire"/>
+                                    <field name="currency_id" options="{'no_create': True, 'no_open': True}"/>
+                                </div>
+                            <field name="date_notaire"/>
+                        </group>
+                    </group>
+                    <footer>
+                         <button class="oe_highlight" string="Appliquer" name="action_appliquer" type="object"/> or
+                         <button class="oe_link" string="Annuler" special="cancel"/>
+                    </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

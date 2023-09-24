@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- HEADER -->
+        <template id="external_layout_header_inherit" inherit_id="web.external_layout_background">
+            <xpath expr="//div[1]" position="replace">
+                <t t-if="doc_model in ['purchase.order']">
+                    <div class="row"> <!-- Logo -->
+                            <div class="col-3 mb4">
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                                    alt="Logo"/>
+                            </div>
+                            <div style="text-align:center; padding-right: 50px">
+                                <h1>SARL GENERICLAB</h1>
+                                <p>Capital Social 1 157 293 00 DA <br/>
+                                SIEGE SOCIAL : Z.I. Rouiba voie C B.P.73 Rouiba 16012 Alger Algérie<br/>
+                                Tél. : 023 85 00 22/26/28 - Fax : 023 85 00 22 - Site Web : www.genericlab.com - E-Mail : info@genericlab.com</p>
+                            </div>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+
+<!--    <template id="external_layout_background" inherit_id="web.external_layout_background">-->
+<!--        <xpath expr="//span[@t-field='company.partner_id']" position="replace">-->
+<!--            <t t-if="doc_model in ['demande.achat']">-->
+<!--            </t>-->
+<!--            <t t-else="">-->
+<!--                <t t-if="company.partner_id.street">-->
+<!--                    <span t-field="company.partner_id.street" widget="contact"/>-->
+<!--                </t>-->
+<!--                <br></br>-->
+<!--                <t t-if="company.partner_id.state_id">-->
+<!--                    <span t-field="company.partner_id.state_id"/>-->
+<!--                </t>-->
+<!--                <br></br>-->
+<!--                &lt;!&ndash;<t t-if="company.partner_id.phone" > <span>Tél : </span>&ndash;&gt;-->
+<!--                &lt;!&ndash;<span t-field="company.partner_id.phone"/>&ndash;&gt;-->
+<!--                &lt;!&ndash;</t><br></br>&ndash;&gt;-->
+<!--                &lt;!&ndash;<t t-if="company.partner_id.fax" >  <span>Fax : </span>&ndash;&gt;-->
+<!--                &lt;!&ndash;<span t-field="company.partner_id.fax"/>&ndash;&gt;-->
+<!--                &lt;!&ndash;</t>&ndash;&gt;-->
+<!--                <t t-if="company.company_registry">-->
+<!--                    <span>RC :</span>-->
+<!--                    <span t-field="company.company_registry"/>-->
+<!--                </t>-->
+<!--                <br/>-->
+<!--                <t t-if="company.nif">-->
+<!--                    <span>NIF :</span>-->
+<!--                    <span t-field="company.partner_id.nif"/>-->
+<!--                </t>-->
+<!--                <br/>-->
+<!--                <t t-if="company.ai">-->
+<!--                    <span>AI :</span>-->
+<!--                    <span t-field="company.partner_id.ai"/>-->
+<!--                </t>-->
+<!--            </t>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//ul[@class='list-inline']" position="replace">-->
+<!--            <ul class="list-inline">-->
+<!--                <li t-if="company.phone" class="list-inline-item">-->
+<!--                    <i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/>-->
+<!--                    <span t-field="company.phone"/>-->
+<!--                </li>-->
+<!--                <li t-if="company.partner_id.fax" class="list-inline-item">-->
+<!--                    <i class="fa fa-fax" role="img" aria-label="Fax" title="Fax"/>-->
+<!--                    <span t-field="company.partner_id.fax"/>-->
+<!--                </li>-->
+<!--                <li t-if="company.website" class="list-inline-item">-->
+<!--                    <i class="fa fa-globe" role="img" aria-label="Website" title="Website"/>-->
+<!--                    <span t-field="company.website"/>-->
+<!--                </li>-->
+<!--                <li t-if="company.vat" class="list-inline-item">-->
+<!--                    <i class="fa fa-building-o" role="img" aria-label="Fiscal number"/>-->
+<!--                    <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:-->
+<!--                    <span t-field="company.vat"/>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </xpath>-->
+<!--    </template>-->
+<!--    <template id="external_layout_boxed" inherit_id="web.external_layout_boxed">-->
+<!--        <xpath expr="//span[@t-field='company.partner_id']" position="replace">-->
+<!--            <t t-if="company.partner_id.street">-->
+<!--                <span t-field="company.partner_id.street" widget="contact"/>-->
+<!--            </t>-->
+<!--            <br></br>-->
+<!--            <t t-if="company.partner_id.state_id">-->
+<!--                <span t-field="company.partner_id.state_id"/>-->
+<!--            </t>-->
+<!--            <br></br>-->
+<!--            &lt;!&ndash;<t t-if="company.partner_id.phone" > <span>Tél : </span>&ndash;&gt;-->
+<!--            &lt;!&ndash;<span t-field="company.partner_id.phone"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;</t><br></br>&ndash;&gt;-->
+<!--            &lt;!&ndash;<t t-if="company.partner_id.fax" >  <span>Fax : </span>&ndash;&gt;-->
+<!--            &lt;!&ndash;<span t-field="company.partner_id.fax"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;</t>&ndash;&gt;-->
+<!--            <t t-if="company.company_registry">-->
+<!--                <span>RC :</span>-->
+<!--                <span t-field="company.company_registry"/>-->
+<!--            </t>-->
+<!--            <br/>-->
+<!--            <t t-if="company.nif">-->
+<!--                <span>NIF :</span>-->
+<!--                <span t-field="company.partner_id.nif"/>-->
+<!--            </t>-->
+<!--            <br/>-->
+<!--            <t t-if="company.ai">-->
+<!--                <span>AI :</span>-->
+<!--                <span t-field="company.partner_id.ai"/>-->
+<!--            </t>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//ul[@class='list-inline']" position="replace">-->
+<!--            <ul class="list-inline">-->
+<!--                <li t-if="company.phone" class="list-inline-item">-->
+<!--                    <i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/>-->
+<!--                    <span t-field="company.phone"/>-->
+<!--                </li>-->
+<!--                <li t-if="company.partner_id.fax" class="list-inline-item">-->
+<!--                    <i class="fa fa-fax" role="img" aria-label="Fax" title="Fax"/>-->
+<!--                    <span t-field="company.partner_id.fax"/>-->
+<!--                </li>-->
+<!--                <li t-if="company.website" class="list-inline-item">-->
+<!--                    <i class="fa fa-globe" role="img" aria-label="Website" title="Website"/>-->
+<!--                    <span t-field="company.website"/>-->
+<!--                </li>-->
+<!--                <li t-if="company.vat" class="list-inline-item">-->
+<!--                    <i class="fa fa-building-o" role="img" aria-label="Fiscal number"/>-->
+<!--                    <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:-->
+<!--                    <span t-field="company.vat"/>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </xpath>-->
+<!--    </template>-->
+<!--    <template id="external_layout_clean" inherit_id="web.external_layout_clean">-->
+<!--        <xpath expr="//span[@t-field='company.partner_id']" position="replace">-->
+<!--            <t t-if="company.partner_id.street">-->
+<!--                <span t-field="company.partner_id.street" widget="contact"/>-->
+<!--            </t>-->
+<!--            <br></br>-->
+<!--            <t t-if="company.partner_id.state_id">-->
+<!--                <span t-field="company.partner_id.state_id"/>-->
+<!--            </t>-->
+<!--            <br></br>-->
+<!--            &lt;!&ndash;<t t-if="company.partner_id.phone" > <span>Tél : </span>&ndash;&gt;-->
+<!--            &lt;!&ndash;<span t-field="company.partner_id.phone"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;</t><br></br>&ndash;&gt;-->
+<!--            &lt;!&ndash;<t t-if="company.partner_id.fax" >  <span>Fax : </span>&ndash;&gt;-->
+<!--            &lt;!&ndash;<span t-field="company.partner_id.fax"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;</t>&ndash;&gt;-->
+<!--            <t t-if="company.company_registry">-->
+<!--                <span>RC :</span>-->
+<!--                <span t-field="company.company_registry"/>-->
+<!--            </t>-->
+<!--            <br/>-->
+<!--            <t t-if="company.nif">-->
+<!--                <span>NIF :</span>-->
+<!--                <span t-field="company.partner_id.nif"/>-->
+<!--            </t>-->
+<!--            <br/>-->
+<!--            <t t-if="company.ai">-->
+<!--                <span>AI :</span>-->
+<!--                <span t-field="company.partner_id.ai"/>-->
+<!--            </t>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//ul[@class='list-unstyled']" position="replace">-->
+<!--            <ul class="list-unstyled">-->
+<!--                <li t-if="company.phone" class="list-inline-item">-->
+<!--                    <i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/>-->
+<!--                    <span t-field="company.phone"/>-->
+<!--                </li>-->
+<!--                <li t-if="company.partner_id.fax" class="list-inline-item">-->
+<!--                    <i class="fa fa-fax" role="img" aria-label="Fax" title="Fax"/>-->
+<!--                    <span t-field="company.partner_id.fax"/>-->
+<!--                </li>-->
+<!--                <li t-if="company.website" class="list-inline-item">-->
+<!--                    <i class="fa fa-globe" role="img" aria-label="Website" title="Website"/>-->
+<!--                    <span t-field="company.website"/>-->
+<!--                </li>-->
+<!--                <li t-if="company.vat" class="list-inline-item">-->
+<!--                    <i class="fa fa-building-o" role="img" aria-label="Fiscal number"/>-->
+<!--                    <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:-->
+<!--                    <span t-field="company.vat"/>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </xpath>-->
+<!--    </template>-->
+<!--    <template id="external_layout_standard" inherit_id="web.external_layout_standard">-->
+<!--        <xpath expr="//div[1]" position="replace">-->
+<!--            <t t-if="company.partner_id.street">-->
+<!--                <span t-field="company.partner_id.street" widget="contact"/>-->
+<!--            </t>-->
+<!--            <br/>-->
+<!--            <t t-if="company.partner_id.state_id">-->
+<!--                <span t-field="company.partner_id.state_id"/>-->
+<!--            </t>-->
+<!--            <br/>-->
+<!--            <t t-if="company.company_registry">-->
+<!--                <span>RC :</span>-->
+<!--                <span t-field="company.company_registry"/>-->
+<!--            </t>-->
+<!--            <br/>-->
+<!--            <t t-if="company.nif">-->
+<!--                <span>NIF :</span>-->
+<!--                <span t-field="company.partner_id.nif"/>-->
+<!--            </t>-->
+<!--            <br/>-->
+<!--            <t t-if="company.ai">-->
+<!--                <span>AI :</span>-->
+<!--                <span t-field="company.partner_id.ai"/>-->
+<!--            </t>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//ul[@class='list-inline mb4']" position="replace">-->
+<!--            <ul class="list-inline mb4">-->
+<!--                <li t-if="company.phone" class="list-inline-item">-->
+<!--                    <i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/>-->
+<!--                    <span t-field="company.phone"/>-->
+<!--                </li>-->
+<!--                <li t-if="company.partner_id.fax" class="list-inline-item">-->
+<!--                    <i class="fa fa-fax" role="img" aria-label="Fax" title="Fax"/>-->
+<!--                    <span t-field="company.partner_id.fax"/>-->
+<!--                </li>-->
+<!--                <li t-if="company.website" class="list-inline-item">-->
+<!--                    <i class="fa fa-globe" role="img" aria-label="Website" title="Website"/>-->
+<!--                    <span t-field="company.website"/>-->
+<!--                </li>-->
+<!--                <li t-if="company.vat" class="list-inline-item">-->
+<!--                    <i class="fa fa-building-o" role="img" aria-label="Fiscal number"/>-->
+<!--                    <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:-->
+<!--                    <span t-field="company.vat"/>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </xpath>-->
+<!--    </template>-->
+</odoo>

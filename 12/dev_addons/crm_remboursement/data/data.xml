@@ -1,0 +1,18 @@
+<openerp>
+    <data>
+        <!-- chargement de la table type Annulation-->
+
+         <record model="crm.desistement.dossier" id="des_paie">
+             <field name="name">Les originaux des accusés de paiement remis au client</field>
+         </record>
+
+        <record model="crm.desistement.dossier" id="des_reserv">
+             <field name="name">Original Attestation de réservation</field>
+         </record>
+
+        <record model="crm.desistement.dossier" id="des_demande">
+             <field name="name">La demande de désistement signé par le réservataire</field>
+         </record>
+
+    </data>
+</openerp>

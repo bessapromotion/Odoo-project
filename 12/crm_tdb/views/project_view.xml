@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="sale_order_filtre_current_month_search_view" model="ir.ui.view">
+            <field name="name">sale.order.crm.search.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter name="current_month_filter" string="Mois actual"
+                            domain="[('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), ('create_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+
+                </xpath>
+            </field>
+        </record>
+        <!--<record id="view_crm_tdb_reservation_filter" model="ir.ui.view">-->
+        <record model="ir.ui.view" id="crm_tdb_product_pivot_view_2">
+            <field name="name">crm.tdb.sale</field>
+            <field name="model">product.template</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="project par ensoleiment">
+                    <field name="project_id"/>
+                    <field name="ensoleillement_id"/>
+                    <field name="etat" type="measure"/>
+                    <field name="p" type="measure" widget="percentage"/>
+                </pivot>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_project_graph_view_2">
+            <field name="name">Etat des Projet par ensoleiment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+            <field name="context">{'group_by': ['etat', 'project_name'], 'pivot_measures': ['__count', 'list_price'],
+                'pivot_column_groupby': ['ensoleillement_id'], 'pivot_row_groupby': ['etat', 'project_name'],
+                'orderedBy': []}
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_project_graph_view_3">
+            <field name="name">Etat des Projet par VIS-À-VIS</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+            <field name="context">{'group_by': ['etat', 'project_name'], 'pivot_measures': ['__count', 'list_price'],
+                'pivot_column_groupby': ['vis_id'], 'pivot_row_groupby': ['etat', 'project_name'], 'orderedBy': []}
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_project_graph_view_4">
+            <field name="name">Etat des Projet par orientation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+            <field name="context">{'group_by': ['etat', 'project_name'], 'pivot_measures': ['__count', 'list_price'],
+                'pivot_column_groupby': ['orientation'], 'pivot_row_groupby': ['etat', 'project_name'], 'orderedBy': []}
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_project_graph_view_5">
+            <field name="name">Etat des Projet par superficie</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+            <field name="context">{'group_by': ['etat', 'project_name'], 'pivot_measures': ['__count', 'list_price'],
+                'pivot_column_groupby': ['superficie'], 'pivot_row_groupby': ['etat', 'project_name'], 'orderedBy': []}
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_project_graph_view_6">
+            <field name="name">Etat des Projet par agencement</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+            <field name="context">{'group_by': ['etat', 'project_name'], 'pivot_measures': ['__count', 'list_price'],
+                'pivot_column_groupby': ['agencement_id'], 'pivot_row_groupby': ['etat', 'project_name'], 'orderedBy':
+                []}
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_project_graph_view_7">
+            <field name="name">Etat des Projet par type de dificulté</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+            <field name="context">{'group_by': ['etat', 'commune_id','format_id'], 'pivot_measures': ['__count',
+                'list_price'],
+                'pivot_column_groupby': ['type_difficulte'], 'pivot_row_groupby': ['etat', 'commune_id','format_id'],
+                'orderedBy':
+                []}
+            </field>
+        </record>
+        <!--        analyse vente et stock-->
+        <record model="ir.actions.act_window" id="action_crm_tdb_project_vente_typologie">
+            <field name="name">Etat des Vente par projet/typologie</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+            <field name="context">{'group_by': ['project_name','format_id'], 'pivot_measures':
+                ['__count','mt_encaisse_v', 'list_price'],
+                'pivot_column_groupby': ['type_difficulte'], 'pivot_row_groupby': ['project_name','format_id'],
+                'orderedBy':
+                []}
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_sale_order_graph2">
+            <field name="name">sale.order.graph</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <graph string="Sales Orders" sample="1" type="pie">
+                    <field name="partner_id"/>
+                    <field name="amount_total" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_project_vente_encaissement_commercial">
+            <field name="name">Vente et encaissement sur vente par commercial</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_sale_order_graph2"/>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="context">{'search_default_current_month_filter': 1,'group_by': ['user_id'], 'graph_measures':
+                ['mt_encaisse'], 'graph_mode': 'bar',
+                'graph_groupbys': ['user_id'], 'orderedBy': [], 'graph_measure': 'mt_encaisse',
+                'dashboard_merge_domains_contexts': False}
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_crm_tdb_project_vente_encaissement_total">
+            <field name="name">Nombre de ventes par projet avec encaissement sur vente total</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_sale_order_graph2"/>
+            <field name="context">{'search_default_current_month_filter': 1,'group_by': ['project_id'], 'graph_measure':
+                'mt_encaisse', 'graph_mode': 'bar',
+                'graph_groupbys': ['project_id']}
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_crm_tdb_stock_nombre">
+            <field name="name">stock en nombre</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+            <field name="context">{'group_by': ['project_name',], 'pivot_measures':
+                ['__count', 'p'],
+                'pivot_column_groupby': ['etat'], 'pivot_row_groupby': ['project_name'],
+                'orderedBy':
+                []}
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_stock_valeur">
+            <field name="name">stock en valeur</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+            <field name="context">{'group_by': ['project_name',], 'pivot_measures':
+                ['list_price', 'p'],
+                'pivot_column_groupby': ['etat'], 'pivot_row_groupby': ['project_name'],
+                'orderedBy':
+                []}
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_appt_typologie">
+            <field name="name">Appartement par nombre de typologie</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+            <field name="context">{'group_by': ['format_id','project_name'], 'pivot_measures':
+                ['__count', 'p'],
+                'pivot_column_groupby': ['etat'], 'pivot_row_groupby': ['format_id','project_name'],
+                'orderedBy':
+                []}
+            </field>
+        </record>
+        <!--        recouvrement-->
+        <record model="ir.ui.view" id="crm_reservation_graph_view">
+            <field name="name">crm.reservation.graph</field>
+            <field name="model">crm.reservation</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+                <graph string="Recouvrement" sample="1">
+                    <field name="partner_id"/>
+                    <field name="project_id"/>
+                    <field name="mode_achat" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="crm_reservation_pivot_view">
+            <field name="name">crm.reservation.pivot</field>
+            <field name="model">crm.reservation</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+                <pivot string="Recouvrement">
+                    <field name="partner_id"/>
+                    <field name="project_id"/>
+                    <field name="mode_achat" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+        <record id="crm_reservation_filtre_current_month_search_view" model="ir.ui.view">
+            <field name="name">crm.reservation.search</field>
+            <field name="model">crm.reservation</field>
+            <field name="inherit_id" ref="crm_operation.view_crm_reservation_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter name="current_month_filter" string="Mois actual"
+                            domain="[('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), ('create_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_analyse_rec_encaissemen_mode_achat">
+            <field name="name">Encaissements par mode d'achat</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.reservation</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="crm_reservation_graph_view"/>
+            <field name="context">{'search_default_current_month_filter': 1,'group_by': ['mode_achat'],
+                'graph_measure':'total_paiement',
+                'graph_mode': 'bar',
+                'graph_groupbys': ['mode_achat']}
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_tdb_analyse_rec_charge_rcv">
+            <field name="name">Réalisations par Chargées Recouvrement</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="crm_tdb_product_pivot_view_2"/>
+            <field name="context">{'search_default_current_month_filter': 1,'group_by': ['charge_recouv_id'],
+                'graph_measure':
+                'mt_encaisse', 'graph_mode': 'bar',
+                'graph_groupbys': ['charge_recouv_id']}
+            </field>
+        </record>
+    </data>
+</openerp>

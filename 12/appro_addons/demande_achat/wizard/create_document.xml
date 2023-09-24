@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_create_document" model="ir.ui.view">
+            <field name="name">Création des documents achat</field>
+            <field name="model">purchase.create.document.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="demande_id"/>
+                            <field name="achat" invisible="1"/>
+                            <field name="affect" invisible="1"/>
+                            <field name="type_demande" invisible="1"/>
+                            <field name="destination" widget="radio"  attrs="{'invisible': [('type_demande','=', 'service')]}"/>
+                            <field name="stock_destination_id"
+                                   attrs="{'invisible':['|', ('type_demande','=', 'service'), ('destination', '!=', 'entrepot')]}"
+                                   domain="[('usage', '=', 'internal')]"/>
+                        </group>
+                        <group attrs="{'invisible': [('achat', '=', False)]}">
+                            <field name="methode" widget="radio" />
+                            <field name="partner_id" attrs="{'invisible': [('methode', '=', 'consultation')], 'required': [('methode', '=', 'fournisseur')]}"
+                                   domain="[('supplier', '=', True)]" options='{"no_open": True, "no_create": True}'/>
+                            <field name="methode_req" widget="radio" attrs="{'invisible': [('methode', '=', 'fournisseur')]}"/>
+                            <field name="requition_id"
+                                   attrs="{'invisible': ['|', ('methode', '=', 'fournisseur'), ('methode_req', '=','new')], 'required': [('methode_req', '=', 'old'), ('methode', '=', 'consultation')]}"
+                                   domain="[('state', '=', 'draft')]" options='{"no_open": True, "no_create": True}'/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button name="action_appliquer" type="object" string="Appliquer" class="btn-primary"/>
+                        ou
+                        <button special="cancel" string="Fermer"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+    </data>
+</odoo>

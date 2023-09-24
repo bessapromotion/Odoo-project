@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+        <record id="view_invoice_operation_form" model="ir.ui.view">
+            <field name="name">account.invoice.operation.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+
+                    <field name="project_id"/>
+                </xpath>
+                 <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="num_dossier"/>
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="mode_paiement_id" options='{"no_open": True, "no_create": True}' string="Mode paiement probable"/>
+                    <field name="mode_achat"/>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="charge_recouv_id"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

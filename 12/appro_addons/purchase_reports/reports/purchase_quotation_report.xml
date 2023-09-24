@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		<template id="report_purchasequotation_document" inherit_id="purchase.report_purchasequotation_document">
+            <xpath expr="//div[1]" position="replace">
+                <div style="padding-top:20px;">
+                    <p></p>
+                     <strong t-field="o.partner_id" /><br></br>
+                <t t-if="o.partner_id.street" >
+                          <span t-field="o.partner_id.street"/>
+                </t><br></br>
+                <t t-if="o.partner_id.state_id" >
+                          <span t-field="o.partner_id.state_id" />
+                </t><br></br>
+                <t t-if="o.partner_id.fax" >  <strong >Fax : </strong>
+                          <span t-field="o.partner_id.fax"/>
+                </t><br></br>
+                <t t-if="o.partner_id.email" >  <strong >E-mail : </strong>
+                          <span t-field="o.partner_id.email"/>
+                </t><br></br>
+                <t t-if="o.partner_id.rc" > <strong >RC : </strong>
+                          <span t-field="o.partner_id.rc"/>
+                </t>
+                </div>
+            </xpath>
+            <xpath expr="//h2[1]" position="replace">
+                 <h2 t-if="o.state in ['purchase', 'done']" >Demande de devis : <span t-field="o.name"/> </h2>
+                 <p align="right"> Alger le :  <span t-esc="o.date_order"  t-options='{"widget": "date"}'/>
+                 </p>
+            </xpath>
+            <xpath expr="//table[@class='table table-sm']" position="replace">
+                <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th class="text-center"><strong>N°</strong></th>
+                        <!--<th class="text-center"><strong>Code</strong></th>-->
+                        <th><strong>Désignation</strong></th>
+                        <th class="text-right"><strong>Qté.</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="o.order_line" t-as="line">
+                        <td class="text-center">
+                            <span t-esc="line_index + 1" />
+                        </td>
+                        <td>
+                            <span t-field="line.name"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.product_qty"/>
+                            <span t-field="line.product_uom.name" groups="uom.group_uom"/>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+             </xpath>
+        </template>
+
+</odoo>

@@ -1,0 +1,49 @@
+<openerp>
+    <data>
+        <!-- entrepot-->
+
+         <!--<record model="stock.warehouse" id="warehouse_exp">-->
+             <!--<field name="name">Exploitation</field>-->
+             <!--<field name="code">EXP</field>-->
+         <!--</record>-->
+
+
+
+        <record id="location_mad" model="stock.location">
+            <field name="name">Mise a disposition</field>
+            <!--<field name="location_id" ref="stock.stock_location_locations_virtual"/>-->
+            <field name="usage">customer</field>
+            <field name="company_id"></field>
+        </record>
+
+        <!--type mouvement-->
+        <!---->
+         <!--<record model="stock.picking.type" id="picking_type_mad">-->
+             <!--<field name="name">Livraisons internes</field>-->
+             <!--<field name="sequence_id">4</field>-->
+             <!--<field name="warehouse_id"></field>-->
+             <!--<field name="code">internal</field>-->
+             <!--<field name="mise_a_dispo">mad</field>-->
+             <!--<field name="use_existing_lot">True</field>-->
+             <!--<field name="use_create_lot">False</field>-->
+             <!--<field name="use_create_lot">False</field>-->
+             <!--<field name="default_location_src_id"></field>-->
+             <!--<field name="default_location_dest_id"></field>-->
+         <!--</record>-->
+
+<!---->
+    </data>
+
+<!--    <data noupdate="1">-->
+
+<!--            <record id="sequence_bc_achats" model="ir.sequence">-->
+<!--            <field name="name">Bon de commande Achat</field>-->
+<!--            <field name="code">bon.commande.achat</field>-->
+<!--            <field name="prefix">BC</field>-->
+<!--            <field name="suffix">/%(year)s</field>-->
+<!--            <field name="padding">4</field>-->
+<!--            <field name="number_next">1</field>-->
+<!--            <field name="number_increment">1</field>-->
+<!--        </record>-->
+<!--    </data>-->
+</openerp>

@@ -1,0 +1,53 @@
+<openerp>
+    <data>
+         <record model="product.famille" id="famille_sanitaire">
+             <field name="name">Sanitaire</field>
+         </record>
+         <record model="product.famille" id="famille_fassade">
+             <field name="name">FASSADE</field>
+         </record>
+         <record model="product.famille" id="famille_plomberie">
+             <field name="name">PLOMBERIE</field>
+         </record>
+         <record model="product.famille" id="famille_menuiserie">
+             <field name="name">menuiserie</field>
+         </record>
+         <record model="product.famille" id="famille_sol">
+             <field name="name">Revetement sol</field>
+         </record>
+         <record model="product.famille" id="famille_vrd">
+             <field name="name">VRD</field>
+         </record>
+         <record model="product.famille" id="famille_equipement">
+             <field name="name">equipement</field>
+         </record>
+         <record model="product.famille" id="famille_mural">
+             <field name="name">Revetement mural</field>
+         </record>
+         <record model="product.famille" id="famille_etanchiete">
+             <field name="name">etanchiété</field>
+         </record>
+
+
+         <record model="product.sousfamille" id="sousfamille_accessoire">
+             <field name="name">Accesoires</field>
+             <field name="famille_id" ref="purchase_product.famille_sanitaire"/>
+         </record>
+
+         <record model="product.sousfamille" id="sousfamille_bois">
+             <field name="name">Bois</field>
+             <field name="famille_id" ref="purchase_product.famille_menuiserie"/>
+         </record>
+
+         <record model="product.sousfamille" id="sousfamille_equipement">
+             <field name="name">equipement</field>
+             <field name="famille_id" ref="purchase_product.famille_sanitaire"/>
+         </record>
+
+         <record model="product.sousfamille" id="sousfamille_divers">
+             <field name="name">Divers</field>
+             <field name="famille_id" ref="purchase_product.famille_vrd"/>
+         </record>
+
+    </data>
+</openerp>

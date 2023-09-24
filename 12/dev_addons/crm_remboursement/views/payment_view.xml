@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_payment_3_form" model="ir.ui.view">
+            <field name="name">account.payment.3.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="crm_echeancier.view_payment_2_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='communication']" position="after">
+                    <field name="remboursement_id"/>
+                    <field name="est_remboursement" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='project_id']" position="replace">
+                    <field name="project_id" attrs="{'invisible': [('est_remboursement', '=', True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='echeance_id']" position="replace">
+                    <field name="echeance_id"  attrs="{'invisible': [('est_remboursement', '=', True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='paiement_concretisation']" position="replace">
+                    <field name="paiement_concretisation" attrs="{'invisible': [('est_remboursement', '=', True)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

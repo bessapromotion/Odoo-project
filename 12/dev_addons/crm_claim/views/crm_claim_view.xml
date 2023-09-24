@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Claims    -->
+
+        <record model="ir.ui.view" id="crm_case_claims_tree_view1">
+            <field name="name">CRM - Claims Tree</field>
+            <field name="model">crm.claim</field>
+            <field name="arch" type="xml">
+                <tree string="Claims" decoration-muted="state == 'cancel'">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="user_id"/>
+                    <field name="date"/>
+                    <field name="stage_id"/>
+                    <field name="date_action_next"/>
+                    <field name="action_next"/>
+                    <field name="categ_id" string="Type"/>
+                    <field name="date_deadline" invisible="1"/>
+                    <field name="date_closed" invisible="1"/>
+                     <field name="state" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_case_claims_form_view1">
+            <field name="name">CRM - Claims Form</field>
+            <field name="model">crm.claim</field>
+            <field name="arch" type="xml">
+                <form string="Claim">
+                <header>
+                    <button name="action_cancel" string="Annuler" states="valid" type="object" confirm="Voulez vous annuler la réclamation ?"/>
+                    <field name="stage_id" widget="statusbar" clickable="True"/>
+                    <field name="state" invisible="1"/>
+                </header>
+                <sheet string="Claims">
+                    <group>
+                        <field name="name"/>
+                        <field name="date"/>
+                    </group>
+                    <group colspan="4" col="4" groups="base.group_user">
+                        <field name="user_id" context="{'default_groups_ref': ['base.group_user', 'base.group_partner_manager']}"/>
+                        <field name="priority" widget="priority"/>
+                        <field name="source_id" widget="selection"/>
+                        <field name="team_id"/>
+                        <field name="date_deadline"/>
+                    </group>
+                    <group colspan="4" col="4">
+                        <notebook>
+                            <page string="Claim Description" >
+                               <group>
+                                      <group>
+                                           <separator colspan="2" string="Claim Reporter"/>
+                                           <field name="partner_id" options="{'no_create': True}" />
+                                           <field name="partner_phone"/>
+                                           <field name="partner_mobile"/>
+                                           <field name="partner_email" />
+                                      </group>
+                                      <group>
+                                          <separator colspan="2" string="Bien"/>
+                                              <field name="product_id" options="{'no_create': True, 'no_open': True}"  domain="[('client_id' , 'in',( partner_id,)),]"/>
+                                              <field name="project_id" />
+                                              <field name="bloc" />
+                                      </group>
+                                  </group>
+                                <group colspan="2" col="2" groups="base.group_user">
+                                    <separator colspan="2" string="Responsibilities"/>
+                                    <field name="user_fault"/>
+                                    <field name="categ_id" options="{'no_create': True, 'no_open': True}"/>
+                                    <!--<field name="ref"/>-->
+                                </group>
+                                <separator colspan="4" string="Claim/Action Description" groups="base.group_user"/>
+                                <field name="description" colspan="4" nolabel="1"/>
+                            </page>
+                            <page string="Follow Up" groups="base.group_user">
+                                <group colspan="2" col="2">
+                                    <separator colspan="2" string="Actions"/>
+                                    <field name="date_action_next"/>
+                                    <field name="action_next"/>
+                                </group>
+                                <group colspan="2" col="2" groups="base.group_user">
+                                    <separator colspan="2" string="Dates"/>
+                                    <field name="create_date"/>
+                                    <field name="date_closed" invisible="1"/>
+                                    <field name="write_date"/>
+                                </group>
+
+                                <group colspan="2" col="2">
+                                    <separator colspan="2" string="Root Causes"/>
+                                    <field name="cause" colspan="2" nolabel="1"/>
+                                </group>
+                                <group colspan="2" col="2">
+                                    <separator colspan="2" string="Resolution Actions"/>
+                                    <field name="type_action"/>
+                                    <field name="resolution" colspan="2" nolabel="1" placeholder="Action Description..."/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                         <field name="message_follower_ids" widget="mail_followers"/>
+                         <field name="activity_ids" widget="mail_activity"/>
+                         <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Claim Calendar view -->
+
+        <record model="ir.ui.view" id="crm_case_claims_calendar_view1">
+            <field name="name">Claims Actions</field>
+            <field name="model">crm.claim</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <calendar string="Claims" date_start="date_action_next" color="user_id">
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+
+         <record id="view_crm_claim_filter" model="ir.ui.view">
+            <field name="name">crm.claim.search.view</field>
+            <field name="model">crm.claim</field>
+            <field name="arch" type="xml">
+                <search string="Status Search">
+             <!-- permet une recherche "directe" -->
+                     <group col="10" colspan="4">
+                        <field name="partner_id" filter_domain="[('partner_id', 'ilike', self)]"/>
+                        <field name="user_id"/>
+                        <field name="source_id" />
+                    </group>
+                    <!-- Permet le regroupement -->
+                    <separator/>
+                    <group expand="0" string="Grouper par" >
+                        <filter string="Client" name="Client" context="{'group_by':'partner_id'}" />
+                        <!--<filter string="Projet" name="projet" context="{'group_by':'project_id'}" />-->
+                        <filter string="Responsable" name="user_id" context="{'group_by':'user_id'}" />
+                        <filter string="Source" name="source_id" context="{'group_by':'source_id'}" />
+                    </group>
+                    <separator/>
+                     <!-- permet un filtrage -->
+                     <filter name="doleance" string="Réclamation" domain="[('state', '!=', 'cancel')]"/>
+                    <filter name="annulé" string="Annulé" domain="[('state', '=', 'cancel')]"/>
+                </search>
+            </field>
+        </record>
+
+		<record model="ir.actions.act_window" id="crm_claim_view_act1">
+            <field name="name">Claims</field>
+            <field name="res_model">crm.claim</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="view_id" ref="crm_case_claims_tree_view1"/>
+            <field name="search_view_id" ref="view_crm_claim_filter"/>
+            <field name="context">{"search_default_doleance":1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Record and track your customers' claims. Claims may be linked to a sales order or a lot.You can send emails with attachments and keep the full history for a claim (emails sent, intervention type and so on).Claims may automatically be linked to an email address using the mail gateway module.
+                </p>
+            </field>
+        </record>
+
+		<record model="ir.actions.act_window.view" id="action_crm_tag_tree_claim0">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="crm_case_claims_tree_view1"/>
+            <field name="act_window_id" ref="crm_claim_view_act1"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_crm_tag_calendar_claim0">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">calendar</field>
+            <field name="view_id" ref="crm_case_claims_calendar_view1"/>
+            <field name="act_window_id" ref="crm_claim_view_act1"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_crm_tag_form_claim0">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="crm_case_claims_form_view1"/>
+            <field name="act_window_id" ref="crm_claim_view_act1"/>
+        </record>
+
+
+    </data>
+</openerp>

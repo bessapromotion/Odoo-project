@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+<!-- ordre.paiement -->
+  		<record model="ir.ui.view" id="ordre_paiement_tree_view">
+            <field name="name">ordre.paiement.tree</field>
+            <field name="model">ordre.paiement</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+				<tree string="Ordre de paiement">
+                	<field name="name"/>
+                    <field name="date"/>
+                    <field name="user_id"/>
+                    <field name="partner_id"/>
+				  	<field name="objet"/>
+					<field name="amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--filtre-->
+
+		<record id="ordre_paiement_filter" model="ir.ui.view">
+            <field name="name">ordre.paiement.filter</field>
+            <field name="model">ordre.paiement</field>
+            <field name="arch" type="xml">
+                <search string="Ordre de paiement">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="partner_id"/>
+                    <filter name="encours" string="En cours de traitement" domain="[('state','in',('traitement',))]"/>
+                    <filter name="ordonnancement" string="Bons pour ordonnancement" domain="[('state','in',('ordonnancement',))]"/>
+                    <filter name="paiement" string="Bons pour paiement" domain="[('state','in',('open',))]"/>
+                    <filter name="done" string="Terminés" domain="[('state','in',('done',))]"/>
+                    <filter name="cancel" string="Ordre annulées" domain="[('state','in',('cancel',))]"/>
+
+                    <group expand="0" string="Grouper par...">
+                        <filter string="Fournisseur" name="partner_id" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Etat" name="state" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+		<record model="ir.ui.view" id="ordre_paiement_form_view">
+            <field name="name">ordre.paiement.form</field>
+            <field name="model">ordre.paiement</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+				<form string="Ordre de paiement">
+                    <header>
+                        <button name="action_send_to_traitment" string="Envoi pour traitement" states="draft" class="oe_highlight" type="object"
+                        confirm="Voulez-vous envoyer l'ordre de paiement pour traitement ?"/>
+
+                        <button name="action_bon_ordonnacement" string="Bon pour ordonnacement" states="traitement" class="oe_highlight" type="object"
+                                groups="base.group_user" confirm="Voulez-vous confirmer l'opération ?"/>
+
+                        <button name="action_bon_paiement" string="Bon pour paiement" states="ordonnancement"  class="oe_highlight" type="object"
+                                groups="base.group_user" confirm="Voulez-vous confirmer l'opération ?"/>
+
+                        <button name="action_print_recu_paiement" string="Etablir le paiement" states="open" type="object" class="oe_highlight"
+                                groups="base.group_user"/>
+
+                        <button name="print_ordre_paiement" string="Imprimer ordre de paiement" states="open,done" type="object" class="oe_highlight"
+                                groups="base.group_user"/>
+
+                        <button name="action_cancel" string="Annuler l'ordre" states="draft,traitement,ordonnancement,open" type="object"
+                        confirm="Voulez-vous annuler l'ordre de paiement ?" />
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,traitement,ordonnancement,open,done" />
+				    </header>
+					<sheet>
+                        <h1>
+                            Ordre de paiement
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+						<group>
+                            <group>
+                                <field name="date"/>
+                                <field name="partner_id" options='{"no_open": True, "no_create": True}'/>
+
+                                <field name="type"/>
+                                <field name="order_id"
+                                       domain="[('state', 'in', ('purchase','done',)), ('partner_id', '=', partner_id)]"
+                                       options='{"no_create": True}'/>
+                                <field name="invoice_id"
+                                       domain="[('partner_id', '=', partner_id), ('state', '=', 'open')]"
+                                       options='{"no_create": True}'
+                                       attrs="{'invisible':[('type','=', 'order')]}"
+                                />
+                                <field name="requisition_id" />
+                                <field name="user_id" options='{"no_open": True, "no_create": True}'/>
+                            </group>
+							<group>
+								<field name="objet"/>
+								<field name="amount"/>
+								<field name="date_ordonnancement" states="ordonnancement,open,done"/>
+								<field name="date_paiement" states="open,done"/>
+								<field name="mode_paiement_id" states="open,done" options='{"no_open": True, "no_create": True}'/>
+        					</group>
+						</group>
+						<notebook>
+                            <page string="Observation">
+                                <field name="observation"/>
+                            </page>
+						</notebook>
+					</sheet>
+                    <div class="oe_chatter">
+                    	<field name="message_follower_ids" widget="mail_followers" modifiers="{}"/>
+                    	<field name="message_ids" widget="mail_thread" modifiers="{}"/>
+                	</div>
+				</form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_ordre_paiement_view">
+            <field name="name">Ordre de paiement</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ordre.paiement</field>
+            <field name="view_type">form</field>
+			<field name="search_view_id" ref="ordre_paiement_filter"/>
+<!--            <field name="domain">[('dem_global', '=', False)]</field>-->
+<!--            <field name="context">{'search_default_encours': 1, 'default_dem_global': False}</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="ordre_paiement_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Créer un nouveau ordre de paiement.
+                </p><p>
+
+                </p><p>
+
+                </p>
+            </field>
+		</record>
+
+ <!-- Top menu item -->
+            <!--menu dans le module achat-->
+            <menuitem name="Ordre de paiement" id="menu_op_1" parent="purchase.menu_purchase_root" sequence="40" groups="purchase.group_purchase_user"/>
+                <menuitem name="Ordre de paiement" action="action_ordre_paiement_view" id="menu_ordre_paiement" parent="menu_op_1" sequence="10"  groups="purchase.group_purchase_user"/>
+
+    </data>
+</openerp>

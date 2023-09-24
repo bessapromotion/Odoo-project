@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+            <menuitem name="Analyse" id="menu_analyse" parent="crm_operation.menu_operation" sequence="50"  groups="sales_team.group_sale_salesman"/>
+
+                <menuitem name="Recouvrement par projets" id="menus_analyse_recouvrement1" sequence="10" parent="menu_analyse" groups="sales_team.group_sale_salesman"
+                          action="action_crm_tdb_recouvrement1"/>
+                <menuitem name="Recouvrement par chargés de recouvrement" id="menus_analyse_recouvrement2" sequence="10" parent="menu_analyse" groups="sales_team.group_sale_salesman"
+                          action="action_crm_tdb_recouvrement2"/>
+                <menuitem name="Prévisions" id="menus_analyse_prevision" sequence="10" parent="menu_analyse" groups="sales_team.group_sale_salesman"
+                          action="action_crm_tdb_prevision"/>
+
+                <menuitem name="Réservations" id="menus_analyse_reservation" sequence="10" parent="menu_analyse" groups="sales_team.group_sale_salesman"
+                          action="action_crm_tdb__reservation_graph_view"/>
+
+                <menuitem name="Etat des Biens" id="menus_analyse_product" sequence="10" parent="menu_analyse" groups="sales_team.group_sale_salesman"
+                          action="action_crm_tdb__product_graph_view"/>
+                <menuitem name="Etat des Ventes" id="menus_sales" sequence="10" parent="menu_analyse" groups="sales_team.group_sale_salesman"
+                          action="action_crm_tdb_sale_view"/>
+
+
+    </data>
+</openerp>

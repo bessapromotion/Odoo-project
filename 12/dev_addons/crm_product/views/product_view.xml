@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_crm_product_template_form" model="ir.ui.view">
+            <field name="name">crm.product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="description" position="replace"/>
+                    <xpath expr="//page[@name='general_information']" position="before">
+                        <page string="Caracteristiques" attrs="{'invisible': [('sale_ok', '=', False)]}">
+                            <group>
+                                <group>
+                                    <field name="project_id"  attrs="{'required': [('sale_ok', '=', True)]}" options='{"no_create": True, "no_open": True}'/>
+                                </group>
+                                <group>
+                                </group>
+                                <group>
+                                    <field name="num_lot"/>
+                                    <field name="type_id" options='{"no_create": True, "no_open": True}'/>
+                                    <field name="format_id" attrs="{'invisible': [('type_id','not in',(1,6))] ,'required': [('type_id','=', 1)]}" options='{"no_create": True, "no_open": True}'/>
+                                    <field name="bloc" attrs="{'required': [('type_id','in', (1,6))]}"/>
+                                    <field name="etage"  options='{"no_create": True, "no_open": True}' attrs="{'required': [('sale_ok', '=', True)]}"/>
+                                    <field name="niveau"/>
+                                    <field name="numero"/>
+                                    <field name="orientation" attrs="{'invisible': [('type_id','not in',(1,6))], 'required': [('type_id','=', 1)]}" options='{"no_create": True, "no_open": True}'/>
+                                </group>
+                                <group>
+                                    <field name="superficie"  attrs="{'invisible': [('type_id','>',7)], 'required': [('sale_ok', '=', True)]}"/>
+                                    <field name="prix_m2"  widget="monetary"  options="{'currency_field': 'currency_id'}" />
+                                    <field name="price_2" string="prix de vente" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                    <field name="prix_m2_actuel"  widget="monetary"  options="{'currency_field': 'currency_id'}" />
+                                    <separator/><separator/>
+                                    <field name="surf_habitable_edd" invisible="1"/>
+                                    <field name="surf_utile_edd" invisible="1"/>
+                                    <field name="surf_habitable_com" invisible="1"/>
+                                    <field name="surf_utile_com" attrs="{'invisible': [('type_id','not in',(1,2,6))]}"/>
+
+                                    <separator/><separator/>
+                                </group>
+                            </group>
+                            <group string="Notes internes">
+                                <field name="description" nolabel="1" placeholder="This note is only for internal purposes."/>
+                            </group>
+                        </page>
+                        <page string="Réservation"  attrs="{'invisible': [('sale_ok', '=', False)]}">
+                            <group>
+                                <group>
+                                    <field name="client_id"/>
+                                    <field name="etat"/>
+                                    <field name="order_id"  />
+                                    <!--<field name="reservation_id" />-->
+                                    <field name="view_orders"/>
+                                </group>
+                                <group>
+                                </group>
+                            </group>
+                            <separator string="En cours" attrs="{'invisible': [('view_orders','=', False)]}"/>
+                            <separator attrs="{'invisible': [('view_orders','=', False)]}"/>
+                            <field name="line_ids" readonly="1" attrs="{'invisible': [('view_orders','=', False)]}">
+                                    <tree>
+                                        <field name="order_id" string="Référence Devis"/>
+                                        <field name="order_partner_id" string="Client"/>
+                                        <field name="salesman_id" string="Commercial"/>
+                                        <field name="state" string="Etat"/>
+                                        <field name="create_date"/>
+                                        <field name="validity_date"/>
+                                        <field name="confirmation_date"/>
+                                        <!--<button name="action_order_priority" string="Mettre en priortié" type="object" icon="fa-heart" />-->
+                                    </tree>
+                                </field>
+                            <separator string="Annulées" attrs="{'invisible': [('view_orders','=', False)]}"/>
+                            <separator attrs="{'invisible': [('view_orders','=', False)]}"/>
+                            <field name="line_canceled_ids" readonly="1" attrs="{'invisible': [('view_orders','=', False)]}">
+                                    <tree>
+                                        <field name="order_id" string="Référence Devis"/>
+                                        <field name="order_partner_id" string="Client"/>
+                                        <field name="salesman_id" string="Commercial"/>
+                                        <field name="state" string="Etat"/>
+                                        <field name="create_date"/>
+                                        <field name="confirmation_date"/>
+                                        <button name="action_activate_order" string="Réactiver le devis" type="object" icon="fa-refresh" />
+                                    </tree>
+                                </field>
+                        </page>
+                        <page string="Plan" attrs="{'invisible': [('sale_ok', '=', False)]}">
+                            <group>
+                                <group>
+                                    <field name="plan_pdf" widget="file"/>
+                                </group>
+                            </group>
+
+                            <field name="plan_1_pdf" widget="pdf_viewer"/>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record id="view_crm_product_product_form" model="ir.ui.view">
+            <field name="name">crm.product.product.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/form/sheet/notebook" position="inside">
+                        <page string="Caracteristiques"  attrs="{'invisible': [('sale_ok', '=', False)]}">
+                            <group>
+                                <group>
+                                    <field name="project_id" attrs="{'required': [('sale_ok', '=', True)]}"  options='{"no_create": True, "no_open": True}'/>
+                                    <field name="type_id"/>
+                                </group>
+                                <group>
+                                </group>
+                                <group>
+                                    <field name="format_id" attrs="{'invisible': [('type_id','!=',1)]}"/>
+                                    <field name="bloc"/>
+                                    <field name="etage" options='{"no_create": True, "no_open": True}' attrs="{'invisible': [('type_id','!=',1)], 'required': [('sale_ok', '=', True)]}"/>
+                                    <field name="niveau"/>
+                                    <field name="numero"/>
+                                    <field name="orientation" attrs="{'invisible': [('type_id','!=',1)]}"/>
+                                </group>
+                                <group>
+                                    <field name="superficie" attrs="{'invisible': [('type_id','>',7)], 'required': [('sale_ok', '=', True)]}"/>
+                                    <field name="prix_m2"  widget="monetary"  options="{'currency_field': 'currency_id'}" attrs="{'invisible': [('type_id','>',1)]}"/>
+                                    <field name="price_2" string="prix de vente" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                    <separator/><separator/>
+                                    <field name="surf_habitable_edd" invisible="1"/>
+                                    <field name="surf_utile_edd" invisible="1"/>
+                                    <field name="surf_habitable_com" invisible="1"/>
+                                    <field name="surf_utile_com" attrs="{'invisible': [('type_id','>',1)]}"/>
+                                    <field name="num_lot"/>
+                                    <separator/><separator/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Réservation"  attrs="{'invisible': [('sale_ok', '=', False)]}">
+                            <group>
+                                <group>
+                                    <field name="client_id"/>
+                                    <field name="etat"/>
+                                    <field name="order_id"  />
+                                    <!--<field name="reservation_id" />-->
+                                    <field name="view_orders"/>
+
+                                </group>
+                                <group>
+                                </group>
+                            </group>
+
+                            <separator string="En cours" attrs="{'invisible': [('view_orders','=', False)]}"/>
+                            <separator attrs="{'invisible': [('view_orders','=', False)]}"/>
+                            <field name="line_ids" readonly="1" attrs="{'invisible': [('view_orders','=', False)]}">
+                                    <tree>
+                                        <field name="order_id" string="Référence Devis"/>
+                                        <field name="order_partner_id" string="Client"/>
+                                        <field name="salesman_id" string="Commercial"/>
+                                        <field name="state" string="Etat"/>
+                                        <field name="create_date"/>
+                                        <field name="validity_date"/>
+                                        <field name="confirmation_date"/>
+                                        <!--<button name="action_order_priority" string="Mettre en priortié" type="object" icon="fa-heart" />-->
+                                    </tree>
+                                </field>
+                            <separator string="Annulées" attrs="{'invisible': [('view_orders','=', False)]}"/>
+                            <separator attrs="{'invisible': [('view_orders','=', False)]}"/>
+                            <field name="line_canceled_ids" readonly="1" attrs="{'invisible': [('view_orders','=', False)]}">
+                                    <tree>
+                                        <field name="order_id" string="Référence Devis"/>
+                                        <field name="order_partner_id" string="Client"/>
+                                        <field name="salesman_id" string="Commercial"/>
+                                        <field name="state" string="Etat"/>
+                                        <field name="create_date"/>
+                                        <field name="confirmation_date"/>
+                                        <button name="action_activate_order" string="Réactiver le devis" type="object" icon="fa-refresh" />
+                                    </tree>
+                                </field>
+                        </page>
+                        <page string="Plan"  attrs="{'invisible': [('sale_ok', '=', False)]}">
+                            <group>
+                                <group>
+                                    <field name="plan_pdf" widget="file"/>
+                                </group>
+                            </group>
+                            <field name="plan_1_pdf" widget="pdf_viewer"/>
+                        </page>
+
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record id="crm_product_template_search_view" model="ir.ui.view">
+            <field name="name">product.template.search</field>
+            <field name="model">product.template</field>
+            <field name="arch" type="xml">
+                <search string="Product">
+                    <field name="name" string="Product" filter_domain="['|', '|', ('product_variant_ids.default_code', 'ilike', self),('name', 'ilike', self), ('barcode', 'ilike', self)]"/>
+                    <field name="num_lot"/>
+                    <field name="client_id"/>
+                    <field name="categ_id" filter_domain="[('categ_id', 'child_of', raw_value)]"/>
+                    <separator/>
+                    
+                    <!--
+                    <filter string="Services" name="services" domain="[('type','=','service')]"/>
+                    <filter string="Products" name="consumable" domain="[('type', 'in', ['consu', 'product'])]"/>
+                    <separator/>
+                    <filter string="Can be Sold" name="filter_to_sell" domain="[('sale_ok','=',True)]"/>
+                    <filter string="Can be Purchased" name="filter_to_purchase" domain="[('purchase_ok', '=', True)]"/>
+                    <separator/>
+                    -->
+                    <filter string="Appartement" name="filter_appartement" domain="[('type_id', '=','Appartement')]"/>
+                    <filter string="Espace a aménager" name="filter_appartement" domain="[('type_id', '=','Espace a aménager')]"/>
+                    <filter string="Local" name="filter_local" domain="[('type_id', '=','Local')]"/>
+                    <filter string="Parking" name="filter_parking" domain="[('type_id', '=','Place de parking')]"/>
+                    <filter string="Cellier" name="filter_cellier" domain="[('type_id', '=','Cellier')]"/>
+                    <filter string="Autre" name="filter_autre" domain="[('type_id', '=','Autre')]"/>
+                    
+                    <separator/>
+                    <filter string="Libre" name="filter_libre" domain="[('etat', '=','Libre')]"/>
+                    <filter string="Pré-Réservé" name="filter_pre_reserve" domain="[('etat','=','Pré-Réservé')]"/>
+                    <filter string="Réservé" name="filter_reserve" domain="[('etat','=','Réservé')]"/>
+                    <filter string="Bloqué P" name="filter_ploque_p" domain="[('etat','=','Bloqué P')]"/>
+                    <filter string="Bloqué C" name="filter_ploque_c" domain="[('etat','=','Bloqué C')]"/>
+                    <filter string="Livré" name="filter_livre" domain="[('etat', '=','Livré')]"/>
+                    <separator/>
+                    
+                    <!--
+                    <filter string="Réservé" name="filter_reserve" domain="[('etat','=','Réservé')]"/>
+                    <filter string="Livré" name="filter_livre" domain="[('etat', '=','Livré')]"/>
+                    -->
+
+                    <separator/>
+                    <filter string="Archivé" name="inactive" domain="[('active','=',False)]"/>
+                    <field string="Attributes" name="attribute_line_ids" groups="product.group_product_variant"/>
+                    <field name="pricelist_id" widget="selection" context="{'pricelist': self}" filter_domain="[]" groups="product.group_sale_pricelist"/> <!-- Keep widget=selection on this field to pass numeric `self` value, which is not the case for regular m2o widgets! -->
+                    <separator/>
+
+                    <!--
+                    <filter string="Late Activities" name="activities_overdue"
+                        domain="[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+                        help="Show all records which has next action date is before today"/>
+                    <filter string="Today Activities" name="activities_today"
+                        domain="[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter string="Future Activities" name="activities_upcoming_all"
+                        domain="[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))
+                        ]"/>
+                    <separator/>
+                    -->
+                    
+                    <group expand="0" string="Grouper par" >
+                        <!--<filter string="Commercial" name="commercial_id" context="{'group_by':'commercial_id'}" />-->
+                        <filter string="Projet" name="project_id" context="{'group_by':'project_id'}" />
+                        <filter string="Etat" name="etat" context="{'group_by':'etat'}" />
+                        <filter string="Type" name="type_id" context="{'group_by':'type_id'}" />
+                        <filter string="Typologie" name="format_id" context="{'group_by':'format_id'}" />
+                        <filter string="Orientation" name="orientation" context="{'group_by':'orientation'}" />
+                        <filter string="Etage" name="etage" context="{'group_by':'etage'}" />
+                        <filter string="Bloc" name="bloc" context="{'group_by':'bloc'}" />
+                    </group>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+
+        <record id="crm_product_template_2_search_view" model="ir.ui.view">
+            <field name="name">product.template.crm.search.form</field>
+            <field name="model">product.template</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <field name="num_lot"/>
+                    <field name="client_id"/>
+                </xpath>
+<!--                <xpath expr="//field[@name='name']" position="after">-->
+<!--                    <field name="num_lot"/>-->
+<!--                    <field name="client_id"/>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='consumable']" position="after">-->
+<!--                    <separator/>-->
+<!--                    <filter string="Libre" name="filter_libre" domain="[('etat', '=',u'Libre')]"/>-->
+<!--                    <filter string="Pré-Réservé" name="filter_pre_reserve" domain="[('etat','=',u'Pré-Réservé')]"/>-->
+<!--                    <separator/>-->
+<!--                    <filter string="Réservé" name="filter_reserve" domain="[('etat','=',u'Réservé')]"/>-->
+<!--                    <filter string="Livré" name="filter_livre" domain="[('etat', '=',u'Livré')]"/>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+
+        
+        <record id="product_graph_view2" model="ir.ui.view">
+            <field name="name">product.template.graph</field>
+            <field name="model">product.template</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+               <graph string="Graphe des Biens" type="pie">
+			<field name='etat' />
+                        <field name='project_id' mode="graph" />
+               </graph> 
+	     </field>
+        </record>
+
+         <record id="crm_product_template_action" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">kanban,tree,form,activity,graph</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="product.product_template_kanban_view"/>
+            <field name="search_view_id" ref="crm_product_template_search_view"/>
+            <field name="context">{"search_default_filter_to_sell":1, "sale_multi_pricelist_product_template": 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product
+                </p><p>
+                    You must define a product for everything you purchase,
+                    whether it's a physical product, a consumable or services.
+                </p>
+            </field>
+        </record>
+     
+
+
+
+    <!--<record id="view_as_product_template_kanban_price" model="ir.ui.view">-->
+        <!--<field name="name">product template kanban view: hide price</field>-->
+        <!--<field name="model">product.template</field>-->
+        <!--<field name="inherit_id" ref="product.product_template_kanban_view" />-->
+        <!--<field name="arch" type="xml">-->
+            <!--<xpath expr="//div[@class='oe_kanban_details']/div[2]" position="after">-->
+                <!--<div class="oe_kanban_details">-->
+
+                    <!--<ul>-->
+                        <!--<li><field name="type_id"></field></li>-->
+                    <!--</ul>-->
+
+                <!--</div>-->
+            <!--</xpath>-->
+        <!--</field>-->
+    <!--</record>-->
+    </data>
+</openerp>

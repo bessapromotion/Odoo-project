@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//div[1]" position="replace">
+            <div style="padding-top:20px;">
+                <p></p>
+                <strong t-field="o.partner_id"/>
+                <br></br>
+                <t t-if="o.partner_id.street or o.partner_id.street2">
+                    <span t-field="o.partner_id.street"/>
+                    <span t-field="o.partner_id.street2"/>
+                </t>
+                <br></br>
+                <t t-if="o.partner_id.city or o.partner_id.state_id">
+                    <span t-field="o.partner_id.city"/>
+                    <span t-field="o.partner_id.state_id"/>
+                </t>
+                <br></br>
+                <t t-if="o.partner_id.phone or o.partner_id.fax">
+                    <strong>Tel :</strong>
+                    <span t-field="o.partner_id.phone"/>,
+                    <strong>Fax :</strong>
+                    <span t-field="o.partner_id.fax"/>
+                </t>
+                <t t-else="">
+                    <strong>Tel :</strong>........................,
+                    <strong>Fax :</strong>
+                    <span t-field="o.partner_id.fax"/>
+                </t>
+
+                <br></br>
+                <t t-if="o.partner_id.email">
+                    <strong>E-mail :</strong>
+                    <span t-field="o.partner_id.email"/>
+                </t>
+                <br></br>
+                <t t-if="o.partner_id.nif">
+                    <strong>IF :</strong>
+                    <span t-field="o.partner_id.nif"/>
+                    <strong>AI :</strong>
+                    <span t-field="o.partner_id.ai"/>
+                    <br/>
+                    <strong>RC :</strong>
+                    <span t-field="o.partner_id.rc"/>
+                </t>
+                <t t-else="">
+                    <strong>IF :</strong>.....................,
+                    <strong>AI :</strong>
+                    <span t-field="o.partner_id.ai"/>
+                    <br/>
+                    <strong>RC :</strong>
+                    <span t-field="o.partner_id.rc"/>
+                </t>
+            </div>
+        </xpath>
+        <xpath expr="//h2[3]" position="replace">
+            <h2 t-if="o.state in ['purchase', 'done']">Commande :
+                <span t-field="o.name"/>
+            </h2>
+            <p align="right">Alger le :
+                <span t-esc="o.date_order" t-options='{"widget": "date"}'/>
+            </p>
+        </xpath>
+        <xpath expr="//div[@id='informations']" position="replace">
+            <t t-if="o.mode_paiement_id">
+                <p>Compte Bancaire :
+                    <span t-field="o.journal_id"/>
+                </p>
+            </t>
+            <t t-if="o.mode_paiement_id">
+                <p>RIB :
+                    <span t-field="o.rib"/>
+                </p>
+            </t>
+            <t t-if="o.create_uid">
+                <p>Créer par :
+                    <span t-field="o.create_uid.name"/>
+                </p>
+            </t>
+            <t t-if="o.partner_id.property_supplier_payment_term_id">
+                <p>Mode de paiement :
+                    <span t-field="o.partner_id.property_supplier_payment_term_id"/>
+                </p>
+            </t>
+            <t t-if="o.project_id">
+                <p>Projet :
+                    <span t-field="o.project_id"/>
+                </p>
+            </t>
+
+        </xpath>
+        <xpath expr="//table[@class='table table-sm o_main_table']" position="replace">
+
+            <table class="table table-sm o_main_table" style="font-size:70%;">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            <strong>N°</strong>
+                        </th>
+                        <!--<th class="text-center"><strong>Code</strong></th>-->
+                        <th>
+                            <strong>Désignation</strong>
+                        </th>
+                        <th>
+                        </th>
+                        <th class="text-right">
+                            <strong>Qté.</strong>
+                        </th>
+                        <th class="text-right">
+                            <strong>UDM</strong>
+                        </th>
+                        <th class="text-right">
+                            <strong>Prix U.</strong>
+                        </th>
+                        <th class="text-right">
+                            <strong>Montant</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="o.order_line" t-as="line">
+                        <td class="text-center">
+                            <span t-esc="line_index + 1"/>
+                        </td>
+                        <td>
+                            <span t-field="line.product_id.name"/>
+                        </td>
+                        <td>
+                            <t t-foreach="line.product_id.attribute_value_ids" t-as="v">
+                                <span t-field="v.name"/>
+                            </t>
+
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.product_qty"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.product_uom"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.price_unit"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.price_subtotal"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </xpath>
+
+        <xpath expr="//div[@id='total']" position="replace">
+            <div id="total" class="row justify-content-end" style="font-size:70%;">
+                <div class="col-4">
+                    <table class="table table-sm">
+                        <tr class="border-black">
+                            <td>
+                                <strong>Total HT</strong>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="o.amount_untaxed"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total TVA (<span t-field="o.taxe"/>)
+                            </td>
+                            <td class="text-right">
+                                <span t-field="o.amount_tax"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                        <tr class="border-black o_total">
+                            <td>
+                                <strong>Total TTC</strong>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="o.amount_total"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-8">
+                <br></br>
+                <br></br>
+                <p>Arrêté le présent bon de commande à la somme de :
+                    <strong t-field="o.montant_lettre"/>
+                </p>
+            </div>
+            <!--
+            <div style="text-align:left;margin-top:5%;float:right;display:inline-block;">
+                <p>
+                    <b>
+                        <u>
+                            <span t-field="o.create_uid.name"/>
+                        </u>
+                    </b>
+                </p>
+            </div>  "text-align:right;margin-top:5%;float:left;display:inline-block;" -->
+            <t t-if="o.note">
+            <div style="display: inline-block;width: 500px;height: 100px;padding: 5px;border: 1px solid black;">
+                <p>
+                    <b>
+                        <u>
+                            <span t-field="o.note"/>
+                        </u>
+                    </b>
+                </p>
+            </div>
+            </t>
+        </xpath>
+    </template>
+
+    <!--    layout header-->
+
+    <template id="layout_standard_deltalog" inherit_id="web.external_layout_standard">
+        <xpath expr="//div[@class='header']" position="replace">
+            <t t-if="doc_model in ['purchase.order']">
+                <div class="header">
+                    <table style="width:100%; border: none;">
+                        <tr>
+                            <td>
+
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                                     style="max-height: 100px;"
+                                     alt="Logo"/>
+
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Compte : CNEP N°100 0008195 54 00</td>
+                            <td>
+                                <b>EURL BESSA PROMOTION</b>
+                            </td>
+                            <td>RC :
+                                <span t-field="o.company_id.company_registry"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>RIB : CNEP N°
+                                <span t-field="o.company_id.rib"/>
+                            </td>
+                            <td>
+                                <span t-field="o.company_id.street"/>
+                            </td>
+                            <td>AI :
+                                <span t-field="o.company_id.ai"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ID FISCAL :
+                                <span t-field="o.company_id.nif"/>
+                            </td>
+                            <td>Tel
+                                <span t-field="o.company_id.phone"/>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <hr style="border:1px solid black;"/>
+                    <!--                    <div class="text-center" style="border-top: 1px solid black;">-->
+                    <!--                    </div>-->
+                </div>
+            </t>
+            <t t-else="">
+                <div class="header">
+                    <div class="row">
+                        <div class="col-3 mb4">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;"
+                                 alt="Logo"/>
+                        </div>
+                        <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header"
+                             name="moto"/>
+                    </div>
+                    <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                        <div class="col-12">
+                            <div style="border-bottom: 1px solid black;"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6" name="company_address">
+                            <div t-field="company.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                            />
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+    <template id="layout_background_deltalog" inherit_id="web.external_layout_background">
+        <xpath expr="//div[@class='header']" position="replace">
+            <t t-if="doc_model in ['purchase.order']">
+                <div class="header">
+                    <table style="width:100%; border: none;">
+                        <tr>
+                            <td>
+
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                                     style="max-height: 100px;"
+                                     alt="Logo"/>
+
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Compte : CNEP N°100 0008195 54 00</td>
+                            <td>
+                               <!-- <b>EURL BESSA PROMOTION</b> -->
+                            </td>
+                            <td>RC :
+                                <span t-field="o.company_id.company_registry"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>RIB : CNEP N°
+                                <span t-field="o.company_id.rib"/>
+                            </td>
+                            <td>
+                               <!-- <span t-field="o.company_id.street"/> -->
+                            </td>
+                            <td>AI :
+                                <span t-field="o.company_id.ai"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ID FISCAL :
+                                <span t-field="o.company_id.nif"/>
+                            </td>
+                            <td>
+                              <!--  Tel<span t-field="o.company_id.phone"/> -->
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <hr style="border:1px solid black;"/>
+                    <!--                    <div class="text-center" style="border-top: 1px solid black;">-->
+                    <!--                    </div>-->
+                </div>
+            </t>
+            <t t-else="">
+                <div class="header">
+                    <div class="row">
+                        <div class="col-3 mb4">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;"
+                                 alt="Logo"/>
+                        </div>
+                        <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header"
+                             name="moto"/>
+                    </div>
+                    <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                        <div class="col-12">
+                            <div style="border-bottom: 1px solid black;"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6" name="company_address">
+                            <div t-field="company.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                            />
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+
+</odoo>

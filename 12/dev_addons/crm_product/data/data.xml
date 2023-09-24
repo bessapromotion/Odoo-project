@@ -1,0 +1,69 @@
+<openerp>
+    <data>
+        <!-- chargement de la table type produit-->
+
+         <record model="product.type" id="type_appart">
+             <field name="name">Appartement</field>
+         </record>
+
+         <record model="product.type" id="type_local">
+             <field name="name">Local</field>
+         </record>
+
+         <record model="product.type" id="type_parking">
+             <field name="name">Place de parking</field>
+         </record>
+
+         <!--record model="product.type" id="type_cellier">
+             <field name="name">Cellier</field>
+         </record>
+
+         <record model="product.type" id="type_espace_amenager">
+             <field name="name">Espace a aménager</field>
+         </record-->
+
+         <record model="product.type" id="type_autre">
+             <field name="name">Autre</field>
+         </record>
+
+        <!-- chargement de la table mode de paiement-->
+
+         <record model="mode.paiement" id="mode_cheque">
+             <field name="name">Cheque</field>
+         </record>
+
+         <record model="mode.paiement" id="mode_espece">
+             <field name="name">Espece</field>
+         </record>
+
+         <record model="mode.paiement" id="mode_virement">
+             <field name="name">Virement</field>
+         </record>
+
+         <record model="mode.paiement" id="mode_no">
+             <field name="name">Versement</field>
+         </record>
+
+        <!-- chargement de format -->
+            <!--
+                <record model="product.format" id="format_f2">
+                 <field name="name">F2</field>
+                </record>
+
+                <record model="product.format" id="format_f3">
+                 <field name="name">F3</field>
+                </record>
+
+                <record model="product.format" id="format_f4">
+                 <field name="name">F4</field>
+                </record>
+
+                <record model="product.format" id="format_f5">
+                 <field name="name">F5</field>
+                </record>
+            -->
+     
+
+
+    </data>
+</openerp>

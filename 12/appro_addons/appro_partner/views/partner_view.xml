@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+ <!-- interface Clients -->
+		<record id="view_partner_infoplus_form" model="ir.ui.view">
+            <field name="name">res.partner.infoplus.form</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='mobile']" position="after">
+                        <field name="fax"/>
+
+                	</xpath>
+                	<xpath expr="//field[@name='property_supplier_payment_term_id']" position="after">
+                        <field name="forme_juridique_id" attrs="{'invisible':[('supplier','=',False)]}"/>
+                        <field name="type_fournisseur" attrs="{'invisible':[('supplier','=',False)]}"/>
+                        <field name="supplier_user_id" attrs="{'invisible':[('supplier','=',False)]}" options="{'no_create': True}"/>
+                	</xpath>
+                	<xpath expr="//notebook/page[@name='sales_purchases']//field[@name='property_account_position_id']" position="before">
+                        <separator/><separator/>
+                        <field name="rc" attrs="{'invisible':[('is_company','=',False)]}"/>
+                        <field name="nif" attrs="{'invisible':[('is_company','=',False)]}" />
+                        <field name="nis" attrs="{'invisible':[('is_company','=',False)]}" />
+                        <field name="ai" attrs="{'invisible':[('is_company','=',False)]}" />
+
+                	</xpath>
+                    <!--<xpath expr="//field[@name='vat']" position="replace">-->
+                                                <!--<separator/><separator/>-->
+                        <!--<h2 attrs="{'invisible':['|', ('supplier','=',False), ('is_company', '=', False)]}" >-->
+                          <!--Informations Fiscales-->
+                        <!--</h2>-->
+                        <!--<field name="rc" attrs="{'invisible':['|', ('supplier','=',False), ('is_company', '=', False)]}"/>-->
+                        <!--<field name="nif" attrs="{'invisible':['|', ('supplier','=',False), ('is_company', '=', False)]}"/>-->
+                        <!--<field name="nis" attrs="{'invisible':['|', ('supplier','=',False), ('is_company', '=', False)]}"/>-->
+                    <!--</xpath>-->
+                </data>
+			</field>
+        </record>
+    </data>
+</odoo>
