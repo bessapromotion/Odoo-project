@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
-    <record model="ir.rule" id="hr_employee_historique_rule">
-        <field name="name">Historique multi-company</field>
-        <field name="model_id" ref="model_hr_employee_historique"/>
-        <field name="domain_force">['|',('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
-    </record>
-</odoo>

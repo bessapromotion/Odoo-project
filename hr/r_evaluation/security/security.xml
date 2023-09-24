@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
-    <record model="ir.rule" id="hr_evaluation_rule">
-        <field name="name">Evaluation multi-company</field>
-        <field name="model_id" ref="model_hr_evaluation"/>
-        <field name="domain_force">['|',('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
-    </record>
-</odoo>

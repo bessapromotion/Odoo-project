@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_mission_moyen_user,hr.mission.moyen user,model_hr_mission_moyen,hr.group_hr_user,1,1,1,1
-access_hr_mission_user,hr.mission user,model_hr_mission,hr.group_hr_user,1,1,1,1
-access_hr_mission_employee_user,hr.mission.employee user,model_hr_mission_employee,hr.group_hr_user,1,1,1,1

@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_frt_decharge_user,hr.frt.decharge user,model_hr_frt_decharge,hr.group_hr_user,1,1,1,1
-access_hr_frt_decharge_line_user,hr.frt.decharge.line user,model_hr_frt_decharge_line,hr.group_hr_user,1,1,1,1
-

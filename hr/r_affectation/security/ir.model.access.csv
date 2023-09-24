@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_affectation_user,hr.affectation user,model_hr_affectation,hr.group_hr_user,1,1,1,1
-access_hr_direction_user,hr.direction user,model_hr_direction,hr.group_hr_user,1,1,1,1
-access_hr_affectation_article_line_user,hr.affectation_article.line user,model_hr_affectation_article_line,hr.group_hr_user,1,1,1,1

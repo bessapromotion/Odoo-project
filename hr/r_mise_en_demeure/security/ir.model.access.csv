@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_demeure_user,hr.demeure user,model_hr_demeure,hr.group_hr_user,1,1,1,1
-access_hr_demeure_motif_user,hr.demeure.motif user,model_hr_demeure_motif,hr.group_hr_user,1,1,1,1

@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_enfant_user,hr.enfant user,model_hr_enfant,hr.group_hr_user,1,1,1,1
-access_hr_conjoint_user,hr.conjoint user,model_hr_conjoint,hr.group_hr_user,1,1,1,1
-access_hr_niveau_scolaire_user,hr.niveau.scolaire ser,model_hr_niveau_scolaire,hr.group_hr_user,1,1,1,1

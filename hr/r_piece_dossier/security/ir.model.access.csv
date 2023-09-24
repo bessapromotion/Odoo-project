@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_dossier_piece_user,hr.dossier.piece user,model_hr_dossier_piece,hr.group_hr_user,1,1,1,1
-access_hr_dossier_user,hr.dossier user,model_hr_dossier,hr.group_hr_user,1,1,1,1
-access_hr_dossier_model_user,hr.dossier.model user,model_hr_dossier_model,hr.group_hr_user,1,1,1,1
-access_hr_dossier_model_piece_user,hr.dossier.model.piece user,model_hr_dossier_model_piece,hr.group_hr_user,1,1,1,1

@@ -1,9 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_conge_user,hr.conge user,model_hr_conge,hr.group_hr_user,1,1,1,1
-access_hr_conge_line_user,hr.conge.line user,model_hr_conge_line,hr.group_hr_user,1,1,1,1
-access_hr_conge_region_user,hr.conge.region user,model_hr_conge_region,hr.group_hr_user,1,1,1,1
-access_hr_conge_recuperation_user,hr.conge.recuperation user,model_hr_conge_recuperation,hr.group_hr_user,1,1,1,1
-access_hr_conge_recuperation_line_user,hr.conge.recuperation.line user,model_hr_conge_recuperation_line,hr.group_hr_user,1,1,1,1
-access_hr_conge_occasion_user,hr.conge.occasion user,model_hr_conge_occasion,hr.group_hr_user,1,1,1,1
-access_hr_conge_ferie_user,hr.conge.ferie user,model_hr_conge_ferie,hr.group_hr_user,1,1,1,1
-access_hr_conge_ferie_date_user,hr.conge.ferie.date user,model_hr_conge_ferie_date,hr.group_hr_user,1,1,1,1

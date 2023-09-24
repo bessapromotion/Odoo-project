@@ -1,7 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_civilite_user,hr.civilite user,model_hr_civilite,hr.group_hr_user,1,1,1,1
-access_hr_csp_user,hr.csp user,model_hr_csp,hr.group_hr_user,1,1,1,1
-access_hr_job_mission_user,hr.job.mission user,model_hr_job_mission,hr.group_hr_user,1,1,1,1
-access_hr_motif_attestation_wizard_user,motif.attestation.wizard user,model_motif_attestation_wizard,hr.group_hr_user,1,1,1,1
-access_hr_employee_historique_user,hr.employee.historique user,model_hr_employee_historique,hr.group_hr_user,1,1,1,1
-access_hr_type_placement_user,hr.type.placement user,model_hr_type_placement,hr.group_hr_user,1,1,1,1
